@@ -14,6 +14,8 @@ import {
   Link
 } from "react-router-dom";
 
+import { API_URI } from '../config/constants';
+
 const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 150,
@@ -29,7 +31,7 @@ const CredentialsTable = ({query}) => {
   const classes = useStyles();
 
   const [{data, loading, error}] = useAxios({
-    url: 'http://localhost:3000/getCredentialsByCpe',
+    url: `${API_URI}/getCredentialsByCpe`,
     method: 'POST',
     data: {
       cpe: query
@@ -39,7 +41,7 @@ const CredentialsTable = ({query}) => {
   return (
     <>
       { error ?
-        <div>Query resulted in an error.</div> :
+        <div>There was an error.</div> :
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="credentials table">
             <TableHead>
@@ -69,7 +71,7 @@ const CredentialsTable = ({query}) => {
               </TableBody>
             }
           </Table>
-          { true &&
+          { loading &&
             <LinearProgress color={'secondary'} />
           }
         </TableContainer>

@@ -8,8 +8,6 @@ import VendorTable from "../components/VendorTable";
 const VendorListPage = () => {
   let { vendorId } = useParams();
 
-  console.log(vendorId);
-
   return(
     <div>
       <VendorTable vendorId={vendorId} />

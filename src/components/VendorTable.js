@@ -20,6 +20,8 @@ import {
   BrowserRouter,
 } from "react-router-dom";
 
+import { API_URI } from '../config/constants';
+
 const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 150,
@@ -36,7 +38,7 @@ const VendorTable = () => {
   const classes = useStyles();
 
   const [{data, loading, error}] = useAxios({
-    url: 'http://localhost:3000/getVendors',
+    url: `${API_URI}/getVendors`,
   });
 
   return (
@@ -63,7 +65,7 @@ const VendorTable = () => {
             }
           </Table>
           { loading &&
-          <LinearProgress data-testid={'vendortable-loader'} role={'progressbar'} color={'secondary'} />
+          <LinearProgress  color={'secondary'} />
           }
         </TableContainer>
       }

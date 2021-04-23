@@ -2,14 +2,18 @@ import React from "react";
 import { render, screen } from '@testing-library/react';
 import useAxios from "axios-hooks";
 
-import VendorTable from '../components/VendorTable';
+import VendorTable from '../../components/VendorTable';
+
+import {
+  sampleVendors
+} from '../data/sampleData';
+import CredentialsTable from "../../components/CredentialsTable";
 
 jest.mock('axios-hooks');
 
 describe("<VendorTable />", () => {
 
   it("renders <VendorTable /> component", () => {
-
     useAxios.mockImplementation(() => ([{
       error: false,
       loading: false,
@@ -28,11 +32,11 @@ describe("<VendorTable />", () => {
     }]));
 
     render(<VendorTable />);
-    expect(screen.getByTestId('vendortable-loader')).toBeTruthy();
+    expect(screen.queryByRole('progressbar')).toBeTruthy();
 
   });
 
-  it.skip('does not render a progress bar when loading is complete', () => {
+  it('does not render a progress bar when loading is complete', () => {
     useAxios.mockImplementation(() => ([{
       error: false,
       loading: false,
@@ -40,7 +44,7 @@ describe("<VendorTable />", () => {
     }]));
 
     render(<VendorTable />);
-    expect(screen.getByTestId('vendortable-loader')).toBeFalsy();
+    expect(screen.queryByRole('progressbar')).toBeFalsy();
 
   });
 
@@ -52,32 +56,44 @@ describe("<VendorTable />", () => {
     }]));
 
     render(<VendorTable />);
-    expect(screen.getByText('There was an error.')).toBeTruthy();
+    expect(screen.queryByText('There was an error.')).toBeTruthy();
 
   });
 
-  it.skip('does not render an error message if there is not an error', () => {
+  it('does not render an error message if there is not an error', () => {
     useAxios.mockImplementation(() => ([{
-      error: true,
+      error: false,
       loading: true,
       data: null
     }]));
 
     render(<VendorTable />);
-    expect(screen.getByText('There was an error.')).toBeFalsy();
-
+    expect(screen.queryByText('There was an error.')).toBeNull();
   });
 
   it('renders a table with a list of vendors', () => {
     useAxios.mockImplementation(() => ([{
       error: false,
       loading: false,
-      data: ["foo", "bar"]
+      data: sampleVendors
     }]));
 
     render(<VendorTable />);
-    expect(screen.getByText('foo')).toBeTruthy();
-    expect(screen.getByText('bar')).toBeTruthy();
+    sampleVendors.forEach((vendor) => {
+      expect(screen.getByText(vendor)).toBeTruthy();
+    });
+
+  });
+
+  it('renders the proper table headings', () => {
+    useAxios.mockImplementation(() => ([{
+      error: false,
+      loading: false,
+      data: []
+    }]));
+
+    render(<VendorTable />);
+    expect(screen.getByText("Vendors")).toBeTruthy();
 
   });
 

@@ -16,6 +16,8 @@ import {
   Link
 } from "react-router-dom";
 
+import { API_URI } from '../config/constants';
+
 const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 150,
@@ -32,7 +34,7 @@ const ProductsByVendorTable = ({vendorId}) => {
   const classes = useStyles();
 
   const [{data, loading, error}] = useAxios({
-    url: 'http://localhost:3000/getProductsByVendor',
+    url: `${API_URI}/getProductsByVendor`,
     method: 'POST',
     data: {
       vendor: vendorId

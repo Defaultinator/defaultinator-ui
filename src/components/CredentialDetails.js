@@ -8,6 +8,8 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import LockIcon from '@material-ui/icons/Lock';
 
+import { API_URI } from '../config/constants';
+
 const useStyles = makeStyles((theme) => ({
   mainContent: {
     maxWidth: 350,
@@ -31,7 +33,7 @@ const CredentialDetails = ({vendorId, productId}) => {
   const classes = useStyles();
 
   const request = {
-    url: 'http://localhost:3000/getCredentialsByProductAndVendor',
+    url: `${API_URI}/getCredentialsByProductAndVendor`,
     method: 'POST',
     data: {
       product: productId,
@@ -46,10 +48,10 @@ const CredentialDetails = ({vendorId, productId}) => {
     <Container>
       <div className={classes.mainContent}>
         { error ?
-          <div>Error!</div> :
+          <div>There was an error.</div> :
           <>
             { loading ?
-              <Skeleton height={350}></Skeleton> :
+              <Skeleton height={350} data-testid={"credentialdetail-skeleton"}></Skeleton> :
               <Paper className={clsx(classes.credentialCard, classes.dataHeight)}>
                 { data.map((row, idx) =>
                   <div key={idx}>

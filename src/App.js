@@ -95,24 +95,19 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const SearchBar = withRouter(() => {
+export const SearchBar = withRouter(() => {
   const history = useHistory();
   const classes = useStyles();
 
   const [searchText, setSearchText] = useState('');
-
-  const executeSearch = () => {
-    history.push(`/search?query=${searchText}`);
-    setSearchText('');
-  };
 
   return(
     <div className={classes.search}>
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          executeSearch();
-        }}
+          history.push(`/search?query=${searchText}`);
+          setSearchText('');        }}
       >
         <div className={classes.searchIcon}>
           <SearchIcon />

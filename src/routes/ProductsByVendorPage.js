@@ -8,8 +8,6 @@ import ProductsByVendorTable from "../components/ProductsByVendorTable";
 const ProductsByVendorPage = () => {
   let { vendorId } = useParams();
 
-  console.log(vendorId);
-
   return(
     <div>
       <ProductsByVendorTable vendorId={vendorId} />
