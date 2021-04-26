@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const DEFAULT_PORT = 3001;
+const DEFAULT_PORT = process.env.PORT || 3001;
 
 const API_BASE_URI = process.env.API_BASE_URI || "http://localhost";
 const API_PORT = process.env.API_PORT || 3000;

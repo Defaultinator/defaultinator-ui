@@ -1,16 +1,32 @@
 import { render, screen } from '@testing-library/react';
 import App, {
-  SearchBar
+  SearchBar,
 } from '../App';
 
+import useAxios from "axios-hooks";
+
+jest.mock('axios-hooks');
+
+
 describe('<App />', () => {
+
+  beforeEach(() => {
+
+    useAxios.mockImplementation(() => ([{
+      error: false,
+      loading: false,
+      data: []
+    }]));
+
+  });
+
   it('renders the app with Defaultinator in the title', () => {
     render(<App />);
     const linkElement = screen.getByText(/Defaultinator/i);
     expect(linkElement).toBeInTheDocument();
   });
 
-  it.skip('renders <SearchResults /> when the /search route is active', () => {
+  it.skip('renders <SearchResultsPage /> when the /search route is active', () => {
 
   });
 
