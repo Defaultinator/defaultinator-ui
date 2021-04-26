@@ -12,7 +12,7 @@ API_PORT=3000
 
 ## Dev Environment
 
-### Set up the local API
+### Set up the local API (Optional but helpful)
 
 [dafaultinator-api](https://github.com/cbarnard-r7/defaultinator-api)
 
