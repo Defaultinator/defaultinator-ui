@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import useAxios from "axios-hooks";
 
 import VendorTable from '../../components/VendorTable';
@@ -7,7 +7,10 @@ import VendorTable from '../../components/VendorTable';
 import {
   sampleVendors
 } from '../data/sampleData';
-import CredentialsTable from "../../components/CredentialsTable";
+
+import {
+  renderWithRouter
+} from "../utils/renderWithRouter";;
 
 jest.mock('axios-hooks');
 
@@ -20,7 +23,7 @@ describe("<VendorTable />", () => {
       data: []
     }]));
 
-    render(<VendorTable />);
+    renderWithRouter(<VendorTable />);
 
   });
 
@@ -31,7 +34,7 @@ describe("<VendorTable />", () => {
       data: null
     }]));
 
-    render(<VendorTable />);
+    renderWithRouter(<VendorTable />);
     expect(screen.queryByRole('progressbar')).toBeTruthy();
 
   });
@@ -43,7 +46,7 @@ describe("<VendorTable />", () => {
       data: []
     }]));
 
-    render(<VendorTable />);
+    renderWithRouter(<VendorTable />);
     expect(screen.queryByRole('progressbar')).toBeFalsy();
 
   });
@@ -55,7 +58,7 @@ describe("<VendorTable />", () => {
       data: null
     }]));
 
-    render(<VendorTable />);
+    renderWithRouter(<VendorTable />);
     expect(screen.queryByText('There was an error.')).toBeTruthy();
 
   });
@@ -67,7 +70,7 @@ describe("<VendorTable />", () => {
       data: null
     }]));
 
-    render(<VendorTable />);
+    renderWithRouter(<VendorTable />);
     expect(screen.queryByText('There was an error.')).toBeNull();
   });
 
@@ -78,7 +81,7 @@ describe("<VendorTable />", () => {
       data: sampleVendors
     }]));
 
-    render(<VendorTable />);
+    renderWithRouter(<VendorTable />);
     sampleVendors.forEach((vendor) => {
       expect(screen.getByText(vendor)).toBeTruthy();
     });
@@ -92,7 +95,7 @@ describe("<VendorTable />", () => {
       data: []
     }]));
 
-    render(<VendorTable />);
+    renderWithRouter(<VendorTable />);
     expect(screen.getByText("Vendors")).toBeTruthy();
 
   });

@@ -11,7 +11,8 @@ import useAxios from "axios-hooks";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
 import {
-  Link
+  Link,
+  useHistory,
 } from "react-router-dom";
 
 import { API_URI } from '../config/constants';
@@ -29,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 
 const CredentialsTable = ({query}) => {
   const classes = useStyles();
+  const history = useHistory();
 
   const [{data, loading, error}] = useAxios({
     url: `${API_URI}/getCredentialsByCpe`,
@@ -57,9 +59,7 @@ const CredentialsTable = ({query}) => {
                   <TableRow
                     key={idx}
                     className={classes.tableRow}
-                    component={Link}
-                    to={`/lookup/${row.vendor}/${row.product}`}
-                    style={{ textDecoration: 'none' }}
+                    onClick={() => history.push(`/lookup/${row.vendor}/${row.product}`)}
                   >
                     <TableCell component="th" scope="row">
                       {row.cpe}

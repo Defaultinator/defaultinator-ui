@@ -27,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: lighten(theme.palette.background.paper, 0.1)
     }
   },
+  itemText: {
+    color: theme.palette.text.primary
+  }
 }));
 
 // TODO: This is currently both the vendor list and product list. That probably isn't good.
@@ -56,8 +59,14 @@ const ProductsByVendorTable = ({vendorId}) => {
               <TableBody>
                 {data.map((product, idx) => (
                   <TableRow key={idx} className={classes.tableRow}>
-                    <TableCell component={Link} to={`/lookup/${vendorId}/${product}`}  style={{ textDecoration: 'none' }} scope="row">
-                      {product}
+                    <TableCell component="th" scope="row"  style={{ padding: 0 }}>
+                      <Link to={`/lookup/${vendorId}/${product}`} style={{ textDecoration: 'none' }}>
+                        <div style={{ padding: 16 }}>
+                          <span className={classes.itemText}>
+                            {product}
+                          </span>
+                        </div>
+                      </Link>
                     </TableCell>
                   </TableRow>
                 ))}
