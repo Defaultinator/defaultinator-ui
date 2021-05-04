@@ -369,7 +369,7 @@ export const SearchBarTypeahead = ({data}) => {
   return(
     <Paper className={classes.searchSuggestions} elevation={4}>
       <List aria-label={"search-suggestions"}>
-        { data.map((item, idx) => (
+        { data?.map((item, idx) => (
           <ListItem
             button
             dense

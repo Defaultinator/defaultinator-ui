@@ -51,7 +51,13 @@ const CredentialDetails = ({vendorId, productId}) => {
           <div>There was an error.</div> :
           <>
             { loading ?
-              <Skeleton height={350} data-testid={"credentialdetail-skeleton"}></Skeleton> :
+              <Skeleton
+                variant={'rect'}
+                animation={'wave'}
+                data-testid={"credentialdetail-skeleton"}
+                style={{height: 250, width: 350}}
+              >
+              </Skeleton> :
               <Paper className={clsx(classes.credentialCard, classes.dataHeight)}>
                 { data.map((row, idx) =>
                   <div key={idx}>
