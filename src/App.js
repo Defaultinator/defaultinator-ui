@@ -1,4 +1,5 @@
 import React, {
+  useEffect,
   useState
 } from 'react';
 
@@ -37,6 +38,11 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import useAxios from "axios-hooks";
+import {API_URI} from "./config/constants";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -119,6 +125,12 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   offset: theme.mixins.toolbar,
+  searchSuggestions: {
+    position: 'absolute',
+    marginTop: theme.spacing(1),
+    width: '100%',
+    flexGrow: 1,
+  },
 }));
 
 export const AdvancedSearchModal = ({onSubmit}) => {
@@ -350,12 +362,52 @@ export const AdvancedSearchModal = ({onSubmit}) => {
   );
 };
 
+export const SearchBarTypeahead = ({data}) => {
+  const history = useHistory();
+  const classes = useStyles();
+
+  return(
+    <Paper className={classes.searchSuggestions} elevation={4}>
+      <List aria-label={"search-suggestions"}>
+        { data.map((item, idx) => (
+          <ListItem
+            button
+            dense
+            key={idx}
+            onClick={() => {
+              console.log('boom');
+              history.push(`/lookup/${item.vendor}/${item.product}`)
+            }}
+          >
+            <ListItemText primary={item.product} />
+          </ListItem>
+        ))}
+      </List>
+
+    </Paper>
+  );
+};
+
 export const SearchBar = withRouter(() => {
   const history = useHistory();
   const classes = useStyles();
 
+  const [hasFocus, setHasFocus] = useState(false);
   const [searchText, setSearchText] = useState('');
   const [advancedSearch, setAdvancedSearch] = useState(false);
+
+  const [{data, loading, error}, refetch] = useAxios({
+    manual: true,
+    url: `${API_URI}/textSearchTypeahead`,
+    method: 'POST',
+    data: {
+      text: searchText
+    }
+  });
+
+  useEffect(() => {
+    if(searchText !== '') refetch();
+  }, [searchText]);
 
   const advancedSubmit = (text) => {
     setAdvancedSearch(false);
@@ -383,7 +435,11 @@ export const SearchBar = withRouter(() => {
           inputProps={{ 'aria-label': 'search' }}
           value={searchText}
           onFocus={() => {
+            setHasFocus(true);
             advancedSearch && setAdvancedSearch(false)
+          }}
+          onBlur={() => {
+            setHasFocus(false);
           }}
           onChange={(e) => setSearchText(e.target.value)}
           endAdornment={
@@ -399,6 +455,9 @@ export const SearchBar = withRouter(() => {
             </InputAdornment>
           }
         />
+        <Fade in={data && hasFocus} disableStrictModeCompat>
+          <div><SearchBarTypeahead data={data} /></div>
+        </Fade>
         <Fade in={advancedSearch} disableStrictModeCompat>
           <div><AdvancedSearchModal onSubmit={advancedSubmit}/></div>
         </Fade>
