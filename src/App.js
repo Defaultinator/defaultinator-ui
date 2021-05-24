@@ -379,7 +379,7 @@ export const SearchBarTypeahead = ({data}) => {
               history.push(`/lookup/${item.vendor}/${item.product}`)
             }}
           >
-            <ListItemText primary={item.product} />
+            <ListItemText primary={`${item.vendor}`} secondary={item.product} />
           </ListItem>
         ))}
       </List>
@@ -396,7 +396,7 @@ export const SearchBar = withRouter(() => {
   const [searchText, setSearchText] = useState('');
   const [advancedSearch, setAdvancedSearch] = useState(false);
 
-  const [{data, loading, error}, refetch] = useAxios({
+  const [{data}, refetch] = useAxios({
     manual: true,
     url: `${API_URI}/textSearchTypeahead`,
     method: 'POST',
@@ -407,7 +407,7 @@ export const SearchBar = withRouter(() => {
 
   useEffect(() => {
     if(searchText !== '') refetch();
-  }, [searchText]);
+  }, [searchText, refetch]);
 
   const advancedSubmit = (text) => {
     setAdvancedSearch(false);
