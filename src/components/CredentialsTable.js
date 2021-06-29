@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {lighten, makeStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -32,7 +33,7 @@ const CredentialsTable = ({query}) => {
   const history = useHistory();
 
   const [{data, loading, error}] = useAxios({
-    url: `${API_URI}/getCredentialsByCpe`,
+    url: `${API_URI}/credentials/search`,
     method: 'POST',
     data: {
       cpe: query
@@ -54,14 +55,14 @@ const CredentialsTable = ({query}) => {
             </TableHead>
             { !loading &&
               <TableBody>
-                {data.map((row, idx) => (
+                {data.docs.map((row, idx) => (
                   <TableRow
                     key={idx}
                     className={classes.tableRow}
                     onClick={() => history.push(`/lookup/${row.vendor}/${row.product}`)}
                   >
                     <TableCell component="th" scope="row">
-                      {row.cpe}
+                      {`cpe:/${row.cpe.part}:${row.cpe.vendor}:${row.cpe.product}`}
                     </TableCell>
                     <TableCell align="right">{row.username}</TableCell>
                     <TableCell align="right">{row.password}</TableCell>
