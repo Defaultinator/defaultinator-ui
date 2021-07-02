@@ -29,19 +29,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const CredentialDetails = ({vendorId, productId}) => {
+const CredentialDetails = ({credentialId}) => {
   const classes = useStyles();
-
-  const request = {
-    url: `${API_URI}/getCredentialsByProductAndVendor`,
-    method: 'POST',
-    data: {
-      product: productId,
-      vendor: vendorId
-    }
-  };
-
-  const [{data, loading, error}] = useAxios(request);
+  const [{data, loading, error}] = useAxios(`${API_URI}/credentials/${credentialId}`);
 
   // TODO: Skeleton size is messed up
   return (
@@ -59,13 +49,11 @@ const CredentialDetails = ({vendorId, productId}) => {
               >
               </Skeleton> :
               <Paper className={clsx(classes.credentialCard, classes.dataHeight)}>
-                { data.map((row, idx) =>
-                  <div key={idx}>
-                    <div><h2>{row.cpe}</h2></div>
-                    <div><AccountCircleIcon />{row.username}</div>
-                    <div><LockIcon />{row.password}</div>
+                  <div>
+                    <div><h2>{`cpe:/${data.cpe.part}:${data.cpe.vendor}:${data.cpe.product}`}</h2></div>
+                    <div><AccountCircleIcon />{data.username}</div>
+                    <div><LockIcon />{data.password}</div>
                   </div>
-                )}
               </Paper>
             }
           </>

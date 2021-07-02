@@ -5,8 +5,6 @@ import React, {
 
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
   useHistory,
   withRouter,
   Link
@@ -22,10 +20,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 
 import Container from "@material-ui/core/Container";
-import SearchResultsPage from "./routes/SearchResultsPage";
-import VendorListPage from "./routes/VendorListPage";
-import ProductsByVendorPage from "./routes/ProductsByVendorPage";
-import CredentialLookupPage from "./routes/CredentialLookupPage";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
@@ -43,6 +37,7 @@ import {API_URI} from "./config/constants";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import MainRoute from "./routes/MainRoute";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -106,7 +101,7 @@ const useStyles = makeStyles((theme) => ({
   },
   mainContent: {
     margin: '0px',
-    padding: '0px',
+    padding: theme.spacing(2),
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(4),
     },
@@ -232,6 +227,8 @@ export const AdvancedSearchModal = ({onSubmit}) => {
       edition: edition,
       language: language,
     };
+
+    //console.log(cpeAttrs);
 
     onSubmit(generateCpeStringFromAttributes(cpeAttrs));
   };
@@ -492,20 +489,7 @@ const App = () => {
         </AppBar>
         <div className={classes.offset} />
         <Container className={classes.mainContent}>
-          <Switch>
-            <Route path={"/search"}>
-              <SearchResultsPage />
-            </Route>
-            <Route path={"/vendors/"}>
-              <VendorListPage />
-            </Route>
-            <Route path={"/products/:vendorId?"}>
-              <ProductsByVendorPage />
-            </Route>
-            <Route path={"/lookup/:vendorId/:productId"}>
-              <CredentialLookupPage />
-            </Route>
-          </Switch>
+          <MainRoute />
         </Container>
       </Router>
     </div>

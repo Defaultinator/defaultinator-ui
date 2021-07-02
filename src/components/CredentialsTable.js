@@ -55,11 +55,11 @@ const CredentialsTable = ({query}) => {
             </TableHead>
             { !loading &&
               <TableBody>
-                {data.docs.map((row, idx) => (
+                {data.docs.map((row) => (
                   <TableRow
-                    key={idx}
+                    key={row._id}
                     className={classes.tableRow}
-                    onClick={() => history.push(`/lookup/${row.vendor}/${row.product}`)}
+                    onClick={() => history.push(`/credentials/${row._id}`)}
                   >
                     <TableCell component="th" scope="row">
                       {`cpe:/${row.cpe.part}:${row.cpe.vendor}:${row.cpe.product}`}
