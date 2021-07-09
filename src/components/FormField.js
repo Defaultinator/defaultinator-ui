@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   input: {},
 }));
 
-const FormField = ({name, placeholder, control}) => {
+const FormField = ({name, placeholder, control, defaultValue = ""}) => {
   const classes = useStyles();
 
   return (

@@ -7,6 +7,7 @@ import {
 
 import {
   Fab,
+  Container,
 } from "@material-ui/core";
 import AddIcon from '@material-ui/icons/Add';
 import {
@@ -16,6 +17,7 @@ import {
 import CredentialLookupPage from "./Credentials/CredentialLookupPage";
 import CredentialsListPage from "./Credentials/CredentialsListPage";
 import AddCredentialsPage from "./Credentials/AddCredentialsPage";
+import EditCredentialsPage from "./Credentials/EditCredentialsPage";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,6 +39,10 @@ const CredentialsPage = () => {
       "content": <AddCredentialsPage />,
     },
     {
+      "path": `${path}/:credentialId/edit`,
+      "content": <EditCredentialsPage />,
+    },
+    {
       "path": `${path}/:credentialId`,
       "content": <CredentialLookupPage />,
     },
@@ -51,7 +57,9 @@ const CredentialsPage = () => {
       <Switch>
         { pages.map((page, idx) =>
           <Route path={page.path} key={idx}>
-            {page.content}
+            <Container>
+              {page.content}
+            </Container>
           </Route>
         )}
       </Switch>

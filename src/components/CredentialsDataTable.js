@@ -1,15 +1,11 @@
 import React from 'react';
-import clsx from 'clsx';
 
 import {
   Table,
-  TableBody,
   TableCell,
   TableContainer,
   TableHead,
-  TablePagination,
   TableRow,
-  TableSortLabel,
   Toolbar,
   Paper,
   Container,
@@ -48,7 +44,13 @@ const CredentialsTableToolbar = ({title}) => {
 const CredentialsTableHeader = () => {
   const columnConfig = [
     {
+      "name": "Vendor",
+    },
+    {
       "name": "Product",
+    },
+    {
+      "name": "Version",
     },
     {
       "name": "Username",
@@ -76,6 +78,7 @@ const CredentialsDataTable = ({loading = false, data, config}) => {
     'title': 'Credentials',
   };
 
+  // TODO: Must refresh the page to get changes. Fix it.
   return(
     <Container>
       <Paper className={classes.paper}>
@@ -91,7 +94,9 @@ const CredentialsDataTable = ({loading = false, data, config}) => {
                   to={`/credentials/${row._id}`}
                   className={classes.row}
                 >
-                  <TableCell>{row.cpe.product}</TableCell>
+                  <TableCell>{row.cpe.vendor || 'ANY'}</TableCell>
+                  <TableCell>{row.cpe.product || 'ANY'}</TableCell>
+                  <TableCell>{row.cpe.version || 'ANY'}</TableCell>
                   <TableCell>{row.username}</TableCell>
                   <TableCell>{row.password}</TableCell>
                 </TableRow>

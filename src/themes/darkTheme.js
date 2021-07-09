@@ -1,7 +1,10 @@
 import {
-  createMuiTheme,
+  //createMuiTheme,
   responsiveFontSizes
 } from '@material-ui/core/styles';
+
+// TODO: Not safe for production
+import { unstable_createMuiStrictModeTheme as createMuiTheme } from '@material-ui/core';
 
 const darkTheme = createMuiTheme({
   palette: {

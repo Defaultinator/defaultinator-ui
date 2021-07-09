@@ -14,10 +14,14 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ProtocolForm = ({control}) => {
+const ProtocolFormSection = ({control}) => {
   const classes = useStyles();
 
   const protocols = [
+    {
+      "name": <em>Unknown</em>,
+      "value": "unknown"
+    },
     {
       "name": "Other",
       "value": "other"
@@ -37,10 +41,12 @@ const ProtocolForm = ({control}) => {
   ];
 
   return (
-    <Grid container spacing={4} justify={'start'}>
+    <Grid container spacing={4} justify={'flex-start'}>
         <Grid item md>
           <Controller
+            name={'protocol'}
             control={control}
+            defaultValue={""}
             render={({field}) =>
               <FormControl variant={"outlined"} className={classes.select}>
                 <InputLabel
@@ -53,6 +59,7 @@ const ProtocolForm = ({control}) => {
                   labelId={"add-protocol-label"}
                   label={"Protocol"}
                   {...field}
+                  defaultValue={""}
                 >
                   {protocols.map((protocol, idx) =>
                     <MenuItem value={protocol.value} key={idx}>
@@ -62,11 +69,10 @@ const ProtocolForm = ({control}) => {
                 </Select>
               </FormControl>
             }
-            name={'protocol'}
           />
         </Grid>
     </Grid>
   );
 };
 
-export default ProtocolForm;
+export default ProtocolFormSection;

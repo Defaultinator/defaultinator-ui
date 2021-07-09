@@ -6,7 +6,7 @@ import {
 
 import FormField from "../FormField";
 
-const CredsForm = ({control}) => {
+const CredsFormSection = ({control}) => {
   const inputs = [
     {
       "name": "username",
@@ -19,9 +19,9 @@ const CredsForm = ({control}) => {
   ];
 
   return (
-    <Grid container spacing={4} justify={'center'}>
+    <Grid container spacing={4} justify="space-evenly">
       {inputs.map((input, idx) =>
-        <Grid item md key={idx}>
+        <Grid item key={idx}>
           <FormField {...input} control={control}/>
         </Grid>
       )}
@@ -29,4 +29,4 @@ const CredsForm = ({control}) => {
   );
 };
 
-export default CredsForm;
+export default CredsFormSection;

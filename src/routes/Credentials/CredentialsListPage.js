@@ -15,15 +15,11 @@ const CredentialLookupPage = () => {
       console.log(error);
       enqueueSnackbar('There was an error loading the requested data.');
     }
-  }, [error]);
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  }, [error, enqueueSnackbar]);
 
   return(
     <div>
-      <CredentialsDataTable loading={loading} data={data} />
+      <CredentialsDataTable loading={loading} data={data?.docs} />
     </div>
   );
 };

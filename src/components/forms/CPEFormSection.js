@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const CPEForm = ({control}) => {
+const CPEFormSection = ({control}) => {
   const classes = useStyles();
 
   const inputs = [
@@ -52,7 +52,9 @@ const CPEForm = ({control}) => {
     <Grid container spacing={4} justify={'center'}>
       <Grid item>
         <Controller
+          name={'part'}
           control={control}
+          defaultValue={""}
           render={({field}) =>
             <FormControl variant={"outlined"} className={classes.select}>
               <InputLabel
@@ -81,7 +83,6 @@ const CPEForm = ({control}) => {
               </Select>
             </FormControl>
           }
-          name={'part'}
         />
       </Grid>
       {inputs.map((input, idx) =>
@@ -93,4 +94,4 @@ const CPEForm = ({control}) => {
   );
 };
 
-export default CPEForm;
+export default CPEFormSection;
