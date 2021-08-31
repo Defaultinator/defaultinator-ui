@@ -360,7 +360,6 @@ export const AdvancedSearchModal = ({onSubmit}) => {
 };
 
 export const SearchBarTypeahead = ({data}) => {
-  const history = useHistory();
   const classes = useStyles();
 
   return(
@@ -370,13 +369,11 @@ export const SearchBarTypeahead = ({data}) => {
           <ListItem
             button
             dense
+            component={Link}
+            to={`/search?query=cpe:/a:${item._id}`}
             key={idx}
-            onClick={() => {
-              console.log('boom');
-              history.push(`/lookup/${item.vendor}/${item.product}`)
-            }}
           >
-            <ListItemText primary={`${item.vendor}`} secondary={item.product} />
+            <ListItemText primary={`Vendor: ${item._id}`} secondary={`Records: ${item.count}`} />
           </ListItem>
         ))}
       </List>
@@ -395,16 +392,13 @@ export const SearchBar = withRouter(() => {
 
   const [{data}, refetch] = useAxios({
     manual: true,
-    url: `${API_URI}/textSearchTypeahead`,
-    method: 'POST',
-    data: {
-      text: searchText
-    }
+    url: `${API_URI}/credentials/typeahead?prefix=${searchText}&count=5`,
+    method: 'GET',
   });
 
-  useEffect(() => {
-    if(searchText !== '') refetch();
-  }, [searchText, refetch]);
+  // useEffect(() => {
+  //   if(searchText !== '') refetch();
+  // }, [searchText, refetch]);
 
   const advancedSubmit = (text) => {
     setAdvancedSearch(false);
@@ -477,7 +471,7 @@ const App = () => {
               color="inherit"
               aria-label="open drawer"
               component={Link}
-              to={'/vendors'}
+              to={'/credentials'}
             >
               <MenuIcon />
             </IconButton>

@@ -82,7 +82,7 @@ const ActionButtons = ({reset}) => {
   );
 };
 
-const CPESection = ({control}) => {
+const CPESection = ({control, autoCompleteParams}) => {
   const classes = useStyles();
 
   return (
@@ -94,7 +94,7 @@ const CPESection = ({control}) => {
       >
         CPE Information
       </Typography>
-      <CPEFormSection control={control}/>
+      <CPEFormSection control={control} autoCompleteParams={autoCompleteParams} />
     </Container>
   );
 };
@@ -221,20 +221,18 @@ const ReferencesSection = ({references, setReferences}) => {
 const CredentialsForm = (
   {
     formAction,
-    defaultValues = {},
+    defaultValues = {'part': ''},
     title = 'Add New Credentials'
   }
 ) => {
   const classes = useStyles();
-  const {handleSubmit, control, reset} = useForm({defaultValues: defaultValues});
+  const {handleSubmit, control, reset, getValues, watch} = useForm({defaultValues: defaultValues});
   const [references, setReferences] = useState([]);
+  const values = watch();
 
   // TODO: Must refresh the page if you immediately return.
   // Steps to reproduce: Edit a cred. Immediately click edit. Changes are not reflected in the form.
   // Hit refresh. Changes are now reflected.
-  useEffect(() => {
-    reset();
-  }, []);
 
   const onSubmit = (data) => {
     let newCred = {};
@@ -267,12 +265,15 @@ const CredentialsForm = (
         </Container>
         <CredentialsSection control={control}/>
         <Divider/>
-        <CPESection control={control}/>
+        <CPESection control={control} autoCompleteParams={values} />
         <Divider/>
         <ProtocolSection control={control}/>
         <Divider/>
         <ReferencesSection references={references} setReferences={setReferences}/>
         <ActionButtons reset={reset}/>
+        <Button variant={'outlined'} onClick={() => console.log(getValues())}>
+          Test
+        </Button>
       </form>
     </Paper>
   );

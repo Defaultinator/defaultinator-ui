@@ -13,6 +13,7 @@
     "cpe": "git+https://github.com/cbarnard-r7/cpe-js.git",
     "dotenv": "^8.2.0",
     "material-ui-confirm": "^2.1.3",
+    "material-ui-popup-state": "^1.8.4",
     "notistack": "^1.0.9",
     "query-string": "^7.0.0",
     "react": "^17.0.2",

@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   input: {},
 }));
 
-const FormField = ({name, placeholder, control, defaultValue = ""}) => {
+const FormField = ({name, placeholder, control, autocompleteprops, defaultValue = ""}) => {
   const classes = useStyles();
 
   return (
@@ -28,6 +28,7 @@ const FormField = ({name, placeholder, control, defaultValue = ""}) => {
             label={placeholder}
             autoComplete='off'
             {...field}
+            {...autocompleteprops}
           />
         </FormControl>
       }
