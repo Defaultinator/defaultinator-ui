@@ -33,7 +33,6 @@ export const PaginatedDataTable = (
 
   return (
     <TableContainer component={Paper}>
-
       <Table aria-label="data table" size={dense ? 'small' : 'medium'}>
         <TableHead>
           <TableRow>

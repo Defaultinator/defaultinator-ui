@@ -18,6 +18,7 @@ import CredentialLookupPage from "./Credentials/CredentialLookupPage";
 import CredentialsListPage from "./Credentials/CredentialsListPage";
 import AddCredentialsPage from "./Credentials/AddCredentialsPage";
 import EditCredentialsPage from "./Credentials/EditCredentialsPage";
+import SearchCredentialsPage from "./Credentials/SearchCredentialsPage";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,7 +41,7 @@ const CredentialsPage = () => {
     },
     {
       path: `${path}/search`,
-      content: <div />,
+      content: <SearchCredentialsPage />,
     },
     {
       path: `${path}/:credentialId/edit`,
