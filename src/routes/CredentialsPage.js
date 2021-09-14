@@ -35,20 +35,24 @@ const CredentialsPage = () => {
 
   const pages = [
     {
-      "path": `${path}/add`,
-      "content": <AddCredentialsPage />,
+      path: `${path}/add`,
+      content: <AddCredentialsPage />,
     },
     {
-      "path": `${path}/:credentialId/edit`,
-      "content": <EditCredentialsPage />,
+      path: `${path}/search`,
+      content: <div />,
     },
     {
-      "path": `${path}/:credentialId`,
-      "content": <CredentialLookupPage />,
+      path: `${path}/:credentialId/edit`,
+      content: <EditCredentialsPage />,
     },
     {
-      "path": `${path}/`,
-      "content": <CredentialsListPage />,
+      path: `${path}/:credentialId`,
+      content: <CredentialLookupPage />,
+    },
+    {
+      path: `${path}/`,
+      content: <CredentialsListPage />,
     }
   ];
 

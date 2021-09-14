@@ -1,13 +1,24 @@
 import React from 'react';
 
-import {ThemeProvider} from '@material-ui/styles';
+import { ThemeProvider } from '@material-ui/styles';
 import darkTheme from '../src/themes/darkTheme';
+import { SnackbarProvider } from 'notistack';
+import { ConfirmProvider } from 'material-ui-confirm';
 
 export const decorators = [
   (Story) => (
-    <ThemeProvider theme={darkTheme}>
-      <Story />
-    </ThemeProvider>
+    <SnackbarProvider maxSnack={3}>
+      <ThemeProvider theme={darkTheme}>
+        <ConfirmProvider
+          defaultOptions={{
+            confirmationButtonProps: { autoFocus: true, variant: 'contained' },
+            cancellationButtonProps: { color: 'secondary' },
+          }}
+        >
+          <Story />
+        </ConfirmProvider>
+      </ThemeProvider>
+    </SnackbarProvider>
   ),
 ];
 
