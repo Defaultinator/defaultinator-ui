@@ -35,7 +35,7 @@ const formatData = (data) => {
   return data.map((item) => ({ ...item, cpe: `cpe:/${item.cpe.part}:${item.cpe.vendor}:${item.cpe.product}` }));
 };
 
-const CredentialLookupPage = () => {
+const CredentialsListPage = () => {
   const [paginationParams, setPaginationParams] = useState();
 
   const { enqueueSnackbar } = useSnackbar();
@@ -63,20 +63,16 @@ const CredentialLookupPage = () => {
   };
 
   return (
-    <div>
-      {!error &&
-        <PaginatedDataTable
-          data={data ? formatData(data.docs) : null}
-          loading={loading}
-          dataConfig={TABLE_CONFIG}
-          rowsPerPage={data?.limit}
-          page={data ? data.page - 1 : null}
-          totalRows={data?.total}
-          updateConfig={handlePaginationChange}
-        />
-      }
-    </div>
+    <PaginatedDataTable
+      data={data ? formatData(data.docs) : null}
+      loading={loading}
+      dataConfig={TABLE_CONFIG}
+      rowsPerPage={data?.limit}
+      page={data ? data.page - 1 : null}
+      totalRows={data?.total}
+      updateConfig={handlePaginationChange}
+    />
   );
 };
 
-export default CredentialLookupPage;
+export default CredentialsListPage;
