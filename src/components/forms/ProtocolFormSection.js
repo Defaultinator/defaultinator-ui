@@ -41,7 +41,7 @@ const ProtocolFormSection = ({control}) => {
   ];
 
   return (
-    <Grid container spacing={4} justify={'flex-start'}>
+    <Grid container spacing={4} justifyContent={'flex-start'}>
         <Grid item md>
           <Controller
             name={'protocol'}
