@@ -108,7 +108,7 @@ const CPEFormSection = ({control, autoCompleteParams}) => {
   ];
 
   return (
-    <Grid container spacing={4} justify={'center'}>
+    <Grid container spacing={4} justifyContent={'center'}>
       <Grid item>
         <Controller
           name={'part'}

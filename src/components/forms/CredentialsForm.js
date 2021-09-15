@@ -1,6 +1,5 @@
 import React, {
   useState,
-  useEffect,
 } from 'react';
 import {
   useForm,
@@ -271,9 +270,6 @@ const CredentialsForm = (
         <Divider/>
         <ReferencesSection references={references} setReferences={setReferences}/>
         <ActionButtons reset={reset}/>
-        <Button variant={'outlined'} onClick={() => console.log(getValues())}>
-          Test
-        </Button>
       </form>
     </Paper>
   );

@@ -2,6 +2,9 @@ import React, {
   useState,
   useEffect,
 } from 'react';
+import {
+  useHistory,
+} from 'react-router-dom';
 import useAxios from "axios-hooks";
 import {
   useSnackbar,
@@ -31,11 +34,8 @@ const TABLE_CONFIG = {
   }
 };
 
-const formatData = (data) => {
-  return data.map((item) => ({ ...item, cpe: `cpe:/${item.cpe.part}:${item.cpe.vendor}:${item.cpe.product}` }));
-};
-
 const CredentialsListPage = () => {
+  const history = useHistory();
   const [paginationParams, setPaginationParams] = useState();
 
   const { enqueueSnackbar } = useSnackbar();
@@ -60,6 +60,16 @@ const CredentialsListPage = () => {
       ...(rowsPerPage && { limit: rowsPerPage }),
       ...((page || page === 0) && { page: parseInt(page) + 1 }),
     });
+  };
+
+  const formatData = (data) => {
+    return data.map((item) => (
+      {
+        ...item,
+        cpe: `cpe:/${item.cpe.part}:${item.cpe.vendor}:${item.cpe.product}`,
+        rowProps: { onClick: () => history.push(`/credentials/${item._id}`), style: {cursor: 'pointer'} }
+      }
+    ));
   };
 
   return (

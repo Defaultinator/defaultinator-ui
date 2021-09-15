@@ -25,8 +25,7 @@ export const PaginatedDataTable = (
     totalRows,
     loading = false,
     updateConfig,
-    onRowClick = () => { },
-    dense = false
+    dense = false,
   }
 ) => {
   const { fields, pagination } = dataConfig;
@@ -46,21 +45,21 @@ export const PaginatedDataTable = (
             ))}
           </TableRow>
         </TableHead>
-        {loading &&
-          <tr>
-            <td colspan={fields.length}>
-              <LinearProgress colspan="3" />
-            </td>
-          </tr>
-        }
         <TableBody>
+          {loading &&
+            <tr>
+              <td colSpan={fields.length}>
+                <LinearProgress colSpan="3" />
+              </td>
+            </tr>
+          }
           {data &&
             <>
               {data.map((row, idx) => (
                 <TableRow
                   key={idx}
                   hover
-                  onClick={(e) => onRowClick(e, row)}
+                  {...row.rowProps}
                 >
                   {fields.map((field, idx) => (
                     <TableCell

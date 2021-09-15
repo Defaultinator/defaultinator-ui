@@ -14,7 +14,7 @@ import {
   makeStyles,
 } from "@material-ui/core/styles";
 
-import CredentialLookupPage from "./Credentials/CredentialLookupPage";
+import CredentialDetailsPage from "./Credentials/CredentialDetailsPage";
 import CredentialsListPage from "./Credentials/CredentialsListPage";
 import AddCredentialsPage from "./Credentials/AddCredentialsPage";
 import EditCredentialsPage from "./Credentials/EditCredentialsPage";
@@ -49,7 +49,7 @@ const CredentialsPage = () => {
     },
     {
       path: `${path}/:credentialId`,
-      content: <CredentialLookupPage />,
+      content: <CredentialDetailsPage />,
     },
     {
       path: `${path}/`,

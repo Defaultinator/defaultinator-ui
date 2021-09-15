@@ -18,6 +18,7 @@ import { CredentialType } from '../config/types';
 const useStyles = makeStyles({
   root: {
     maxWidth: 550,
+    minWidth: 250,
     textAlign: 'center',
   },
   card: {
@@ -36,7 +37,15 @@ const useStyles = makeStyles({
   },
 });
 
-export const CredentialCard = ({ credential, onPrimaryAction, primaryButtonText, onSecondaryAction, secondaryButtonText }) => {
+export const CredentialCard = (
+  {
+    credential,
+    primaryButtonText,
+    primaryButtonProps,
+    secondaryButtonText,
+    secondaryButtonProps
+  }
+) => {
   const styles = useStyles();
   const { username, password, cpe } = credential;
   const { vendor, product } = cpe;
@@ -87,21 +96,21 @@ export const CredentialCard = ({ credential, onPrimaryAction, primaryButtonText,
       </CardContent>
       <Divider />
       <CardActions className={styles.cardActions}>
-        {primaryButtonText && onPrimaryAction &&
+        {primaryButtonText &&
           <Button
             size="small"
             color="primary"
             variant={'contained'}
-            onClick={() => onPrimaryAction(credential)}
+            {...primaryButtonProps}
           >
             {primaryButtonText}
           </Button>
         }
-        {secondaryButtonText && onSecondaryAction &&
+        {secondaryButtonText &&
           <Button
             size="small"
             color="secondary"
-            onClick={() => onSecondaryAction(credential)}
+            {...secondaryButtonProps}
           >
             {secondaryButtonText}
           </Button>
@@ -113,15 +122,13 @@ export const CredentialCard = ({ credential, onPrimaryAction, primaryButtonText,
 
 CredentialCard.propTypes = {
   credential: CredentialType,
-  onPrimaryAction: PropTypes.func,
   primaryButtonText: PropTypes.string,
-  onSecondaryAction: PropTypes.func,
+  primaryButtonProps: PropTypes.object,
   secondaryButtonText: PropTypes.string,
+  secondaryButtonProps: PropTypes.object,
 };
 
 CredentialCard.defaultProps = {
-  items: [],
-  actions: [],
 };
 
 export default CredentialCard;

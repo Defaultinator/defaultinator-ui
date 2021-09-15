@@ -5,26 +5,11 @@ import {
   Switch,
 } from "react-router-dom";
 
-import SearchResultsPage from "./SearchResultsPage";
-import VendorListPage from "./VendorListPage";
-import ProductsByVendorPage from "./ProductsByVendorPage";
 import CredentialsPage from "./CredentialsPage";
 
 export const MainRoute = () => {
 
   const pages = [
-    {
-      "path": '/search',
-      "content": <SearchResultsPage />,
-    },
-    {
-      "path": '/vendors/',
-      "content": <VendorListPage />
-    },
-    {
-      "path": '/products/:vendorId?',
-      "content": <ProductsByVendorPage />
-    },
     {
       "path": '/credentials',
       "content": <CredentialsPage />
