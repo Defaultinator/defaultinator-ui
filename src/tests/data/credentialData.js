@@ -1,15 +1,4 @@
-
-export const sampleVendors = [
-  "foo_vend",
-  "bar_vend",
-];
-
-export const sampleProducts = [
-  "foo_prod",
-  "bar_prod",
-];
-
-export const sampleCredential = [
+export const sampleCredentials = [
   {
     cpe: "cpe:/a:b:c",
     username: "foo_user",
@@ -40,10 +29,28 @@ export const sampleCredential = [
   },
 ];
 
-export const sampleCredentials = [
-  {
-    cpe: "cpe:/a:b:c",
-    username: "abc",
-    password: "123",
-  }
-];
+export const credentialTableConfig = {
+  fields: [
+    {
+      "label": "CPE",
+      "fieldName": "cpe",
+      "align": "left",
+    },
+    {
+      "label": "Username",
+      "fieldName": "username",
+    },
+    {
+      "label": "Password",
+      "fieldName": "password",
+    },
+    {
+      "label": "Vendor",
+      "fieldName": "vendor",
+    },
+    {
+      "label": "Product",
+      "fieldName": "product",
+    },
+  ],
+};

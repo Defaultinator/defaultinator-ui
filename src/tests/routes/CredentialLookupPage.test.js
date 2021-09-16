@@ -1,7 +1,7 @@
 import React from "react";
 import ShallowRenderer from 'react-test-renderer/shallow';
 
-import CredentialLookupPage from '../../routes/CredentialLookupPage';
+import CredentialLookupPage from '../../routes/Credentials/CredentialLookupPage';
 
 import {
   MemoryRouter

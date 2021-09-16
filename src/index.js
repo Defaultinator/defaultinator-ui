@@ -4,15 +4,26 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { ThemeProvider } from '@material-ui/styles';
+import {ThemeProvider} from '@material-ui/styles';
+import {SnackbarProvider} from 'notistack';
+import {ConfirmProvider} from 'material-ui-confirm';
 import darkTheme from './themes/darkTheme';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
-      <App />
-    </ThemeProvider>
+    <SnackbarProvider maxSnack={3}>
+      <ThemeProvider theme={darkTheme}>
+        <ConfirmProvider
+          defaultOptions={{
+            confirmationButtonProps: { autoFocus: true, variant: 'contained'},
+            cancellationButtonProps: {color: 'secondary'},
+          }}
+        >
+          <CssBaseline/>
+          <App/>
+        </ConfirmProvider>
+      </ThemeProvider>
+    </SnackbarProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
