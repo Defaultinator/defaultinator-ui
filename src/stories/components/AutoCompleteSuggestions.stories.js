@@ -1,6 +1,6 @@
 import React from 'react';
 
-import AutoCompleteSuggestions from '../components/AutoCompleteSuggestions';
+import AutoCompleteSuggestions from '../../components/AutoCompleteSuggestions';
 
 export default {
   title: 'Components/AutoCompleteSuggestions',

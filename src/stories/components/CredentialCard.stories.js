@@ -1,6 +1,6 @@
 import React from 'react';
 
-import CredentialCard from '../components/CredentialCard';
+import CredentialCard from '../../components/CredentialCard';
 
 export default {
   title: 'Components/CredentialCard',

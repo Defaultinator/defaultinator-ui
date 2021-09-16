@@ -397,7 +397,7 @@ export const SearchBar = withRouter(() => {
 
   const advancedSubmit = (text) => {
     setAdvancedSearch(false);
-    history.push(`/search?query=${text}`);
+    history.push(`/credentials/search?query=${text}`);
   };
 
   return(
