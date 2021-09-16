@@ -1,5 +1,11 @@
-import React from 'react';
+import React, {
+  useState,
+} from 'react';
 import PropTypes from 'prop-types';
+
+import {
+  Link,
+} from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -11,7 +17,12 @@ import {
   Grid,
   Typography,
   Divider,
+  IconButton,
+  Menu,
+  MenuItem,
+  Tooltip,
 } from '@material-ui/core';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 import { CredentialType } from '../config/types';
 
@@ -37,6 +48,44 @@ const useStyles = makeStyles({
   },
 });
 
+const CardMenuOptions = ({ references }) => {
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  return (
+    <>
+    <Tooltip title={"References"}>
+      <span>
+      <IconButton
+        disabled={references.length > 0 ? false : true}
+        aria-label="settings"
+        aria-controls="simple-menu"
+        aria-haspopup="true"
+        onClick={(e) => setAnchorEl(e.currentTarget)}
+      >
+        <MoreVertIcon />
+      </IconButton>
+      </span>
+      </Tooltip>
+      <Menu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={() => setAnchorEl(null)}
+      >
+        {references.map((ref, idx) => (
+          <MenuItem
+            component={'a'}
+            href={`${ref}`}
+          >
+            {ref}
+          </MenuItem>
+        ))}
+      </Menu>
+    </>
+  );
+};
+
 export const CredentialCard = (
   {
     credential,
@@ -56,6 +105,7 @@ export const CredentialCard = (
         title={vendor}
         titleTypographyProps={{ style: { textTransform: 'capitalize' } }}
         subheader={product}
+        action={<CardMenuOptions {...credential} />}
       />
       <Divider />
       <CardContent>
@@ -71,7 +121,7 @@ export const CredentialCard = (
               className={styles.fieldHeading}
             >
               Username
-                </Typography>
+            </Typography>
             <Typography
               className={styles.fieldContent}
             >
@@ -85,7 +135,7 @@ export const CredentialCard = (
               className={styles.fieldHeading}
             >
               Password
-              </Typography>
+            </Typography>
             <Typography
               className={styles.fieldContent}
             >
