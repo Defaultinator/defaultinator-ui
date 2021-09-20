@@ -12,10 +12,25 @@ import {
   Paper,
   LinearProgress,
 } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
-/**
- * Primary UI component for user interaction
- */
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+
+const useStyles = makeStyles((theme) => ({
+  loadingRow: {
+    padding: 0,
+  },
+  errorRow: {
+    padding: 0,
+    height: 350,
+  },
+  errorIcon: {
+    margin: 'auto',
+    display: 'block',
+    color: theme.palette.error.main,
+  }
+}));
+
 export const PaginatedDataTable = (
   {
     data = [],
@@ -24,10 +39,12 @@ export const PaginatedDataTable = (
     page,
     totalRows,
     loading = false,
+    error = false,
     updateConfig,
     dense = false,
   }
 ) => {
+  const styles = useStyles();
   const { fields, pagination } = dataConfig;
 
   return (
@@ -46,41 +63,51 @@ export const PaginatedDataTable = (
           </TableRow>
         </TableHead>
         <TableBody>
-          {loading &&
-            <tr>
-              <td colSpan={fields.length}>
-                <LinearProgress colSpan="3" />
-              </td>
-            </tr>
-          }
-          {data &&
+          {error ?
+            <TableRow>
+              <TableCell colSpan={fields.length} className={styles.errorRow}>
+                <ErrorOutlineIcon fontSize={'large'} colSpan={3} className={styles.errorIcon} />
+              </TableCell>
+            </TableRow>
+            :
             <>
-              {data.map((row, idx) => (
-                <TableRow
-                  key={idx}
-                  hover
-                  {...row.rowProps}
-                >
-                  {fields.map((field, idx) => (
-                    <TableCell
-                      key={idx}
-                      align={field.align || "right"}
-                    >
-                      {row[field.fieldName]}
-                    </TableCell>
-                  ))}
+              {loading &&
+                <TableRow>
+                  <TableCell colSpan={fields.length} className={styles.loadingRow}>
+                    <LinearProgress colSpan="3" />
+                  </TableCell>
                 </TableRow>
-              ))}
-              <TableRow>
-                <TablePagination
-                  rowsPerPageOptions={pagination.rowsPerPageOptions}
-                  count={totalRows || data?.length}
-                  rowsPerPage={rowsPerPage || pagination.defaultRowsPerPage}
-                  page={page || 0}
-                  onPageChange={(e, p) => updateConfig({ page: p })}
-                  onRowsPerPageChange={(e) => updateConfig({ rowsPerPage: e.target.value })}
-                />
-              </TableRow>
+              }
+              {data &&
+                <>
+                  {data.map((row, idx) => (
+                    <TableRow
+                      key={idx}
+                      hover
+                      {...row.rowProps}
+                    >
+                      {fields.map((field, idx) => (
+                        <TableCell
+                          key={idx}
+                          align={field.align || "right"}
+                        >
+                          {row[field.fieldName]}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  ))}
+                  <TableRow>
+                    <TablePagination
+                      rowsPerPageOptions={pagination.rowsPerPageOptions}
+                      count={totalRows || data?.length}
+                      rowsPerPage={rowsPerPage || pagination.defaultRowsPerPage}
+                      page={page || 0}
+                      onPageChange={(e, p) => updateConfig({ page: p })}
+                      onRowsPerPageChange={(e) => updateConfig({ rowsPerPage: e.target.value })}
+                    />
+                  </TableRow>
+                </>
+              }
             </>
           }
         </TableBody>
@@ -107,6 +134,7 @@ PaginatedDataTable.propTypes = {
   updateConfig: PropTypes.func.isRequired,
   dense: PropTypes.bool,
   loading: PropTypes.bool,
+  error: PropTypes.bool,
 };
 
 PaginatedDataTable.defaultProps = {
@@ -114,6 +142,7 @@ PaginatedDataTable.defaultProps = {
   updateConfig: () => { },
   dense: false,
   loading: false,
+  error: false,
 };
 
 export default PaginatedDataTable;

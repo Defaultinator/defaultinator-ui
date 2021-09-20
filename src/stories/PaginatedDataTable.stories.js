@@ -270,3 +270,9 @@ LoadingInitial.args = {
   dataConfig: sampleCredentialsTableConfig,
   loading: true,
 };
+
+export const Error = Default.bind({});
+Error.args = {
+  dataConfig: sampleCredentialsTableConfig,
+  error: true,
+};
