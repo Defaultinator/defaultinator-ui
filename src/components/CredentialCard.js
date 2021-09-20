@@ -3,10 +3,6 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  Link,
-} from 'react-router-dom';
-
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Button,
@@ -31,6 +27,7 @@ const useStyles = makeStyles({
     maxWidth: 550,
     minWidth: 250,
     textAlign: 'center',
+    margin: 'auto',
   },
   card: {
     borderRadius: 12,
@@ -53,18 +50,18 @@ const CardMenuOptions = ({ references }) => {
 
   return (
     <>
-    <Tooltip title={"References"}>
-      <span>
-      <IconButton
-        disabled={references.length > 0 ? false : true}
-        aria-label="settings"
-        aria-controls="simple-menu"
-        aria-haspopup="true"
-        onClick={(e) => setAnchorEl(e.currentTarget)}
-      >
-        <MoreVertIcon />
-      </IconButton>
-      </span>
+      <Tooltip title={"References"}>
+        <span>
+          <IconButton
+            disabled={references.length > 0 ? false : true}
+            aria-label="settings"
+            aria-controls="simple-menu"
+            aria-haspopup="true"
+            onClick={(e) => setAnchorEl(e.currentTarget)}
+          >
+            <MoreVertIcon />
+          </IconButton>
+        </span>
       </Tooltip>
       <Menu
         id="simple-menu"

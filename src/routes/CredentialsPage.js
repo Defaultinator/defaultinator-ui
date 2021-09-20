@@ -57,14 +57,12 @@ const CredentialsPage = () => {
     }
   ];
 
-  return(
+  return (
     <div>
       <Switch>
-        { pages.map((page, idx) =>
+        {pages.map((page, idx) =>
           <Route path={page.path} key={idx}>
-            <Container>
-              {page.content}
-            </Container>
+            {page.content}
           </Route>
         )}
       </Switch>

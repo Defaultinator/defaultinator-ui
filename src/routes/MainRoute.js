@@ -23,12 +23,12 @@ export const MainRoute = () => {
     }
   ];
 
-  return(
+  return (
     <Switch>
       {pages.map((page, idx) =>
         <Route path={page.path} key={idx}>
           <div className={classes.content}>
-          {page.content}
+            {page.content}
           </div>
         </Route>
       )}

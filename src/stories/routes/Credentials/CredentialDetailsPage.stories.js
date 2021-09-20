@@ -1,7 +1,7 @@
 import React from 'react';
 import { MemoryRouter, Route } from "react-router-dom";
-import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
+// import axios from 'axios';
+// import MockAdapter from 'axios-mock-adapter';
 
 import CredentialDetailsPage from '../../../routes/Credentials/CredentialDetailsPage';
 
