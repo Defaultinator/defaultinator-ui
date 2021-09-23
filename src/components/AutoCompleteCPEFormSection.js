@@ -7,20 +7,12 @@ import PropTypes from 'prop-types';
 import useAxios from "axios-hooks";
 import { API_URI } from '../config/constants';
 
-import { makeStyles } from '@material-ui/core/styles';
 import {
   Grid,
   TextField,
   CircularProgress,
 } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    //maxWidth: 700,
-    padding: theme.spacing(2),
-  },
-}));
 
 const CPEFormAutocompleteItem = ({ field, setField, fieldName, queryParams }) => {
   const [open, setOpen] = useState(false);
@@ -63,7 +55,7 @@ const CPEFormAutocompleteItem = ({ field, setField, fieldName, queryParams }) =>
         setOpen(false);
       }}
       onBlur={() => setField({ _id: fieldText })}
-      options={(!(data.find((item) => item._id === fieldText) || fieldText === '' )) ? [{ _id: fieldText }, ...data] : data}
+      options={(!(data.find((item) => item._id === fieldText) || fieldText === '')) ? [{ _id: fieldText }, ...data] : data}
       value={field}
       onChange={(event, newValue) => setField(newValue)}
       inputValue={fieldText}
@@ -92,15 +84,13 @@ const CPEFormAutocompleteItem = ({ field, setField, fieldName, queryParams }) =>
   );
 };
 
-export const AdvancedSearchModal = () => {
-  const styles = useStyles();
-  const [queryParams, setQueryParams] = useState({});
+export const AutoCompleteCPEFormSection = ({fields, setFields}) => {
   const [vendor, setVendor] = useState('');
   const [product, setProduct] = useState('');
   const [version, setVersion] = useState('');
 
   useEffect(() => {
-    setQueryParams((q) => {
+    setFields((q) => {
       let newParams = { ...q };
       delete newParams.vendor;
       return ({
@@ -108,10 +98,10 @@ export const AdvancedSearchModal = () => {
         ...(vendor?._id && { vendor: vendor._id }),
       });
     });
-  }, [vendor, setQueryParams]);
+  }, [vendor, setFields]);
 
   useEffect(() => {
-    setQueryParams((q) => {
+    setFields((q) => {
       let newParams = { ...q };
       delete newParams.product;
       return ({
@@ -119,10 +109,10 @@ export const AdvancedSearchModal = () => {
         ...(product?._id && { product: product._id }),
       });
     });
-  }, [product, setQueryParams]);
+  }, [product, setFields]);
 
   useEffect(() => {
-    setQueryParams((q) => {
+    setFields((q) => {
       let newParams = { ...q };
       delete newParams.version;
       return ({
@@ -130,36 +120,40 @@ export const AdvancedSearchModal = () => {
         ...(version?._id && { version: version._id }),
       });
     });
-  }, [version, setQueryParams]);
+  }, [version, setFields]);
 
   return (
-    <div className={styles.root}>
-      <Grid container spacing={3}>
-        <Grid item sm={4}>
-          <Autocomplete
-            id={"combo-box-demo"}
-            options={['a', 'o', 'h']}
-            renderInput={(params) => <TextField {...params} label={"Part"} variant={"outlined"} />}
-          />
-        </Grid>
-        <Grid item xs={12} sm={8}>
-          <CPEFormAutocompleteItem field={vendor} setField={setVendor} fieldName={'vendor'} queryParams={queryParams} />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <CPEFormAutocompleteItem field={product} setField={setProduct} fieldName={'product'} queryParams={queryParams} />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <CPEFormAutocompleteItem field={version} setField={setVersion} fieldName={'version'} queryParams={queryParams} />
-        </Grid>
+    <Grid container spacing={3}>
+      <Grid item sm={4}>
+        <Autocomplete
+          id={"part-select"}
+          options={['a', 'o', 'h']}
+          renderInput={(params) => <TextField {...params} label={"Part"} variant={"outlined"} />}
+        />
       </Grid>
-    </div>
+      <Grid item xs={12} sm={8}>
+        <CPEFormAutocompleteItem field={vendor} setField={setVendor} fieldName={'vendor'} queryParams={fields} />
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <CPEFormAutocompleteItem field={product} setField={setProduct} fieldName={'product'} queryParams={fields} />
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <CPEFormAutocompleteItem field={version} setField={setVersion} fieldName={'version'} queryParams={fields} />
+      </Grid>
+    </Grid>
   );
 };
 
-AdvancedSearchModal.propTypes = {
+AutoCompleteCPEFormSection.propTypes = {
+  fields: PropTypes.shape({
+    vendor: PropTypes.string,
+    product: PropTypes.string,
+    version: PropTypes.string
+  }).isRequired,
+  setFields: PropTypes.func.isRequired,
 };
 
-AdvancedSearchModal.defaultProps = {
+AutoCompleteCPEFormSection.defaultProps = {
 };
 
-export default AdvancedSearchModal;
+export default AutoCompleteCPEFormSection;

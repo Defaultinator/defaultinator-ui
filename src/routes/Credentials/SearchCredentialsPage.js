@@ -79,6 +79,7 @@ const SearchCredentialsPage = () => {
     <PaginatedDataTable
       data={data ? formatData(data.docs) : null}
       loading={loading}
+      error={error}
       dataConfig={TABLE_CONFIG}
       rowsPerPage={data?.limit}
       page={data ? data.page - 1 : null}

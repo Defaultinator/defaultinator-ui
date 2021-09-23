@@ -1,6 +1,6 @@
 import React from 'react';
 
-import AdvancedSearchModal from '../../components/AdvancedSearchModal';
+import AdvancedSearchModal from '../../../components/AdvancedSearchModal/AdvancedSearchModal';
 
 export default {
   title: 'Components/AdvancedSearchModal',

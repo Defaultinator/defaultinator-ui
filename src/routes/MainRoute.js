@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
     margin: 'auto',
   },
 }));
+
 export const MainRoute = () => {
   const classes = useStyles();
 
