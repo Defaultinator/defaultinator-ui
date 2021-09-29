@@ -23,6 +23,12 @@ npm install
 npm run dev
 ```
 
+But ideally you are deving with storybook, so run this to do component development.
+
+```
+npm run storybook
+```
+
 ### Testing
 
 ```
