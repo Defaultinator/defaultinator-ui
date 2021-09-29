@@ -5,7 +5,7 @@ import React, {
 import PropTypes from 'prop-types';
 
 import useAxios from "axios-hooks";
-import { API_URI } from '../config/constants';
+import { API_URI } from '../../config/constants';
 
 import {
   Grid,

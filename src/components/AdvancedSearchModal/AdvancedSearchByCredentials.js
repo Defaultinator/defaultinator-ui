@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const AdvancedSearchByCPE = () => {
+const AdvancedSearchByCPE = ({ onSubmit }) => {
   const styles = useStyles();
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
@@ -56,10 +56,28 @@ const AdvancedSearchByCPE = () => {
         justifyContent="flex-end"
       >
         <Grid item>
-          <Button variant={"contained"} color={'primary'}>Search</Button>
+          <Button
+            variant={"contained"}
+            color={'primary'}
+            onClick={() => onSubmit({
+              ...(username && {username: username}),
+              ...(password && {password: password})
+            })}
+          >
+            Search
+          </Button>
         </Grid>
         <Grid item>
-          <Button color={'secondary'} className={styles.cancel}>Clear</Button>
+          <Button
+            color={'secondary'}
+            className={styles.cancel}
+            onClick={() => {
+              setUsername('');
+              setPassword('');
+            }}
+          >
+            Clear
+          </Button>
         </Grid>
       </Grid>
     </Container>

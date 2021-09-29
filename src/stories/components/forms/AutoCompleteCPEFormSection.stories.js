@@ -1,9 +1,9 @@
 import React, { useState, } from 'react';
 
-import AutoCompleteCPEFormSection from '../../components/AutoCompleteCPEFormSection';
+import AutoCompleteCPEFormSection from '../../../components/forms/AutoCompleteCPEFormSection';
 
 export default {
-    title: 'Components/AutoCompleteCPEFormSection',
+    title: 'Components/forms/AutoCompleteCPEFormSection',
     component: AutoCompleteCPEFormSection,
     decorators: [
         (Story) => {

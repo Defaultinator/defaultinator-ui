@@ -1,18 +1,31 @@
 import React from 'react';
 import { MemoryRouter, Route } from "react-router-dom";
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 
 import EditCredentialsPage from '../../../routes/Credentials/EditCredentialsPage';
+
+import { API_URI } from '../../../config/constants';
+import { sampleCredential } from '../../../tests/data/credentialData';
+
+const credentialId = "5";
 
 export default {
   title: 'Pages/Credentials/EditCredentialsPage',
   component: EditCredentialsPage,
   decorators: [
-    (Story) => (
-      <MemoryRouter initialEntries={[`/60e61b26d4b4c967c38fc3ed`]}>
-        <Route path="/:credentialId">
-          <Story />
-        </Route>
-      </MemoryRouter>),
+    (Story) => {
+      // TODO: Mock more error states somewhere. Here? The test? I don't know.
+      const mock = new MockAdapter(axios);
+      mock.onGet(`${API_URI}/credentials/${credentialId}`).reply(200, sampleCredential);
+      mock.onPut(`${API_URI}/credentials/${credentialId}`).reply(200, `OK`);
+      return (
+        <MemoryRouter initialEntries={[`/${credentialId}`]}>
+          <Route path="/:credentialId">
+            <Story />
+          </Route>
+        </MemoryRouter>);
+    },
   ],
 };
 

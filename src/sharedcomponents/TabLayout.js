@@ -12,7 +12,6 @@ import {
 } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { red } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
   toolbarAdjustment: {
@@ -85,16 +84,16 @@ const TabContent = ({ tabContent, active }) => {
     <>
       <div className={`${classes.toolbarAdjustment}`} />
       {tabContent.map((content, idx) => (
-        <div className={classes.tabHeightFlex}>
-        <Slide
+        <div
+          className={classes.tabHeightFlex}
           key={idx}
-          direction={getDirection(idx)}
-          in={active === idx}
-          
-
         >
-          <div className={`${classes.tabContainer} ${active === idx ? classes.active : classes.inactive}`}>{content}</div>
-        </Slide>
+          <Slide
+            direction={getDirection(idx)}
+            in={active === idx}
+          >
+            <div className={`${classes.tabContainer} ${active === idx ? classes.active : classes.inactive}`}>{content}</div>
+          </Slide>
         </div>
       ))}
     </>

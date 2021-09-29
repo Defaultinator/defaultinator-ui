@@ -8,7 +8,7 @@ import {
   Container,
   Grid,
 } from '@material-ui/core';
-import AutoCompleteCPEFormSection from '../AutoCompleteCPEFormSection';
+import AutoCompleteCPEFormSection from '../forms/AutoCompleteCPEFormSection';
 
 const useStyles = makeStyles((theme) => ({
   actions: {
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const AdvancedSearchByCPE = () => {
+const AdvancedSearchByCPE = ({ onSubmit }) => {
   const styles = useStyles();
   const [fields, setFields] = useState({});
 
@@ -32,10 +32,22 @@ const AdvancedSearchByCPE = () => {
         justifyContent="flex-end"
       >
         <Grid item>
-          <Button variant={"contained"} color={'primary'}>Search</Button>
+          <Button
+            variant={"contained"}
+            color={'primary'}
+            onClick={() => onSubmit(fields)}
+          >
+            Search
+          </Button>
         </Grid>
         <Grid item>
-          <Button color={'secondary'} className={styles.cancel}>Clear</Button>
+          <Button
+            color={'secondary'}
+            className={styles.cancel}
+            onClick={() => setFields({})}
+          >
+            Clear
+          </Button>
         </Grid>
       </Grid>
     </Container>

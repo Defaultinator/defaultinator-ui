@@ -1,9 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
+  useHistory,
+} from "react-router-dom";
 
+import {
   Paper,
 } from '@material-ui/core';
 
@@ -20,15 +22,23 @@ const useStyles = makeStyles((theme) => ({
 
 export const AdvancedSearchModal = () => {
   const styles = useStyles();
+  const history = useHistory();
+
+  const handleSearch = (fields) => {
+    history.push({
+      pathname: '/credentials/search',
+      search: "?" + new URLSearchParams(fields)
+    });
+  };
 
   const tabs = [
     {
       tabText: "CPE",
-      tabContent: <AdvancedSearchByCPE />,
+      tabContent: <AdvancedSearchByCPE onSubmit={handleSearch} />,
     },
     {
       tabText: "Credential",
-      tabContent: <AdvancedSearchByCredentials />,
+      tabContent: <AdvancedSearchByCredentials onSubmit={handleSearch} />,
     },
   ];
 

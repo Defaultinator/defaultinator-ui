@@ -72,6 +72,7 @@ const CardMenuOptions = ({ references }) => {
       >
         {references.map((ref, idx) => (
           <MenuItem
+            key={idx}
             component={'a'}
             href={`${ref}`}
           >
