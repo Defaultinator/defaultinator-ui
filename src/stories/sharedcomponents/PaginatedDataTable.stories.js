@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PaginatedDataTable from '../sharedcomponents/PaginatedDataTable';
+import PaginatedDataTable from '../../sharedcomponents/PaginatedDataTable';
 
 const sampleCredentials = [
   {
@@ -232,7 +232,7 @@ const sampleCredentialsTableConfig = {
 };
 
 export default {
-  title: 'Data Display/PaginatedDataTable',
+  title: 'Shared Components/PaginatedDataTable',
   component: PaginatedDataTable,
   argTypes: {
     updateConfig: { action: 'updateConfig' },
@@ -269,4 +269,10 @@ export const LoadingInitial = Default.bind({});
 LoadingInitial.args = {
   dataConfig: sampleCredentialsTableConfig,
   loading: true,
+};
+
+export const Error = Default.bind({});
+Error.args = {
+  dataConfig: sampleCredentialsTableConfig,
+  error: true,
 };

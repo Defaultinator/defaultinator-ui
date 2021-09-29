@@ -5,26 +5,25 @@ import MockAdapter from 'axios-mock-adapter';
 
 import CredentialDetailsPage from '../../../routes/Credentials/CredentialDetailsPage';
 
-// import { API_URI } from '../../config/constants';
+import { API_URI } from '../../../config/constants';
+import { sampleCredential } from '../../../tests/data/credentialData';
 
-// const credential = { "references": ["http://192-168-1-1-ip.co/manuals/1107.pdf"], "_id": "23452345", "username": "", "password": "public", "protocol": "Unknown", "cpe": { "_id": "234523452345", "part": "a", "product": "11wa_321a", "vendor": "11wave", "version": "ANY", "language": "ANY", "update": "ANY", "edition": "ANY" }, "__v": 0 };
-// const credentialId = "12345";
+const credentialId = "5";
 
 export default {
   title: 'Pages/Credentials/CredentialDetailsPage',
   component: CredentialDetailsPage,
   decorators: [
-    (Story) => (
-      <MemoryRouter initialEntries={[`/60e61b26d4b4c967c38fc3ed`]}>
-        <Route path="/:credentialId">
-          <Story />
-        </Route>
-      </MemoryRouter>),
-    // (Story) => {
-    //   const mock = new MockAdapter(axios);
-    //   mock.onGet(`${API_URI}/credentials/${credentialId}`).reply(200, credential);
-    //   return (<Story />)
-    // }
+    (Story) => {
+      const mock = new MockAdapter(axios);
+      mock.onGet(`${API_URI}/credentials/${credentialId}`).reply(200, sampleCredential);
+      return (
+        <MemoryRouter initialEntries={[`/${credentialId}`]}>
+          <Route path="/:credentialId">
+            <Story />
+          </Route>
+        </MemoryRouter>);
+    },
   ],
 };
 

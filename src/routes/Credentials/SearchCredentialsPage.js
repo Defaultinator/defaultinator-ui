@@ -36,17 +36,25 @@ const TABLE_CONFIG = {
 
 const SearchCredentialsPage = () => {
   const history = useHistory();
-  let query = new URLSearchParams(document.location.search);
+  const { enqueueSnackbar } = useSnackbar();
   const [paginationParams, setPaginationParams] = useState();
 
-  const { enqueueSnackbar } = useSnackbar();
+  const query = new URLSearchParams(document.location.search);
+  const searchParams = {
+    ...(query.get('part') && {part: query.get('part')}),
+    ...(query.get('vendor') && {vendor: query.get('vendor')}),
+    ...(query.get('product') && {product: query.get('product')}),
+    ...(query.get('version') && {version: query.get('version')}),
+    ...(query.get('username') && {username: query.get('username')}),
+    ...(query.get('password') && {password: query.get('password')}),
+  };
 
   const [{ data, loading, error }] = useAxios({
     url: `${API_URI}/credentials/search`,
-    method: 'POST',
-    data: {cpe: query.get('query')},
+    method: 'GET',
     params: {
-      ...paginationParams
+      ...paginationParams,
+      ...searchParams,
     }
   });
 
@@ -79,6 +87,7 @@ const SearchCredentialsPage = () => {
     <PaginatedDataTable
       data={data ? formatData(data.docs) : null}
       loading={loading}
+      error={error}
       dataConfig={TABLE_CONFIG}
       rowsPerPage={data?.limit}
       page={data ? data.page - 1 : null}

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 export const CpeType = PropTypes.shape({
-    part: PropTypes.oneOf(['a', 'o', 'h', '*']),
+    part: PropTypes.oneOf(['a', 'o', 'h', '*', '']),
     vendor: PropTypes.string,
     product: PropTypes.string,
     version: PropTypes.string,

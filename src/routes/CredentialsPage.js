@@ -7,7 +7,6 @@ import {
 
 import {
   Fab,
-  Container,
 } from "@material-ui/core";
 import AddIcon from '@material-ui/icons/Add';
 import {
@@ -57,14 +56,12 @@ const CredentialsPage = () => {
     }
   ];
 
-  return(
+  return (
     <div>
       <Switch>
-        { pages.map((page, idx) =>
+        {pages.map((page, idx) =>
           <Route path={page.path} key={idx}>
-            <Container>
-              {page.content}
-            </Container>
+            {page.content}
           </Route>
         )}
       </Switch>

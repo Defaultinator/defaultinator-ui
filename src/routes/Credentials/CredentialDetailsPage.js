@@ -22,7 +22,7 @@ const CredentialDetailsPage = () => {
   const confirm = useConfirm();
   const { enqueueSnackbar } = useSnackbar();
   const [{ data: credential, loading, error }] = useAxios(`${API_URI}/credentials/${credentialId}`);
-
+  
   const [
     , executeDelete
   ] = useAxios(
@@ -63,7 +63,6 @@ const CredentialDetailsPage = () => {
       });
   };
 
-  // TODO: Skeleton size is messed up
   return (
     <>
       {!loading &&
