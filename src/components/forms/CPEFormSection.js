@@ -25,9 +25,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CPEFormElement = ({control, input, autoCompleteParams}) => {
+  const prefix = autoCompleteParams[input.name];
+
   const params = {
     field: input.name,
-    prefix: autoCompleteParams[input.name],
+    prefix: prefix,
     ...autoCompleteParams,
   };
 
@@ -55,7 +57,7 @@ const CPEFormElement = ({control, input, autoCompleteParams}) => {
     }, 500);
 
     return () => clearTimeout(delayRequest);
-  }, [autoCompleteParams[input.name]]);
+  }, [prefix, executeRequest]);
 
   return (
     <PopupState variant="popover" popupId={`popover-${input.name}`}>
