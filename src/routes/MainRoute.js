@@ -7,6 +7,7 @@ import {
 
 import { makeStyles } from '@material-ui/core/styles';
 import CredentialsPage from "./CredentialsPage";
+import APIKeyPage from "./APIKeyPage";
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -21,7 +22,11 @@ export const MainRoute = () => {
     {
       "path": '/credentials',
       "content": <CredentialsPage />
-    }
+    },
+    {
+      "path": '/apikeys',
+      "content": <APIKeyPage />
+    },
   ];
 
   return (
