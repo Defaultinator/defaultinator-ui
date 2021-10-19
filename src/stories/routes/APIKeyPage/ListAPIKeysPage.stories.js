@@ -13,7 +13,7 @@ export default {
   decorators: [
     (Story) => {
       const mock = new MockAdapter(axios);
-      mock.onGet(`${API_URI}/apikeys`).reply(200, sampleApiKeys);
+      mock.onGet(`${API_URI}/apikeys`).reply(200, {docs: sampleApiKeys});
       return(<Story />);
     },
   ],

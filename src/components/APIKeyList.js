@@ -39,7 +39,7 @@ export const APIKeyList = ({ keys=[] }) => {
 };
 
 APIKeyList.propTypes = {
-  keys: PropTypes.arrayOf(APIKeyType),
+  keys: PropTypes.arrayOf(PropTypes.shape(APIKeyType)),
 };
 
 APIKeyList.defaultProps = {
