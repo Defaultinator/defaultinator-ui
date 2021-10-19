@@ -15,9 +15,8 @@ export default {
     withQuery,
     (Story) => {
       // TODO: Mock more error states somewhere. Here? The test? I don't know.
-      // TODO: This mock isn't working as expected in the story.
       const mock = new MockAdapter(axios);
-      mock.onGet(`${API_URI}/credentials/search?vendor=linksys`).reply(200, sampleSearchLinksys);
+      mock.onGet(`${API_URI}/credentials/search`).reply(200, sampleSearchLinksys);
       return (<Story />);
     },
   ],
