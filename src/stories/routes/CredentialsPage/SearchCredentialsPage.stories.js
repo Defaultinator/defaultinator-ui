@@ -3,13 +3,13 @@ import { withQuery } from '@storybook/addon-queryparams';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 
-import SearchCredentialsPage from '../../../routes/Credentials/SearchCredentialsPage';
+import SearchCredentialsPage from '../../../routes/CredentialsPage/SearchCredentialsPage';
 
 import { API_URI } from '../../../config/constants';
 import { sampleSearchLinksys } from '../../../tests/data/credentialData';
 
 export default {
-  title: 'Pages/Credentials/SearchCredentialsPage',
+  title: 'Pages/CredentialsPage/SearchCredentialsPage',
   component: SearchCredentialsPage,
   decorators: [
     withQuery,

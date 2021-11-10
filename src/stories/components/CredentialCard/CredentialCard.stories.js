@@ -1,8 +1,8 @@
 import React from 'react';
 
-import CredentialCard from '../../components/CredentialCard';
+import CredentialCard from '../../../components/CredentialCard/CredentialCard';
 
-import { sampleCredential } from '../../tests/data/credentialData';
+import { sampleCredential } from '../../../tests/data/credentialData';
 
 export default {
   title: 'Components/CredentialCard',

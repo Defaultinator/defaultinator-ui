@@ -11,6 +11,7 @@ import {
 } from 'notistack';
 import { API_URI } from "../../config/constants";
 import PaginatedDataTable from "../../sharedcomponents/PaginatedDataTable";
+import { useApiKey } from '../../util/useApiKey';
 
 const TABLE_CONFIG = {
   fields: [
@@ -37,11 +38,15 @@ const TABLE_CONFIG = {
 const CredentialsListPage = () => {
   const history = useHistory();
   const [paginationParams, setPaginationParams] = useState();
+  const [apikey] = useApiKey();
 
   const { enqueueSnackbar } = useSnackbar();
 
   const [{ data, loading, error }] = useAxios({
     url: `${API_URI}/credentials`,
+    headers: {
+      'X-API-KEY': apikey,
+    },
     params: {
       ...paginationParams
     }

@@ -14,7 +14,7 @@ import { useSnackbar } from "notistack";
 
 import { API_URI } from '../../config/constants';
 
-import CredentialCard from '../../components/CredentialCard';
+import CredentialCard from '../../components/CredentialCard/CredentialCard';
 
 const CredentialDetailsPage = () => {
   let { credentialId } = useParams();

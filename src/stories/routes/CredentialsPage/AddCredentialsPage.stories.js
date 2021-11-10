@@ -1,9 +1,9 @@
 import React from 'react';
 
-import AddCredentialsPage from '../../../routes/Credentials/AddCredentialsPage';
+import AddCredentialsPage from '../../../routes/CredentialsPage/AddCredentialsPage';
 
 export default {
-  title: 'Pages/Credentials/AddCredentialsPage',
+  title: 'Pages/CredentialsPage/AddCredentialsPage',
   component: AddCredentialsPage,
 };
 

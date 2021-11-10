@@ -2,13 +2,13 @@ import React from 'react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 
-import CredentialsListPage from '../../../routes/Credentials/CredentialsListPage';
+import CredentialsListPage from '../../../routes/CredentialsPage/CredentialsListPage';
 
 import { API_URI } from '../../../config/constants';
 import { sampleCredentials } from '../../../tests/data/credentialData';
 
 export default {
-  title: 'Pages/Credentials/CredentialsListPage',
+  title: 'Pages/CredentialsPage/CredentialsListPage',
   component: CredentialsListPage,
   decorators: [
     (Story) => {

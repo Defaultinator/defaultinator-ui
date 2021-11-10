@@ -56,6 +56,7 @@ export const PaginatedDataTable = (
               <TableCell
                 key={idx}
                 align={field.align || "right"}
+                style={{borderBottom: 'none'}}
               >
                 {field.label}
               </TableCell>
@@ -71,13 +72,14 @@ export const PaginatedDataTable = (
             </TableRow>
             :
             <>
-              {loading &&
-                <TableRow>
-                  <TableCell colSpan={fields.length} className={styles.loadingRow}>
-                    <LinearProgress colSpan="3" />
-                  </TableCell>
-                </TableRow>
-              }
+              <TableRow>
+                <TableCell colSpan={fields.length} className={styles.loadingRow}>
+                  {loading ?
+                    <LinearProgress colSpan="3" /> :
+                    <div style={{ height: 4 }} colSpan={3} />
+                  }
+                </TableCell>
+              </TableRow>
               {data &&
                 <>
                   {data.map((row, idx) => (

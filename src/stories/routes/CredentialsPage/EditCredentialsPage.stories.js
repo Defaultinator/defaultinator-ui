@@ -3,7 +3,7 @@ import { MemoryRouter, Route } from "react-router-dom";
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 
-import EditCredentialsPage from '../../../routes/Credentials/EditCredentialsPage';
+import EditCredentialsPage from '../../../routes/CredentialsPage/EditCredentialsPage';
 
 import { API_URI } from '../../../config/constants';
 import { sampleCredential } from '../../../tests/data/credentialData';
@@ -11,7 +11,7 @@ import { sampleCredential } from '../../../tests/data/credentialData';
 const credentialId = "5";
 
 export default {
-  title: 'Pages/Credentials/EditCredentialsPage',
+  title: 'Pages/CredentialsPage/EditCredentialsPage',
   component: EditCredentialsPage,
   decorators: [
     (Story) => {

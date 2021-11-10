@@ -13,11 +13,13 @@ import {
   makeStyles,
 } from "@material-ui/core/styles";
 
-import CredentialDetailsPage from "./Credentials/CredentialDetailsPage";
-import CredentialsListPage from "./Credentials/CredentialsListPage";
-import AddCredentialsPage from "./Credentials/AddCredentialsPage";
-import EditCredentialsPage from "./Credentials/EditCredentialsPage";
-import SearchCredentialsPage from "./Credentials/SearchCredentialsPage";
+import withAuth from '../components/withAuth';
+
+import CredentialDetailsPage from "./CredentialsPage/CredentialDetailsPage";
+import CredentialsListPage from "./CredentialsPage/CredentialsListPage";
+import AddCredentialsPage from "./CredentialsPage/AddCredentialsPage";
+import EditCredentialsPage from "./CredentialsPage/EditCredentialsPage";
+import SearchCredentialsPage from "./CredentialsPage/SearchCredentialsPage";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -78,4 +80,4 @@ const CredentialsPage = () => {
   );
 };
 
-export default CredentialsPage;
+export default withAuth(CredentialsPage);
