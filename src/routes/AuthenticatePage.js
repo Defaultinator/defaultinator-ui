@@ -4,7 +4,7 @@ import AuthForm from "../components/forms/AuthForm/AuthForm";
 import { REQUEST_ACCOUNT_EMAIL } from "../config/constants";
 
 const AuthenticatePage = () => {
-  const [apikey, setApikey] = useApiKey();
+  const [apikey, setApikey] = useApiKey(s => [s.apikey, s.setApikey]);
 
     return(
       <Container>

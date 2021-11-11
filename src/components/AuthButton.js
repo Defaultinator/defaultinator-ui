@@ -4,13 +4,13 @@ import {
 } from "@material-ui/core";
 
 const AuthButton = () => {
-  const [apikey, setApikey] = useApiKey();
+  const [apikey, deleteApikey] = useApiKey(s => [s.apikey, s.deleteApikey]);
 
   return (
     <>
       {apikey && apikey !== '' &&
         <Button
-          onClick={() => setApikey('')}
+          onClick={() => deleteApikey()}
         >
           Logout
         </Button>
