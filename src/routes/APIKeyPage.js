@@ -15,11 +15,9 @@ import {
 
 import withAuth from '../components/withAuth';
 
-import CredentialDetailsPage from "./CredentialsPage/CredentialDetailsPage";
-import CredentialsListPage from "./CredentialsPage/CredentialsListPage";
-import AddCredentialsPage from "./CredentialsPage/AddCredentialsPage";
-import EditCredentialsPage from "./CredentialsPage/EditCredentialsPage";
-import SearchCredentialsPage from "./CredentialsPage/SearchCredentialsPage";
+import ListAPIKeysPage from './APIKeyPage/ListAPIKeysPage';
+import ViewAPIKeyPage from './APIKeyPage/ViewAPIKeyPage';
+import AddAPIKeyPage from './APIKeyPage/AddAPIKeyPage';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,30 +29,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CredentialsPage = () => {
+const APIKeyPage = () => {
   let { path, url } = useRouteMatch();
   let classes = useStyles();
 
   const pages = [
     {
       path: `${path}/add`,
-      content: <AddCredentialsPage />,
+      content: <AddAPIKeyPage />,
     },
     {
-      path: `${path}/search`,
-      content: <SearchCredentialsPage />,
-    },
-    {
-      path: `${path}/:credentialId/edit`,
-      content: <EditCredentialsPage />,
-    },
-    {
-      path: `${path}/:credentialId`,
-      content: <CredentialDetailsPage />,
+      path: `${path}/:apiKeyId`,
+      content: <ViewAPIKeyPage />,
     },
     {
       path: `${path}/`,
-      content: <CredentialsListPage />,
+      content: <ListAPIKeysPage />,
     }
   ];
 
@@ -71,7 +61,6 @@ const CredentialsPage = () => {
         <Fab
           className={classes.fab}
           color={"primary"}
-          onClick={() => console.log('clock')}
         >
           <AddIcon />
         </Fab>
@@ -80,4 +69,4 @@ const CredentialsPage = () => {
   );
 };
 
-export default withAuth(CredentialsPage);
+export default withAuth(APIKeyPage);

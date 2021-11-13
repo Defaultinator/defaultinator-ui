@@ -16,3 +16,9 @@ export const CredentialType = PropTypes.shape({
     references: PropTypes.arrayOf(PropTypes.string),
     cpe: CpeType,
 });
+
+export const APIKeyType = {
+    apiKey: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    notes: PropTypes.string,
+};

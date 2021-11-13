@@ -13,6 +13,7 @@ import {
 } from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 
+import useApiKey from '../../util/useApiKey';
 import FormField from "../FormField";
 import useAxios from "axios-hooks";
 import {API_URI} from '../../config/constants';
@@ -25,9 +26,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CPEFormElement = ({control, input, autoCompleteParams}) => {
+  const [apiKey] = useApiKey(s => [s.apikey]);
+  const prefix = autoCompleteParams[input.name];
+
   const params = {
     field: input.name,
-    prefix: autoCompleteParams[input.name],
+    prefix: prefix,
     ...autoCompleteParams,
   };
 
@@ -43,7 +47,10 @@ const CPEFormElement = ({control, input, autoCompleteParams}) => {
   // TODO: This autocomplete makes things go super slow. It rerenders the whole form every keypress. It works, but yikes
   const [{data}, executeRequest] = useAxios({
       url: `${API_URI}/dictionary/typeahead`,
-      params: params
+      params: params,
+      headers: {
+        'X-API-KEY': apiKey,
+      }
     },
     {
       manual: true
@@ -55,7 +62,7 @@ const CPEFormElement = ({control, input, autoCompleteParams}) => {
     }, 500);
 
     return () => clearTimeout(delayRequest);
-  }, [autoCompleteParams[input.name]]);
+  }, [prefix, executeRequest]);
 
   return (
     <PopupState variant="popover" popupId={`popover-${input.name}`}>
