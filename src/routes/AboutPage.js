@@ -13,7 +13,7 @@ const AboutPage = () => {
         Defaultinator is a data repository for storing and querying default passwords for common devices and applications.
         This tool is designed to support defenders looking to harden their attack surface and minimize their vulnerability
         to CWE-798 (https://cwe.mitre.org/data/definitions/798.html) as well as aiding them in assessing their compliance
-        with consumer protection legislation.
+        with consumer protection laws and best practices.
       </Typography>
       <Typography variant={'h5'} gutterBottom>
         Use Cases
@@ -30,8 +30,27 @@ const AboutPage = () => {
         have hardcoded credentials that are readily accessible on GitHub (even clearly documented), or have documentation
         that displays a default deployment configuration that uses sample credentials which are often just copied and
         pasted by developers. It can be difficult to audit if you are using default credentials in your own environment,
-        so Defaultinator was developed to facilitate the process of eliminating these unwanted credentials from your own
-        environment.
+        so Defaultinator was developed to facilitate the process of identifying these unwanted credentials so they can be
+        eliminated from your own environment.
+      </Typography>
+      <Typography variant={'h6'} gutterBottom>
+        Alignment with Best Practices
+      </Typography>
+      <Typography variant={'body1'} paragraph>
+        Several regulations and requirements prohibit default or non-unique passwords. For example, CA and OR state laws
+        specifically prohibit shared default passwords in IoT devices. PCI DSS v.3.2.1, requirement 2, prohibits use of
+        vendor-supplied default passwords.
+      </Typography>
+      <Typography variant={'body1'} paragraph>
+        This type of regulation is likely to become more common globally. The UK is planning a law to prohibit shared
+        default passwords in consumer smart devices, and has identified default passwords in its Code of Practice. Similar
+        to the UK, Australia has also issued a Code of Practice that prohibits shared default passwords, and has indicated
+        that Australia would pursue this as a mandatory requirement as well. In addition, several widely recognized security
+        standards forbid use of shared default passwords. For example, ETSI EN 303 645 requirement 5.1.
+      </Typography>
+      <Typography variant={'body1'} paragraph>
+        By identifying use of shared default passwords at scale, Defaultinator could help organizations align their
+        operations with regulations, requirements, and best practices that prohibit use of default or non-unique passwords.
       </Typography>
       <Typography variant={'h6'} gutterBottom>
         Threat Intelligence
