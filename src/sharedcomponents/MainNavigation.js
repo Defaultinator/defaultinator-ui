@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
 
 import {
   Link,
@@ -32,17 +33,57 @@ const useStyles = makeStyles((theme) => ({
   },
   drawer: {
     width: drawerWidth,
+    flexShrink: 0,
   },
+  // appBar: {
+  //   width: `calc(100% - ${drawerWidth}px)`,
+  //   marginLeft: drawerWidth,
+  //   //zIndex: theme.zIndex.drawer + 1,
+  // },
   appBar: {
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
-  toolbar: theme.mixins.toolbar,
+  //toolbar: theme.mixins.toolbar,
+  toolbar: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: 'flex-end',
+  },
   content: {
-    height: '100vh',
     flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
+    padding: theme.spacing(3),
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    marginLeft: -drawerWidth,
   },
+  contentShift: {
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    marginLeft: 0,
+  },
+  // content: {
+  //   height: '100vh',
+  //   flexGrow: 1,
+  //   backgroundColor: theme.palette.background.default,
+  // },
   pages: {
     padding: theme.spacing(3),
   },
@@ -89,7 +130,9 @@ const MainNavigation = ({ pages, title, AppBarAction = <></> }) => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="fixed" className={classes.appBar}>
+      <AppBar position="fixed" className={clsx(classes.appBar, {
+          [classes.appBarShift]: mobileOpen,
+        })}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -118,7 +161,9 @@ const MainNavigation = ({ pages, title, AppBarAction = <></> }) => {
           <AppDrawerContent pages={pages} />
         </Drawer>
       </nav>
-      <main className={classes.content}>
+      <main className={clsx(classes.content, {
+          [classes.contentShift]: mobileOpen,
+        })}>
         <div className={classes.toolbar} />
         <div className={classes.pages}>
           <Switch>
