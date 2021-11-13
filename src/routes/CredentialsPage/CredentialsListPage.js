@@ -38,7 +38,7 @@ const TABLE_CONFIG = {
 const CredentialsListPage = () => {
   const history = useHistory();
   const [paginationParams, setPaginationParams] = useState();
-  const [apikey] = useApiKey();
+  const [apikey] = useApiKey(s => [s.apikey]);
 
   const { enqueueSnackbar } = useSnackbar();
 

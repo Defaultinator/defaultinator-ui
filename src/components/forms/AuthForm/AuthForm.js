@@ -26,13 +26,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AuthForm = ({setApikey, apikey}) => {
+const AuthForm = ({onSubmit, apikey, onClear}) => {
   const classes = useStyles();
   const { handleSubmit, control, reset, formState: { errors } } = useForm();
 
-  const onSubmit = (data) => {
-    setApikey(data.apikey);
-  };
+  // const onSubmit = (data) => {
+  //   setApikey(data.apikey);
+  // };
 
   return (
     <Paper className={classes.root}>
@@ -56,7 +56,7 @@ const AuthForm = ({setApikey, apikey}) => {
             color="secondary"
             onClick={() => {
               reset({ apikey: '' });
-              setApikey('');
+              onClear();
             }}
           >
             Clear
@@ -69,8 +69,9 @@ const AuthForm = ({setApikey, apikey}) => {
 };
 
 AuthForm.propTypes = {
-  setApikey: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
   apikey: PropTypes.string,
+  onClear: PropTypes.func.isRequired,
 };
 
 AuthForm.defaultProps = {

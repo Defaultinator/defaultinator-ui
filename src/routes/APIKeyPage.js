@@ -13,6 +13,8 @@ import {
   makeStyles,
 } from "@material-ui/core/styles";
 
+import withAuth from '../components/withAuth';
+
 import ListAPIKeysPage from './APIKeyPage/ListAPIKeysPage';
 import ViewAPIKeyPage from './APIKeyPage/ViewAPIKeyPage';
 import AddAPIKeyPage from './APIKeyPage/AddAPIKeyPage';
@@ -67,4 +69,4 @@ const APIKeyPage = () => {
   );
 };
 
-export default APIKeyPage;
+export default withAuth(APIKeyPage);

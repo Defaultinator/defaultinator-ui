@@ -13,22 +13,32 @@ import { useConfirm } from "material-ui-confirm";
 import { useSnackbar } from "notistack";
 
 import { API_URI } from '../../config/constants';
+import { useApiKey } from '../../util/useApiKey';
 
 import CredentialCard from '../../components/CredentialCard/CredentialCard';
 
 const CredentialDetailsPage = () => {
   let { credentialId } = useParams();
+  const [apikey] = useApiKey(s => [s.apikey]);
   const history = useHistory();
   const confirm = useConfirm();
   const { enqueueSnackbar } = useSnackbar();
-  const [{ data: credential, loading, error }] = useAxios(`${API_URI}/credentials/${credentialId}`);
+  const [{ data: credential, loading, error }] = useAxios({
+    url: `${API_URI}/credentials/${credentialId}`,
+    headers: {
+      'X-API-KEY': apikey,
+    },
+  });
   
   const [
     , executeDelete
   ] = useAxios(
     {
       url: `${API_URI}/credentials/${credentialId}`,
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        'X-API-KEY': apikey,
+      },
     },
     { manual: true }
   );

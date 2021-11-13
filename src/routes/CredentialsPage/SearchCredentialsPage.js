@@ -9,6 +9,7 @@ import useAxios from "axios-hooks";
 import {
   useSnackbar,
 } from 'notistack';
+import { useApiKey } from '../../util/useApiKey';
 import { API_URI } from "../../config/constants";
 import PaginatedDataTable from "../../sharedcomponents/PaginatedDataTable";
 
@@ -38,6 +39,7 @@ const SearchCredentialsPage = () => {
   const history = useHistory();
   const { enqueueSnackbar } = useSnackbar();
   const [paginationParams, setPaginationParams] = useState();
+  const [apikey] = useApiKey(s => [s.apikey]);
 
   const query = new URLSearchParams(document.location.search);
   const searchParams = {
@@ -55,13 +57,16 @@ const SearchCredentialsPage = () => {
     params: {
       ...paginationParams,
       ...searchParams,
-    }
+    },
+    headers: {
+      'X-API-KEY': apikey,
+    },
   });
 
   useEffect(() => {
     if (error) {
-      console.log(error);
-      enqueueSnackbar('There was an error loading the requested data.');
+      const message = error.response?.data?.message || 'There was an error loading the requested data.';
+      enqueueSnackbar(message);
     }
   }, [error, enqueueSnackbar]);
 

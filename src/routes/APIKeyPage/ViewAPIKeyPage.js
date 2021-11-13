@@ -11,7 +11,8 @@ import React, {
   
   // import { useConfirm } from "material-ui-confirm";
   import { useSnackbar } from "notistack";
-  
+  import { useApiKey } from '../../util/useApiKey';
+
   import { API_URI } from '../../config/constants';
   
   import APIKeyCard from '../../components/APIKeyCard';
@@ -21,7 +22,14 @@ import React, {
     // const history = useHistory();
     // const confirm = useConfirm();
     const { enqueueSnackbar } = useSnackbar();
-    const [{ data: apiKey, loading, error }] = useAxios(`${API_URI}/apikeys/${apiKeyId}`);
+    const [apikey] = useApiKey(s => [s.apikey]);
+    const [{ data: apiKeys, loading, error }] = useAxios({
+      url: `${API_URI}/apikeys/${apiKeyId}`,
+      headers: {
+        'X-API-KEY': apikey,
+      },
+    });
+    
     
     // const [
     //   , executeDelete
@@ -35,10 +43,11 @@ import React, {
   
     useEffect(() => {
       if (error) {
-        console.log(error);
-        enqueueSnackbar('There was an error loading the requested data.');
+        const message = error.response?.data?.message || 'There was an error loading the requested data.';
+        enqueueSnackbar(message);
       }
     }, [error, enqueueSnackbar]);
+  
   
     // const handleDelete = () => {
     //   confirm({ description: "Are you sure you want to delete this entry?" })
@@ -68,7 +77,7 @@ import React, {
       <>
         {!loading &&
           <APIKeyCard
-            {...apiKey}
+            {...apiKeys}
           />
         }
       </>

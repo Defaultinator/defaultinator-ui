@@ -5,16 +5,20 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 
 import LockIcon from '@material-ui/icons/Lock';
-import InfoIcon from '@material-ui/icons/Info';
+import HomeIcon from '@material-ui/icons/Home';
 import GavelIcon from '@material-ui/icons/Gavel';
 import FeedbackIcon from '@material-ui/icons/Feedback';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 
 import MainNavigation from './sharedcomponents/MainNavigation';
+import useApiKey from "./util/useApiKey";
 
 import CredentialsPage from './routes/CredentialsPage';
 import APIKeyPage from './routes/APIKeyPage';
+import AboutPage from './routes/AboutPage';
 import AuthButton from './components/AuthButton';
+import TermsPage from "./routes/TermsPage";
+import FeedbackPage from "./routes/FeedbackPage";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,12 +28,13 @@ const useStyles = makeStyles((theme) => ({
 
 const App = () => {
   const classes = useStyles();
+  const [isAdmin] = useApiKey(s => [s.isAdmin]);
 
   const pages = [
     {
-      navText: "About",
-      navIcon: <InfoIcon />,
-      pageContent: <div>About Page</div>,
+      navText: "Home",
+      navIcon: <HomeIcon />,
+      pageContent: <AboutPage />,
       pageTitle: "About",
       path: "/about",
     },
@@ -46,18 +51,19 @@ const App = () => {
       pageContent: <APIKeyPage />,
       pageTitle: "API Keys",
       path: "/apikeys",
+      hidden: !isAdmin,
     },
     {
       navText: "Terms and Conditions",
       navIcon: <GavelIcon />,
-      pageContent: <div>Legal Page</div>,
+      pageContent: <TermsPage />,
       pageTitle: "Terms and Conditions",
       path: "/terms",
     },
     {
       navText: "Feedback",
       navIcon: <FeedbackIcon />,
-      pageContent: <div>Feedback Page</div>,
+      pageContent: <FeedbackPage />,
       pageTitle: "Feedback",
       path: "/feedback",
     },

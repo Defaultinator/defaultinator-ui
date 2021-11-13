@@ -65,6 +65,7 @@ const AppDrawerContent = ({ pages }) => {
             component={Link}
             to={page.path}
             selected={page.path === activePath}
+            disabled={page.hidden || false}
           >
             <ListItemIcon>
               {page.navIcon}
@@ -83,8 +84,6 @@ const MainNavigation = ({ pages, title, AppBarAction = <></> }) => {
   const [mobileOpen, setMobileOpen] = useState(true);
 
   const handleDrawerToggle = () => {
-    console.log('clonk');
-    console.log(mobileOpen);
     setMobileOpen(!mobileOpen);
   };
 
@@ -108,7 +107,7 @@ const MainNavigation = ({ pages, title, AppBarAction = <></> }) => {
       </AppBar>
       <nav className={classes.drawer}>
         <Drawer
-          variant="permanent"
+          variant="persistent"
           open={mobileOpen}
           onClose={handleDrawerToggle}
           className={classes.drawer}
@@ -148,6 +147,7 @@ MainNavigation.propTypes = {
 
     // TODO: Validate this is a path
     path: PropTypes.string,
+    hidden: PropTypes.bool,
   })).isRequired,
   title: PropTypes.string,
 };
