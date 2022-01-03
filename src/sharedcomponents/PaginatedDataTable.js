@@ -15,6 +15,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import Skeleton from '@material-ui/lab/Skeleton';
 
 const useStyles = makeStyles((theme) => ({
   loadingRow: {
@@ -46,6 +47,8 @@ export const PaginatedDataTable = (
 ) => {
   const styles = useStyles();
   const { fields, pagination } = dataConfig;
+
+  console.log(data, loading);
 
   return (
     <TableContainer component={Paper}>
@@ -80,6 +83,17 @@ export const PaginatedDataTable = (
                   }
                 </TableCell>
               </TableRow>
+              {loading && (!data || data.length === 0) &&
+                Array(rowsPerPage || pagination.defaultRowsPerPage).fill(Array(dataConfig.fields.length).fill('')).map((columns, idx) =>
+                  <TableRow key={idx}>
+                    {columns.map((col, idx) => 
+                      <TableCell key={idx}>
+                        <Skeleton />
+                      </TableCell>
+                    )}
+                  </TableRow>
+                )
+              }
               {data &&
                 <>
                   {data.map((row, idx) => (

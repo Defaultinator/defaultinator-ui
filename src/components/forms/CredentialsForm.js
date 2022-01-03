@@ -28,10 +28,10 @@ import {
 
 import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
-import CPEFormSection from "./CPEFormSection";
 import CredsFormSection from "./CredsFormSection";
 import ProtocolFormSection from "./ProtocolFormSection";
 import { CpeType } from '../../config/types';
+import AutoCompleteCPEFormSection from './AutoCompleteCPEFormSection';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -79,23 +79,6 @@ const ActionButtons = ({ reset }) => {
           </Button>
         </Grid>
       </Grid>
-    </Container>
-  );
-};
-
-const CPESection = ({ control, autoCompleteParams }) => {
-  const classes = useStyles();
-
-  return (
-    <Container className={classes.container}>
-      <Typography
-        gutterBottom
-        className={classes.caption}
-        variant="caption"
-      >
-        CPE Information
-      </Typography>
-      <CPEFormSection control={control} autoCompleteParams={autoCompleteParams} />
     </Container>
   );
 };
@@ -227,9 +210,9 @@ const CredentialsForm = (
   }
 ) => {
   const classes = useStyles();
-  const { handleSubmit, control, reset, watch } = useForm({ defaultValues: defaultValues });
+  const { handleSubmit, control, reset } = useForm({ defaultValues: defaultValues });
   const [references, setReferences] = useState([]);
-  const values = watch();
+  const [cpeFields, setCpeFields] = useState({});
 
   // TODO: Must refresh the page if you immediately return.
   // Steps to reproduce: Edit a cred. Immediately click edit. Changes are not reflected in the form.
@@ -239,13 +222,13 @@ const CredentialsForm = (
     let newCred = {};
 
     newCred['cpe'] = {
-      part: data.part || 'ANY',
-      vendor: data.vendor || 'ANY',
-      product: data.product || 'ANY',
-      version: data.version || 'ANY',
-      update: data.update || 'ANY',
-      edition: data.edition || 'ANY',
-      language: data.language || 'ANY',
+      part: cpeFields.part || 'ANY',
+      vendor: cpeFields.vendor || 'ANY',
+      product: cpeFields.product || 'ANY',
+      version: cpeFields.version || 'ANY',
+      update: cpeFields.update || 'ANY',
+      edition: cpeFields.edition || 'ANY',
+      language: cpeFields.language || 'ANY',
     };
 
     newCred['username'] = data.username;
@@ -266,7 +249,18 @@ const CredentialsForm = (
           <Divider />
           <CredentialsSection control={control} />
           <Divider />
-          <CPESection control={control} autoCompleteParams={values} />
+          <Container
+            className={classes.container}
+          >
+            <Typography
+              gutterBottom
+              className={classes.caption}
+              variant="caption"
+            >
+              Credentials
+            </Typography>
+            <AutoCompleteCPEFormSection fields={cpeFields} setFields={setCpeFields} />
+          </Container>
           <Divider />
           <ProtocolSection control={control} />
           <Divider />

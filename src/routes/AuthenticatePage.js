@@ -51,10 +51,12 @@ const AuthenticatePage = () => {
 
   return (
     <Container>
-      <AuthForm onSubmit={onSubmit} apikey={apikey} onClear={onClear} />
-      <br />
-      <br />
-      or <a href={`mailto:${REQUEST_ACCOUNT_EMAIL}`}>request</a> an account!
+      <div>
+        <AuthForm onSubmit={onSubmit} apikey={apikey} onClear={onClear} />
+        <br />
+        <br />
+        or <a href={`mailto:${REQUEST_ACCOUNT_EMAIL}`}>request</a> an account!
+      </div>
     </Container>
   );
 };

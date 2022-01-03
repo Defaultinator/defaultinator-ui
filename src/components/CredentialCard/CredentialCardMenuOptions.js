@@ -45,6 +45,7 @@ const ReferencesMenuItem = ({ references }) => {
     <>
       <MenuItem
         onClick={(e) => setAnchorEl(e.currentTarget)}
+        disabled={references.length <= 0}
       >
         <ListItemIcon>
           <BookmarksIcon />
@@ -80,10 +81,9 @@ const CredentialCardMenuOptions = ({ references }) => {
 
   return (
     <>
-      <Tooltip title={"References"}>
+      <Tooltip title={"More Options"}>
         <span>
           <IconButton
-            disabled={references.length > 0 ? false : true}
             aria-label="settings"
             aria-controls="simple-menu"
             aria-haspopup="true"

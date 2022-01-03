@@ -11,7 +11,7 @@ import {
 } from 'notistack';
 import { useApiKey } from '../../util/useApiKey';
 import { API_URI } from "../../config/constants";
-import PaginatedDataTable from "../../sharedcomponents/PaginatedDataTable";
+import CredentialsList from '../../components/CredentialsList/CredentialsList';
 
 const TABLE_CONFIG = {
   fields: [
@@ -89,7 +89,7 @@ const SearchCredentialsPage = () => {
   };
 
   return (
-    <PaginatedDataTable
+    <CredentialsList
       data={data ? formatData(data.docs) : null}
       loading={loading}
       error={error}

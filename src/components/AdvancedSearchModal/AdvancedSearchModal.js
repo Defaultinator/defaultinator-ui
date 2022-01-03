@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const AdvancedSearchModal = () => {
+export const AdvancedSearchModal = ({ onSearch = () => {}, onClear }) => {
   const styles = useStyles();
   const history = useHistory();
 
@@ -29,6 +29,7 @@ export const AdvancedSearchModal = () => {
       pathname: '/credentials/search',
       search: "?" + new URLSearchParams(fields)
     });
+    onSearch();
   };
 
   const tabs = [

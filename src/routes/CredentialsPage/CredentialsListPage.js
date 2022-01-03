@@ -10,8 +10,8 @@ import {
   useSnackbar,
 } from 'notistack';
 import { API_URI } from "../../config/constants";
-import PaginatedDataTable from "../../sharedcomponents/PaginatedDataTable";
 import { useApiKey } from '../../util/useApiKey';
+import CredentialsList from '../../components/CredentialsList/CredentialsList';
 
 const TABLE_CONFIG = {
   fields: [
@@ -78,7 +78,7 @@ const CredentialsListPage = () => {
   };
 
   return (
-    <PaginatedDataTable
+    <CredentialsList
       data={data ? formatData(data.docs) : null}
       loading={loading}
       dataConfig={TABLE_CONFIG}

@@ -5,6 +5,8 @@ import React, {
 import PropTypes from 'prop-types';
 
 import useAxios from "axios-hooks";
+import { useSnackbar } from "notistack";
+
 import { API_URI } from '../../config/constants';
 
 import {
@@ -13,18 +15,32 @@ import {
   CircularProgress,
 } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import useApiKey from '../../util/useApiKey';
 
 const CPEFormAutocompleteItem = ({ field, setField, fieldName, queryParams }) => {
   const [open, setOpen] = useState(false);
   const [fieldText, setFieldText] = useState('');
-  const [{ data = [], loading }, executeRequest] = useAxios(
+  const [apikey] = useApiKey(s => [s.apikey]);
+  const { enqueueSnackbar } = useSnackbar();
+
+  const [{ data = [], loading, error }, executeRequest] = useAxios(
     {
       url: `${API_URI}/dictionary/typeahead`,
+      headers: {
+        'X-API-KEY': apikey,
+      },
     },
     {
       manual: true
     });
 
+    useEffect(() => {
+      if (error) {
+        console.log(error);
+        enqueueSnackbar('There was an error loading the requested data.');
+      }
+    }, [error, enqueueSnackbar]);
+  
   useEffect(() => {
     if (open) {
       const myParams = { ...queryParams };
