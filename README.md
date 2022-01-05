@@ -20,7 +20,7 @@ API_PORT=3000
 
 ```
 npm install
-npm run dev
+npm run start
 ```
 
 But ideally you are deving with storybook, so run this to do component development.
