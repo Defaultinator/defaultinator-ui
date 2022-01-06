@@ -6,4 +6,6 @@ COPY ["package.json", "package-lock.json*", "./"]
 RUN npm install
 
 COPY . .
-CMD [ "npm", "run", "start"]
+# TODO: avoid using npm script
+ENTRYPOINT ["npm", "run"]
+CMD ["start"]
