@@ -7,17 +7,19 @@ import {
 
 import {
   Fab,
-  Container,
 } from "@material-ui/core";
 import AddIcon from '@material-ui/icons/Add';
 import {
   makeStyles,
 } from "@material-ui/core/styles";
 
-import CredentialLookupPage from "./Credentials/CredentialLookupPage";
-import CredentialsListPage from "./Credentials/CredentialsListPage";
-import AddCredentialsPage from "./Credentials/AddCredentialsPage";
-import EditCredentialsPage from "./Credentials/EditCredentialsPage";
+import withAuth from '../components/withAuth';
+
+import CredentialDetailsPage from "./CredentialsPage/CredentialDetailsPage";
+import CredentialsListPage from "./CredentialsPage/CredentialsListPage";
+import AddCredentialsPage from "./CredentialsPage/AddCredentialsPage";
+import EditCredentialsPage from "./CredentialsPage/EditCredentialsPage";
+import SearchCredentialsPage from "./CredentialsPage/SearchCredentialsPage";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,31 +37,33 @@ const CredentialsPage = () => {
 
   const pages = [
     {
-      "path": `${path}/add`,
-      "content": <AddCredentialsPage />,
+      path: `${path}/add`,
+      content: <AddCredentialsPage />,
     },
     {
-      "path": `${path}/:credentialId/edit`,
-      "content": <EditCredentialsPage />,
+      path: `${path}/search`,
+      content: <SearchCredentialsPage />,
     },
     {
-      "path": `${path}/:credentialId`,
-      "content": <CredentialLookupPage />,
+      path: `${path}/:credentialId/edit`,
+      content: <EditCredentialsPage />,
     },
     {
-      "path": `${path}/`,
-      "content": <CredentialsListPage />,
+      path: `${path}/:credentialId`,
+      content: <CredentialDetailsPage />,
+    },
+    {
+      path: `${path}/`,
+      content: <CredentialsListPage />,
     }
   ];
 
-  return(
+  return (
     <div>
       <Switch>
-        { pages.map((page, idx) =>
+        {pages.map((page, idx) =>
           <Route path={page.path} key={idx}>
-            <Container>
-              {page.content}
-            </Container>
+            {page.content}
           </Route>
         )}
       </Switch>
@@ -76,4 +80,4 @@ const CredentialsPage = () => {
   );
 };
 
-export default CredentialsPage;
+export default withAuth(CredentialsPage);

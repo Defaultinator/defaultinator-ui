@@ -5,37 +5,37 @@ import {
   Switch,
 } from "react-router-dom";
 
-import SearchResultsPage from "./SearchResultsPage";
-import VendorListPage from "./VendorListPage";
-import ProductsByVendorPage from "./ProductsByVendorPage";
+import { makeStyles } from '@material-ui/core/styles';
 import CredentialsPage from "./CredentialsPage";
+import APIKeyPage from "./APIKeyPage";
+
+const useStyles = makeStyles((theme) => ({
+  content: {
+    margin: 'auto',
+  },
+}));
 
 export const MainRoute = () => {
+  const classes = useStyles();
 
   const pages = [
     {
-      "path": '/search',
-      "content": <SearchResultsPage />,
-    },
-    {
-      "path": '/vendors/',
-      "content": <VendorListPage />
-    },
-    {
-      "path": '/products/:vendorId?',
-      "content": <ProductsByVendorPage />
-    },
-    {
       "path": '/credentials',
       "content": <CredentialsPage />
-    }
+    },
+    {
+      "path": '/apikeys',
+      "content": <APIKeyPage />
+    },
   ];
 
-  return(
+  return (
     <Switch>
       {pages.map((page, idx) =>
         <Route path={page.path} key={idx}>
-          {page.content}
+          <div className={classes.content}>
+            {page.content}
+          </div>
         </Route>
       )}
     </Switch>

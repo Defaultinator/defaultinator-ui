@@ -1,16 +1,23 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Controller} from "react-hook-form";
+
+import PopupState, {bindFocus, bindPopper} from 'material-ui-popup-state';
 
 import {
   FormControl,
   Grid,
+  Popper,
   MenuItem,
   InputLabel,
   Select,
 } from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 
+import useApiKey from '../../util/useApiKey';
 import FormField from "../FormField";
+import useAxios from "axios-hooks";
+import {API_URI} from '../../config/constants';
+import AutoCompleteSuggestions from "../AutoCompleteSuggestions";
 
 const useStyles = makeStyles((theme) => ({
   select: {
@@ -18,7 +25,66 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const CPEFormSection = ({control}) => {
+const CPEFormElement = ({control, input, autoCompleteParams}) => {
+  const [apiKey] = useApiKey(s => [s.apikey]);
+  const prefix = autoCompleteParams[input.name];
+
+  const params = {
+    field: input.name,
+    prefix: prefix,
+    ...autoCompleteParams,
+  };
+
+  delete params[input.name];
+  delete params['references'];
+  delete params['username'];
+  delete params['password'];
+
+  Object.keys(params).forEach((key) => {
+    if(!params[key]) delete params[key];
+  });
+
+  // TODO: This autocomplete makes things go super slow. It rerenders the whole form every keypress. It works, but yikes
+  const [{data}, executeRequest] = useAxios({
+      url: `${API_URI}/dictionary/typeahead`,
+      params: params,
+      headers: {
+        'X-API-KEY': apiKey,
+      }
+    },
+    {
+      manual: true
+    });
+
+  useEffect(() => {
+    const delayRequest = setTimeout(() => {
+      executeRequest().catch(() => {});
+    }, 500);
+
+    return () => clearTimeout(delayRequest);
+  }, [prefix, executeRequest]);
+
+  return (
+    <PopupState variant="popover" popupId={`popover-${input.name}`}>
+      {(popupState) => (
+        <>
+          <FormField
+            {...input}
+            control={control}
+            autocompleteprops={bindFocus(popupState)}
+          />
+          { data &&
+            <Popper {...bindPopper(popupState)}  style={{zIndex: 20}}>
+              <AutoCompleteSuggestions suggestions={data} />
+            </Popper>
+          }
+        </>
+      )}
+    </PopupState>
+  );
+};
+
+const CPEFormSection = ({control, autoCompleteParams}) => {
   const classes = useStyles();
 
   const inputs = [
@@ -49,7 +115,7 @@ const CPEFormSection = ({control}) => {
   ];
 
   return (
-    <Grid container spacing={4} justify={'center'}>
+    <Grid container spacing={4} justifyContent={'center'}>
       <Grid item>
         <Controller
           name={'part'}
@@ -87,7 +153,7 @@ const CPEFormSection = ({control}) => {
       </Grid>
       {inputs.map((input, idx) =>
         <Grid item xs={6} md={3} sm={3} key={idx}>
-          <FormField {...input} control={control}/>
+          <CPEFormElement control={control} input={input} autoCompleteParams={autoCompleteParams}/>
         </Grid>
       )}
     </Grid>

@@ -1,10 +1,10 @@
 import React, {
   useState,
-  useEffect,
 } from 'react';
 import {
   useForm,
 } from "react-hook-form";
+import PropTypes from 'prop-types';
 
 import {
   Grid,
@@ -28,9 +28,10 @@ import {
 
 import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
-import CPEFormSection from "./CPEFormSection";
 import CredsFormSection from "./CredsFormSection";
 import ProtocolFormSection from "./ProtocolFormSection";
+import { CpeType } from '../../config/types';
+import AutoCompleteCPEFormSection from './AutoCompleteCPEFormSection';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ActionButtons = ({reset}) => {
+const ActionButtons = ({ reset }) => {
   const classes = useStyles();
 
   return (
@@ -57,7 +58,7 @@ const ActionButtons = ({reset}) => {
       <Grid
         container
         spacing={4}
-        justify="flex-start"
+        justifyContent="flex-start"
         alignItems="center"
       >
         <Grid item>
@@ -82,24 +83,7 @@ const ActionButtons = ({reset}) => {
   );
 };
 
-const CPESection = ({control}) => {
-  const classes = useStyles();
-
-  return (
-    <Container className={classes.container}>
-      <Typography
-        gutterBottom
-        className={classes.caption}
-        variant="caption"
-      >
-        CPE Information
-      </Typography>
-      <CPEFormSection control={control}/>
-    </Container>
-  );
-};
-
-const ProtocolSection = ({control}) => {
+const ProtocolSection = ({ control }) => {
   const classes = useStyles();
 
   return (
@@ -111,12 +95,12 @@ const ProtocolSection = ({control}) => {
       >
         Protocol
       </Typography>
-      <ProtocolFormSection control={control}/>
+      <ProtocolFormSection control={control} />
     </Container>
   );
 };
 
-const CredentialsSection = ({control}) => {
+const CredentialsSection = ({ control }) => {
   const classes = useStyles();
 
   return (
@@ -128,12 +112,12 @@ const CredentialsSection = ({control}) => {
       >
         Credentials
       </Typography>
-      <CredsFormSection control={control}/>
+      <CredsFormSection control={control} />
     </Container>
   );
 };
 
-const ReferenceListItem = ({reference, deleteSelf}) => {
+const ReferenceListItem = ({ reference, deleteSelf }) => {
   return (
     <ListItem
     >
@@ -155,7 +139,7 @@ const ReferenceListItem = ({reference, deleteSelf}) => {
   );
 };
 
-const ReferenceList = ({references, setReferences}) => {
+const ReferenceList = ({ references, setReferences }) => {
 
   const removeSelf = (idx) => () => {
     references.splice(idx, 1);
@@ -165,17 +149,17 @@ const ReferenceList = ({references, setReferences}) => {
   return (
     <>
       {references.length !== 0 &&
-      <List>
-        {references.map((reference, idx) =>
-          <ReferenceListItem reference={reference} key={idx} deleteSelf={removeSelf(idx)}/>
-        )}
-      </List>
+        <List>
+          {references.map((reference, idx) =>
+            <ReferenceListItem reference={reference} key={idx} deleteSelf={removeSelf(idx)} />
+          )}
+        </List>
       }
     </>
   );
 };
 
-const ReferencesSection = ({references, setReferences}) => {
+const ReferencesSection = ({ references, setReferences }) => {
   const classes = useStyles();
   const [reference, setReference] = useState('');
 
@@ -188,7 +172,7 @@ const ReferencesSection = ({references, setReferences}) => {
       >
         References
       </Typography>
-      <ReferenceList references={references} setReferences={setReferences}/>
+      <ReferenceList references={references} setReferences={setReferences} />
       <div style={{
         display: 'flex',
         alignItems: 'center',
@@ -211,7 +195,7 @@ const ReferencesSection = ({references, setReferences}) => {
             setReference('');
           }}
         >
-          <AddIcon/>
+          <AddIcon />
         </IconButton>
       </div>
     </Container>
@@ -221,32 +205,30 @@ const ReferencesSection = ({references, setReferences}) => {
 const CredentialsForm = (
   {
     formAction,
-    defaultValues = {},
-    title = 'Add New Credentials'
+    defaultValues = { 'part': '' },
+    title = 'Add New Credentials',
   }
 ) => {
   const classes = useStyles();
-  const {handleSubmit, control, reset} = useForm({defaultValues: defaultValues});
+  const { handleSubmit, control, reset } = useForm({ defaultValues: defaultValues });
   const [references, setReferences] = useState([]);
+  const [cpeFields, setCpeFields] = useState({});
 
   // TODO: Must refresh the page if you immediately return.
   // Steps to reproduce: Edit a cred. Immediately click edit. Changes are not reflected in the form.
   // Hit refresh. Changes are now reflected.
-  useEffect(() => {
-    reset();
-  }, []);
 
   const onSubmit = (data) => {
     let newCred = {};
 
     newCred['cpe'] = {
-      part: data.part || 'ANY',
-      vendor: data.vendor || 'ANY',
-      product: data.product || 'ANY',
-      version: data.version || 'ANY',
-      update: data.update || 'ANY',
-      edition: data.edition || 'ANY',
-      language: data.language || 'ANY',
+      part: cpeFields.part || 'ANY',
+      vendor: cpeFields.vendor || 'ANY',
+      product: cpeFields.product || 'ANY',
+      version: cpeFields.version || 'ANY',
+      update: cpeFields.update || 'ANY',
+      edition: cpeFields.edition || 'ANY',
+      language: cpeFields.language || 'ANY',
     };
 
     newCred['username'] = data.username;
@@ -264,18 +246,41 @@ const CredentialsForm = (
           <Typography gutterBottom variant="h4">
             {title}
           </Typography>
+          <Divider />
+          <CredentialsSection control={control} />
+          <Divider />
+          <Container
+            className={classes.container}
+          >
+            <Typography
+              gutterBottom
+              className={classes.caption}
+              variant="caption"
+            >
+              Credentials
+            </Typography>
+            <AutoCompleteCPEFormSection fields={cpeFields} setFields={setCpeFields} />
+          </Container>
+          <Divider />
+          <ProtocolSection control={control} />
+          <Divider />
+          <ReferencesSection references={references} setReferences={setReferences} />
+          <ActionButtons reset={reset} />
         </Container>
-        <CredentialsSection control={control}/>
-        <Divider/>
-        <CPESection control={control}/>
-        <Divider/>
-        <ProtocolSection control={control}/>
-        <Divider/>
-        <ReferencesSection references={references} setReferences={setReferences}/>
-        <ActionButtons reset={reset}/>
       </form>
     </Paper>
   );
+};
+
+CredentialsForm.propTypes = {
+  formAction: PropTypes.func.isRequired,
+  defaultValues: CpeType,
+  title: PropTypes.string,
+};
+
+CredentialsForm.defaultProps = {
+  defaultValues: { 'part': '' },
+  title: 'Add New Credentials',
 };
 
 export default CredentialsForm;

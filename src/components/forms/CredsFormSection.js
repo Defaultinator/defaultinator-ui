@@ -19,7 +19,7 @@ const CredsFormSection = ({control}) => {
   ];
 
   return (
-    <Grid container spacing={4} justify="space-evenly">
+    <Grid container spacing={4} justifyContent="space-evenly">
       {inputs.map((input, idx) =>
         <Grid item key={idx}>
           <FormField {...input} control={control}/>

@@ -1,5 +1,5 @@
 import React from "react";
-import {Controller} from "react-hook-form";
+import { Controller } from "react-hook-form";
 
 import {
   FormControl,
@@ -13,21 +13,27 @@ const useStyles = makeStyles((theme) => ({
   input: {},
 }));
 
-const FormField = ({name, placeholder, control, defaultValue = ""}) => {
+const FormField = ({ name, placeholder, control, autocompleteprops, defaultValue = "", multiline = false, controllerProps, error }) => {
   const classes = useStyles();
 
   return (
     <Controller
+      {...controllerProps}
       control={control}
-      render={({field}) =>
+      defaultValue={defaultValue}
+      render={({ field }) =>
         <FormControl
           className={classes.input}
         >
           <TextField
+            error={!!error}
+            helperText={error && "Invalid value."}
             variant={"outlined"}
             label={placeholder}
             autoComplete='off'
+            multiline={multiline}
             {...field}
+            {...autocompleteprops}
           />
         </FormControl>
       }
