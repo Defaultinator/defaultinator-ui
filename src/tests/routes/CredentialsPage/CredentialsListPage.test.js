@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
-import * as stories from '../../../stories/routes/Credentials/CredentialsListPage.stories';
+import * as stories from '../../../stories/routes/CredentialsPage/CredentialsListPage.stories';
 
 const { Primary: CredentialsListPage } = composeStories(stories);
 
