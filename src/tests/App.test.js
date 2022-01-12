@@ -1,5 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import App from '../App';
+import { composeStories } from '@storybook/testing-react';
+import * as stories from '../stories/App.stories';
+
+const { Primary: App } = composeStories(stories);
 
 describe('<App />', () => {
 
@@ -19,14 +22,5 @@ describe('<App />', () => {
   });
 
   it.skip('renders <CredentialLokupPage /> when the /lookup/:vendorId/:productId route is active', () => {
-  });
-});
-
-describe('<SearchBar />', () => {
-  it.skip('routes to /search when enter is pressed', () => {
-  });
-
-  it.skip('sets the correct query params', () => {
-    // TODO: This should include proper encoding of special characters. I think.
   });
 });
