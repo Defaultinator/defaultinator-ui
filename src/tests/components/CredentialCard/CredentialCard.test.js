@@ -4,7 +4,58 @@ import * as stories from '../../../stories/components/CredentialCard/CredentialC
 
 const { Primary: CredentialCard } = composeStories(stories);
 
-describe('components/CredentialCard', () => {
+// Test data used in story
+//
+// export const sampleCredential = {
+//   "references": [
+//     "http://192-168-1-1-ip.co/manuals/1107.pdf"
+//   ],
+//   "_id": "23452345",
+//   "username": "foo",
+//   "password": "bar",
+//   "protocol": "Unknown",
+//   "cpe": {
+//     "_id": "234523452345",
+//     "part": "a",
+//     "product": "11wa_321a",
+//     "vendor": "11wave",
+//     "version": "ANY",
+//     "language": "ANY",
+//     "update": "ANY",
+//     "edition": "ANY"
+//   },
+//   "edits": [
+//     {
+//       "edit": {
+//         "references": [
+//           "http://192-168-1-1-ip.co/manuals/1107.pdf"
+//         ],
+//         "username": "foo",
+//         "password": "",
+//         "protocol": "Unknown",
+//         "cpe": {
+//           "part": "a",
+//           "product": "11wa_321a",
+//           "vendor": "11wave",
+//           "version": "ANY",
+//           "language": "ANY",
+//           "update": "ANY",
+//           "edition": "ANY"
+//         }
+//       },
+//       "timestamp": 1642110033,
+//     },
+//     {
+//       "edit": {
+//         "password": "bar",
+//       },
+//       "timestamp": 1642110133,
+//     },
+//   ],
+//   "__v": 0
+// };
+
+describe('components/CredentialCard/CredentialCard', () => {
   it('should render', () => {
     render(<CredentialCard />);
   });
@@ -13,21 +64,21 @@ describe('components/CredentialCard', () => {
     render(<CredentialCard />);
 
     expect(screen.getByText('foo')).toBeInTheDocument();
-    expect(screen.getByText('bar')).toBeInTheDocument();    
+    expect(screen.getByText('bar')).toBeInTheDocument();
   });
 
   it('should display the vendor and product', () => {
     render(<CredentialCard />);
 
     expect(screen.getByText('11wave')).toBeInTheDocument();
-    expect(screen.getByText('11wa_321a')).toBeInTheDocument();    
+    expect(screen.getByText('11wa_321a')).toBeInTheDocument();
   });
 
   it('should have an options menu', () => {
     render(<CredentialCard />);
 
     expect(
-      screen.getByRole('button', {name: /options/i})
+      screen.getByRole('button', { name: /options/i })
     ).toBeInTheDocument();
   });
 
@@ -35,7 +86,7 @@ describe('components/CredentialCard', () => {
     render(<CredentialCard />);
 
     expect(
-      screen.getByRole('button', {name: /edit/i})
+      screen.getByRole('button', { name: /edit/i })
     ).toBeInTheDocument();
   });
 
@@ -43,8 +94,15 @@ describe('components/CredentialCard', () => {
     render(<CredentialCard />);
 
     expect(
-      screen.getByRole('button', {name: /delete/i})
+      screen.getByRole('button', { name: /delete/i })
     ).toBeInTheDocument();
+  });
+
+  it('should show the data of creation and most recent edit', () => {
+    render(<CredentialCard />);
+
+    expect(screen.getByText('Created on: 1/13/2022')).toBeInTheDocument();
+    expect(screen.getByText('Last edited: 1/13/2022')).toBeInTheDocument();
   });
 
 });
