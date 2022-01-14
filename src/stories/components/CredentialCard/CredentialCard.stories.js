@@ -2,7 +2,7 @@ import React from 'react';
 
 import CredentialCard from '../../../components/CredentialCard/CredentialCard';
 
-import { sampleCredential } from '../../../tests/data/credentialData';
+import { sampleCredential, sampleVerifiedCredential } from '../../../tests/data/credentialData';
 
 export default {
   title: 'Components/CredentialCard',
@@ -18,6 +18,13 @@ const Template = (args) => <CredentialCard {...args} />;
 export const Primary = Template.bind({});
 Primary.args = {
   credential: sampleCredential,
+  primaryButtonText: "Edit",
+  secondaryButtonText: "Delete",
+};
+
+export const Verified = Template.bind({});
+Verified.args = {
+  credential: sampleVerifiedCredential,
   primaryButtonText: "Edit",
   secondaryButtonText: "Delete",
 };

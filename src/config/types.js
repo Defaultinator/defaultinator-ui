@@ -15,6 +15,7 @@ export const CredentialType = PropTypes.shape({
   password: PropTypes.string,
   references: PropTypes.arrayOf(PropTypes.string),
   cpe: CpeType,
+  isVerified: PropTypes.bool,
   edits: PropTypes.arrayOf(PropTypes.shape({
     edit: PropTypes.object,
     timestamp: PropTypes.number,
