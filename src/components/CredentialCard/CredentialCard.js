@@ -37,6 +37,12 @@ const useStyles = makeStyles({
   fieldContent: {
     margin: 'auto',
   },
+  timestampContainer: {
+    width: '100%',
+  },
+  timestampContents: {
+    textAlign: 'left',
+  }
 });
 
 export const CredentialCard = (
@@ -49,8 +55,22 @@ export const CredentialCard = (
   }
 ) => {
   const styles = useStyles();
-  const { username, password, cpe } = credential;
+  const { username, password, cpe, edits } = credential;
   const { vendor, product } = cpe;
+
+  const createdOn = Math.min(...edits.map(({ timestamp }) => timestamp));
+
+  let lastEdited;
+  if (edits.length > 1) {
+    lastEdited = Math.max(...edits.map(({ timestamp }) => timestamp));
+  };
+
+  const dateOptions = {
+    year: "numeric",
+    month: "numeric",
+    day: "2-digit"
+  }
+
 
   return (
     <Card className={styles.root}>
@@ -99,6 +119,22 @@ export const CredentialCard = (
       </CardContent>
       <Divider />
       <CardActions className={styles.cardActions}>
+        <span className={styles.timestampContainer}>
+          <div className={styles.timestampContents}>
+            <Typography variant={'caption'}>
+              Created on: {new Date(createdOn * 1000).toLocaleString("en-US", dateOptions)}
+            </Typography>
+          </div>
+          <>
+            {lastEdited &&
+              <div className={styles.timestampContents}>
+                <Typography variant={'caption'}>
+                  Last edited: {new Date(lastEdited * 1000).toLocaleString("en-US", dateOptions)}
+                </Typography>
+              </div>
+            }
+          </>
+        </span>
         {primaryButtonText &&
           <Button
             size="small"
