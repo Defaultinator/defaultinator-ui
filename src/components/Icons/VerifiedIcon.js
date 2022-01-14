@@ -19,8 +19,6 @@ const useStyles = makeStyles((theme) => ({
 const VerifiedIcon = ({ isVerified = false }) => {
   const classes = useStyles();
 
-  console.log(isVerified);
-
   if (isVerified)
     return (
       <Tooltip title={"Verified Record"} aria-label="verified">
