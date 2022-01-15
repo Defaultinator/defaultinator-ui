@@ -6,6 +6,7 @@ export const sampleCredentials = {
       "username": "",
       "password": "public",
       "protocol": "Unknown",
+      "isVerified": true,
       "cpe": {
         "_id": "60e61b26d4b4c967c38fc3ee",
         "part": "a",
@@ -22,6 +23,7 @@ export const sampleCredentials = {
       "username": "admin",
       "password": "admin",
       "protocol": "Unknown",
+      "isVerified": true,
       "cpe": {
         "_id": "60e61b26d4b4c967c38fc3f1",
         "part": "a",
@@ -38,6 +40,7 @@ export const sampleCredentials = {
       "username": "admin",
       "password": "",
       "protocol": "unknown",
+      "isVerified": true,
       "cpe": {
         "_id": "60e61b26d4b4c967c38fc3f4",
         "part": "a",
@@ -54,6 +57,7 @@ export const sampleCredentials = {
       "username": "http://gateway.2wire.net/setup/",
       "password": "",
       "protocol": "Unknown",
+      "isVerified": true,
       "cpe": {
         "_id": "60e61b26d4b4c967c38fc3f7",
         "part": "a",
@@ -174,6 +178,56 @@ export const sampleCredential = {
   "username": "foo",
   "password": "bar",
   "protocol": "Unknown",
+  "cpe": {
+    "_id": "234523452345",
+    "part": "a",
+    "product": "11wa_321a",
+    "vendor": "11wave",
+    "version": "ANY",
+    "language": "ANY",
+    "update": "ANY",
+    "edition": "ANY"
+  },
+  "edits": [
+    {
+      "edit": {
+        "references": [
+          "http://192-168-1-1-ip.co/manuals/1107.pdf"
+        ],
+        "username": "foo",
+        "password": "",
+        "protocol": "Unknown",
+        "cpe": {
+          "part": "a",
+          "product": "11wa_321a",
+          "vendor": "11wave",
+          "version": "ANY",
+          "language": "ANY",
+          "update": "ANY",
+          "edition": "ANY"
+        }
+      },
+      "timestamp": 1642110033,
+    },
+    {
+      "edit": {
+        "password": "bar",
+      },
+      "timestamp": 1642110133,
+    },
+  ],
+  "__v": 0
+};
+
+export const sampleVerifiedCredential = {
+  "references": [
+    "http://192-168-1-1-ip.co/manuals/1107.pdf"
+  ],
+  "_id": "23452345",
+  "username": "foo",
+  "password": "bar",
+  "protocol": "Unknown",
+  "isVerified": true,
   "cpe": {
     "_id": "234523452345",
     "part": "a",

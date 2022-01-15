@@ -15,6 +15,7 @@ import {
 import { CredentialType } from '../../config/types';
 
 import CredentialCardMenuOptions from './CredentialCardMenuOptions';
+import VerifiedIcon from '../Icons/VerifiedIcon';
 
 const useStyles = makeStyles({
   root: {
@@ -55,7 +56,14 @@ export const CredentialCard = (
   }
 ) => {
   const styles = useStyles();
-  const { username, password, cpe, edits } = credential;
+  
+  const { 
+    username, 
+    password, 
+    cpe, 
+    isVerified, 
+    edits, 
+  } = credential;
   const { vendor, product } = cpe;
 
   const createdOn = Math.min(...edits.map(({ timestamp }) => timestamp));
@@ -65,16 +73,19 @@ export const CredentialCard = (
     lastEdited = Math.max(...edits.map(({ timestamp }) => timestamp));
   };
 
+  // Needed to display the date properly
   const dateOptions = {
     year: "numeric",
     month: "numeric",
     day: "2-digit"
-  }
-
+  };
 
   return (
     <Card className={styles.root}>
       <CardHeader
+        avatar={
+          <VerifiedIcon isVerified={isVerified} />
+        }
         title={vendor}
         titleTypographyProps={{ style: { textTransform: 'capitalize' } }}
         subheader={product}
