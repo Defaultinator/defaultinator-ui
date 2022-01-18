@@ -87,8 +87,9 @@ export const CredentialCard = (
           <VerifiedIcon isVerified={isVerified} />
         }
         title={vendor}
-        titleTypographyProps={{ style: { textTransform: 'capitalize' } }}
+        titleTypographyProps={{ style: { textTransform: 'capitalize' }, variant: 'h5' }}
         subheader={product}
+        subheaderTypographyProps={{variant: 'body2'}}
         action={<CredentialCardMenuOptions {...credential} />}
       />
       <Divider />
