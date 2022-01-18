@@ -41,6 +41,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios-mock-adapter": "^1.20.0",
+    "chromatic": "^6.4.0",
     "react-test-renderer": "^17.0.2",
     "storybook": "^6.3.8",
     "storybook-react-router": "^1.0.8"
@@ -51,7 +52,8 @@
     "test": "react-scripts test --silent --setupFiles ./setupFile.js",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "chromatic": "npx chromatic --project-token=0b89cbeb111e --allow-console-errors"
   },
   "eslintConfig": {
     "extends": [

@@ -1,4 +1,4 @@
-const flattenObject = (ob) => {
+export const flattenObject = (ob) => {
   let toReturn = {};
 
   for (let i in ob) {
@@ -18,7 +18,7 @@ const flattenObject = (ob) => {
   return toReturn;
 };
 
-const flattenCpe = (obj) => {
+export const flattenCpe = (obj) => {
   if(!obj) return null;
 
   const ret = {
@@ -36,9 +36,4 @@ const flattenCpe = (obj) => {
   };
 
   return(ret);
-};
-
-module.exports = {
-  flattenObject,
-  flattenCpe,
 };
