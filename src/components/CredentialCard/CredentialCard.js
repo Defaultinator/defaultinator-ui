@@ -10,6 +10,7 @@ import {
   Grid,
   Typography,
   Divider,
+  IconButton,
 } from '@material-ui/core';
 
 import { CredentialType } from '../../config/types';
@@ -52,17 +53,19 @@ export const CredentialCard = (
     primaryButtonText,
     primaryButtonProps,
     secondaryButtonText,
-    secondaryButtonProps
+    secondaryButtonProps,
+    isAdmin = false,
+    onVerify = () => {},
   }
 ) => {
   const styles = useStyles();
-  
-  const { 
-    username, 
-    password, 
-    cpe, 
-    isVerified, 
-    edits, 
+
+  const {
+    username,
+    password,
+    cpe,
+    isVerified,
+    edits,
   } = credential;
   const { vendor, product } = cpe;
 
@@ -84,12 +87,18 @@ export const CredentialCard = (
     <Card className={styles.root}>
       <CardHeader
         avatar={
-          <VerifiedIcon isVerified={isVerified} />
+          <IconButton
+            disabled={!isAdmin}
+            aria-label={isVerified ? "unverify" : "verify"}
+            onClick={() => onVerify(credential)}
+          >
+            <VerifiedIcon isVerified={isVerified} />
+          </IconButton>
         }
         title={vendor}
         titleTypographyProps={{ style: { textTransform: 'capitalize' }, variant: 'h5' }}
         subheader={product}
-        subheaderTypographyProps={{variant: 'body2'}}
+        subheaderTypographyProps={{ variant: 'body2' }}
         action={<CredentialCardMenuOptions {...credential} />}
       />
       <Divider />
@@ -177,9 +186,13 @@ CredentialCard.propTypes = {
   primaryButtonProps: PropTypes.object,
   secondaryButtonText: PropTypes.string,
   secondaryButtonProps: PropTypes.object,
+  isAdmin: PropTypes.bool,
+  onVerify: PropTypes.func,
 };
 
 CredentialCard.defaultProps = {
+  isAdmin: false,
+  onVerify: () => {},
 };
 
 export default CredentialCard;
