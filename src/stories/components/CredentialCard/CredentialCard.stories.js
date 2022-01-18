@@ -10,6 +10,7 @@ export default {
   argTypes: {
     onPrimaryAction: { action: 'onPrimaryAction' },
     onSecondaryAction: { action: 'onSecondaryAction' },
+    onVerify: { action: 'onVerify' }
   },
 };
 
@@ -27,4 +28,12 @@ Verified.args = {
   credential: sampleVerifiedCredential,
   primaryButtonText: "Edit",
   secondaryButtonText: "Delete",
+};
+
+export const IsAdmin = Template.bind({});
+IsAdmin.args = {
+  credential: sampleVerifiedCredential,
+  primaryButtonText: "Edit",
+  secondaryButtonText: "Delete",
+  isAdmin: true,
 };
