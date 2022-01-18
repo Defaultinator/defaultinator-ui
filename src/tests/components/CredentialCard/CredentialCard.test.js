@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import * as stories from '../../../stories/components/CredentialCard/CredentialCard.stories';
 
-const { Primary: CredentialCard } = composeStories(stories);
+const { Primary: CredentialCard, Verified } = composeStories(stories);
 
 // Test data used in story
 //
@@ -103,6 +103,19 @@ describe('components/CredentialCard/CredentialCard', () => {
 
     expect(screen.getByText('Created on: 1/13/2022')).toBeInTheDocument();
     expect(screen.getByText('Last edited: 1/13/2022')).toBeInTheDocument();
+  });
+
+  it('should display the result as unverified by default', () => {
+    render(<CredentialCard />);
+
+    expect(screen.getByLabelText('unverified')).toBeInTheDocument();
+  });
+
+  it('should display the result is verified if it is verified', () => {
+    render(<Verified />);
+
+    expect(screen.getByLabelText('verified')).toBeInTheDocument();
+
   });
 
 });
