@@ -55,7 +55,7 @@ export const CredentialCard = (
     secondaryButtonText,
     secondaryButtonProps,
     isAdmin = false,
-    onVerify = () => {},
+    onVerify = () => { },
   }
 ) => {
   const styles = useStyles();
@@ -65,14 +65,14 @@ export const CredentialCard = (
     password,
     cpe,
     isVerified = false,
-    edits = [],
+    edits,
   } = credential;
   const { vendor, product } = cpe;
 
-  const createdOn = Math.min(...edits.map(({ timestamp }) => timestamp));
+  const createdOn = Math.min(...(edits?.map(({ timestamp }) => timestamp) || [0]));
 
   let lastEdited;
-  if (edits.length > 1) {
+  if (edits?.length > 1) {
     lastEdited = Math.max(...edits.map(({ timestamp }) => timestamp));
   };
 
@@ -141,20 +141,20 @@ export const CredentialCard = (
       <Divider />
       <CardActions className={styles.cardActions}>
         <span className={styles.timestampContainer}>
-          <div className={styles.timestampContents}>
-            <Typography variant={'caption'}>
-              Created on: {new Date(createdOn * 1000).toLocaleString("en-US", dateOptions)}
-            </Typography>
-          </div>
-          <>
-            {lastEdited &&
-              <div className={styles.timestampContents}>
-                <Typography variant={'caption'}>
-                  Last edited: {new Date(lastEdited * 1000).toLocaleString("en-US", dateOptions)}
-                </Typography>
-              </div>
-            }
-          </>
+          {!!createdOn &&
+            <div className={styles.timestampContents}>
+              <Typography variant={'caption'}>
+                Created on: {new Date(createdOn * 1000).toLocaleString("en-US", dateOptions)}
+              </Typography>
+            </div>
+          }
+          {lastEdited &&
+            <div className={styles.timestampContents}>
+              <Typography variant={'caption'}>
+                Last edited: {new Date(lastEdited * 1000).toLocaleString("en-US", dateOptions)}
+              </Typography>
+            </div>
+          }
         </span>
         {primaryButtonText &&
           <Button
@@ -192,7 +192,7 @@ CredentialCard.propTypes = {
 
 CredentialCard.defaultProps = {
   isAdmin: false,
-  onVerify: () => {},
+  onVerify: () => { },
 };
 
 export default CredentialCard;
