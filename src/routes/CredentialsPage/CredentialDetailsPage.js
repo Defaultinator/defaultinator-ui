@@ -133,6 +133,7 @@ const CredentialDetailsPage = () => {
           secondaryButtonText={'Delete'}
           secondaryButtonProps={{ onClick: handleDelete }}
           onVerify={toggleVerify}
+          isAdmin={isAdmin}
         />
       }
     </>
