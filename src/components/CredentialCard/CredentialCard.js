@@ -64,8 +64,8 @@ export const CredentialCard = (
     username,
     password,
     cpe,
-    isVerified,
-    edits,
+    isVerified = false,
+    edits = [],
   } = credential;
   const { vendor, product } = cpe;
 
