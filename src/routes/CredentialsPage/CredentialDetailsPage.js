@@ -23,7 +23,7 @@ const CredentialDetailsPage = () => {
   const history = useHistory();
   const confirm = useConfirm();
   const { enqueueSnackbar } = useSnackbar();
-  const [{ data: credential, loading, credError }] = useAxios({
+  const [{ data: credential, loading, credError }, executeGet] = useAxios({
     url: `${API_URI}/credentials/${credentialId}`,
     headers: {
       'X-API-KEY': apikey,
@@ -108,7 +108,8 @@ const CredentialDetailsPage = () => {
         executeVerify({ data: { isVerified: !credential.isVerified } })
           .then((res) => {
             if (res.status === 200) {
-              enqueueSnackbar('Credential verified!');
+              enqueueSnackbar('Verification status changed!');
+              executeGet();
             } else {
               enqueueSnackbar('There has been an error verifying this record.');
               console.log(res);
