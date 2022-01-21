@@ -5,7 +5,7 @@ import {
   useParams,
 } from "react-router-dom";
 import {
-  Link, useHistory,
+  Link, useHistory, useLocation,
 } from 'react-router-dom';
 import useAxios from "axios-hooks";
 
@@ -19,6 +19,7 @@ import CredentialCard from '../../components/CredentialCard/CredentialCard';
 
 const CredentialDetailsPage = () => {
   let { credentialId } = useParams();
+  const location = useLocation();
   const [apikey, isAdmin] = useApiKey(s => [s.apikey, s.isAdmin]);
   const history = useHistory();
   const confirm = useConfirm();
@@ -28,7 +29,13 @@ const CredentialDetailsPage = () => {
     headers: {
       'X-API-KEY': apikey,
     },
-  });
+  },
+    { manual: true }
+  );
+
+  useEffect(() => {
+    executeGet();
+  }, [executeGet, location]);
 
   // Error handling for initial credential loading
   useEffect(() => {
@@ -128,6 +135,7 @@ const CredentialDetailsPage = () => {
     <>
       {!loading &&
         <CredentialCard
+          loading={loading}
           credential={credential}
           primaryButtonText={'Edit'}
           primaryButtonProps={{ component: Link, to: `/credentials/${credentialId}/edit` }}
