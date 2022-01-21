@@ -107,8 +107,6 @@ export const AutoCompleteCPEFormSection = ({ fields, setFields }) => {
   const [product, setProduct] = useState({ _id: fields?.product });
   const [version, setVersion] = useState({ _id: fields?.version });
 
-  console.log(fields);
-
   useEffect(() => {
     if (vendor?.hasOwnProperty('_id')) {
       setFields((q) => {
