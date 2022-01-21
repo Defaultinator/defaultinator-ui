@@ -71,7 +71,6 @@ const CredentialsPage = () => {
         <Fab
           className={classes.fab}
           color={"primary"}
-          onClick={() => console.log('clock')}
         >
           <AddIcon />
         </Fab>
