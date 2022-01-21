@@ -48,8 +48,6 @@ export const PaginatedDataTable = (
   const styles = useStyles();
   const { fields, pagination } = dataConfig;
 
-  console.log(data, loading);
-
   return (
     <TableContainer component={Paper}>
       <Table aria-label="data table" size={dense ? 'small' : 'medium'}>
