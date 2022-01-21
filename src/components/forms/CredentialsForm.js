@@ -212,7 +212,7 @@ const CredentialsForm = (
   const classes = useStyles();
   const { handleSubmit, control, reset } = useForm({ defaultValues: defaultValues });
   const [references, setReferences] = useState([]);
-  const [cpeFields, setCpeFields] = useState({});
+  const [cpeFields, setCpeFields] = useState(defaultValues);
 
   // TODO: Must refresh the page if you immediately return.
   // Steps to reproduce: Edit a cred. Immediately click edit. Changes are not reflected in the form.
@@ -249,9 +249,7 @@ const CredentialsForm = (
           <Divider />
           <CredentialsSection control={control} />
           <Divider />
-          <Container
-            className={classes.container}
-          >
+          <Container className={classes.container}>
             <Typography
               gutterBottom
               className={classes.caption}

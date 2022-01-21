@@ -19,7 +19,7 @@ import useApiKey from '../../util/useApiKey';
 
 const CPEFormAutocompleteItem = ({ field, setField, fieldName, queryParams }) => {
   const [open, setOpen] = useState(false);
-  const [fieldText, setFieldText] = useState('');
+  const [fieldText, setFieldText] = useState(field);
   const [apikey] = useApiKey(s => [s.apikey]);
   const { enqueueSnackbar } = useSnackbar();
 
@@ -34,13 +34,13 @@ const CPEFormAutocompleteItem = ({ field, setField, fieldName, queryParams }) =>
       manual: true
     });
 
-    useEffect(() => {
-      if (error) {
-        console.log(error);
-        enqueueSnackbar('There was an error loading the requested data.');
-      }
-    }, [error, enqueueSnackbar]);
-  
+  useEffect(() => {
+    if (error) {
+      console.log(error);
+      enqueueSnackbar('There was an error loading the requested data.');
+    }
+  }, [error, enqueueSnackbar]);
+
   useEffect(() => {
     if (open) {
       const myParams = { ...queryParams };
@@ -75,6 +75,7 @@ const CPEFormAutocompleteItem = ({ field, setField, fieldName, queryParams }) =>
       value={field}
       onChange={(event, newValue) => setField(newValue)}
       inputValue={fieldText}
+      defaultValue={fieldText}
       onInputChange={(event, newInputValue) => {
         setFieldText(newInputValue);
       }}
@@ -100,42 +101,51 @@ const CPEFormAutocompleteItem = ({ field, setField, fieldName, queryParams }) =>
   );
 };
 
-export const AutoCompleteCPEFormSection = ({fields, setFields}) => {
-  const [vendor, setVendor] = useState('');
-  const [product, setProduct] = useState('');
-  const [version, setVersion] = useState('');
+export const AutoCompleteCPEFormSection = ({ fields, setFields }) => {
+  const [part, setPart] = useState(fields?.part);
+  const [vendor, setVendor] = useState({ _id: fields?.vendor });
+  const [product, setProduct] = useState({ _id: fields?.product });
+  const [version, setVersion] = useState({ _id: fields?.version });
+
+  console.log(fields);
 
   useEffect(() => {
-    setFields((q) => {
-      let newParams = { ...q };
-      delete newParams.vendor;
-      return ({
-        ...newParams,
-        ...(vendor?._id && { vendor: vendor._id }),
+    if (vendor?.hasOwnProperty('_id')) {
+      setFields((q) => {
+        let newParams = { ...q };
+        delete newParams.vendor;
+        return ({
+          ...newParams,
+          ...(vendor?._id && { vendor: vendor._id }),
+        });
       });
-    });
+    }
   }, [vendor, setFields]);
 
   useEffect(() => {
-    setFields((q) => {
-      let newParams = { ...q };
-      delete newParams.product;
-      return ({
-        ...newParams,
-        ...(product?._id && { product: product._id }),
+    if (product?.hasOwnProperty('_id')) {
+      setFields((q) => {
+        let newParams = { ...q };
+        delete newParams.product;
+        return ({
+          ...newParams,
+          ...(product?._id && { product: product._id }),
+        });
       });
-    });
+    }
   }, [product, setFields]);
 
   useEffect(() => {
-    setFields((q) => {
-      let newParams = { ...q };
-      delete newParams.version;
-      return ({
-        ...newParams,
-        ...(version?._id && { version: version._id }),
+    if (version?.hasOwnProperty('_id')) {
+      setFields((q) => {
+        let newParams = { ...q };
+        delete newParams.version;
+        return ({
+          ...newParams,
+          ...(version?._id && { version: version._id }),
+        });
       });
-    });
+    }
   }, [version, setFields]);
 
   return (
@@ -144,6 +154,20 @@ export const AutoCompleteCPEFormSection = ({fields, setFields}) => {
         <Autocomplete
           id={"part-select"}
           options={['a', 'o', 'h']}
+          defaultValue={part}
+          value={part}
+          onChange={(e, newPart) => {
+            setPart(newPart);
+            setFields((q) => {
+              let newParams = { ...q };
+              delete newParams.part;
+              return ({
+                ...newParams,
+                ...(newPart && { part: newPart }),
+              });
+            })
+          }
+          }
           renderInput={(params) => <TextField {...params} label={"Part"} variant={"outlined"} />}
         />
       </Grid>
