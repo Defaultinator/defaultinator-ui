@@ -17,6 +17,7 @@ import { CredentialType } from '../../config/types';
 
 import CredentialCardMenuOptions from './CredentialCardMenuOptions';
 import VerifiedIcon from '../Icons/VerifiedIcon';
+import { Skeleton } from '@material-ui/lab';
 
 const useStyles = makeStyles({
   root: {
@@ -49,25 +50,26 @@ const useStyles = makeStyles({
 
 export const CredentialCard = (
   {
-    credential,
+    credential = {},
     primaryButtonText,
     primaryButtonProps,
     secondaryButtonText,
     secondaryButtonProps,
     isAdmin = false,
     onVerify = () => { },
+    loading = false,
   }
 ) => {
   const styles = useStyles();
 
   const {
-    username,
-    password,
-    cpe,
+    username = '',
+    password = '',
+    cpe = {},
     isVerified = false,
-    edits,
+    edits = [],
   } = credential;
-  const { vendor, product } = cpe;
+  const { vendor = '', product = '' } = cpe;
 
   const createdOn = Math.min(...(edits?.map(({ timestamp }) => timestamp) || [0])) / 1000;
 
@@ -83,23 +85,38 @@ export const CredentialCard = (
     day: "2-digit"
   };
 
+  const loadingWrapper = (loading, element, shape = "rect") => {
+    if (loading) {
+      return (
+        <Skeleton variant={shape}>
+          {element}
+        </Skeleton>
+      );
+    } else {
+      return element;
+    }
+  };
+
   return (
     <Card className={styles.root}>
       <CardHeader
         avatar={
-          <IconButton
-            disabled={!isAdmin}
-            aria-label={isVerified ? "unverify" : "verify"}
-            onClick={() => onVerify(credential)}
-          >
-            <VerifiedIcon isVerified={isVerified} />
-          </IconButton>
+          loadingWrapper(
+            loading,
+            <IconButton
+              disabled={!isAdmin}
+              aria-label={isVerified ? "unverify" : "verify"}
+              onClick={() => onVerify(credential)}
+            >
+              <VerifiedIcon isVerified={isVerified} />
+            </IconButton>,
+            'circle')
         }
-        title={vendor}
+        title={loading ? <Skeleton width={100} variant={'text'} /> : vendor}
         titleTypographyProps={{ style: { textTransform: 'capitalize' }, variant: 'h5' }}
-        subheader={product}
+        subheader={loading ? <Skeleton width={200} variant={'text'} /> : product}
         subheaderTypographyProps={{ variant: 'body2' }}
-        action={<CredentialCardMenuOptions {...credential} />}
+        action={loadingWrapper(loading, <CredentialCardMenuOptions {...credential} />, 'circle')}
       />
       <Divider />
       <CardContent>
@@ -119,7 +136,7 @@ export const CredentialCard = (
             <Typography
               className={styles.fieldContent}
             >
-              {username || <i>blank</i>}
+              {loading ? <Skeleton /> : (username || <i>blank</i>)}
             </Typography>
           </Grid>
           <Divider orientation={'vertical'} flexItem />
@@ -133,7 +150,7 @@ export const CredentialCard = (
             <Typography
               className={styles.fieldContent}
             >
-              {password || <i>blank</i>}
+              {loading ? <Skeleton /> : (password || <i>blank</i>)}
             </Typography>
           </Grid>
         </Grid>
@@ -144,20 +161,31 @@ export const CredentialCard = (
           {!!createdOn &&
             <div className={styles.timestampContents}>
               <Typography variant={'caption'}>
-                Created on: {new Date(createdOn * 1000).toLocaleString("en-US", dateOptions)}
+                {loading ?
+                  <Skeleton width={150} /> :
+                  <>
+                    Created on: {new Date(createdOn * 1000).toLocaleString("en-US", dateOptions)}
+                  </>
+                }
               </Typography>
             </div>
           }
           {lastEdited &&
             <div className={styles.timestampContents}>
               <Typography variant={'caption'}>
-                Last edited: {new Date(lastEdited * 1000).toLocaleString("en-US", dateOptions)}
+                {loading ?
+                  <Skeleton width={150} /> :
+                  <>
+                    Last edited: {new Date(lastEdited * 1000).toLocaleString("en-US", dateOptions)}
+                  </>
+                }
               </Typography>
             </div>
           }
         </span>
         {primaryButtonText &&
           <Button
+            disabled={loading}
             size="small"
             color="primary"
             variant={'contained'}
@@ -168,6 +196,7 @@ export const CredentialCard = (
         }
         {secondaryButtonText &&
           <Button
+            disabled={loading}
             size="small"
             color="secondary"
             {...secondaryButtonProps}
@@ -188,11 +217,13 @@ CredentialCard.propTypes = {
   secondaryButtonProps: PropTypes.object,
   isAdmin: PropTypes.bool,
   onVerify: PropTypes.func,
+  loading: PropTypes.bool,
 };
 
 CredentialCard.defaultProps = {
   isAdmin: false,
   onVerify: () => { },
+  loading: false,
 };
 
 export default CredentialCard;

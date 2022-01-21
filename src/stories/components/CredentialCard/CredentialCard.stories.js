@@ -37,3 +37,11 @@ IsAdmin.args = {
   secondaryButtonText: "Delete",
   isAdmin: true,
 };
+
+export const Loading = Template.bind({});
+Loading.args = {
+  credential: sampleCredential,
+  primaryButtonText: "Edit",
+  secondaryButtonText: "Delete",
+  loading: true,
+};
