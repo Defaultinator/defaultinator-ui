@@ -69,11 +69,11 @@ export const CredentialCard = (
   } = credential;
   const { vendor, product } = cpe;
 
-  const createdOn = Math.min(...(edits?.map(({ timestamp }) => timestamp) || [0]));
+  const createdOn = Math.min(...(edits?.map(({ timestamp }) => timestamp) || [0])) / 1000;
 
   let lastEdited;
   if (edits?.length > 1) {
-    lastEdited = Math.max(...edits.map(({ timestamp }) => timestamp));
+    lastEdited = Math.max(...edits.map(({ timestamp }) => timestamp)) / 1000;
   };
 
   // Needed to display the date properly
