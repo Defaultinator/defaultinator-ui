@@ -38,7 +38,7 @@ const EditCredentialsPage = () => {
       url: `${API_URI}/credentials/${credentialId}`,
       method: 'PUT',
       headers: {
-        'X-API-KEY': '',// apikey,
+        'X-API-KEY': apikey,
       },
     },
     {manual: true}
