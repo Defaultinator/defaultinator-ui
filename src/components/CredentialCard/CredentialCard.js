@@ -185,7 +185,7 @@ export const CredentialCard = (
         </span>
         {primaryButtonText &&
           <Button
-            disabled={loading}
+            disabled={loading || isValid}
             size="small"
             color="primary"
             variant={'contained'}
