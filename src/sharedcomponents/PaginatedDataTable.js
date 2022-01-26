@@ -139,7 +139,7 @@ PaginatedDataTable.propTypes = {
     fields: PropTypes.arrayOf(PropTypes.shape({
       label: PropTypes.string.isRequired,
       fieldName: PropTypes.string.isRequired,
-      align: PropTypes.oneOf(['left', 'right']),
+      align: PropTypes.oneOf(['left', 'right', 'center']),
     })),
   }).isRequired,
   rowsPerPage: PropTypes.number,

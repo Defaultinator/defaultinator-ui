@@ -1,9 +1,15 @@
 import { Paper } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import PaginatedDataTable from '../../sharedcomponents/PaginatedDataTable';
+import PartIcon from '../Icons/PartIcon';
+import VerifiedIcon from '../Icons/VerifiedIcon';
 import CredentialsListToolbar from './CredentialsListToolbar';
 
 export const CredentialsList = ({ data, dataConfig, loading, rowsPerPage, page, totalRows, updateConfig, dense, error }) => {
+
+  data = data.map((row) => ({...row, isVerified: <VerifiedIcon isVerified={row.isVerified} /> }));
+  data = data.map((row) => ({...row, part: <PartIcon part={row.part} /> }));
+
   return (
     <Paper>
       <CredentialsListToolbar />
