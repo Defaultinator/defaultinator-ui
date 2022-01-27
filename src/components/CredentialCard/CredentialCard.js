@@ -51,9 +51,7 @@ const useStyles = makeStyles({
 export const CredentialCard = (
   {
     credential = {},
-    primaryButtonText,
     primaryButtonProps,
-    secondaryButtonText,
     secondaryButtonProps,
     isAdmin = false,
     onVerify = () => { },
@@ -158,7 +156,7 @@ export const CredentialCard = (
       <Divider />
       <CardActions className={styles.cardActions}>
         <span className={styles.timestampContainer}>
-          {!!createdOn &&
+          {!!createdOn && createdOn !== Infinity &&
             <div className={styles.timestampContents}>
               <Typography variant={'caption'}>
                 {loading ?
@@ -183,25 +181,23 @@ export const CredentialCard = (
             </div>
           }
         </span>
-        {primaryButtonText &&
-          <Button
-            disabled={loading || isVerified}
-            size="small"
-            color="primary"
-            variant={'contained'}
-            {...primaryButtonProps}
-          >
-            {primaryButtonText}
-          </Button>
-        }
-        {secondaryButtonText &&
+        <Button
+          disabled={loading || isVerified}
+          size="small"
+          color="primary"
+          variant={'contained'}
+          {...primaryButtonProps}
+        >
+          Edit
+        </Button>
+        {isAdmin &&
           <Button
             disabled={loading}
             size="small"
             color="secondary"
             {...secondaryButtonProps}
           >
-            {secondaryButtonText}
+            Delete
           </Button>
         }
       </CardActions>
@@ -211,9 +207,7 @@ export const CredentialCard = (
 
 CredentialCard.propTypes = {
   credential: CredentialType,
-  primaryButtonText: PropTypes.string,
   primaryButtonProps: PropTypes.object,
-  secondaryButtonText: PropTypes.string,
   secondaryButtonProps: PropTypes.object,
   isAdmin: PropTypes.bool,
   onVerify: PropTypes.func,
@@ -221,6 +215,7 @@ CredentialCard.propTypes = {
 };
 
 CredentialCard.defaultProps = {
+  credential: {},
   isAdmin: false,
   onVerify: () => { },
   loading: false,
