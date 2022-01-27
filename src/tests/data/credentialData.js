@@ -207,13 +207,13 @@ export const sampleCredential = {
           "edition": "ANY"
         }
       },
-      "timestamp": 1642110033,
+      "timestamp": 1642110033000,
     },
     {
       "edit": {
         "password": "bar",
       },
-      "timestamp": 1642110133,
+      "timestamp": 1642110133000,
     },
   ],
   "__v": 0
