@@ -15,5 +15,11 @@ const Template = (args) => <APIKeyCard {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-  ...testKey,
+  apiKey: testKey,
+  loading: false,
+};
+
+export const Loading = Template.bind({});
+Loading.args = {
+  loading: true,
 };

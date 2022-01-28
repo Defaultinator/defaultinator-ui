@@ -50,7 +50,6 @@ const CredentialsListPage = () => {
     return data?.map((item) => (
       {
         ...item,
-        cpe: `cpe:/${item.cpe.part}:${item.cpe.vendor}:${item.cpe.product}`,
         vendor: item.cpe?.vendor || 'ANY',
         product: item.cpe?.product || 'ANY',
         part: item.cpe?.part || 'unknown',
