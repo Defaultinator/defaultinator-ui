@@ -8,7 +8,7 @@ import {
 import {
   Fab,
 } from "@material-ui/core";
-import AddIcon from '@material-ui/icons/Add';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import {
   makeStyles,
 } from "@material-ui/core/styles";
@@ -62,7 +62,7 @@ const APIKeyPage = () => {
           className={classes.fab}
           color={"primary"}
         >
-          <AddIcon />
+          <PersonAddIcon />
         </Fab>
       </Link>
     </div>

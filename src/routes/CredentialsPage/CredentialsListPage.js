@@ -59,8 +59,6 @@ const CredentialsListPage = () => {
     ));
   };
 
-  console.log(data);
-
   return (
     <CredentialsList
       data={formatData(data?.docs)}

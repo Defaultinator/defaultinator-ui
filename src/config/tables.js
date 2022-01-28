@@ -32,3 +32,24 @@ export const CREDENTIALS_TABLE_CONFIG = {
     defaultRowsPerPage: 5,
   },
 };
+
+export const APIKEY_TABLE_CONFIG = {
+  fields: [
+    {
+      "label": "Admin?",
+      "fieldName": "isAdmin",
+    },
+    {
+      "label": "E-Mail",
+      "fieldName": "email",
+    },
+    {
+      "label": "API Key",
+      "fieldName": "apiKey",
+    },
+  ],
+  pagination: {
+    rowsPerPageOptions: [5, 10, 50, 100],
+    defaultRowsPerPage: 5,
+  },
+};

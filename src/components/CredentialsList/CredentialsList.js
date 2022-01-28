@@ -1,5 +1,9 @@
 import { Paper } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import { 
+  CredentialType, 
+  PaginatedDataTableConfigType, 
+} from '../../config/types';
 import PaginatedDataTable from '../../sharedcomponents/PaginatedDataTable';
 import PartIcon from '../Icons/PartIcon';
 import VerifiedIcon from '../Icons/VerifiedIcon';
@@ -29,17 +33,8 @@ export const CredentialsList = ({ data = [], dataConfig, loading, rowsPerPage, p
 };
 
 CredentialsList.propTypes = {
-  /**
-   * The data to display
-   */
-  data: PropTypes.arrayOf(PropTypes.object),
-  dataConfig: PropTypes.shape({
-    fields: PropTypes.arrayOf(PropTypes.shape({
-      label: PropTypes.string.isRequired,
-      fieldName: PropTypes.string.isRequired,
-      align: PropTypes.oneOf(['left', 'right']),
-    })),
-  }).isRequired,
+  data: PropTypes.arrayOf(CredentialType),
+  dataConfig: PaginatedDataTableConfigType,
   rowsPerPage: PropTypes.number,
   page: PropTypes.number,
   totalRows: PropTypes.number,
