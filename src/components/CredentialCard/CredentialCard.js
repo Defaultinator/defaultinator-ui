@@ -18,6 +18,7 @@ import { CredentialType } from '../../config/types';
 import CredentialCardMenuOptions from './CredentialCardMenuOptions';
 import VerifiedIcon from '../Icons/VerifiedIcon';
 import { Skeleton } from '@material-ui/lab';
+import loadingWrapper from '../../util/loadingWrapper';
 
 const useStyles = makeStyles({
   root: {
@@ -81,18 +82,6 @@ export const CredentialCard = (
     year: "numeric",
     month: "numeric",
     day: "2-digit"
-  };
-
-  const loadingWrapper = (loading, element, shape = "rect") => {
-    if (loading) {
-      return (
-        <Skeleton variant={shape}>
-          {element}
-        </Skeleton>
-      );
-    } else {
-      return element;
-    }
   };
 
   return (
