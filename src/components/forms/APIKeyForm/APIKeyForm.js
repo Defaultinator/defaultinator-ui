@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Controller,
   useForm,
@@ -19,6 +19,7 @@ import {
   makeStyles,
 } from "@material-ui/core/styles";
 import FormField from '../../FormField';
+import { APIKeyType } from '../../../config/types';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,16 +31,24 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     width: 300,
   },
+  input: {
+    width: '100%',
+  }
 }));
 
 const APIKeyForm = (
   {
     formAction,
-    title = 'Create New API Key',
+    defaultValues = {email: '', notes: '', isAdmin: false},
+    loading = false,
   }
 ) => {
   const classes = useStyles();
-  const { handleSubmit, control, reset, formState: { errors } } = useForm();
+  const { handleSubmit, control, reset, formState: { errors } } = useForm({defaultValues: defaultValues});
+
+  useEffect(()=> {
+    reset(defaultValues);
+  }, [defaultValues, reset])
 
   const onSubmit = (data) => {
     formAction(data);
@@ -54,11 +63,12 @@ const APIKeyForm = (
             <Grid item xs={12}>
               <FormField
                 name={"email"}
+                className={classes.input}
                 placeholder={"E-mail Address"}
                 control={control}
                 controllerProps={{ rules: { required: true } }}
-                defaultValue=''
                 error={errors.email}
+                textFieldProps={{ disabled: loading }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -67,17 +77,16 @@ const APIKeyForm = (
                 placeholder={"Notes"}
                 multiline
                 control={control}
-                defaultValue=''
+                textFieldProps={{ disabled: loading }}
               />
             </Grid>
             <Grid item xs={12}>
               <Controller
                 name="isAdmin"
                 control={control}
-                defaultValue={false}
                 render={({ field }) => (
                   <FormGroup>
-                    <FormControlLabel control={<Checkbox {...field} />} label="Admin?" />
+                    <FormControlLabel control={<Checkbox disabled={loading} {...field} />} label="Admin?" />
                   </FormGroup>
                 )}
               />
@@ -88,10 +97,18 @@ const APIKeyForm = (
           <Button
             color="secondary"
             onClick={() => reset({ email: '', notes: '', isAdmin: false })}
+            disabled={loading}
           >
             Clear
           </Button>
-          <Button type="submit" variant="contained" color="primary">Submit</Button>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            disabled={loading}
+          >
+            Submit
+          </Button>
         </Container>
       </form>
     </Paper>
@@ -100,11 +117,11 @@ const APIKeyForm = (
 
 APIKeyForm.propTypes = {
   formAction: PropTypes.func.isRequired,
-  title: PropTypes.string,
+  defaultValues: PropTypes.shape(APIKeyType),
 };
 
 APIKeyForm.defaultProps = {
-  title: 'Create New API Key',
+  defaultValues: {email: '', notes: '', isAdmin: false},
 };
 
 export default APIKeyForm;

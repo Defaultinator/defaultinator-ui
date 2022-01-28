@@ -23,7 +23,16 @@ export const CredentialType = PropTypes.shape({
 });
 
 export const APIKeyType = {
-  apiKey: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
+  apiKey: PropTypes.string,
+  email: PropTypes.string,
   notes: PropTypes.string,
+  isAdmin: PropTypes.bool,
 };
+
+export const PaginatedDataTableConfigType = PropTypes.shape({
+  fields: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.string.isRequired,
+    fieldName: PropTypes.string.isRequired,
+    align: PropTypes.oneOf(['left', 'right', 'center']),
+  })),
+}).isRequired;

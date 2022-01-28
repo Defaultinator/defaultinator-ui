@@ -19,29 +19,21 @@ const Template = (args) => <CredentialCard {...args} />;
 export const Primary = Template.bind({});
 Primary.args = {
   credential: sampleCredential,
-  primaryButtonText: "Edit",
-  secondaryButtonText: "Delete",
 };
 
 export const Verified = Template.bind({});
 Verified.args = {
   credential: sampleVerifiedCredential,
-  primaryButtonText: "Edit",
-  secondaryButtonText: "Delete",
 };
 
 export const IsAdmin = Template.bind({});
 IsAdmin.args = {
-  credential: sampleVerifiedCredential,
-  primaryButtonText: "Edit",
-  secondaryButtonText: "Delete",
+  credential: sampleCredential,
   isAdmin: true,
 };
 
 export const Loading = Template.bind({});
 Loading.args = {
   credential: sampleCredential,
-  primaryButtonText: "Edit",
-  secondaryButtonText: "Delete",
   loading: true,
 };

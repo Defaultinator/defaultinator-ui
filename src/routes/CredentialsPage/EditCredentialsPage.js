@@ -20,7 +20,7 @@ import {
 
 const EditCredentialsPage = () => {
   const history = useHistory();
-  let {credentialId} = useParams();
+  const {credentialId} = useParams();
   const {enqueueSnackbar} = useSnackbar();
   const confirm = useConfirm();
   const [apikey] = useApiKey(s => [s.apikey]);
