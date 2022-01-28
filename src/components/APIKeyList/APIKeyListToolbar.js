@@ -34,13 +34,13 @@ export const APIKeyListToolbar = () => {
         >
           API Keys
         </Typography>
-        <Tooltip title={`Filter Results`}>
+        {/* <Tooltip title={`Search Keys`}>
           <IconButton
             onClick={() => {}}
           >
             <SearchIcon />
           </IconButton>
-        </Tooltip>
+        </Tooltip> */}
       </Toolbar>
     </>
   );

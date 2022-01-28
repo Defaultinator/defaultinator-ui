@@ -13,6 +13,7 @@ import IsAdminIcon from '../Icons/IsAdminIcon';
 const useStyles = makeStyles({
   root: {
     maxWidth: 600,
+    margin: 'auto',
   },
 });
 
@@ -40,7 +41,10 @@ export const APIKeyList = ({ data = [], dataConfig, loading, rowsPerPage, page, 
 };
 
 APIKeyList.propTypes = {
-  data: PropTypes.arrayOf(APIKeyType),
+  data: PropTypes.arrayOf(PropTypes.shape({
+    ...APIKeyType,
+    rowProps: PropTypes.object,
+  })),
   dataConfig: PaginatedDataTableConfigType,
   rowsPerPage: PropTypes.number,
   page: PropTypes.number,
