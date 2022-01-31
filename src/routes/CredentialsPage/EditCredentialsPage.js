@@ -20,7 +20,7 @@ import {
 
 const EditCredentialsPage = () => {
   const history = useHistory();
-  let {credentialId} = useParams();
+  const {credentialId} = useParams();
   const {enqueueSnackbar} = useSnackbar();
   const confirm = useConfirm();
   const [apikey] = useApiKey(s => [s.apikey]);
@@ -38,7 +38,7 @@ const EditCredentialsPage = () => {
       url: `${API_URI}/credentials/${credentialId}`,
       method: 'PUT',
       headers: {
-        'X-API-KEY': '',// apikey,
+        'X-API-KEY': apikey,
       },
     },
     {manual: true}

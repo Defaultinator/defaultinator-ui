@@ -12,28 +12,7 @@ import {
 import { API_URI } from "../../config/constants";
 import { useApiKey } from '../../util/useApiKey';
 import CredentialsList from '../../components/CredentialsList/CredentialsList';
-
-const TABLE_CONFIG = {
-  fields: [
-    {
-      label: "CPE",
-      fieldName: "cpe",
-      align: "left"
-    },
-    {
-      label: "Username",
-      fieldName: 'username',
-    },
-    {
-      label: "Password",
-      fieldName: 'password',
-    },
-  ],
-  pagination: {
-    rowsPerPageOptions: [10, 25, 50, 100],
-    defaultRowsPerPage: 10,
-  }
-};
+import { CREDENTIALS_TABLE_CONFIG } from '../../config/tables';
 
 const CredentialsListPage = () => {
   const history = useHistory();
@@ -68,10 +47,12 @@ const CredentialsListPage = () => {
   };
 
   const formatData = (data) => {
-    return data.map((item) => (
+    return data?.map((item) => (
       {
         ...item,
-        cpe: `cpe:/${item.cpe.part}:${item.cpe.vendor}:${item.cpe.product}`,
+        vendor: item.cpe?.vendor || 'ANY',
+        product: item.cpe?.product || 'ANY',
+        part: item.cpe?.part || 'unknown',
         rowProps: { onClick: () => history.push(`/credentials/${item._id}`), style: {cursor: 'pointer'} }
       }
     ));
@@ -79,9 +60,9 @@ const CredentialsListPage = () => {
 
   return (
     <CredentialsList
-      data={data ? formatData(data.docs) : null}
+      data={formatData(data?.docs)}
       loading={loading}
-      dataConfig={TABLE_CONFIG}
+      dataConfig={CREDENTIALS_TABLE_CONFIG}
       rowsPerPage={data?.limit}
       page={data ? data.page - 1 : null}
       totalRows={data?.total}

@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   input: {},
 }));
 
-const FormField = ({ name, placeholder, control, autocompleteprops, defaultValue = "", multiline = false, controllerProps, error }) => {
+const FormField = ({ name, placeholder, control, autocompleteprops, defaultValue = "", multiline = false, controllerProps, error, textFieldProps }) => {
   const classes = useStyles();
 
   return (
@@ -33,6 +33,7 @@ const FormField = ({ name, placeholder, control, autocompleteprops, defaultValue
             autoComplete='off'
             multiline={multiline}
             {...field}
+            {...textFieldProps}
             {...autocompleteprops}
           />
         </FormControl>

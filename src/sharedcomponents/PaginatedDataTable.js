@@ -48,8 +48,6 @@ export const PaginatedDataTable = (
   const styles = useStyles();
   const { fields, pagination } = dataConfig;
 
-  console.log(data, loading);
-
   return (
     <TableContainer component={Paper}>
       <Table aria-label="data table" size={dense ? 'small' : 'medium'}>
@@ -141,7 +139,7 @@ PaginatedDataTable.propTypes = {
     fields: PropTypes.arrayOf(PropTypes.shape({
       label: PropTypes.string.isRequired,
       fieldName: PropTypes.string.isRequired,
-      align: PropTypes.oneOf(['left', 'right']),
+      align: PropTypes.oneOf(['left', 'right', 'center']),
     })),
   }).isRequired,
   rowsPerPage: PropTypes.number,

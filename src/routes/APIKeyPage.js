@@ -8,7 +8,7 @@ import {
 import {
   Fab,
 } from "@material-ui/core";
-import AddIcon from '@material-ui/icons/Add';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import {
   makeStyles,
 } from "@material-ui/core/styles";
@@ -18,6 +18,7 @@ import withAuth from '../components/withAuth';
 import ListAPIKeysPage from './APIKeyPage/ListAPIKeysPage';
 import ViewAPIKeyPage from './APIKeyPage/ViewAPIKeyPage';
 import AddAPIKeyPage from './APIKeyPage/AddAPIKeyPage';
+import EditAPIKeyPage from './APIKeyPage/EditAPIKeyPage';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,6 +38,10 @@ const APIKeyPage = () => {
     {
       path: `${path}/add`,
       content: <AddAPIKeyPage />,
+    },
+    {
+      path: `${path}/:apiKeyId/edit`,
+      content: <EditAPIKeyPage />,
     },
     {
       path: `${path}/:apiKeyId`,
@@ -62,7 +67,7 @@ const APIKeyPage = () => {
           className={classes.fab}
           color={"primary"}
         >
-          <AddIcon />
+          <PersonAddIcon />
         </Fab>
       </Link>
     </div>

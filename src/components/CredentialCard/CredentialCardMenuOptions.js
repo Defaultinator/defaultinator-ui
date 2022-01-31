@@ -84,7 +84,7 @@ const CredentialCardMenuOptions = ({ references }) => {
       <Tooltip title={"More Options"}>
         <span>
           <IconButton
-            aria-label="settings"
+            aria-label="options"
             aria-controls="simple-menu"
             aria-haspopup="true"
             onClick={(e) => setAnchorEl(e.currentTarget)}
