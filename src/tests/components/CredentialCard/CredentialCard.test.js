@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import * as stories from '../../../stories/components/CredentialCard/CredentialCard.stories';
 
-const { Primary: CredentialCard, Verified, IsAdmin } = composeStories(stories);
+const { Primary: CredentialCard, Verified, IsAdmin, Loading } = composeStories(stories);
 
 // Test data used in story
 //
@@ -94,14 +94,14 @@ describe('components/CredentialCard/CredentialCard', () => {
 
     it('should show the data of creation and most recent edit', () => {
       render(<CredentialCard />);
-  
+
       expect(screen.getByText('Created on: 1/13/2022')).toBeInTheDocument();
       expect(screen.getByText('Last edited: 1/13/2022')).toBeInTheDocument();
     });
-  
+
     it('should display the result as unverified by default', () => {
       render(<CredentialCard />);
-  
+
       expect(screen.getByLabelText('unverified')).toBeInTheDocument();
     });
 
@@ -113,28 +113,33 @@ describe('components/CredentialCard/CredentialCard', () => {
       ).toBeDisabled();
     });
 
+    it('should be enabled when isVerified is false', () => {
+      render(<CredentialCard />);
+
+      expect(screen.getByLabelText('edit')).toBeEnabled();
+    });
+
   });
 
   describe('Verified story', () => {
 
     it.skip('should display the result is verified if it is verified', () => {
       render(<Verified />);
-  
+
       expect(screen.getByLabelText('verified')).toBeInTheDocument();
     });
 
-    it.skip('edit button should be disabled for verified credential', () => {
+    it('should be disabled when isVerified is true', () => {
       render(<Verified />);
-  
-      expect(screen.getByRole('button', { name: /edit/i })).toBeDisabled();
-    });
 
+      expect(screen.getByLabelText('edit')).toBeDisabled();
+    });
   });
 
   describe('IsAdmin story', () => {
     it('should have a delete button', () => {
       render(<IsAdmin />);
-  
+
       expect(
         screen.getByRole('button', { name: /delete/i })
       ).toBeInTheDocument();
@@ -146,6 +151,17 @@ describe('components/CredentialCard/CredentialCard', () => {
       expect(
         screen.getByRole('button', { name: /verify/i })
       ).toBeEnabled();
+    });
+  });
+
+  describe('Loading story', () => {
+    it('should have edit button disabled during loading state', () => {
+      render(<Loading />);
+
+      expect(
+        screen.getByRole('button', { name: /edit/i })
+      ).toBeDisabled();
+
     });
   });
 
