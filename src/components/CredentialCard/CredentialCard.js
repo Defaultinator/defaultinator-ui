@@ -175,6 +175,7 @@ export const CredentialCard = (
           size="small"
           color="primary"
           variant={'contained'}
+          aria-label="edit"
           {...primaryButtonProps}
         >
           Edit
@@ -184,6 +185,7 @@ export const CredentialCard = (
             disabled={loading}
             size="small"
             color="secondary"
+            aria-label="delete"
             {...secondaryButtonProps}
           >
             Delete
