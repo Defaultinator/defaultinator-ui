@@ -25,3 +25,6 @@ yarn-error.log*
 # Storybook/Chromatic
 storybook-static/
 build-storybook.log*
+
+# Visual Studio
+.vs 
