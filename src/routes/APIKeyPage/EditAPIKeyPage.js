@@ -58,10 +58,10 @@ const AddAPIKeyPage = () => {
   const myAction = (data) => {
     executePut({ data: data }).then((res) => {
       if (res.status === 200) {
-        enqueueSnackbar('API Key updated!');
+        enqueueSnackbar('API Key updated!', { variant: 'success' });
         history.push(`/apikeys/${res.data._id}`);
       } else {
-        enqueueSnackbar('There has been an error updating the specified API Key.');
+        enqueueSnackbar('There has been an error updating the specified API Key.', { variant: 'error' });
         console.log(res);
       }
     });

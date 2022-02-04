@@ -71,15 +71,15 @@ const ViewAPIKeyPage = () => {
         executeDelete()
           .then((res) => {
             if (res.status === 200) {
-              enqueueSnackbar('API key deleted!');
+              enqueueSnackbar('API key deleted!', { variant: 'success' });
               history.push(`/apikeys`);
             } else {
-              enqueueSnackbar('There has been an error deleting this record.');
+              enqueueSnackbar('There has been an error deleting this record.', { variant: 'error' });
               console.log(res);
             }
           })
           .catch((err) => {
-            enqueueSnackbar('There has been an error deleting this record.');
+            enqueueSnackbar('There has been an error deleting this record.', { variant: 'error' });
             console.log(err);
           });
       })

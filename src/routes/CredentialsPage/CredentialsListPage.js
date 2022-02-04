@@ -34,7 +34,7 @@ const CredentialsListPage = () => {
   useEffect(() => {
     if (error) {
       console.log(error);
-      enqueueSnackbar('There was an error loading the requested data.');
+      enqueueSnackbar('There was an error loading the requested data.', { variant: 'error' });
     }
   }, [error, enqueueSnackbar]);
 

@@ -39,10 +39,10 @@ const AddAPIKeyPage = () => {
   const myAction = (data) => {
     executePost({ data: data }).then((res) => {
       if (res.status === 200) {
-        enqueueSnackbar('API Key added!');
+        enqueueSnackbar('API Key added!', { variant: 'success'});
         history.push(`/apikeys/${res.data._id}`);
       } else {
-        enqueueSnackbar('There has been an error submitting your credentials.');
+        enqueueSnackbar('There has been an error submitting your credentials.', { variant: 'error' });
         console.log(res);
       }
     });

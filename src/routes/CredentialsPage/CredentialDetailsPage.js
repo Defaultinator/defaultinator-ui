@@ -41,7 +41,7 @@ const CredentialDetailsPage = () => {
   useEffect(() => {
     if (credError) {
       console.log(credError);
-      enqueueSnackbar('There was an error loading the requested data.');
+      enqueueSnackbar('There was an error loading the requested data.', { variant: 'error' });
     }
   }, [credError, enqueueSnackbar]);
 
@@ -62,7 +62,7 @@ const CredentialDetailsPage = () => {
   useEffect(() => {
     if (deleteError) {
       console.log(deleteError);
-      enqueueSnackbar('There was an error loading the requested data.');
+      enqueueSnackbar('There was an error loading the requested data.', { variant: 'error' });
     }
   }, [deleteError, enqueueSnackbar]);
 
@@ -72,15 +72,15 @@ const CredentialDetailsPage = () => {
         executeDelete()
           .then((res) => {
             if (res.status === 200) {
-              enqueueSnackbar('Credential deleted!');
+              enqueueSnackbar('Credential deleted!', { variant: 'success' });
               history.push(`/credentials`);
             } else {
-              enqueueSnackbar('There has been an error deleting this record.');
+              enqueueSnackbar('There has been an error deleting this record.', { variant: 'error' });
               console.log(res);
             }
           })
           .catch((err) => {
-            enqueueSnackbar('There has been an error deleting this record.');
+            enqueueSnackbar('There has been an error deleting this record.', { variant: 'error' });
             console.log(err);
           });
       })
@@ -105,7 +105,7 @@ const CredentialDetailsPage = () => {
   useEffect(() => {
     if (verifyError) {
       console.log(verifyError);
-      enqueueSnackbar('There was an error verifying the credential.');
+      enqueueSnackbar('There was an error verifying the credential.', { variant: 'error' });
     }
   }, [verifyError, enqueueSnackbar]);
 
@@ -115,15 +115,15 @@ const CredentialDetailsPage = () => {
         executeVerify({ data: { isVerified: !credential.isVerified } })
           .then((res) => {
             if (res.status === 200) {
-              enqueueSnackbar('Verification status changed!');
+              enqueueSnackbar('Verification status changed!', { variant: 'success' });
               executeGet();
             } else {
-              enqueueSnackbar('There has been an error verifying this record.');
+              enqueueSnackbar('There has been an error verifying this record.', { variant: 'error' });
               console.log(res);
             }
           })
           .catch((err) => {
-            enqueueSnackbar('There has been an error verifying this record.');
+            enqueueSnackbar('There has been an error verifying this record.', { variant: 'error' });
             console.log(err);
           });
       })

@@ -64,7 +64,7 @@ const EditCredentialsPage = () => {
         executePut({data: data})
           .then((res) => {
             if (res.status === 200) {
-              enqueueSnackbar('Credential edited!');
+              enqueueSnackbar('Credential edited!', { variant: 'success' });
               history.push(`/credentials/${credentialId}`);
             }
           });
