@@ -32,7 +32,7 @@ const AddAPIKeyPage = () => {
   useEffect(() => {
     if (error) {
       const message = error.response?.data?.message || 'There was an error loading the requested data.';
-      enqueueSnackbar(message);
+      enqueueSnackbar(message, { variant: 'error' });
     }
   }, [error, enqueueSnackbar]);
 

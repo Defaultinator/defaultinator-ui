@@ -33,7 +33,7 @@ const AddAPIKeyPage = () => {
   useEffect(() => {
     if (error) {
       const message = error.response?.data?.message || 'There was an error updating the API Key.';
-      enqueueSnackbar(message);
+      enqueueSnackbar(message, { variant: 'error' });
     }
   }, [error, enqueueSnackbar]);
 
@@ -51,7 +51,7 @@ const AddAPIKeyPage = () => {
   useEffect(() => {
     if (putError) {
       const message = putError.response?.data?.message || 'There was an error updating the API Key.';
-      enqueueSnackbar(message);
+      enqueueSnackbar(message, { variant: 'error' });
     }
   }, [putError, enqueueSnackbar]);
 

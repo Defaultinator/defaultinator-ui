@@ -41,7 +41,7 @@ const ViewAPIKeyPage = () => {
   useEffect(() => {
     if (error) {
       const message = error.response?.data?.message || 'There was an error loading the requested data.';
-      enqueueSnackbar(message);
+      enqueueSnackbar(message, { variant: 'error' });
     }
   }, [error, enqueueSnackbar]);
 
@@ -61,7 +61,7 @@ const ViewAPIKeyPage = () => {
   useEffect(() => {
     if (deleteError) {
       const message = deleteError.response?.data?.message || 'There was an error deleting the requested data.';
-      enqueueSnackbar(message);
+      enqueueSnackbar(message, { variant: 'error' });
     }
   }, [deleteError, enqueueSnackbar]);
 
