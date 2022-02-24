@@ -106,7 +106,8 @@ const AppDrawerContent = ({ pages }) => {
             component={Link}
             to={page.path}
             selected={page.path === activePath}
-            disabled={page.hidden || false}
+            style={{display: page.hidden ? 'none' : 'flex'}}
+            id={page.navText.replaceAll(' ', '-').toLowerCase()}
           >
             <ListItemIcon>
               {page.navIcon}

@@ -19,6 +19,7 @@ import AboutPage from './routes/AboutPage';
 import AuthButton from './components/AuthButton';
 import TermsPage from "./routes/TermsPage";
 import FeedbackPage from "./routes/FeedbackPage";
+import MyJoyride from "./components/Joyride/Joyride";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,8 +70,40 @@ const App = () => {
     },
   ];
 
+  const steps = [
+    {
+      title: "Home",
+      target: "#home",
+      content: "This page gives an overview of the project and it's intended usecases.",
+      spotlightPadding: 0,
+      placementBeacon: 'left',
+    },
+    {
+      title: "Credentials",
+      target: "#credentials",
+      content: "Here you can find all of the credentials stored in the database. You can also search by vendor and product, or by credential.",
+      spotlightPadding: 0,
+      placementBeacon: 'left',
+    },
+    {
+      title: "T's and C's",
+      target: "#terms-and-conditions",
+      content: "This page outlines the terms and conditons. Most importantly, this app is only approved for authorized purposes. Don't use it for anything illegal.",
+      spotlightPadding: 0,
+      placementBeacon: 'left',
+    },
+    {
+      title: "Feedback",
+      target: "#feedback",
+      content: "Run into a problem? Let us know on the Feedback page.",
+      spotlightPadding: 0,
+      placementBeacon: 'left',
+    },
+  ];
+
   return (
     <div className={classes.root}>
+      <MyJoyride steps={steps} />
       <Router>
         <MainNavigation pages={pages} title={"Defaultinator"} AppBarAction={<AuthButton />}/>
       </Router>
