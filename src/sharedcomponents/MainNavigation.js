@@ -150,7 +150,7 @@ const MainNavigation = ({ pages, title, AppBarAction = <></> }) => {
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer}>
-        <Drawer
+      <Drawer
           variant="persistent"
           open={mobileOpen}
           onClose={handleDrawerToggle}

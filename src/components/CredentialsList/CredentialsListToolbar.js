@@ -48,6 +48,7 @@ export const CredentialsListToolbar = () => {
         </Typography>
         <Tooltip title={`Filter Results`}>
           <IconButton
+            id={'search-credentials'}
             onClick={() => setSearchOpen(true)}
           >
             <SearchIcon />

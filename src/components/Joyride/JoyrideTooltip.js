@@ -50,7 +50,7 @@ const JoyrideTooltip = ({
           }
         </Grid>
         <Grid item xs={12}>
-          {content &&
+          {(typeof content === 'string') ?
             <Typography
               variant={'body2'}
               style={{ textAlign: 'center' }}
@@ -58,6 +58,8 @@ const JoyrideTooltip = ({
             >
               {content}
             </Typography>
+            :
+            <>{ content }</>
           }
         </Grid>
         <Grid
@@ -66,15 +68,17 @@ const JoyrideTooltip = ({
           xs={3}
           direction={'row'}
           alignItems={'flex-start'}
-          justify={'flex-start'}
+          justifyContent={'flex-start'}
         >
           <Button
             {...backProps}
             size="small"
             disabled={index === 0}
             color="secondary"
+            variant="contained"
+            style={{ paddingLeft: 2 }}
           >
-            <KeyboardArrowLeftIcon />Back
+            <KeyboardArrowLeftIcon fontSize={'small'} />Back
           </Button>
         </Grid>
         <Grid
@@ -82,7 +86,7 @@ const JoyrideTooltip = ({
           container
           xs
           direction={'column'}
-          justify={'center'}
+          justifyContent={'center'}
           display={'flex'}
         >
           <LinearProgress variant="determinate" value={Math.round((index + 1) / size * 100)} />
@@ -93,13 +97,14 @@ const JoyrideTooltip = ({
           xs={3}
           direction={'row'}
           alignItems={'center'}
-          justify={'flex-end'}
+          justifyContent={'flex-end'}
         >
           {(index + 1) === size ?
             <Button
               {...closeProps}
               size="small"
               color="secondary"
+              variant="contained"
             >
               Done
             </Button>
@@ -108,8 +113,10 @@ const JoyrideTooltip = ({
               {...primaryProps}
               size="small"
               color="secondary"
+              variant="contained"
+              style={{ paddingRight: 2 }}
             >
-              Next<KeyboardArrowRightIcon />
+              Next<KeyboardArrowRightIcon fontSize={'small'} />
             </Button>
           }
         </Grid>
