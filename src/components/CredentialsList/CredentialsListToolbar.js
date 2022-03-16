@@ -57,5 +57,4 @@ export const CredentialsListToolbar = () => {
     </>
   );
 };
-
 export default CredentialsListToolbar;

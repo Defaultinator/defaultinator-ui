@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import {
   Button,
@@ -52,6 +53,17 @@ const ReportIssueDialog = ({ open, setOpen = () => { } }) => {
       </DialogActions>
     </Dialog>
   );
+};
+ReportIssueDialog.propTypes = {
+  open: PropTypes.bool,
+    // Not sure 'open' proptype is correct!*
+};
+
+ReportIssueDialog.defaultProps = {
+  credential: {},
+  isAdmin: false,
+  onVerify: () => { },
+  loading: false,
 };
 
 export default ReportIssueDialog;

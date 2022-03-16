@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, {
   useState,
 } from 'react';
@@ -107,4 +108,19 @@ const CredentialCardMenuOptions = ({ references }) => {
   );
 };
 
+CredentialCardMenuOptions.propTypes = {
+  id: PropTypes.string,
+  anchorEl: PropTypes.element,
+  keepMounted: PropTypes.bool,
+  open: PropTypes.bool,
+  // Not sure 'open's or anchorE1's proptypes are correct!*
+  onClose: PropTypes.func,
+};
+
+CredentialCardMenuOptions.defaultProps = {
+  credential: {},
+  isAdmin: false,
+  onVerify: () => { },
+  loading: false,
+};
 export default CredentialCardMenuOptions;
