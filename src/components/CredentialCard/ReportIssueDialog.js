@@ -54,16 +54,4 @@ const ReportIssueDialog = ({ open, setOpen = () => { } }) => {
     </Dialog>
   );
 };
-ReportIssueDialog.propTypes = {
-  open: PropTypes.bool,
-    // Not sure 'open' proptype is correct!*
-};
-
-ReportIssueDialog.defaultProps = {
-  credential: {},
-  isAdmin: false,
-  onVerify: () => { },
-  loading: false,
-};
-
 export default ReportIssueDialog;
