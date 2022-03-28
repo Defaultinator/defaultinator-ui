@@ -9,13 +9,20 @@ import { Grid, Paper, Typography } from "@material-ui/core";
 import VerifiedIcon from "../Icons/VerifiedIcon";
 import PartIcon from "../Icons/PartIcon";
 
-const MyJoyride = ({ ...props }) => {
+const MyJoyride = ({ enabled = false, onComplete = () => {}, ...props }) => {
   const history = useHistory();
 
   const [stepIndex, setStepIndex] = useState(0);
   const [running, setRunning] = useState(true);
 
   const steps = [
+    {
+      title: "Welcome!",
+      target: "body",
+      content: "Welcome to the thunderdome!",
+      disableBeacon: true,
+      placement: 'center',
+    },
     {
       title: "Home",
       target: "#home",
@@ -123,7 +130,15 @@ const MyJoyride = ({ ...props }) => {
       title: "Search",
       target: "#search-credentials",
       content: "You can search this table by product and vendor, or username and password.",
-      spotlightPadding: 0,
+      spotlightPadding: 10,
+      styles: { spotlight: { borderRadius: 50 } },
+      before: async () => await history.push('/credentials'),
+    },
+    {
+      title: "Add a Credential",
+      target: "#add-credential",
+      content: "If you have a source for a default credential that isn't already listed in the database, you can add it yourself.",
+      spotlightPadding: 10,
       styles: { spotlight: { borderRadius: 50 } },
       before: async () => await history.push('/credentials'),
     },
@@ -146,7 +161,8 @@ const MyJoyride = ({ ...props }) => {
   ];
 
   const handleCallback = ({ action, index, type, status, step }) => {
-
+    console.log(action, index, type, status);
+    console.log('-----');
     switch (type) {
       case EVENTS.STEP_AFTER:
         switch (action) {
@@ -159,6 +175,7 @@ const MyJoyride = ({ ...props }) => {
 
             setStepIndex(index + 1);
             break;
+          
           case ACTIONS.PREV:
             // This is a workaround because joyride looks for the target before dispatching the step:before event.
             // So we have to run the function manually when we know the user wants the next step.
@@ -168,6 +185,7 @@ const MyJoyride = ({ ...props }) => {
 
             setStepIndex(index - 1);
             break;
+
           case ACTIONS.CLOSE:
             setRunning(false);
             break;
@@ -177,6 +195,17 @@ const MyJoyride = ({ ...props }) => {
         };
         break;
 
+      case EVENTS.TOUR_STATUS:
+        switch(action) {
+          case ACTIONS.STOP:
+            onComplete();
+            break;
+
+          default:
+            break;
+        };
+        break;
+        
       // case EVENTS.STEP_BEFORE:
       //   const { before } = step;
       //   if (before) {
@@ -193,7 +222,7 @@ const MyJoyride = ({ ...props }) => {
     <OldJoyride
       steps={steps}
       stepIndex={stepIndex}
-      run={running}
+      run={running && enabled}
       continuous
       showProgress
       tooltipComponent={JoyrideTooltip}
