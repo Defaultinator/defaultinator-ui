@@ -58,6 +58,7 @@ export const PaginatedDataTable = (
                 key={idx}
                 align={field.align || "right"}
                 style={{borderBottom: 'none'}}
+                id={`table-header-${field.label.replaceAll(' ', '-').toLowerCase()}`}
               >
                 {field.label}
               </TableCell>
