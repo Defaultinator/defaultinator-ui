@@ -1,7 +1,7 @@
 import { useApiKey } from "../util/useApiKey";
 import {
   Button,
-} from "@material-ui/core";
+} from "@mui/material";
 
 const AuthButton = () => {
   const [apikey, deleteApikey] = useApiKey(s => [s.apikey, s.deleteApikey]);

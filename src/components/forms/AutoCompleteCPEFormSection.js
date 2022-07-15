@@ -13,8 +13,8 @@ import {
   Grid,
   TextField,
   CircularProgress,
-} from '@material-ui/core';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+} from '@mui/material';
+import Autocomplete from '@mui/material/Autocomplete';
 import useApiKey from '../../util/useApiKey';
 
 const CPEFormAutocompleteItem = ({ field, setField, fieldName, queryParams }) => {

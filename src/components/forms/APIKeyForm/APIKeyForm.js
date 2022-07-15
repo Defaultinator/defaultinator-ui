@@ -13,11 +13,9 @@ import {
   FormGroup,
   FormControlLabel,
   Checkbox,
-} from "@material-ui/core";
+} from "@mui/material";
 
-import {
-  makeStyles,
-} from "@material-ui/core/styles";
+import makeStyles from '@mui/styles/makeStyles';
 import FormField from '../../FormField';
 import { APIKeyType } from '../../../config/types';
 

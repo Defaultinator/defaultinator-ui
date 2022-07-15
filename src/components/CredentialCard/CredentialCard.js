@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import {
   Button,
   Card,
@@ -11,13 +11,13 @@ import {
   Typography,
   Divider,
   IconButton,
-} from '@material-ui/core';
+} from '@mui/material';
 
 import { CredentialType } from '../../config/types';
 
 import CredentialCardMenuOptions from './CredentialCardMenuOptions';
 import VerifiedIcon from '../Icons/VerifiedIcon';
-import { Skeleton } from '@material-ui/lab';
+import { Skeleton } from '@mui/material';
 import loadingWrapper from '../../util/loadingWrapper';
 
 const useStyles = makeStyles({
@@ -94,7 +94,7 @@ export const CredentialCard = (
               disabled={!isAdmin}
               aria-label={isVerified ? "unverify" : "verify"}
               onClick={() => onVerify(credential)}
-            >
+              size="large">
               <VerifiedIcon isVerified={isVerified} />
             </IconButton>,
             'circle')

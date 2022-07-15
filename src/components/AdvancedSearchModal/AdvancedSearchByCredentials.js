@@ -2,13 +2,13 @@ import React, {
   useState,
 } from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import {
   Button,
   Container,
   Grid,
   TextField,
-} from '@material-ui/core';
+} from '@mui/material';
 
 const useStyles = makeStyles((theme) => ({
   actions: {

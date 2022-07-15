@@ -1,5 +1,5 @@
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import PersonIcon from '@material-ui/icons/Person';
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import PersonIcon from '@mui/icons-material/Person';
 
 const IsAdminIcon = ({ isAdmin = false }) => {
   return (

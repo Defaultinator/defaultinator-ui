@@ -10,8 +10,8 @@ import {
   MenuItem,
   InputLabel,
   Select,
-} from "@material-ui/core";
-import {makeStyles} from "@material-ui/core/styles";
+} from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 
 import useApiKey from '../../util/useApiKey';
 import FormField from "../FormField";

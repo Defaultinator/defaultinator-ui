@@ -1,4 +1,4 @@
-import { Skeleton } from '@material-ui/lab';
+import { Skeleton } from '@mui/material';
 
 export const loadingWrapper = (loading, element, shape = "rect") => {
   if (loading) {

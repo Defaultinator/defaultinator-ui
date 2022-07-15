@@ -11,11 +11,11 @@ import {
   TablePagination,
   Paper,
   LinearProgress,
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import Skeleton from '@material-ui/lab/Skeleton';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import Skeleton from '@mui/material/Skeleton';
 
 const useStyles = makeStyles((theme) => ({
   loadingRow: {

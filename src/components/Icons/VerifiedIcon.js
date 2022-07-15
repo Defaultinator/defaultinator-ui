@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 
-import {
-  makeStyles, Tooltip,
-} from "@material-ui/core";
+import { Tooltip } from "@mui/material";
 
-import SecurityIcon from '@material-ui/icons/Security';
-import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
+import makeStyles from '@mui/styles/makeStyles';
+
+import SecurityIcon from '@mui/icons-material/Security';
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 
 const useStyles = makeStyles((theme) => ({
   verified: {

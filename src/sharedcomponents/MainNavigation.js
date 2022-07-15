@@ -19,11 +19,9 @@ import {
   ListItemText,
   ListItemIcon,
   Typography,
-} from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
-import {
-  makeStyles,
-} from '@material-ui/core/styles';
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import makeStyles from '@mui/styles/makeStyles';
 
 const drawerWidth = 260;
 
@@ -139,7 +137,7 @@ const MainNavigation = ({ pages, title, AppBarAction = <></> }) => {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-          >
+            size="large">
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>

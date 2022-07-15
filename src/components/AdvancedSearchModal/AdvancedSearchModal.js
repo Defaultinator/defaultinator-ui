@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import {
   useHistory,
 } from "react-router-dom";
 
 import {
   Paper,
-} from '@material-ui/core';
+} from '@mui/material';
 
 import AdvancedSearchByCPE from './AdvancedSearchByCPE';
 import AdvancedSearchByCredentials from './AdvancedSearchByCredentials';

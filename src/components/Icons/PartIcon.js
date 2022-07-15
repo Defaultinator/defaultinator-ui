@@ -1,9 +1,9 @@
-import AppsIcon from '@material-ui/icons/Apps';
-import RouterIcon from '@material-ui/icons/Router';
-import DeveloperBoardIcon from '@material-ui/icons/DeveloperBoard';
-import DeviceUnknownIcon from '@material-ui/icons/DeviceUnknown';
+import AppsIcon from '@mui/icons-material/Apps';
+import RouterIcon from '@mui/icons-material/Router';
+import DeveloperBoardIcon from '@mui/icons-material/DeveloperBoard';
+import DeviceUnknownIcon from '@mui/icons-material/DeviceUnknown';
 
-import { Tooltip } from '@material-ui/core';
+import { Tooltip } from '@mui/material';
 
 export const PartIcon = ({part}) => {
   let icon = <DeviceUnknownIcon />;

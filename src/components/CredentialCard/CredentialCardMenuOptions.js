@@ -9,12 +9,12 @@ import {
   Tooltip,
   Typography,
   ListItemIcon,
-} from '@material-ui/core';
+} from '@mui/material';
 
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import BugReportIcon from '@material-ui/icons/BugReport';
-import BookmarksIcon from '@material-ui/icons/Bookmarks';
-import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import BugReportIcon from '@mui/icons-material/BugReport';
+import BookmarksIcon from '@mui/icons-material/Bookmarks';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 import ReportIssueDialog from './ReportIssueDialog';
 
@@ -79,32 +79,30 @@ const ReferencesMenuItem = ({ references }) => {
 const CredentialCardMenuOptions = ({ references }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
-  return (
-    <>
-      <Tooltip title={"More Options"}>
-        <span>
-          <IconButton
-            aria-label="options"
-            aria-controls="simple-menu"
-            aria-haspopup="true"
-            onClick={(e) => setAnchorEl(e.currentTarget)}
-          >
-            <MoreVertIcon />
-          </IconButton>
-        </span>
-      </Tooltip>
-      <Menu
-        id="credentials-options-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={() => setAnchorEl(null)}
-      >
-        <ReportIssueMenuItem />
-        <ReferencesMenuItem references={references} />
-      </Menu>
-    </>
-  );
+  return <>
+    <Tooltip title={"More Options"}>
+      <span>
+        <IconButton
+          aria-label="options"
+          aria-controls="simple-menu"
+          aria-haspopup="true"
+          onClick={(e) => setAnchorEl(e.currentTarget)}
+          size="large">
+          <MoreVertIcon />
+        </IconButton>
+      </span>
+    </Tooltip>
+    <Menu
+      id="credentials-options-menu"
+      anchorEl={anchorEl}
+      keepMounted
+      open={Boolean(anchorEl)}
+      onClose={() => setAnchorEl(null)}
+    >
+      <ReportIssueMenuItem />
+      <ReferencesMenuItem references={references} />
+    </Menu>
+  </>;
 };
 
 export default CredentialCardMenuOptions;

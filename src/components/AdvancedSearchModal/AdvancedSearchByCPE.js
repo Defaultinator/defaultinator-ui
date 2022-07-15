@@ -2,12 +2,12 @@ import React, {
   useState,
 } from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import {
   Button,
   Container,
   Grid,
-} from '@material-ui/core';
+} from '@mui/material';
 import AutoCompleteCPEFormSection from '../forms/AutoCompleteCPEFormSection';
 
 const useStyles = makeStyles((theme) => ({

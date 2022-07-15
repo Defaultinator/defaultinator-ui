@@ -7,11 +7,9 @@ import {
 
 import {
   Fab,
-} from "@material-ui/core";
-import AddIcon from '@material-ui/icons/Add';
-import {
-  makeStyles,
-} from "@material-ui/core/styles";
+} from "@mui/material";
+import AddIcon from '@mui/icons-material/Add';
+import makeStyles from '@mui/styles/makeStyles';
 
 import withAuth from '../components/withAuth';
 

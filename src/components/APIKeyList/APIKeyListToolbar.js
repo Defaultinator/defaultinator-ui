@@ -1,15 +1,14 @@
-import {
-  makeStyles,
-  alpha,
-} from '@material-ui/core/styles';
+import { alpha } from '@mui/material/styles';
+
+import makeStyles from '@mui/styles/makeStyles';
 
 import {
   IconButton,
   Toolbar,
   Tooltip,
   Typography,
-} from "@material-ui/core";
-import SearchIcon from '@material-ui/icons/Search';
+} from "@mui/material";
+import SearchIcon from '@mui/icons-material/Search';
 
 const useStyles = makeStyles((theme) => ({
   root: {

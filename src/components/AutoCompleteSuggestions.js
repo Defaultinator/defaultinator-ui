@@ -6,7 +6,7 @@ import {
   ListItem,
   ListItemText,
   Paper,
-} from "@material-ui/core";
+} from "@mui/material";
 
 const SuggestionItem = ({suggestion}) => {
   const {_id: name, count} = suggestion;

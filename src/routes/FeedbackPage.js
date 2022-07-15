@@ -3,7 +3,7 @@ import {
   Container,
   Typography,
   TextField,
-} from "@material-ui/core";
+} from "@mui/material";
 import { useState } from "react";
 import { REQUEST_ACCOUNT_EMAIL } from "../config/constants";
 

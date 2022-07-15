@@ -16,7 +16,7 @@ import CredentialsForm from "../../components/forms/CredentialsForm";
 import {flattenCpe} from "../../util/flatten";
 import {
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
 
 const EditCredentialsPage = () => {
   const history = useHistory();

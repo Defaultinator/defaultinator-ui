@@ -2,13 +2,13 @@ import {
   BrowserRouter as Router,
 } from "react-router-dom";
 
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 
-import LockIcon from '@material-ui/icons/Lock';
-import HomeIcon from '@material-ui/icons/Home';
-import GavelIcon from '@material-ui/icons/Gavel';
-import FeedbackIcon from '@material-ui/icons/Feedback';
-import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import LockIcon from '@mui/icons-material/Lock';
+import HomeIcon from '@mui/icons-material/Home';
+import GavelIcon from '@mui/icons-material/Gavel';
+import FeedbackIcon from '@mui/icons-material/Feedback';
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
 
 import MainNavigation from './sharedcomponents/MainNavigation';
 import useApiKey from "./util/useApiKey";

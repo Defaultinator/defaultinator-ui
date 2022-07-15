@@ -1,7 +1,7 @@
 import {
   Container,
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
 
 const AboutPage = () => {
   return (

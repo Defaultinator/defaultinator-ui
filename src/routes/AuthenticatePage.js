@@ -6,7 +6,7 @@ import {
 
 import {
   Container,
-} from "@material-ui/core";
+} from "@mui/material";
 
 import { useApiKey } from "../util/useApiKey";
 import AuthForm from "../components/forms/AuthForm/AuthForm";

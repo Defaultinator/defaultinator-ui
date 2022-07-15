@@ -6,7 +6,7 @@ import {
   DialogContent,
   DialogActions,
   TextField,
-} from '@material-ui/core';
+} from '@mui/material';
 import { REQUEST_ACCOUNT_EMAIL } from '../../config/constants';
 
 const ReportIssueDialog = ({ open, setOpen = () => { } }) => {

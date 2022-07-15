@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import {
   Button,
   Card,
@@ -8,11 +8,11 @@ import {
   CardContent,
   CardHeader,
   Typography,
-} from '@material-ui/core';
+} from '@mui/material';
 import { APIKeyType } from '../config/types';
 import IsAdminIcon from './Icons/IsAdminIcon';
 import loadingWrapper from '../util/loadingWrapper';
-import { Skeleton } from '@material-ui/lab';
+import { Skeleton } from '@mui/material';
 
 const useStyles = makeStyles({
   root: {

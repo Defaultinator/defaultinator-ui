@@ -20,14 +20,12 @@ import {
   TextField,
   FormControl,
   IconButton,
-} from "@material-ui/core";
+} from "@mui/material";
 
-import {
-  makeStyles,
-} from "@material-ui/core/styles";
+import makeStyles from '@mui/styles/makeStyles';
 
-import AddIcon from '@material-ui/icons/Add';
-import DeleteIcon from '@material-ui/icons/Delete';
+import AddIcon from '@mui/icons-material/Add';
+import DeleteIcon from '@mui/icons-material/Delete';
 import CredsFormSection from "./CredsFormSection";
 import ProtocolFormSection from "./ProtocolFormSection";
 import { CpeType } from '../../config/types';
@@ -125,11 +123,7 @@ const ReferenceListItem = ({ reference, deleteSelf }) => {
         primary={reference}
       />
       <ListItemSecondaryAction>
-        <IconButton
-          edge="end"
-          aria-label="delete"
-          onClick={deleteSelf}
-        >
+        <IconButton edge="end" aria-label="delete" onClick={deleteSelf} size="large">
           <DeleteIcon
             color={'secondary'}
           />
@@ -194,7 +188,7 @@ const ReferencesSection = ({ references, setReferences }) => {
             setReferences([...references, reference]);
             setReference('');
           }}
-        >
+          size="large">
           <AddIcon />
         </IconButton>
       </div>
