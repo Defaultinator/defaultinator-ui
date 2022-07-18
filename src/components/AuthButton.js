@@ -11,6 +11,7 @@ const AuthButton = () => {
       {apikey && apikey !== '' &&
         <Button
           onClick={() => deleteApikey()}
+          variant="outlined"
         >
           Logout
         </Button>

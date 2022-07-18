@@ -61,7 +61,7 @@ const ActionButtons = ({ reset }) => {
       >
         <Grid item>
           <Button
-            variant={'contained'}
+            variant={'outlined'}
             type={'submit'}
             color={'primary'}
           >

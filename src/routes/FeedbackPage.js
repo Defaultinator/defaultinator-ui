@@ -27,7 +27,7 @@ const FeedbackPage = () => {
       <div>
         <br />
         <Button
-          variant="contained"
+          variant="outlined"
           color="primary"
           component='a'
           href={`mailto:${REQUEST_ACCOUNT_EMAIL}?subject=Defaultinator Feedback&body=${text}`}

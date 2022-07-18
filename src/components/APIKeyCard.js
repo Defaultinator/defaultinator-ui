@@ -51,19 +51,19 @@ export const APIKeyCard = ({
         <Button
           disabled={loading}
           size="small"
-          color="primary"
-          variant={'contained'}
-          {...editButtonProps}
-        >
-          Edit
-        </Button>
-        <Button
-          disabled={loading}
-          size="small"
           color="secondary"
           {...deleteButtonProps}
         >
           Delete
+        </Button>
+        <Button
+          disabled={loading}
+          size="small"
+          color="primary"
+          variant="outlined"
+          {...editButtonProps}
+        >
+          Edit
         </Button>
       </CardActions>
     </Card>

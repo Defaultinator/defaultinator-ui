@@ -37,7 +37,7 @@ const ReportIssueDialog = ({ open, setOpen = () => { } }) => {
       </DialogContent>
       <DialogActions>
         <Button
-          variant="contained"
+          variant="outlined"
           color="primary"
           component='a'
           href={`mailto:${REQUEST_ACCOUNT_EMAIL}`}

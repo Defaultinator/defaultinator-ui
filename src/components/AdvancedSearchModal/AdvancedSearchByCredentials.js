@@ -57,7 +57,7 @@ const AdvancedSearchByCPE = ({ onSubmit }) => {
       >
         <Grid item>
           <Button
-            variant={"contained"}
+            variant={"outlined"}
             color={'primary'}
             onClick={() => onSubmit({
               ...(username && {username: username}),

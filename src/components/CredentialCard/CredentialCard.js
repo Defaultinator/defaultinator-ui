@@ -174,7 +174,7 @@ export const CredentialCard = (
           disabled={loading || isVerified}
           size="small"
           color="primary"
-          variant={'contained'}
+          variant={'outlined'}
           aria-label="edit"
           {...primaryButtonProps}
         >

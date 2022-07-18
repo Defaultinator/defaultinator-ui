@@ -59,7 +59,7 @@ const AuthForm = ({onSubmit, apikey, onClear}) => {
           >
             Clear
           </Button>
-          <Button type="submit" variant="contained" color="primary">Submit</Button>
+          <Button type="submit" variant="outlined" color="primary">Submit</Button>
         </Container>
       </form>
     </Paper>

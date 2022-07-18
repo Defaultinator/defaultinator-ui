@@ -53,6 +53,7 @@ const TabBar = ({ tabText, activeTab, setActiveTab, tabBarStyles }) => {
         centered
         value={activeTab}
         onChange={(e, newActiveTab) => setActiveTab(newActiveTab)}
+        variant={'fullWidth'}
         style={tabBarStyles}
       >
         {tabText.map((text, idx) => (
