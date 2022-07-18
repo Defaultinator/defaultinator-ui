@@ -9,6 +9,7 @@ import { APIKeyType, PaginatedDataTableConfigType } from '../../config/types';
 import APIKeyListToolbar from './APIKeyListToolbar';
 import PaginatedDataTable from '../../sharedcomponents/PaginatedDataTable';
 import IsAdminIcon from '../Icons/IsAdminIcon';
+import ApiKey from '../ApiKey';
 
 const useStyles = makeStyles({
   root: {
@@ -20,7 +21,11 @@ const useStyles = makeStyles({
 export const APIKeyList = ({ data = [], dataConfig, loading, rowsPerPage, page, totalRows, updateConfig, dense, error }) => {
   const styles = useStyles();
 
-  data = data?.map((row) => ({...row, isAdmin: <IsAdminIcon isAdmin={row.isAdmin} />}))
+  data = data?.map((row) => ({
+    ...row, 
+    isAdmin: <IsAdminIcon isAdmin={row.isAdmin} />,
+    apiKey: <ApiKey apiKey={row.apiKey} />
+  }));
 
   return (
     <Paper className={styles.root}>

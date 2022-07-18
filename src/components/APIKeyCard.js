@@ -13,6 +13,7 @@ import { APIKeyType } from '../config/types';
 import IsAdminIcon from './Icons/IsAdminIcon';
 import loadingWrapper from '../util/loadingWrapper';
 import { Skeleton } from '@mui/material';
+import ApiKey from './ApiKey';
 
 const useStyles = makeStyles({
   root: {
@@ -41,7 +42,7 @@ export const APIKeyCard = ({
           loadingWrapper(loading, <IsAdminIcon isAdmin={isAdmin} />, 'circle')
         }
         title={loading ? <Skeleton width={100} variant={'text'} /> : email}
-        subheader={loading ? <Skeleton width={150} variant={'text'} /> : key}
+        subheader={loading ? <Skeleton width={150} variant={'text'} /> : <ApiKey apiKey={key} />}
       />
       <CardContent>
         <Typography variant="body1">{loading ? [1,2,3].map((val) => <Skeleton key={val} style={{ width: '100%' }} />) : notes}</Typography>
