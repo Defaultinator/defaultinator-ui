@@ -2,7 +2,9 @@ import { render } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import * as stories from '../../../stories/components/CredentialsList/CredentialsList.stories';
 
-const { Primary: CredentialsList, Dense, Loading, LoadingInitial, Error } = composeStories(stories);
+const {
+  Primary: CredentialsList, Dense, Loading, LoadingInitial, Error,
+} = composeStories(stories);
 
 describe('components/CredentialsList', () => {
   it('should render', () => {
@@ -32,5 +34,4 @@ describe('components/CredentialsList', () => {
       render(<Error />);
     });
   });
-
 });

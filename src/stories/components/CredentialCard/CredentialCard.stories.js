@@ -10,11 +10,13 @@ export default {
   argTypes: {
     onPrimaryAction: { action: 'onPrimaryAction' },
     onSecondaryAction: { action: 'onSecondaryAction' },
-    onVerify: { action: 'onVerify' }
+    onVerify: { action: 'onVerify' },
   },
 };
 
-const Template = (args) => <CredentialCard {...args} />;
+function Template(args) {
+  return <CredentialCard {...args} />;
+}
 
 export const Primary = Template.bind({});
 Primary.args = {

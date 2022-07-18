@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import { Tooltip } from "@mui/material";
+import { Tooltip } from '@mui/material';
 
 import makeStyles from '@mui/styles/makeStyles';
 
@@ -13,26 +13,25 @@ const useStyles = makeStyles((theme) => ({
   },
   unverified: {
     color: theme.palette.warning.main,
-  }
+  },
 }));
 
-const VerifiedIcon = ({ isVerified = false }) => {
+function VerifiedIcon({ isVerified = false }) {
   const classes = useStyles();
 
-  if (isVerified)
+  if (isVerified) {
     return (
-      <Tooltip title={"Verified Record"} aria-label="verified">
+      <Tooltip title="Verified Record" aria-label="verified">
         <VerifiedUserIcon className={classes.verified} />
       </Tooltip>
     );
-  else
-    return (
-      <Tooltip title={"Record Needs Review"} aria-label="unverified">
-        <SecurityIcon className={classes.unverified} />
-      </Tooltip>
-    );
-
-};
+  }
+  return (
+    <Tooltip title="Record Needs Review" aria-label="unverified">
+      <SecurityIcon className={classes.unverified} />
+    </Tooltip>
+  );
+}
 
 VerifiedIcon.propTypes = {
   isVerified: PropTypes.bool,

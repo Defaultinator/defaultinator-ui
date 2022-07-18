@@ -7,7 +7,9 @@ export default {
   component: IsAdminIcon,
 };
 
-const Template = (args) => <IsAdminIcon {...args} />;
+function Template(args) {
+  return <IsAdminIcon {...args} />;
+}
 
 export const Primary = Template.bind({});
 Primary.args = {

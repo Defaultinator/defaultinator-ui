@@ -10,7 +10,9 @@ export default {
   },
 };
 
-const Template = (args) => <APIKeyForm {...args} />;
+function Template(args) {
+  return <APIKeyForm {...args} />;
+}
 
 export const Primary = Template.bind({});
 Primary.args = {

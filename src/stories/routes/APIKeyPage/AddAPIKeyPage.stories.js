@@ -12,13 +12,15 @@ export default {
   decorators: [
     (Story) => {
       const mock = new MockAdapter(axios);
-      mock.onPost(`${API_URI}/apikeys`).reply(200, {_id: 21});
+      mock.onPost(`${API_URI}/apikeys`).reply(200, { _id: 21 });
       return (<Story />);
     },
   ],
 };
 
-const Template = (args) => <AddAPIKeyPage {...args} />;
+function Template(args) {
+  return <AddAPIKeyPage {...args} />;
+}
 
 export const Primary = Template.bind({});
 Primary.args = {

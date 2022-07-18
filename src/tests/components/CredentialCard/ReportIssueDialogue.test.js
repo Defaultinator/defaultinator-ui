@@ -5,7 +5,7 @@ import * as stories from '../../../stories/components/CredentialCard/ReportIssue
 const { Primary: ReportIssueDialog } = composeStories(stories);
 
 describe('components/CredentialCard/ReportIssueDialog', () => {
-    it('should render', () => {
-        render(<ReportIssueDialog />);
-    });
+  it('should render', () => {
+    render(<ReportIssueDialog />);
+  });
 });

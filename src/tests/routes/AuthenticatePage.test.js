@@ -5,7 +5,7 @@ import * as stories from '../../stories/routes/AuthenticatePage.stories';
 const { Primary: AuthenticatePage } = composeStories(stories);
 
 describe('routes/AuthenticatePage', () => {
-    it('should render', () => {
-        render(<AuthenticatePage />);
-    });
+  it('should render', () => {
+    render(<AuthenticatePage />);
+  });
 });

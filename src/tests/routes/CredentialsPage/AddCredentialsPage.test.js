@@ -5,7 +5,7 @@ import * as stories from '../../../stories/routes/CredentialsPage/AddCredentials
 const { Primary: AddCredentialsPage } = composeStories(stories);
 
 describe('routes/AddCredentialsPage', () => {
-    it('should render', () => {
-        render(<AddCredentialsPage />);
-    });
+  it('should render', () => {
+    render(<AddCredentialsPage />);
+  });
 });

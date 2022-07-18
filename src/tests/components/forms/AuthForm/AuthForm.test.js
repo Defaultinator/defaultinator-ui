@@ -5,7 +5,7 @@ import * as stories from '../../../../stories/components/forms/AuthForm/AuthForm
 const { Primary: AuthForm } = composeStories(stories);
 
 describe('components/AdvancedSearchModal/AuthForm', () => {
-    it('should render', () => {
-        render(<AuthForm />);
-    });
+  it('should render', () => {
+    render(<AuthForm />);
+  });
 });

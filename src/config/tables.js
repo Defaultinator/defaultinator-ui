@@ -1,30 +1,30 @@
 export const CREDENTIALS_TABLE_CONFIG = {
   fields: [
     {
-      "label": "Verified",
-      "fieldName": "isVerified",
-      "align": "center",
+      label: 'Verified',
+      fieldName: 'isVerified',
+      align: 'center',
     },
     {
-      "label": "Part",
-      "fieldName": "part",
-      "align": "center",
+      label: 'Part',
+      fieldName: 'part',
+      align: 'center',
     },
     {
-      "label": "Vendor",
-      "fieldName": "vendor",
+      label: 'Vendor',
+      fieldName: 'vendor',
     },
     {
-      "label": "Product",
-      "fieldName": "product",
+      label: 'Product',
+      fieldName: 'product',
     },
     {
-      "label": "Username",
-      "fieldName": "username",
+      label: 'Username',
+      fieldName: 'username',
     },
     {
-      "label": "Password",
-      "fieldName": "password",
+      label: 'Password',
+      fieldName: 'password',
     },
   ],
   pagination: {
@@ -36,16 +36,16 @@ export const CREDENTIALS_TABLE_CONFIG = {
 export const APIKEY_TABLE_CONFIG = {
   fields: [
     {
-      "label": "Admin?",
-      "fieldName": "isAdmin",
+      label: 'Admin?',
+      fieldName: 'isAdmin',
     },
     {
-      "label": "E-Mail",
-      "fieldName": "email",
+      label: 'E-Mail',
+      fieldName: 'email',
     },
     {
-      "label": "API Key",
-      "fieldName": "apiKey",
+      label: 'API Key',
+      fieldName: 'apiKey',
     },
   ],
   pagination: {

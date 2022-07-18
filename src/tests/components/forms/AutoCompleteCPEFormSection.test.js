@@ -5,7 +5,7 @@ import * as stories from '../../../stories/components/forms/AutoCompleteCPEFormS
 const { Primary: AutoCompleteCPEFormSection } = composeStories(stories);
 
 describe('components/AdvancedSearchModal/AutoCompleteCPEFormSection', () => {
-    it('should render', () => {
-        render(<AutoCompleteCPEFormSection />);
-    });
+  it('should render', () => {
+    render(<AutoCompleteCPEFormSection />);
+  });
 });

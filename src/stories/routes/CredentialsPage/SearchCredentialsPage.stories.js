@@ -27,7 +27,9 @@ export default {
   },
 };
 
-const Template = (args) => <SearchCredentialsPage {...args} />;
+function Template(args) {
+  return <SearchCredentialsPage {...args} />;
+}
 
 export const Primary = Template.bind({});
 Primary.args = {

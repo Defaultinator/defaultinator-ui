@@ -5,7 +5,7 @@ import DeviceUnknownIcon from '@mui/icons-material/DeviceUnknown';
 
 import { Tooltip } from '@mui/material';
 
-export const PartIcon = ({part}) => {
+export function PartIcon({ part }) {
   let icon = <DeviceUnknownIcon />;
   let text = 'Unknown';
 
@@ -15,22 +15,22 @@ export const PartIcon = ({part}) => {
       text = 'Software';
       break;
     case 'o':
-      icon = <DeveloperBoardIcon />
+      icon = <DeveloperBoardIcon />;
       text = 'Operating System';
       break;
     case 'h':
-      icon = <RouterIcon />
+      icon = <RouterIcon />;
       text = 'Hardware';
       break;
     default:
       break;
-  };
+  }
 
-  return(
+  return (
     <Tooltip title={text}>
       {icon}
     </Tooltip>
   );
-};
+}
 
 export default PartIcon;

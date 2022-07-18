@@ -5,7 +5,7 @@ import * as stories from '../../../stories/components/forms/CredentialsForm.stor
 const { Primary: CredentialsForm } = composeStories(stories);
 
 describe('components/AdvancedSearchModal/CredentialsForm', () => {
-    it('should render', () => {
-        render(<CredentialsForm />);
-    });
+  it('should render', () => {
+    render(<CredentialsForm />);
+  });
 });

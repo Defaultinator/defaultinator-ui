@@ -5,7 +5,7 @@ import * as stories from '../../stories/components/AutoCompleteSuggestions.stori
 const { Primary: AutoCompleteSuggestions } = composeStories(stories);
 
 describe('components/AutoCompleteSuggestions', () => {
-    it('should render', () => {
-        render(<AutoCompleteSuggestions />);
-    });
+  it('should render', () => {
+    render(<AutoCompleteSuggestions />);
+  });
 });

@@ -5,7 +5,7 @@ import * as stories from '../../../stories/components/AdvancedSearchModal/Advanc
 const { Primary: AdvancedSearchByCPE } = composeStories(stories);
 
 describe('components/AdvancedSearchModal/AdvancedSearchByCPE', () => {
-    it('should render', () => {
-        render(<AdvancedSearchByCPE />);
-    });
+  it('should render', () => {
+    render(<AdvancedSearchByCPE />);
+  });
 });

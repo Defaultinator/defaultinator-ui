@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
-  //toolbar: theme.mixins.toolbar,
+  // toolbar: theme.mixins.toolbar,
   toolbar: {
     display: 'flex',
     alignItems: 'center',
@@ -90,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AppDrawerContent = ({ pages }) => {
+function AppDrawerContent({ pages }) {
   const classes = useStyles();
   const { pathname: activePath } = useLocation();
 
@@ -115,9 +115,9 @@ const AppDrawerContent = ({ pages }) => {
       </List>
     </div>
   );
-};
+}
 
-const MainNavigation = ({ pages, title, AppBarAction = <></> }) => {
+function MainNavigation({ pages, title, AppBarAction = <></> }) {
   const classes = useStyles();
 
   const [mobileOpen, setMobileOpen] = useState(true);
@@ -128,16 +128,20 @@ const MainNavigation = ({ pages, title, AppBarAction = <></> }) => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="fixed" className={clsx(classes.appBar, {
+      <AppBar
+        position="fixed"
+        className={clsx(classes.appBar, {
           [classes.appBarShift]: mobileOpen,
-        })}>
+        })}
+      >
         <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            size="large">
+            size="large"
+          >
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
@@ -160,8 +164,9 @@ const MainNavigation = ({ pages, title, AppBarAction = <></> }) => {
         </Drawer>
       </nav>
       <main className={clsx(classes.content, {
-          [classes.contentShift]: mobileOpen,
-        })}>
+        [classes.contentShift]: mobileOpen,
+      })}
+      >
         <div className={classes.toolbar} />
         <div className={classes.pages}>
           <Switch>

@@ -7,7 +7,7 @@ import {
   Toolbar,
   Tooltip,
   Typography,
-} from "@mui/material";
+} from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
 const useStyles = makeStyles((theme) => ({
@@ -19,30 +19,28 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const APIKeyListToolbar = () => {
+export function APIKeyListToolbar() {
   const classes = useStyles();
 
   return (
-    <>
-      <Toolbar
-        className={classes.root}
+    <Toolbar
+      className={classes.root}
+    >
+      <Typography
+        className={classes.title}
+        variant="h6"
       >
-        <Typography
-          className={classes.title}
-          variant={'h6'}
-        >
-          API Keys
-        </Typography>
-        {/* <Tooltip title={`Search Keys`}>
+        API Keys
+      </Typography>
+      {/* <Tooltip title={`Search Keys`}>
           <IconButton
             onClick={() => {}}
           >
             <SearchIcon />
           </IconButton>
         </Tooltip> */}
-      </Toolbar>
-    </>
+    </Toolbar>
   );
-};
+}
 
 export default APIKeyListToolbar;

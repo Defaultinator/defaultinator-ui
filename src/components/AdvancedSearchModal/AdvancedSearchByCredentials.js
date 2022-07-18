@@ -2,7 +2,6 @@ import React, {
   useState,
 } from 'react';
 
-import makeStyles from '@mui/styles/makeStyles';
 import {
   Button,
   Container,
@@ -10,21 +9,7 @@ import {
   TextField,
 } from '@mui/material';
 
-const useStyles = makeStyles((theme) => ({
-  actions: {
-    paddingTop: theme.spacing(3),
-  },
-  cancel: {
-    marginLeft: theme.spacing(2),
-  },
-  input: {
-    margin: 'auto',
-    display: 'table',
-  }
-}));
-
-const AdvancedSearchByCPE = ({ onSubmit }) => {
-  const styles = useStyles();
+function AdvancedSearchByCPE({ onSubmit }) {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
 
@@ -33,35 +18,35 @@ const AdvancedSearchByCPE = ({ onSubmit }) => {
       <Grid container spacing={3}>
         <Grid item xs={6}>
           <TextField
-            className={styles.input}
+            sx={{ margin: 'auto', display: 'table' }}
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            label={'Username'}
-            variant={'outlined'}
+            label="Username"
+            variant="outlined"
           />
         </Grid>
         <Grid item xs={6}>
-        <TextField
-            className={styles.input}
+          <TextField
+            sx={{ margin: 'auto', display: 'table' }}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            label={'Password'}
-            variant={'outlined'}
+            label="Password"
+            variant="outlined"
           />
         </Grid>
       </Grid>
       <Grid
         container
-        className={styles.actions}
+        sx={{ paddingTop: 3 }}
         justifyContent="flex-end"
       >
         <Grid item>
           <Button
-            variant={"outlined"}
-            color={'primary'}
+            variant="outlined"
+            color="primary"
             onClick={() => onSubmit({
-              ...(username && {username: username}),
-              ...(password && {password: password})
+              ...(username && { username }),
+              ...(password && { password }),
             })}
           >
             Search
@@ -69,8 +54,8 @@ const AdvancedSearchByCPE = ({ onSubmit }) => {
         </Grid>
         <Grid item>
           <Button
-            color={'secondary'}
-            className={styles.cancel}
+            color="secondary"
+            sx={{ marginLeft: 2 }}
             onClick={() => {
               setUsername('');
               setPassword('');
@@ -82,7 +67,7 @@ const AdvancedSearchByCPE = ({ onSubmit }) => {
       </Grid>
     </Container>
   );
-};
+}
 
 AdvancedSearchByCPE.propTypes = {
 };

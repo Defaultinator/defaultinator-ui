@@ -1,15 +1,15 @@
 import {
   Container,
   Typography,
-} from "@mui/material";
+} from '@mui/material';
 
-const TermsPage = () => {
+function TermsPage() {
   return (
     <Container>
-      <Typography variant={'h4'} gutterBottom>
+      <Typography variant="h4" gutterBottom>
         Don't do Bad Stuff
       </Typography>
-      <Typography variant={'body1'} paragraph>
+      <Typography variant="body1" paragraph>
         “Defaultinator” is intended to be used for good-faith testing, investigation, and
         mitigation of security flaws so that individuals and organizations can be safer.
         Defaultinator is not intended to be used to target or scan networks, systems, or
@@ -21,6 +21,6 @@ const TermsPage = () => {
       </Typography>
     </Container>
   );
-};
+}
 
 export default TermsPage;

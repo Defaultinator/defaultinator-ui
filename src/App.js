@@ -1,8 +1,6 @@
 import {
   BrowserRouter as Router,
-} from "react-router-dom";
-
-import makeStyles from '@mui/styles/makeStyles';
+} from 'react-router-dom';
 
 import LockIcon from '@mui/icons-material/Lock';
 import HomeIcon from '@mui/icons-material/Home';
@@ -11,71 +9,64 @@ import FeedbackIcon from '@mui/icons-material/Feedback';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 
 import MainNavigation from './sharedcomponents/MainNavigation';
-import useApiKey from "./util/useApiKey";
+import { useApiKey } from './util/useApiKey';
 
 import CredentialsPage from './routes/CredentialsPage';
 import APIKeyPage from './routes/APIKeyPage';
 import AboutPage from './routes/AboutPage';
 import AuthButton from './components/AuthButton';
-import TermsPage from "./routes/TermsPage";
-import FeedbackPage from "./routes/FeedbackPage";
+import TermsPage from './routes/TermsPage';
+import FeedbackPage from './routes/FeedbackPage';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-}));
-
-const App = () => {
-  const classes = useStyles();
-  const [isAdmin] = useApiKey(s => [s.isAdmin]);
+function App() {
+  const [isAdmin] = useApiKey((s) => [s.isAdmin]);
 
   const pages = [
     {
-      navText: "Home",
+      navText: 'Home',
       navIcon: <HomeIcon />,
       pageContent: <AboutPage />,
-      pageTitle: "About",
-      path: "/about",
+      pageTitle: 'About',
+      path: '/about',
     },
     {
-      navText: "Credentials",
+      navText: 'Credentials',
       navIcon: <LockIcon />,
       pageContent: <CredentialsPage />,
-      pageTitle: "Credentials",
-      path: "/credentials",
+      pageTitle: 'Credentials',
+      path: '/credentials',
     },
     {
-      navText: "Key Management",
+      navText: 'Key Management',
       navIcon: <VpnKeyIcon />,
       pageContent: <APIKeyPage />,
-      pageTitle: "API Keys",
-      path: "/apikeys",
+      pageTitle: 'API Keys',
+      path: '/apikeys',
       hidden: !isAdmin,
     },
     {
-      navText: "Terms and Conditions",
+      navText: 'Terms and Conditions',
       navIcon: <GavelIcon />,
       pageContent: <TermsPage />,
-      pageTitle: "Terms and Conditions",
-      path: "/terms",
+      pageTitle: 'Terms and Conditions',
+      path: '/terms',
     },
     {
-      navText: "Feedback",
+      navText: 'Feedback',
       navIcon: <FeedbackIcon />,
       pageContent: <FeedbackPage />,
-      pageTitle: "Feedback",
-      path: "/feedback",
+      pageTitle: 'Feedback',
+      path: '/feedback',
     },
   ];
 
   return (
-    <div className={classes.root}>
+    <div sx={{ flexGrow: 1 }}>
       <Router>
-        <MainNavigation pages={pages} title={"Defaultinator"} AppBarAction={<AuthButton />}/>
+        <MainNavigation pages={pages} title="Defaultinator" AppBarAction={<AuthButton />} />
       </Router>
     </div>
   );
-};
+}
 
 export default App;

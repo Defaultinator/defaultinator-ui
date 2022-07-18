@@ -5,7 +5,7 @@ import * as stories from '../../stories/routes/AboutPage.stories';
 const { Primary: AboutPage } = composeStories(stories);
 
 describe('routes/AboutPage', () => {
-    it('should render', () => {
-        render(<AboutPage />);
-    });
+  it('should render', () => {
+    render(<AboutPage />);
+  });
 });

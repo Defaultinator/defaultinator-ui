@@ -29,7 +29,7 @@ describe('components/APIKeyCard', () => {
     render(<APIKeyCard />);
 
     expect(
-      screen.getByRole('button', { name: /edit/i })
+      screen.getByRole('button', { name: /edit/i }),
     ).toBeInTheDocument();
   });
 
@@ -37,8 +37,7 @@ describe('components/APIKeyCard', () => {
     render(<APIKeyCard />);
 
     expect(
-      screen.getByRole('button', { name: /delete/i })
+      screen.getByRole('button', { name: /delete/i }),
     ).toBeInTheDocument();
   });
-
 });

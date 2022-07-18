@@ -5,7 +5,7 @@ import * as stories from '../../../stories/routes/CredentialsPage/CredentialDeta
 const { Primary: CredentialDetailsPage } = composeStories(stories);
 
 describe('routes/CredentialDetailsPage', () => {
-    it('should render', () => {
-        render(<CredentialDetailsPage />);
-    });
+  it('should render', () => {
+    render(<CredentialDetailsPage />);
+  });
 });

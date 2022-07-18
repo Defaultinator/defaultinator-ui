@@ -5,7 +5,7 @@ import * as stories from '../../../stories/components/AdvancedSearchModal/Advanc
 const { Primary: AdvancedSearchByCredentials } = composeStories(stories);
 
 describe('components/AdvancedSearchModal/AdvancedSearchByCredentials', () => {
-    it('should render', () => {
-        render(<AdvancedSearchByCredentials />);
-    });
+  it('should render', () => {
+    render(<AdvancedSearchByCredentials />);
+  });
 });

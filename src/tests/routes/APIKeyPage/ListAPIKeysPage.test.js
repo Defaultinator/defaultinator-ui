@@ -5,7 +5,7 @@ import * as stories from '../../../stories/routes/APIKeyPage/ListAPIKeysPage.sto
 const { Primary: ListAPIKeysPage } = composeStories(stories);
 
 describe('routes/APIKeyPage/ListAPIKeysPage', () => {
-    it('should render', () => {
-        render(<ListAPIKeysPage />);
-    });
+  it('should render', () => {
+    render(<ListAPIKeysPage />);
+  });
 });

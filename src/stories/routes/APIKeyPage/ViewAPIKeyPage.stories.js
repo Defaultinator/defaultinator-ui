@@ -1,5 +1,5 @@
 import React from 'react';
-import { MemoryRouter, Route } from "react-router-dom";
+import { MemoryRouter, Route } from 'react-router-dom';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 
@@ -22,12 +22,15 @@ export default {
           <Route path="/:apiKeyId">
             <Story />
           </Route>
-        </MemoryRouter>);
+        </MemoryRouter>
+      );
     },
   ],
 };
 
-const Template = (args) => <ViewAPIKeyPage {...args} />;
+function Template(args) {
+  return <ViewAPIKeyPage {...args} />;
+}
 
 export const Primary = Template.bind({});
 Primary.args = {

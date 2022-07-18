@@ -2,7 +2,9 @@ import { render, screen } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import * as stories from '../../../stories/components/CredentialCard/CredentialCard.stories';
 
-const { Primary: CredentialCard, Verified, IsAdmin, Loading } = composeStories(stories);
+const {
+  Primary: CredentialCard, Verified, IsAdmin, Loading,
+} = composeStories(stories);
 
 // Test data used in story
 //
@@ -57,7 +59,6 @@ const { Primary: CredentialCard, Verified, IsAdmin, Loading } = composeStories(s
 
 describe('components/CredentialCard/CredentialCard', () => {
   describe('Primary story', () => {
-
     it('should render', () => {
       render(<CredentialCard />);
     });
@@ -80,7 +81,7 @@ describe('components/CredentialCard/CredentialCard', () => {
       render(<CredentialCard />);
 
       expect(
-        screen.getByRole('button', { name: /options/i })
+        screen.getByRole('button', { name: /options/i }),
       ).toBeInTheDocument();
     });
 
@@ -88,7 +89,7 @@ describe('components/CredentialCard/CredentialCard', () => {
       render(<CredentialCard />);
 
       expect(
-        screen.getByRole('button', { name: /edit/i })
+        screen.getByRole('button', { name: /edit/i }),
       ).toBeInTheDocument();
     });
 
@@ -109,7 +110,7 @@ describe('components/CredentialCard/CredentialCard', () => {
       render(<CredentialCard />);
 
       expect(
-        screen.getByRole('button', { name: /verify/i })
+        screen.getByRole('button', { name: /verify/i }),
       ).toBeDisabled();
     });
 
@@ -118,11 +119,9 @@ describe('components/CredentialCard/CredentialCard', () => {
 
       expect(screen.getByLabelText('edit')).toBeEnabled();
     });
-
   });
 
   describe('Verified story', () => {
-
     it.skip('should display the result is verified if it is verified', () => {
       render(<Verified />);
 
@@ -141,7 +140,7 @@ describe('components/CredentialCard/CredentialCard', () => {
       render(<IsAdmin />);
 
       expect(
-        screen.getByRole('button', { name: /delete/i })
+        screen.getByRole('button', { name: /delete/i }),
       ).toBeInTheDocument();
     });
 
@@ -149,7 +148,7 @@ describe('components/CredentialCard/CredentialCard', () => {
       render(<IsAdmin />);
 
       expect(
-        screen.getByRole('button', { name: /verify/i })
+        screen.getByRole('button', { name: /verify/i }),
       ).toBeEnabled();
     });
   });
@@ -159,10 +158,8 @@ describe('components/CredentialCard/CredentialCard', () => {
       render(<Loading />);
 
       expect(
-        screen.getByRole('button', { name: /edit/i })
+        screen.getByRole('button', { name: /edit/i }),
       ).toBeDisabled();
-
     });
   });
-
 });

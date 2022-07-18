@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   useForm,
-} from "react-hook-form";
+} from 'react-hook-form';
 import PropTypes from 'prop-types';
 
 import {
@@ -9,7 +9,7 @@ import {
   Button,
   Paper,
   Container,
-} from "@mui/material";
+} from '@mui/material';
 
 import makeStyles from '@mui/styles/makeStyles';
 import FormField from '../../FormField';
@@ -24,9 +24,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AuthForm = ({onSubmit, apikey, onClear}) => {
+function AuthForm({ onSubmit, apikey, onClear }) {
   const classes = useStyles();
-  const { handleSubmit, control, reset, formState: { errors } } = useForm();
+  const {
+    handleSubmit, control, reset, formState: { errors },
+  } = useForm();
 
   // const onSubmit = (data) => {
   //   setApikey(data.apikey);
@@ -39,8 +41,8 @@ const AuthForm = ({onSubmit, apikey, onClear}) => {
           <Grid container spacing={3} alignItems="center">
             <Grid item xs={12}>
               <FormField
-                name={"apikey"}
-                placeholder={"Enter Your API Key"}
+                name="apikey"
+                placeholder="Enter Your API Key"
                 control={control}
                 controllerProps={{ rules: { required: true } }}
                 defaultValue={apikey}
@@ -64,7 +66,7 @@ const AuthForm = ({onSubmit, apikey, onClear}) => {
       </form>
     </Paper>
   );
-};
+}
 
 AuthForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,

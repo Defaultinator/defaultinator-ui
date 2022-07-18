@@ -5,7 +5,7 @@ import * as stories from '../../../stories/routes/CredentialsPage/SearchCredenti
 const { Primary: SearchCredentialsPage } = composeStories(stories);
 
 describe('routes/SearchCredentialsPage', () => {
-    it('should render', () => {
-        render(<SearchCredentialsPage />);
-    });
+  it('should render', () => {
+    render(<SearchCredentialsPage />);
+  });
 });

@@ -21,5 +21,4 @@ describe('components/Icon/VerifiedIcon', () => {
 
     expect(screen.getByLabelText('verified')).toBeInTheDocument();
   });
-
 });

@@ -3,11 +3,11 @@ import {
   Switch,
   Route,
   useRouteMatch, Link,
-} from "react-router-dom";
+} from 'react-router-dom';
 
 import {
   Fab,
-} from "@mui/material";
+} from '@mui/material';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import makeStyles from '@mui/styles/makeStyles';
 
@@ -28,9 +28,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const APIKeyPage = () => {
-  let { path, url } = useRouteMatch();
-  let classes = useStyles();
+function APIKeyPage() {
+  const { path, url } = useRouteMatch();
+  const classes = useStyles();
 
   const pages = [
     {
@@ -48,28 +48,28 @@ const APIKeyPage = () => {
     {
       path: `${path}/`,
       content: <ListAPIKeysPage />,
-    }
+    },
   ];
 
   return (
     <div>
       <Switch>
-        {pages.map((page, idx) =>
+        {pages.map((page, idx) => (
           <Route path={page.path} key={idx}>
             {page.content}
           </Route>
-        )}
+        ))}
       </Switch>
       <Link to={`${url}/add`}>
         <Fab
           className={classes.fab}
-          color={"primary"}
+          color="primary"
         >
           <PersonAddIcon />
         </Fab>
       </Link>
     </div>
   );
-};
+}
 
 export default withAuth(APIKeyPage);

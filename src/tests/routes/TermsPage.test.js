@@ -5,7 +5,7 @@ import * as stories from '../../stories/routes/TermsPage.stories';
 const { Primary: TermsPage } = composeStories(stories);
 
 describe('routes/TermsPage', () => {
-    it('should render', () => {
-        render(<TermsPage />);
-    });
+  it('should render', () => {
+    render(<TermsPage />);
+  });
 });

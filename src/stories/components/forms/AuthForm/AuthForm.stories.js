@@ -10,9 +10,10 @@ export default {
   },
 };
 
-const Template = (args) => <AuthForm {...args} />;
+function Template(args) {
+  return <AuthForm {...args} />;
+}
 
 export const Primary = Template.bind({});
 Primary.args = {
 };
-

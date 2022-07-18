@@ -1,28 +1,30 @@
-import { useEffect } from "react";
-import useAxios from "axios-hooks";
+import { useEffect } from 'react';
+import useAxios from 'axios-hooks';
 import {
   useSnackbar,
-} from "notistack";
+} from 'notistack';
 
 import {
   Container, Link, Typography,
-} from "@mui/material";
+} from '@mui/material';
 
-import { useApiKey } from "../util/useApiKey";
-import AuthForm from "../components/forms/AuthForm/AuthForm";
+import { useApiKey } from '../util/useApiKey';
+import AuthForm from '../components/forms/AuthForm/AuthForm';
 import {
   API_URI,
   REQUEST_ACCOUNT_EMAIL,
-} from "../config/constants";
+} from '../config/constants';
 
-const AuthenticatePage = () => {
-  const [apikey, setApikey, setIsAdmin] = useApiKey(s => [s.apikey, s.setApikey, s.setIsAdmin]);
+function AuthenticatePage() {
+  const [apikey, setApikey, setIsAdmin] = useApiKey((s) => [s.apikey, s.setApikey, s.setIsAdmin]);
   const { enqueueSnackbar } = useSnackbar();
 
-  const [{ data: keyinfo, error }, executeRequest] = useAxios({
-    url: `${API_URI}/apikeys/keyinfo`,
-  },
-    { manual: true });
+  const [{ data: keyinfo, error }, executeRequest] = useAxios(
+    {
+      url: `${API_URI}/apikeys/keyinfo`,
+    },
+    { manual: true },
+  );
 
   useEffect(() => {
     const { isAdmin } = keyinfo || { isAdmin: false };
@@ -51,12 +53,17 @@ const AuthenticatePage = () => {
 
   return (
     <Container>
-        <AuthForm onSubmit={onSubmit} apikey={apikey} onClear={onClear} />
-        <br />
-        <br />
-        <Typography variant={`body1`}>or <Link href={`mailto:${REQUEST_ACCOUNT_EMAIL}`}>request</Link> an account!</Typography>
+      <AuthForm onSubmit={onSubmit} apikey={apikey} onClear={onClear} />
+      <br />
+      <br />
+      <Typography variant="body1">
+        or
+        <Link href={`mailto:${REQUEST_ACCOUNT_EMAIL}`}>request</Link>
+        {' '}
+        an account!
+      </Typography>
     </Container>
   );
-};
+}
 
 export default AuthenticatePage;

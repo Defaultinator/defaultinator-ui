@@ -5,7 +5,6 @@ import * as stories from '../stories/App.stories';
 const { Primary: App } = composeStories(stories);
 
 describe('<App />', () => {
-
   it('renders the app with Defaultinator in the title', () => {
     render(<App />);
     const linkElement = screen.getByText(/Defaultinator/i);

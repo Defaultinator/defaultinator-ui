@@ -10,9 +10,10 @@ export default {
   },
 };
 
-const Template = (args) => <CredentialsForm {...args} />;
+function Template(args) {
+  return <CredentialsForm {...args} />;
+}
 
 export const Primary = Template.bind({});
 Primary.args = {
 };
-

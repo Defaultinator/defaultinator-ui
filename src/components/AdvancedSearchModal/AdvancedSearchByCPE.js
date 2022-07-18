@@ -2,7 +2,6 @@ import React, {
   useState,
 } from 'react';
 
-import makeStyles from '@mui/styles/makeStyles';
 import {
   Button,
   Container,
@@ -10,17 +9,8 @@ import {
 } from '@mui/material';
 import AutoCompleteCPEFormSection from '../forms/AutoCompleteCPEFormSection';
 
-const useStyles = makeStyles((theme) => ({
-  actions: {
-    paddingTop: theme.spacing(3),
-  },
-  cancel: {
-    marginLeft: theme.spacing(2),
-  }
-}));
+function AdvancedSearchByCPE({ onSubmit }) {
 
-const AdvancedSearchByCPE = ({ onSubmit }) => {
-  const styles = useStyles();
   const [fields, setFields] = useState({});
 
   return (
@@ -28,13 +18,13 @@ const AdvancedSearchByCPE = ({ onSubmit }) => {
       <AutoCompleteCPEFormSection fields={fields} setFields={setFields} />
       <Grid
         container
-        className={styles.actions}
+        sx={{ paddingTop: 3 }}
         justifyContent="flex-end"
       >
         <Grid item>
           <Button
-            variant={"outlined"}
-            color={'primary'}
+            variant="outlined"
+            color="primary"
             onClick={() => onSubmit(fields)}
           >
             Search
@@ -42,8 +32,8 @@ const AdvancedSearchByCPE = ({ onSubmit }) => {
         </Grid>
         <Grid item>
           <Button
-            color={'secondary'}
-            className={styles.cancel}
+            color="secondary"
+            sx={{marginLeft: 2}}
             onClick={() => setFields({})}
           >
             Clear
@@ -52,7 +42,7 @@ const AdvancedSearchByCPE = ({ onSubmit }) => {
       </Grid>
     </Container>
   );
-};
+}
 
 AdvancedSearchByCPE.propTypes = {
 };

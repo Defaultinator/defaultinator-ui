@@ -5,7 +5,7 @@ import * as stories from '../../../stories/routes/CredentialsPage/CredentialsLis
 const { Primary: CredentialsListPage } = composeStories(stories);
 
 describe('routes/CredentialsListPage', () => {
-    it('should render', () => {
-        render(<CredentialsListPage />);
-    });
+  it('should render', () => {
+    render(<CredentialsListPage />);
+  });
 });

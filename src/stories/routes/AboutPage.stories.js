@@ -6,7 +6,9 @@ export default {
   component: AboutPage,
 };
 
-const Template = (args) => <AboutPage {...args} />;
+function Template(args) {
+  return <AboutPage {...args} />;
+}
 
 export const Primary = Template.bind({});
 Primary.args = {

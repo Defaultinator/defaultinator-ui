@@ -8,5 +8,4 @@ describe('components/CredentialsListToolbar', () => {
   it('should render', () => {
     render(<CredentialsListToolbar />);
   });
-
 });

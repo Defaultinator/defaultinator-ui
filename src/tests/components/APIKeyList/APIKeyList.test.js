@@ -5,7 +5,7 @@ import * as stories from '../../../stories/components/APIKeyList/APIKeyList.stor
 const { Primary: APIKeyList } = composeStories(stories);
 
 describe('components/APIKeyList', () => {
-    it('should render', () => {
-        render(<APIKeyList />);
-    });
+  it('should render', () => {
+    render(<APIKeyList />);
+  });
 });

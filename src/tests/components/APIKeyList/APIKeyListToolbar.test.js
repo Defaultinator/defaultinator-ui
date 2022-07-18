@@ -5,7 +5,7 @@ import * as stories from '../../../stories/components/APIKeyList/APIKeyListToolb
 const { Primary: APIKeyListToolbar } = composeStories(stories);
 
 describe('components/APIKeyListToolbar', () => {
-    it('should render', () => {
-        render(<APIKeyListToolbar />);
-    });
+  it('should render', () => {
+    render(<APIKeyListToolbar />);
+  });
 });

@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import {
   useForm,
-} from "react-hook-form";
+} from 'react-hook-form';
 import PropTypes from 'prop-types';
 
 import {
@@ -20,14 +20,14 @@ import {
   TextField,
   FormControl,
   IconButton,
-} from "@mui/material";
+} from '@mui/material';
 
 import makeStyles from '@mui/styles/makeStyles';
 
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
-import CredsFormSection from "./CredsFormSection";
-import ProtocolFormSection from "./ProtocolFormSection";
+import CredsFormSection from './CredsFormSection';
+import ProtocolFormSection from './ProtocolFormSection';
 import { CpeType } from '../../config/types';
 import AutoCompleteCPEFormSection from './AutoCompleteCPEFormSection';
 
@@ -45,10 +45,10 @@ const useStyles = makeStyles((theme) => ({
     top: -28,
     padding: '0px 8px',
     color: theme.palette.primary.light,
-  }
+  },
 }));
 
-const ActionButtons = ({ reset }) => {
+function ActionButtons({ reset }) {
   const classes = useStyles();
 
   return (
@@ -61,16 +61,16 @@ const ActionButtons = ({ reset }) => {
       >
         <Grid item>
           <Button
-            variant={'outlined'}
-            type={'submit'}
-            color={'primary'}
+            variant="outlined"
+            type="submit"
+            color="primary"
           >
             Submit
           </Button>
         </Grid>
         <Grid item>
           <Button
-            color={'secondary'}
+            color="secondary"
             onClick={() => reset()}
           >
             Clear
@@ -79,9 +79,9 @@ const ActionButtons = ({ reset }) => {
       </Grid>
     </Container>
   );
-};
+}
 
-const ProtocolSection = ({ control }) => {
+function ProtocolSection({ control }) {
   const classes = useStyles();
 
   return (
@@ -96,9 +96,9 @@ const ProtocolSection = ({ control }) => {
       <ProtocolFormSection control={control} />
     </Container>
   );
-};
+}
 
-const CredentialsSection = ({ control }) => {
+function CredentialsSection({ control }) {
   const classes = useStyles();
 
   return (
@@ -113,28 +113,26 @@ const CredentialsSection = ({ control }) => {
       <CredsFormSection control={control} />
     </Container>
   );
-};
+}
 
-const ReferenceListItem = ({ reference, deleteSelf }) => {
+function ReferenceListItem({ reference, deleteSelf }) {
   return (
-    <ListItem
-    >
+    <ListItem>
       <ListItemText
         primary={reference}
       />
       <ListItemSecondaryAction>
         <IconButton edge="end" aria-label="delete" onClick={deleteSelf} size="large">
           <DeleteIcon
-            color={'secondary'}
+            color="secondary"
           />
         </IconButton>
       </ListItemSecondaryAction>
     </ListItem>
   );
-};
+}
 
-const ReferenceList = ({ references, setReferences }) => {
-
+function ReferenceList({ references, setReferences }) {
   const removeSelf = (idx) => () => {
     references.splice(idx, 1);
     setReferences([...references]);
@@ -142,18 +140,17 @@ const ReferenceList = ({ references, setReferences }) => {
 
   return (
     <>
-      {references.length !== 0 &&
+      {references.length !== 0
+        && (
         <List>
-          {references.map((reference, idx) =>
-            <ReferenceListItem reference={reference} key={idx} deleteSelf={removeSelf(idx)} />
-          )}
+          {references.map((reference, idx) => <ReferenceListItem reference={reference} key={idx} deleteSelf={removeSelf(idx)} />)}
         </List>
-      }
+        )}
     </>
   );
-};
+}
 
-const ReferencesSection = ({ references, setReferences }) => {
+function ReferencesSection({ references, setReferences }) {
   const classes = useStyles();
   const [reference, setReference] = useState('');
 
@@ -171,14 +168,15 @@ const ReferencesSection = ({ references, setReferences }) => {
         display: 'flex',
         alignItems: 'center',
         flexWrap: 'wrap',
-      }}>
+      }}
+      >
         <FormControl
           className={classes.input}
         >
           <TextField
-            variant={"outlined"}
-            label={'Reference'}
-            autoComplete='off'
+            variant="outlined"
+            label="Reference"
+            autoComplete="off"
             value={reference}
             onChange={(e) => setReference(e.target.value)}
           />
@@ -188,23 +186,22 @@ const ReferencesSection = ({ references, setReferences }) => {
             setReferences([...references, reference]);
             setReference('');
           }}
-          size="large">
+          size="large"
+        >
           <AddIcon />
         </IconButton>
       </div>
     </Container>
   );
-};
+}
 
-const CredentialsForm = (
-  {
-    formAction,
-    defaultValues = { 'part': '' },
-    title = 'Add New Credentials',
-  }
-) => {
+function CredentialsForm({
+  formAction,
+  defaultValues = { part: '' },
+  title = 'Add New Credentials',
+}) {
   const classes = useStyles();
-  const { handleSubmit, control, reset } = useForm({ defaultValues: defaultValues });
+  const { handleSubmit, control, reset } = useForm({ defaultValues });
   const [references, setReferences] = useState([]);
   const [cpeFields, setCpeFields] = useState(defaultValues);
 
@@ -213,9 +210,9 @@ const CredentialsForm = (
   // Hit refresh. Changes are now reflected.
 
   const onSubmit = (data) => {
-    let newCred = {};
+    const newCred = {};
 
-    newCred['cpe'] = {
+    newCred.cpe = {
       part: cpeFields.part || 'ANY',
       vendor: cpeFields.vendor || 'ANY',
       product: cpeFields.product || 'ANY',
@@ -225,10 +222,10 @@ const CredentialsForm = (
       language: cpeFields.language || 'ANY',
     };
 
-    newCred['username'] = data.username;
-    newCred['password'] = data.password;
-    newCred['references'] = references;
-    newCred['protocol'] = data.protocol;
+    newCred.username = data.username;
+    newCred.password = data.password;
+    newCred.references = references;
+    newCred.protocol = data.protocol;
 
     formAction(newCred);
   };
@@ -262,7 +259,7 @@ const CredentialsForm = (
       </form>
     </Paper>
   );
-};
+}
 
 CredentialsForm.propTypes = {
   formAction: PropTypes.func.isRequired,
@@ -271,7 +268,7 @@ CredentialsForm.propTypes = {
 };
 
 CredentialsForm.defaultProps = {
-  defaultValues: { 'part': '' },
+  defaultValues: { part: '' },
   title: 'Add New Credentials',
 };
 

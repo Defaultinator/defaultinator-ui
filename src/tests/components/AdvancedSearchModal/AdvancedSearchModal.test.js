@@ -5,7 +5,7 @@ import * as stories from '../../../stories/components/AdvancedSearchModal/Advanc
 const { Primary: AdvancedSearchModal } = composeStories(stories);
 
 describe('components/AdvancedSearchModal/AdvancedSearchModal', () => {
-    it('should render', () => {
-        render(<AdvancedSearchModal />);
-    });
+  it('should render', () => {
+    render(<AdvancedSearchModal />);
+  });
 });

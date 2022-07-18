@@ -44,7 +44,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TabBar = ({ tabText, activeTab, setActiveTab, tabBarStyles }) => {
+function TabBar({
+  tabText, activeTab, setActiveTab, tabBarStyles,
+}) {
   const classes = useStyles();
 
   return (
@@ -53,7 +55,7 @@ const TabBar = ({ tabText, activeTab, setActiveTab, tabBarStyles }) => {
         centered
         value={activeTab}
         onChange={(e, newActiveTab) => setActiveTab(newActiveTab)}
-        variant={'fullWidth'}
+        variant="fullWidth"
         style={tabBarStyles}
       >
         {tabText.map((text, idx) => (
@@ -62,9 +64,9 @@ const TabBar = ({ tabText, activeTab, setActiveTab, tabBarStyles }) => {
       </Tabs>
     </div>
   );
-};
+}
 
-const TabContent = ({ tabContent, active }) => {
+function TabContent({ tabContent, active }) {
   const classes = useStyles();
 
   const prevActiveRef = useRef();
@@ -75,10 +77,9 @@ const TabContent = ({ tabContent, active }) => {
 
   const getDirection = (idx) => {
     if (active === idx) {
-      return (active > prevActive ? "left" : "right")
-    } else {
-      return (active < prevActive ? "left" : "right")
+      return (active > prevActive ? 'left' : 'right');
     }
+    return (active < prevActive ? 'left' : 'right');
   };
 
   return (
@@ -99,9 +100,9 @@ const TabContent = ({ tabContent, active }) => {
       ))}
     </>
   );
-};
+}
 
-const TabLayout = ({ tabs, tabBarStyles = {} }) => {
+function TabLayout({ tabs, tabBarStyles = {} }) {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
@@ -118,7 +119,7 @@ const TabLayout = ({ tabs, tabBarStyles = {} }) => {
       />
     </div>
   );
-};
+}
 
 TabLayout.propTypes = {
   tabs: PropTypes.arrayOf(PropTypes.shape({
@@ -134,4 +135,4 @@ TabLayout.defaultProps = {
   tabBarStyles: {},
 };
 
-export default TabLayout
+export default TabLayout;

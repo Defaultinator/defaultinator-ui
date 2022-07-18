@@ -6,7 +6,9 @@ export default {
   component: TermsPage,
 };
 
-const Template = (args) => <TermsPage {...args} />;
+function Template(args) {
+  return <TermsPage {...args} />;
+}
 
 export const Primary = Template.bind({});
 Primary.args = {

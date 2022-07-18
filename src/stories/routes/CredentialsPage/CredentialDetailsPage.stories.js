@@ -1,5 +1,5 @@
 import React from 'react';
-import { MemoryRouter, Route } from "react-router-dom";
+import { MemoryRouter, Route } from 'react-router-dom';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 
@@ -8,7 +8,7 @@ import CredentialDetailsPage from '../../../routes/CredentialsPage/CredentialDet
 import { API_URI } from '../../../config/constants';
 import { sampleCredential } from '../../../tests/data/credentialData';
 
-const credentialId = "5";
+const credentialId = '5';
 
 export default {
   title: 'Pages/CredentialsPage/CredentialDetailsPage',
@@ -22,12 +22,15 @@ export default {
           <Route path="/:credentialId">
             <Story />
           </Route>
-        </MemoryRouter>);
+        </MemoryRouter>
+      );
     },
   ],
 };
 
-const Template = (args) => <CredentialDetailsPage {...args} />;
+function Template(args) {
+  return <CredentialDetailsPage {...args} />;
+}
 
 export const Primary = Template.bind({});
 Primary.args = {

@@ -5,7 +5,7 @@ import * as stories from '../../../../stories/components/forms/APIKeyForm/APIKey
 const { Primary: APIKeyForm } = composeStories(stories);
 
 describe('components/AdvancedSearchModal/APIKeyForm', () => {
-    it('should render', () => {
-        render(<APIKeyForm />);
-    });
+  it('should render', () => {
+    render(<APIKeyForm />);
+  });
 });

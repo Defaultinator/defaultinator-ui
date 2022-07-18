@@ -13,13 +13,15 @@ export default {
   decorators: [
     (Story) => {
       const mock = new MockAdapter(axios);
-      mock.onGet(`${API_URI}/apikeys`).reply(200, {docs: sampleApiKeys});
-      return(<Story />);
+      mock.onGet(`${API_URI}/apikeys`).reply(200, { docs: sampleApiKeys });
+      return (<Story />);
     },
   ],
 };
 
-const Template = (args) => <ListAPIKeysPage {...args} />;
+function Template(args) {
+  return <ListAPIKeysPage {...args} />;
+}
 
 export const Primary = Template.bind({});
 Primary.args = {

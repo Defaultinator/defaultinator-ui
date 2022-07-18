@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { REQUEST_ACCOUNT_EMAIL } from '../../config/constants';
 
-const ReportIssueDialog = ({ open, setOpen = () => { } }) => {
+function ReportIssueDialog({ open, setOpen = () => { } }) {
   const [issue, setIssue] = useState('');
 
   return (
@@ -24,22 +24,21 @@ const ReportIssueDialog = ({ open, setOpen = () => { } }) => {
         <TextField
           multiline
           fullWidth
-          variant={'outlined'}
+          variant="outlined"
           label="Issue Details"
           placeholder="Provide a detailed account of the issue you are reporting."
           inputProps={{
-            maxLength: 250
+            maxLength: 250,
           }}
           value={issue}
           onChange={(e) => setIssue(e.target.value)}
-        >
-        </TextField>
+        />
       </DialogContent>
       <DialogActions>
         <Button
           variant="outlined"
           color="primary"
-          component='a'
+          component="a"
           href={`mailto:${REQUEST_ACCOUNT_EMAIL}`}
         >
           Send
@@ -52,6 +51,6 @@ const ReportIssueDialog = ({ open, setOpen = () => { } }) => {
       </DialogActions>
     </Dialog>
   );
-};
+}
 
 export default ReportIssueDialog;

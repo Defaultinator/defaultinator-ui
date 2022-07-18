@@ -18,29 +18,29 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 import ReportIssueDialog from './ReportIssueDialog';
 
-const ReportIssueMenuItem = () => {
+function ReportIssueMenuItem() {
   const [open, setOpen] = useState(false);
 
-  return(
+  return (
     <>
-    <ReportIssueDialog open={open} setOpen={setOpen}/>
-    <MenuItem
-      onClick={() => setOpen(true)}
-    >
-      <ListItemIcon>
-        <BugReportIcon />
-      </ListItemIcon>
-      <Typography variant="inherit" noWrap>
-        Report an Issue
-      </Typography>
-    </MenuItem>
+      <ReportIssueDialog open={open} setOpen={setOpen} />
+      <MenuItem
+        onClick={() => setOpen(true)}
+      >
+        <ListItemIcon>
+          <BugReportIcon />
+        </ListItemIcon>
+        <Typography variant="inherit" noWrap>
+          Report an Issue
+        </Typography>
+      </MenuItem>
     </>
   );
-};
+}
 
-const ReferencesMenuItem = ({ references }) => {
+function ReferencesMenuItem({ references }) {
   const [anchorEl, setAnchorEl] = useState(null);
-  
+
   return (
     <>
       <MenuItem
@@ -60,12 +60,12 @@ const ReferencesMenuItem = ({ references }) => {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={() => setAnchorEl(null)}
-        style={{position: 'absolute', top: 40}}
+        style={{ position: 'absolute', top: 40 }}
       >
         {references.map((ref, idx) => (
           <MenuItem
             key={idx}
-            component={'a'}
+            component="a"
             href={`${ref}`}
           >
             {ref}
@@ -74,35 +74,38 @@ const ReferencesMenuItem = ({ references }) => {
       </Menu>
     </>
   );
-};
+}
 
-const CredentialCardMenuOptions = ({ references }) => {
+function CredentialCardMenuOptions({ references }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
-  return <>
-    <Tooltip title={"More Options"}>
-      <span>
-        <IconButton
-          aria-label="options"
-          aria-controls="simple-menu"
-          aria-haspopup="true"
-          onClick={(e) => setAnchorEl(e.currentTarget)}
-          size="large">
-          <MoreVertIcon />
-        </IconButton>
-      </span>
-    </Tooltip>
-    <Menu
-      id="credentials-options-menu"
-      anchorEl={anchorEl}
-      keepMounted
-      open={Boolean(anchorEl)}
-      onClose={() => setAnchorEl(null)}
-    >
-      <ReportIssueMenuItem />
-      <ReferencesMenuItem references={references} />
-    </Menu>
-  </>;
-};
+  return (
+    <>
+      <Tooltip title="More Options">
+        <span>
+          <IconButton
+            aria-label="options"
+            aria-controls="simple-menu"
+            aria-haspopup="true"
+            onClick={(e) => setAnchorEl(e.currentTarget)}
+            size="large"
+          >
+            <MoreVertIcon />
+          </IconButton>
+        </span>
+      </Tooltip>
+      <Menu
+        id="credentials-options-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={() => setAnchorEl(null)}
+      >
+        <ReportIssueMenuItem />
+        <ReferencesMenuItem references={references} />
+      </Menu>
+    </>
+  );
+}
 
 export default CredentialCardMenuOptions;
