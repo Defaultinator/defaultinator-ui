@@ -7,7 +7,7 @@ const TermsPage = () => {
   return (
     <Container>
       <Typography variant={'h4'} gutterBottom>
-        Don't do bads
+        Don't do Bad Stuff
       </Typography>
       <Typography variant={'body1'} paragraph>
         “Defaultinator” is intended to be used for good-faith testing, investigation, and

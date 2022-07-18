@@ -5,7 +5,7 @@ import {
 } from "notistack";
 
 import {
-  Container,
+  Container, Link, Typography,
 } from "@mui/material";
 
 import { useApiKey } from "../util/useApiKey";
@@ -51,12 +51,10 @@ const AuthenticatePage = () => {
 
   return (
     <Container>
-      <div>
         <AuthForm onSubmit={onSubmit} apikey={apikey} onClear={onClear} />
         <br />
         <br />
-        or <a href={`mailto:${REQUEST_ACCOUNT_EMAIL}`}>request</a> an account!
-      </div>
+        <Typography variant={`body1`}>or <Link href={`mailto:${REQUEST_ACCOUNT_EMAIL}`}>request</Link> an account!</Typography>
     </Container>
   );
 };
