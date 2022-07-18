@@ -20,9 +20,9 @@ describe('components/APIKeyCard', () => {
   it('should display the key, notes, and email', () => {
     render(<APIKeyCard />);
 
-    expect(screen.getByText('foobarfoobarfoobar')).toBeInTheDocument();
-    expect(screen.getByText('foo@bar.foobar')).toBeInTheDocument();
-    expect(screen.getByText('foo bar foo bar foo bar')).toBeInTheDocument();
+    expect(screen.queryByText('foobarfoobarfoobar')).not.toBeInTheDocument();
+    expect(screen.queryByText('foo@bar.foobar')).toBeInTheDocument();
+    expect(screen.queryByText('foo bar foo bar foo bar')).toBeInTheDocument();
   });
 
   it('should have an edit button', () => {

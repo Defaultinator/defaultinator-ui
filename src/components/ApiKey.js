@@ -5,7 +5,6 @@ import {
   Box,
   IconButton,
   Skeleton,
-  Typography,
 } from '@mui/material';
 
 import VisibilityIcon from '@mui/icons-material/Visibility';
