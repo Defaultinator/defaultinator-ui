@@ -56,7 +56,7 @@ export const PaginatedDataTable = (
             {dataConfig.fields.map((field, idx) => (
               <TableCell
                 key={idx}
-                align={field.align || "right"}
+                align={field.align || "left"}
                 style={{borderBottom: 'none'}}
               >
                 {field.label}
@@ -103,7 +103,7 @@ export const PaginatedDataTable = (
                       {fields.map((field, idx) => (
                         <TableCell
                           key={idx}
-                          align={field.align || "right"}
+                          align={field.align || "left"}
                         >
                           {row[field.fieldName]}
                         </TableCell>
