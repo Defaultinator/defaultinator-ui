@@ -15,7 +15,7 @@ import {
   REQUEST_ACCOUNT_EMAIL,
 } from '../config/constants';
 
-function AuthenticatePage() {
+const AuthenticatePage = () => {
   const [apikey, setApikey, setIsAdmin] = useApiKey((s) => [s.apikey, s.setApikey, s.setIsAdmin]);
   const { enqueueSnackbar } = useSnackbar();
 
@@ -64,6 +64,6 @@ function AuthenticatePage() {
       </Typography>
     </Container>
   );
-}
+};
 
 export default AuthenticatePage;

@@ -13,9 +13,7 @@ export default {
   },
 };
 
-function Default(args) {
-  return <CredentialsList {...args} />;
-}
+const Default = (args) => <CredentialsList {...args} />;
 
 export const Primary = Default.bind({});
 Primary.args = {

@@ -6,9 +6,7 @@ export default {
   component: AuthenticatePage,
 };
 
-function Template(args) {
-  return <AuthenticatePage {...args} />;
-}
+const Template = (args) => <AuthenticatePage {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

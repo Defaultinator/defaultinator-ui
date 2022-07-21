@@ -19,9 +19,7 @@ export default {
   ],
 };
 
-function Template(args) {
-  return <ListAPIKeysPage {...args} />;
-}
+const Template = (args) => <ListAPIKeysPage {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

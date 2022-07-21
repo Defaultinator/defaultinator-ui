@@ -16,7 +16,7 @@ import { useApiKey } from '../../util/useApiKey';
 
 import CredentialCard from '../../components/CredentialCard/CredentialCard';
 
-function CredentialDetailsPage() {
+const CredentialDetailsPage = () => {
   const { credentialId } = useParams();
   const location = useLocation();
   const [apikey, isAdmin] = useApiKey((s) => [s.apikey, s.isAdmin]);
@@ -148,6 +148,6 @@ function CredentialDetailsPage() {
         )}
     </>
   );
-}
+};
 
 export default CredentialDetailsPage;

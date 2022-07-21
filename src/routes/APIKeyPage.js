@@ -6,10 +6,9 @@ import {
 } from 'react-router-dom';
 
 import {
-  Fab,
+  Fab, useTheme,
 } from '@mui/material';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import makeStyles from '@mui/styles/makeStyles';
 
 import withAuth from '../components/withAuth';
 
@@ -18,19 +17,9 @@ import ViewAPIKeyPage from './APIKeyPage/ViewAPIKeyPage';
 import AddAPIKeyPage from './APIKeyPage/AddAPIKeyPage';
 import EditAPIKeyPage from './APIKeyPage/EditAPIKeyPage';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-  },
-  fab: {
-    position: 'fixed',
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
-  },
-}));
-
-function APIKeyPage() {
+const APIKeyPage = () => {
   const { path, url } = useRouteMatch();
-  const classes = useStyles();
+  const theme = useTheme();
 
   const pages = [
     {
@@ -62,7 +51,7 @@ function APIKeyPage() {
       </Switch>
       <Link to={`${url}/add`}>
         <Fab
-          className={classes.fab}
+          sx={{ position: 'fixed', bottom: theme.spacing(2), right: theme.spacing(2) }}
           color="primary"
         >
           <PersonAddIcon />
@@ -70,6 +59,6 @@ function APIKeyPage() {
       </Link>
     </div>
   );
-}
+};
 
 export default withAuth(APIKeyPage);

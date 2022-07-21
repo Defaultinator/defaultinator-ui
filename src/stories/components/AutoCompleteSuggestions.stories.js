@@ -26,9 +26,7 @@ const suggestions = [
   },
 ];
 
-function Template(args) {
-  return <AutoCompleteSuggestions {...args} />;
-}
+const Template = (args) => <AutoCompleteSuggestions {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

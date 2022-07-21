@@ -11,7 +11,6 @@ import {
   InputLabel,
   Select,
 } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
 
 import useAxios from 'axios-hooks';
 import useApiKey from '../../util/useApiKey';
@@ -19,13 +18,7 @@ import FormField from '../FormField';
 import { API_URI } from '../../config/constants';
 import AutoCompleteSuggestions from '../AutoCompleteSuggestions';
 
-const useStyles = makeStyles((theme) => ({
-  select: {
-    minWidth: 150,
-  },
-}));
-
-function CPEFormElement({ control, input, autoCompleteParams }) {
+const CPEFormElement = ({ control, input, autoCompleteParams }) => {
   const [apiKey] = useApiKey((s) => [s.apikey]);
   const prefix = autoCompleteParams[input.name];
 
@@ -44,7 +37,8 @@ function CPEFormElement({ control, input, autoCompleteParams }) {
     if (!params[key]) delete params[key];
   });
 
-  // TODO: This autocomplete makes things go super slow. It rerenders the whole form every keypress. It works, but yikes
+  // TODO: This autocomplete makes things go super slow.
+  // It rerenders the whole form every keypress. It works, but yikes
   const [{ data }, executeRequest] = useAxios(
     {
       url: `${API_URI}/dictionary/typeahead`,
@@ -60,7 +54,7 @@ function CPEFormElement({ control, input, autoCompleteParams }) {
 
   useEffect(() => {
     const delayRequest = setTimeout(() => {
-      executeRequest().catch(() => {});
+      executeRequest().catch(() => { });
     }, 500);
 
     return () => clearTimeout(delayRequest);
@@ -75,21 +69,19 @@ function CPEFormElement({ control, input, autoCompleteParams }) {
             control={control}
             autocompleteprops={bindFocus(popupState)}
           />
-          { data
+          {data
             && (
-            <Popper {...bindPopper(popupState)} style={{ zIndex: 20 }}>
-              <AutoCompleteSuggestions suggestions={data} />
-            </Popper>
+              <Popper {...bindPopper(popupState)} style={{ zIndex: 20 }}>
+                <AutoCompleteSuggestions suggestions={data} />
+              </Popper>
             )}
         </>
       )}
     </PopupState>
   );
-}
+};
 
-function CPEFormSection({ control, autoCompleteParams }) {
-  const classes = useStyles();
-
+const CPEFormSection = ({ control, autoCompleteParams }) => {
   const inputs = [
     {
       name: 'vendor',
@@ -125,32 +117,34 @@ function CPEFormSection({ control, autoCompleteParams }) {
           control={control}
           defaultValue=""
           render={({ field }) => (
-            <FormControl variant="outlined" className={classes.select}>
-              <InputLabel
-                id="add-credentials-part-label"
-              >
-                Part
-              </InputLabel>
-              <Select
-                id="add-credentials-part-input"
-                labelId="add-credentials-part-label"
-                label="Part"
-                {...field}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value="a">
-                  a
-                </MenuItem>
-                <MenuItem value="o">
-                  o
-                </MenuItem>
-                <MenuItem value="h">
-                  h
-                </MenuItem>
-              </Select>
-            </FormControl>
+            <Box sx={{ minWidth: 150 }}>
+              <FormControl variant="outlined">
+                <InputLabel
+                  id="add-credentials-part-label"
+                >
+                  Part
+                </InputLabel>
+                <Select
+                  id="add-credentials-part-input"
+                  labelId="add-credentials-part-label"
+                  label="Part"
+                  {...field}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value="a">
+                    a
+                  </MenuItem>
+                  <MenuItem value="o">
+                    o
+                  </MenuItem>
+                  <MenuItem value="h">
+                    h
+                  </MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
           )}
         />
       </Grid>
@@ -161,6 +155,6 @@ function CPEFormSection({ control, autoCompleteParams }) {
       ))}
     </Grid>
   );
-}
+};
 
 export default CPEFormSection;

@@ -7,9 +7,7 @@ export default {
   component: AdvancedSearchModal,
 };
 
-function Template(args) {
-  return <AdvancedSearchModal {...args} />;
-}
+const Template = (args) => <AdvancedSearchModal {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

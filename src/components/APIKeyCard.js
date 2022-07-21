@@ -14,12 +14,12 @@ import IsAdminIcon from './Icons/IsAdminIcon';
 import loadingWrapper from '../util/loadingWrapper';
 import ApiKey from './ApiKey';
 
-export function APIKeyCard({
+export const APIKeyCard = ({
   apiKey = {},
   loading = false,
   deleteButtonProps = {},
   editButtonProps = {},
-}) {
+}) => {
   const {
     apiKey: key, email, notes, isAdmin,
   } = apiKey;
@@ -57,7 +57,7 @@ export function APIKeyCard({
       </CardActions>
     </Card>
   );
-}
+};
 
 APIKeyCard.propTypes = {
   apiKey: PropTypes.shape(APIKeyType),

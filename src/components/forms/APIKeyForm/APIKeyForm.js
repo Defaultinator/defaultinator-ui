@@ -15,31 +15,14 @@ import {
   Checkbox,
 } from '@mui/material';
 
-import makeStyles from '@mui/styles/makeStyles';
 import FormField from '../../FormField';
 import { APIKeyType } from '../../../config/types';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    // maxWidth: 650,
-    display: 'inline-block',
-    margin: 'auto',
-  },
-  container: {
-    padding: theme.spacing(2),
-    width: 300,
-  },
-  input: {
-    width: '100%',
-  },
-}));
-
-function APIKeyForm({
+const APIKeyForm = ({
   formAction,
   defaultValues = { email: '', notes: '', isAdmin: false },
   loading = false,
-}) {
-  const classes = useStyles();
+}) => {
   const {
     handleSubmit, control, reset, formState: { errors },
   } = useForm({ defaultValues });
@@ -54,14 +37,14 @@ function APIKeyForm({
 
   // TODO: Should validate clientside that the email is valid.Would need YUM or something.
   return (
-    <Paper className={classes.root}>
+    <Paper sx={{ display: 'inline-block', margin: 'auto' }}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Container className={classes.container}>
+        <Container sx={{ padding: 2, width: 300 }}>
           <Grid container spacing={3} alignItems="center">
             <Grid item xs={12}>
               <FormField
                 name="email"
-                className={classes.input}
+                sx={{ width: '100%' }}
                 placeholder="E-mail Address"
                 control={control}
                 controllerProps={{ rules: { required: true } }}
@@ -91,7 +74,7 @@ function APIKeyForm({
             </Grid>
           </Grid>
         </Container>
-        <Container className={classes.container}>
+        <Container sx={{ padding: 2, width: 300 }}>
           <Button
             color="secondary"
             onClick={() => reset({ email: '', notes: '', isAdmin: false })}
@@ -111,7 +94,7 @@ function APIKeyForm({
       </form>
     </Paper>
   );
-}
+};
 
 APIKeyForm.propTypes = {
   formAction: PropTypes.func.isRequired,

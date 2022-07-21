@@ -9,7 +9,7 @@ import {
   TextField,
 } from '@mui/material';
 
-function AdvancedSearchByCPE({ onSubmit }) {
+const AdvancedSearchByCPE = ({ onSubmit }) => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
 
@@ -67,7 +67,7 @@ function AdvancedSearchByCPE({ onSubmit }) {
       </Grid>
     </Container>
   );
-}
+};
 
 AdvancedSearchByCPE.propTypes = {
 };

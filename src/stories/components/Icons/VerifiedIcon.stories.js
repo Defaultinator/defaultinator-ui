@@ -7,9 +7,7 @@ export default {
   component: VerifiedIcon,
 };
 
-function Template(args) {
-  return <VerifiedIcon {...args} />;
-}
+const Template = (args) => <VerifiedIcon {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

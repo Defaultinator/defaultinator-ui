@@ -6,10 +6,9 @@ import {
 } from 'react-router-dom';
 
 import {
-  Fab,
+  Fab, useTheme,
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import makeStyles from '@mui/styles/makeStyles';
 
 import withAuth from '../components/withAuth';
 
@@ -19,19 +18,9 @@ import AddCredentialsPage from './CredentialsPage/AddCredentialsPage';
 import EditCredentialsPage from './CredentialsPage/EditCredentialsPage';
 import SearchCredentialsPage from './CredentialsPage/SearchCredentialsPage';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-  },
-  fab: {
-    position: 'fixed',
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
-  },
-}));
-
-function CredentialsPage() {
+const CredentialsPage = () => {
   const { path, url } = useRouteMatch();
-  const classes = useStyles();
+  const theme = useTheme();
 
   const pages = [
     {
@@ -67,7 +56,7 @@ function CredentialsPage() {
       </Switch>
       <Link to={`${url}/add`}>
         <Fab
-          className={classes.fab}
+          sx={{position: 'fixed', bottom: theme.spacing(2), right: theme.spacing(2)}}
           color="primary"
         >
           <AddIcon />
@@ -75,6 +64,6 @@ function CredentialsPage() {
       </Link>
     </div>
   );
-}
+};
 
 export default withAuth(CredentialsPage);

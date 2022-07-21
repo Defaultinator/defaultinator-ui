@@ -7,9 +7,7 @@ export default {
   component: AdvancedSearchByCredentials,
 };
 
-function Template(args) {
-  return <AdvancedSearchByCredentials {...args} />;
-}
+const Template = (args) => <AdvancedSearchByCredentials {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

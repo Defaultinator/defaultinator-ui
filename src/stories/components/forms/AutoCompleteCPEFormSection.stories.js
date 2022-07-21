@@ -13,10 +13,10 @@ export default {
   ],
 };
 
-function Template(args, context) {
+const Template = (args, context) => {
   const { fields, setFields } = context;
   return (<AutoCompleteCPEFormSection {...args} fields={fields} setFields={setFields} />);
-}
+};
 
 export const Primary = Template.bind({});
 Primary.args = {

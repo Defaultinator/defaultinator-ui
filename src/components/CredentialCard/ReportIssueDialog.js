@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { REQUEST_ACCOUNT_EMAIL } from '../../config/constants';
 
-function ReportIssueDialog({ open, setOpen = () => { } }) {
+const ReportIssueDialog = ({ open, setOpen = () => { } }) => {
   const [issue, setIssue] = useState('');
 
   return (
@@ -51,6 +51,6 @@ function ReportIssueDialog({ open, setOpen = () => { } }) {
       </DialogActions>
     </Dialog>
   );
-}
+};
 
 export default ReportIssueDialog;

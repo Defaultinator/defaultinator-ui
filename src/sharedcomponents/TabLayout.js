@@ -6,69 +6,40 @@ import React, {
 import PropTypes from 'prop-types';
 
 import {
+  Box,
   Slide,
   Tab,
   Tabs,
 } from '@mui/material';
 
-import makeStyles from '@mui/styles/makeStyles';
+const TabBar = ({
+  tabText,
+  activeTab,
+  setActiveTab,
+  tabBarStyles,
+}) => (
+  <Box
+    sx={{
+      width: '100%',
+      backgroundColor: 'background.paper',
+      color: 'primary.main',
+    }}
+  >
+    <Tabs
+      centered
+      value={activeTab}
+      onChange={(e, newActiveTab) => setActiveTab(newActiveTab)}
+      variant="fullWidth"
+      style={tabBarStyles}
+    >
+      {tabText.map((text, idx) => (
+        <Tab key={idx} label={text} />
+      ))}
+    </Tabs>
+  </Box>
+);
 
-const useStyles = makeStyles((theme) => ({
-  toolbarAdjustment: {
-    paddingTop: theme.spacing(2),
-  },
-  tabContainer: {
-    width: '100%',
-    paddingBottom: theme.spacing(2),
-  },
-  tabHeightFlex: {
-    '& div[style*="visibility: hidden;"]': {
-      height: 0,
-    },
-    '& div[aria-hidden="false"]': {
-      height: '100%',
-    },
-  },
-  active: {
-    maxHeight: 500,
-    transition: 'max-height 1s ease-in',
-  },
-  inactive: {
-    maxHeight: 0,
-    transition: 'max-height 0.15s ease-out',
-  },
-  toolbar: {
-    width: '100%',
-    backgroundColor: theme.palette.background.paper,
-    color: theme.palette.primary.main,
-  },
-}));
-
-function TabBar({
-  tabText, activeTab, setActiveTab, tabBarStyles,
-}) {
-  const classes = useStyles();
-
-  return (
-    <div className={classes.toolbar}>
-      <Tabs
-        centered
-        value={activeTab}
-        onChange={(e, newActiveTab) => setActiveTab(newActiveTab)}
-        variant="fullWidth"
-        style={tabBarStyles}
-      >
-        {tabText.map((text, idx) => (
-          <Tab key={idx} label={text} />
-        ))}
-      </Tabs>
-    </div>
-  );
-}
-
-function TabContent({ tabContent, active }) {
-  const classes = useStyles();
-
+const TabContent = ({ tabContent, active }) => {
   const prevActiveRef = useRef();
   useEffect(() => {
     prevActiveRef.current = active;
@@ -84,25 +55,46 @@ function TabContent({ tabContent, active }) {
 
   return (
     <>
-      <div className={`${classes.toolbarAdjustment}`} />
+      <Box sx={{ paddingTop: 2 }} />
       {tabContent.map((content, idx) => (
-        <div
-          className={classes.tabHeightFlex}
+        <Box
+          sx={{
+            '& div[style*="visibility: hidden;"]': {
+              height: 0,
+            },
+            '& div[aria-hidden="false"]': {
+              height: '100%',
+            },
+          }}
           key={idx}
         >
           <Slide
             direction={getDirection(idx)}
             in={active === idx}
           >
-            <div className={`${classes.tabContainer} ${active === idx ? classes.active : classes.inactive}`}>{content}</div>
+            <Box
+              sx={{
+                width: '100%',
+                paddingBottom: 2,
+                maxHeight: 0,
+                transition: 'max-height 0.15s ease-out',
+                ...(active === idx
+                  && {
+                    maxHeight: '500px',
+                    transition: 'max-height 1s ease-in',
+                  }),
+              }}
+            >
+              {content}
+            </Box>
           </Slide>
-        </div>
+        </Box>
       ))}
     </>
   );
-}
+};
 
-function TabLayout({ tabs, tabBarStyles = {} }) {
+const TabLayout = ({ tabs, tabBarStyles = {} }) => {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
@@ -119,7 +111,7 @@ function TabLayout({ tabs, tabBarStyles = {} }) {
       />
     </div>
   );
-}
+};
 
 TabLayout.propTypes = {
   tabs: PropTypes.arrayOf(PropTypes.shape({
@@ -131,7 +123,6 @@ TabLayout.propTypes = {
 };
 
 TabLayout.defaultProps = {
-  tabs: [],
   tabBarStyles: {},
 };
 

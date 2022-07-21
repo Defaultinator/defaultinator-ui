@@ -5,19 +5,11 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import makeStyles from '@mui/styles/makeStyles';
 import CredentialsPage from './CredentialsPage';
 import APIKeyPage from './APIKeyPage';
+import { Box } from '@mui/material';
 
-const useStyles = makeStyles((theme) => ({
-  content: {
-    margin: 'auto',
-  },
-}));
-
-export function MainRoute() {
-  const classes = useStyles();
-
+export const MainRoute = () => {
   const pages = [
     {
       path: '/credentials',
@@ -33,13 +25,13 @@ export function MainRoute() {
     <Switch>
       {pages.map((page, idx) => (
         <Route path={page.path} key={idx}>
-          <div className={classes.content}>
+          <Box sx={{ margin: 'auto' }}>
             {page.content}
-          </div>
+          </Box>
         </Route>
       ))}
     </Switch>
   );
-}
+};
 
 export default MainRoute;

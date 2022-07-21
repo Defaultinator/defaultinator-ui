@@ -28,9 +28,7 @@ export default {
   ],
 };
 
-function Template(args) {
-  return <ViewAPIKeyPage {...args} />;
-}
+const Template = (args) => <ViewAPIKeyPage {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

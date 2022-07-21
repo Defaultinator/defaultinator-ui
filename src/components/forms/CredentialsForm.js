@@ -20,9 +20,8 @@ import {
   TextField,
   FormControl,
   IconButton,
+  useTheme,
 } from '@mui/material';
-
-import makeStyles from '@mui/styles/makeStyles';
 
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -31,64 +30,49 @@ import ProtocolFormSection from './ProtocolFormSection';
 import { CpeType } from '../../config/types';
 import AutoCompleteCPEFormSection from './AutoCompleteCPEFormSection';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    maxWidth: 650,
-    margin: 'auto',
-  },
-  container: {
-    padding: theme.spacing(2),
-  },
-  caption: {
-    backgroundColor: theme.palette.background.paper,
-    position: 'relative',
-    top: -28,
-    padding: '0px 8px',
-    color: theme.palette.primary.light,
-  },
-}));
-
-function ActionButtons({ reset }) {
-  const classes = useStyles();
-
-  return (
-    <Container className={classes.container}>
-      <Grid
-        container
-        spacing={4}
-        justifyContent="flex-start"
-        alignItems="center"
-      >
-        <Grid item>
-          <Button
-            variant="outlined"
-            type="submit"
-            color="primary"
-          >
-            Submit
-          </Button>
-        </Grid>
-        <Grid item>
-          <Button
-            color="secondary"
-            onClick={() => reset()}
-          >
-            Clear
-          </Button>
-        </Grid>
+const ActionButtons = ({ reset }) => (
+  <Container sx={{ padding: 2 }}>
+    <Grid
+      container
+      spacing={4}
+      justifyContent="flex-start"
+      alignItems="center"
+    >
+      <Grid item>
+        <Button
+          variant="outlined"
+          type="submit"
+          color="primary"
+        >
+          Submit
+        </Button>
       </Grid>
-    </Container>
-  );
-}
+      <Grid item>
+        <Button
+          color="secondary"
+          onClick={() => reset()}
+        >
+          Clear
+        </Button>
+      </Grid>
+    </Grid>
+  </Container>
+);
 
-function ProtocolSection({ control }) {
-  const classes = useStyles();
+const ProtocolSection = ({ control }) => {
+  const theme = useTheme();
 
   return (
-    <Container className={classes.container}>
+    <Container sx={{ padding: 2 }}>
       <Typography
         gutterBottom
-        className={classes.caption}
+        sx={{
+          backgroundColor: theme.palette.background.paper,
+          position: 'relative',
+          top: -28,
+          padding: '0px 8px',
+          color: theme.palette.primary.light,
+        }}
         variant="caption"
       >
         Protocol
@@ -96,16 +80,19 @@ function ProtocolSection({ control }) {
       <ProtocolFormSection control={control} />
     </Container>
   );
-}
+};
 
-function CredentialsSection({ control }) {
-  const classes = useStyles();
+const CredentialsSection = ({ control }) => {
+  const theme = useTheme();
 
   return (
-    <Container className={classes.container}>
+    <Container sx={{ padding: 2 }}>
       <Typography
         gutterBottom
-        className={classes.caption}
+        sx={{
+          backgroundColor: theme.palette.background.paper, position: 'relative', top: -28, padding: '0px 8px', color: theme.palette.primary.light,
+        }}
+        Ï
         variant="caption"
       >
         Credentials
@@ -113,26 +100,24 @@ function CredentialsSection({ control }) {
       <CredsFormSection control={control} />
     </Container>
   );
-}
+};
 
-function ReferenceListItem({ reference, deleteSelf }) {
-  return (
-    <ListItem>
-      <ListItemText
-        primary={reference}
-      />
-      <ListItemSecondaryAction>
-        <IconButton edge="end" aria-label="delete" onClick={deleteSelf} size="large">
-          <DeleteIcon
-            color="secondary"
-          />
-        </IconButton>
-      </ListItemSecondaryAction>
-    </ListItem>
-  );
-}
+const ReferenceListItem = ({ reference, deleteSelf }) => (
+  <ListItem>
+    <ListItemText
+      primary={reference}
+    />
+    <ListItemSecondaryAction>
+      <IconButton edge="end" aria-label="delete" onClick={deleteSelf} size="large">
+        <DeleteIcon
+          color="secondary"
+        />
+      </IconButton>
+    </ListItemSecondaryAction>
+  </ListItem>
+);
 
-function ReferenceList({ references, setReferences }) {
+const ReferenceList = ({ references, setReferences }) => {
   const removeSelf = (idx) => () => {
     references.splice(idx, 1);
     setReferences([...references]);
@@ -142,23 +127,26 @@ function ReferenceList({ references, setReferences }) {
     <>
       {references.length !== 0
         && (
-        <List>
-          {references.map((reference, idx) => <ReferenceListItem reference={reference} key={idx} deleteSelf={removeSelf(idx)} />)}
-        </List>
+          <List>
+            {references.map((reference, idx) => <ReferenceListItem reference={reference} key={idx} deleteSelf={removeSelf(idx)} />)}
+          </List>
         )}
     </>
   );
-}
+};
 
-function ReferencesSection({ references, setReferences }) {
-  const classes = useStyles();
+const ReferencesSection = ({ references, setReferences }) => {
+  const theme = useTheme();
   const [reference, setReference] = useState('');
 
   return (
-    <Container className={classes.container}>
+    <Container sx={{ padding: 2 }}>
       <Typography
         gutterBottom
-        className={classes.caption}
+        sx={{
+          backgroundColor: theme.palette.background.paper, position: 'relative', top: -28, padding: '0px 8px', color: theme.palette.primary.light,
+        }}
+        Ï
         variant="caption"
       >
         References
@@ -170,9 +158,7 @@ function ReferencesSection({ references, setReferences }) {
         flexWrap: 'wrap',
       }}
       >
-        <FormControl
-          className={classes.input}
-        >
+        <FormControl>
           <TextField
             variant="outlined"
             label="Reference"
@@ -193,14 +179,15 @@ function ReferencesSection({ references, setReferences }) {
       </div>
     </Container>
   );
-}
+};
 
-function CredentialsForm({
+const CredentialsForm = ({
   formAction,
   defaultValues = { part: '' },
   title = 'Add New Credentials',
-}) {
-  const classes = useStyles();
+}) => {
+  const theme = useTheme();
+
   const { handleSubmit, control, reset } = useForm({ defaultValues });
   const [references, setReferences] = useState([]);
   const [cpeFields, setCpeFields] = useState(defaultValues);
@@ -231,19 +218,22 @@ function CredentialsForm({
   };
 
   return (
-    <Paper className={classes.root}>
+    <Paper sx={{ maxWidth: 650, margin: 'auto' }}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Container className={classes.container}>
+        <Container sx={{ padding: 2 }}>
           <Typography gutterBottom variant="h4">
             {title}
           </Typography>
           <Divider />
           <CredentialsSection control={control} />
           <Divider />
-          <Container className={classes.container}>
+          <Container sx={{ padding: 2 }}>
             <Typography
               gutterBottom
-              className={classes.caption}
+              sx={{
+                backgroundColor: theme.palette.background.paper, position: 'relative', top: -28, padding: '0px 8px', color: theme.palette.primary.light,
+              }}
+              Ï
               variant="caption"
             >
               Credentials
@@ -259,7 +249,7 @@ function CredentialsForm({
       </form>
     </Paper>
   );
-}
+};
 
 CredentialsForm.propTypes = {
   formAction: PropTypes.func.isRequired,

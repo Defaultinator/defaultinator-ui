@@ -7,9 +7,7 @@ export default {
   component: App,
 };
 
-function Template(args) {
-  return <App {...args} />;
-}
+const Template = (args) => <App {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

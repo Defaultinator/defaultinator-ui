@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
-import makeStyles from '@mui/styles/makeStyles';
 import {
+  Box,
   Button,
   Card,
   CardActions,
@@ -20,35 +20,6 @@ import VerifiedIcon from '../Icons/VerifiedIcon';
 import { Skeleton } from '@mui/material';
 import loadingWrapper from '../../util/loadingWrapper';
 
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 550,
-    minWidth: 250,
-    textAlign: 'center',
-    margin: 'auto',
-  },
-  card: {
-    borderRadius: 12,
-    minWidth: 256,
-    textAlign: 'center',
-  },
-  cardActions: {
-    display: "flex",
-    justifyContent: "flex-end"
-  },
-  fieldHeading: {
-  },
-  fieldContent: {
-    margin: 'auto',
-  },
-  timestampContainer: {
-    width: '100%',
-  },
-  timestampContents: {
-    textAlign: 'left',
-  }
-});
-
 export const CredentialCard = (
   {
     credential = {},
@@ -59,8 +30,6 @@ export const CredentialCard = (
     loading = false,
   }
 ) => {
-  const styles = useStyles();
-
   const {
     username = '',
     password = '',
@@ -85,7 +54,7 @@ export const CredentialCard = (
   };
 
   return (
-    <Card className={styles.root}>
+    <Card sx={{ maxWidth: 550, minWidth: 250, textAlign: 'center', margin: 'auto' }}>
       <CardHeader
         avatar={
           loadingWrapper(
@@ -116,12 +85,11 @@ export const CredentialCard = (
           <Grid item>
             <Typography
               variant={'h6'}
-              className={styles.fieldHeading}
             >
               Username
             </Typography>
             <Typography
-              className={styles.fieldContent}
+              sx={{ margin: 'auto' }}
             >
               {loading ? <Skeleton /> : (username || <i>blank</i>)}
             </Typography>
@@ -130,12 +98,11 @@ export const CredentialCard = (
           <Grid item>
             <Typography
               variant={'h6'}
-              className={styles.fieldHeading}
             >
               Password
             </Typography>
             <Typography
-              className={styles.fieldContent}
+              sx={{ margin: 'auto' }}
             >
               {loading ? <Skeleton /> : (password || <i>blank</i>)}
             </Typography>
@@ -143,10 +110,10 @@ export const CredentialCard = (
         </Grid>
       </CardContent>
       <Divider />
-      <CardActions className={styles.cardActions}>
-        <span className={styles.timestampContainer}>
+      <CardActions sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <span sx={{ width: '100%' }}>
           {!!createdOn && createdOn !== Infinity &&
-            <div className={styles.timestampContents}>
+            <Box sx={{textAlign: 'left'}}>
               <Typography variant={'caption'}>
                 {loading ?
                   <Skeleton width={150} /> :
@@ -155,10 +122,10 @@ export const CredentialCard = (
                   </>
                 }
               </Typography>
-            </div>
+            </Box>
           }
           {lastEdited &&
-            <div className={styles.timestampContents}>
+            <Box sx={{textAlign: 'left'}}>
               <Typography variant={'caption'}>
                 {loading ?
                   <Skeleton width={150} /> :
@@ -167,7 +134,7 @@ export const CredentialCard = (
                   </>
                 }
               </Typography>
-            </div>
+            </Box>
           }
         </span>
         <Button

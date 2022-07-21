@@ -9,9 +9,7 @@ export default {
   component: APIKeyList,
 };
 
-function Template(args) {
-  return <APIKeyList {...args} />;
-}
+const Template = (args) => <APIKeyList {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

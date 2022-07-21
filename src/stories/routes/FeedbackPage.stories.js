@@ -6,9 +6,7 @@ export default {
   component: FeedbackPage,
 };
 
-function Template(args) {
-  return <FeedbackPage {...args} />;
-}
+const Template = (args) => <FeedbackPage {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

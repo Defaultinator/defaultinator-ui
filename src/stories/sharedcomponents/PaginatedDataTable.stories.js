@@ -240,9 +240,7 @@ export default {
   },
 };
 
-function Default(args) {
-  return <PaginatedDataTable {...args} />;
-}
+const Default = (args) => <PaginatedDataTable {...args} />;
 
 export const Primary = Default.bind({});
 Primary.args = {

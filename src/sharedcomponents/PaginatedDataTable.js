@@ -12,25 +12,9 @@ import {
   Paper,
   LinearProgress,
 } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
 
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import Skeleton from '@mui/material/Skeleton';
-
-const useStyles = makeStyles((theme) => ({
-  loadingRow: {
-    padding: 0,
-  },
-  errorRow: {
-    padding: 0,
-    height: 350,
-  },
-  errorIcon: {
-    margin: 'auto',
-    display: 'block',
-    color: theme.palette.error.main,
-  }
-}));
 
 export const PaginatedDataTable = (
   {
@@ -45,7 +29,6 @@ export const PaginatedDataTable = (
     dense = false,
   }
 ) => {
-  const styles = useStyles();
   const { fields, pagination } = dataConfig;
 
   return (
@@ -57,7 +40,7 @@ export const PaginatedDataTable = (
               <TableCell
                 key={idx}
                 align={field.align || "left"}
-                style={{borderBottom: 'none'}}
+                style={{ borderBottom: 'none' }}
               >
                 {field.label}
               </TableCell>
@@ -67,14 +50,30 @@ export const PaginatedDataTable = (
         <TableBody>
           {error ?
             <TableRow>
-              <TableCell colSpan={fields.length} className={styles.errorRow}>
-                <ErrorOutlineIcon fontSize={'large'} colSpan={3} className={styles.errorIcon} />
+              <TableCell
+                colSpan={fields.length}
+                sx={{
+                  padding: 0,
+                  height: `350px`,
+                }}>
+                <ErrorOutlineIcon
+                  fontSize={'large'}
+                  colSpan={3}
+                  sx={{
+                    margin: 'auto',
+                    display: 'block',
+                    color: 'error.main',
+                  }}
+                />
               </TableCell>
             </TableRow>
             :
             <>
               <TableRow>
-                <TableCell colSpan={fields.length} className={styles.loadingRow}>
+                <TableCell
+                  colSpan={fields.length}
+                  sx={{ padding: 0 }}
+                >
                   {loading ?
                     <LinearProgress colSpan="3" /> :
                     <div style={{ height: 4 }} colSpan={3} />
@@ -84,7 +83,7 @@ export const PaginatedDataTable = (
               {loading && (!data || data.length === 0) &&
                 Array(rowsPerPage || pagination.defaultRowsPerPage).fill(Array(dataConfig.fields.length).fill('')).map((columns, idx) =>
                   <TableRow key={idx}>
-                    {columns.map((col, idx) => 
+                    {columns.map((col, idx) =>
                       <TableCell key={idx}>
                         <Skeleton />
                       </TableCell>

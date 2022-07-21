@@ -12,7 +12,7 @@ import { API_URI } from '../../config/constants';
 import CredentialsForm from '../../components/forms/CredentialsForm';
 import useApiKey from '../../util/useApiKey';
 
-function AddCredentialsPage() {
+const AddCredentialsPage = () => {
   const history = useHistory();
   const [apiKey] = useApiKey((s) => [s.apikey]);
   const confirm = useConfirm();
@@ -50,6 +50,6 @@ function AddCredentialsPage() {
   return (
     <CredentialsForm formAction={myAction} />
   );
-}
+};
 
 export default AddCredentialsPage;

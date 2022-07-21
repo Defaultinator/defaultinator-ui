@@ -30,9 +30,7 @@ export default {
   ],
 };
 
-function Template(args) {
-  return <EditCredentialsPage {...args} />;
-}
+const Template = (args) => <EditCredentialsPage {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

@@ -8,7 +8,7 @@ import {
   Paper,
 } from '@mui/material';
 
-function SuggestionItem({ suggestion }) {
+const SuggestionItem = ({ suggestion }) => {
   const { _id: name, count } = suggestion;
 
   // TODO: These should be clickable
@@ -17,17 +17,15 @@ function SuggestionItem({ suggestion }) {
       <ListItemText primary={name} secondary={`Records: ${count}`} />
     </ListItem>
   );
-}
+};
 
-function AutoCompleteSuggestions({ suggestions }) {
-  return (
-    <Paper>
-      <List>
-        {suggestions.map((suggestion) => <SuggestionItem key={suggestion._id} suggestion={suggestion} />)}
-      </List>
-    </Paper>
-  );
-}
+const AutoCompleteSuggestions = ({ suggestions }) => (
+  <Paper>
+    <List>
+      {suggestions.map((suggestion) => <SuggestionItem key={suggestion._id} suggestion={suggestion} />)}
+    </List>
+  </Paper>
+);
 
 AutoCompleteSuggestions.propTypes = {
   suggestions: PropTypes.arrayOf(PropTypes.shape({

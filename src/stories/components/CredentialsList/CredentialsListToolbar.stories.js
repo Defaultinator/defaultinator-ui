@@ -7,9 +7,7 @@ export default {
   component: CredentialsListToolbar,
 };
 
-function Template(args) {
-  return <CredentialsListToolbar {...args} />;
-}
+const Template = (args) => <CredentialsListToolbar {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

@@ -7,9 +7,7 @@ export default {
   component: ReportIssueDialog,
 };
 
-function Template(args) {
-  return <ReportIssueDialog {...args} />;
-}
+const Template = (args) => <ReportIssueDialog {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

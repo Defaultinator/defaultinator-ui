@@ -11,33 +11,17 @@ import {
   Container,
 } from '@mui/material';
 
-import makeStyles from '@mui/styles/makeStyles';
 import FormField from '../../FormField';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'inline-block',
-    margin: 'auto',
-  },
-  container: {
-    padding: theme.spacing(2),
-  },
-}));
-
-function AuthForm({ onSubmit, apikey, onClear }) {
-  const classes = useStyles();
+const AuthForm = ({ onSubmit, apikey, onClear }) => {
   const {
     handleSubmit, control, reset, formState: { errors },
   } = useForm();
 
-  // const onSubmit = (data) => {
-  //   setApikey(data.apikey);
-  // };
-
   return (
-    <Paper className={classes.root}>
+    <Paper sx={{ display: 'inline-block', margin: 'auto' }}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Container className={classes.container}>
+        <Container sx={{ padding: 2 }}>
           <Grid container spacing={3} alignItems="center">
             <Grid item xs={12}>
               <FormField
@@ -51,7 +35,7 @@ function AuthForm({ onSubmit, apikey, onClear }) {
             </Grid>
           </Grid>
         </Container>
-        <Container className={classes.container}>
+        <Container sx={{ padding: 2 }}>
           <Button
             color="secondary"
             onClick={() => {
@@ -66,7 +50,7 @@ function AuthForm({ onSubmit, apikey, onClear }) {
       </form>
     </Paper>
   );
-}
+};
 
 AuthForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,

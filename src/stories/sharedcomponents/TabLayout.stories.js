@@ -10,9 +10,7 @@ export default {
   },
 };
 
-function Template(args) {
-  return <TabLayout {...args} />;
-}
+const Template = (args) => <TabLayout {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

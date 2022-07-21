@@ -7,9 +7,7 @@ export default {
 
 // TODO: Need to make a story where the state is set. Otherwise it's just empty.
 
-function Template(args) {
-  return <AuthButton {...args} />;
-}
+const Template = (args) => <AuthButton {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

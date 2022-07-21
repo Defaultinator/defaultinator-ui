@@ -5,7 +5,7 @@ import DeviceUnknownIcon from '@mui/icons-material/DeviceUnknown';
 
 import { Tooltip } from '@mui/material';
 
-export function PartIcon({ part }) {
+export const PartIcon = ({ part }) => {
   let icon = <DeviceUnknownIcon />;
   let text = 'Unknown';
 
@@ -31,6 +31,6 @@ export function PartIcon({ part }) {
       {icon}
     </Tooltip>
   );
-}
+};
 
 export default PartIcon;

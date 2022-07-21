@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import makeStyles from '@mui/styles/makeStyles';
 import {
   Paper,
 } from '@mui/material';
@@ -11,24 +10,15 @@ import PaginatedDataTable from '../../sharedcomponents/PaginatedDataTable';
 import IsAdminIcon from '../Icons/IsAdminIcon';
 import ApiKey from '../ApiKey';
 
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 600,
-    margin: 'auto',
-  },
-});
-
 export const APIKeyList = ({ data = [], dataConfig, loading, rowsPerPage, page, totalRows, updateConfig, dense, error }) => {
-  const styles = useStyles();
-
   data = data?.map((row) => ({
-    ...row, 
+    ...row,
     isAdmin: <IsAdminIcon isAdmin={row.isAdmin} />,
     apiKey: <ApiKey apiKey={row.apiKey} />
   }));
 
   return (
-    <Paper className={styles.root}>
+    <Paper sx={{ maxWidth: 600, margin: 'auto' }}>
       <APIKeyListToolbar />
       <PaginatedDataTable
         data={data || []}

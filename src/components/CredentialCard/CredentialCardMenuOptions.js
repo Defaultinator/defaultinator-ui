@@ -18,7 +18,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 import ReportIssueDialog from './ReportIssueDialog';
 
-function ReportIssueMenuItem() {
+const ReportIssueMenuItem = () => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -36,9 +36,9 @@ function ReportIssueMenuItem() {
       </MenuItem>
     </>
   );
-}
+};
 
-function ReferencesMenuItem({ references }) {
+const ReferencesMenuItem = ({ references }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   return (
@@ -74,9 +74,9 @@ function ReferencesMenuItem({ references }) {
       </Menu>
     </>
   );
-}
+};
 
-function CredentialCardMenuOptions({ references }) {
+const CredentialCardMenuOptions = ({ references }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   return (
@@ -106,6 +106,6 @@ function CredentialCardMenuOptions({ references }) {
       </Menu>
     </>
   );
-}
+};
 
 export default CredentialCardMenuOptions;

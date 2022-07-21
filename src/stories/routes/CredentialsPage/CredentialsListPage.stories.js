@@ -20,9 +20,7 @@ export default {
   ],
 };
 
-function Template(args) {
-  return <CredentialsListPage {...args} />;
-}
+const Template = (args) => <CredentialsListPage {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

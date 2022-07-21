@@ -5,9 +5,7 @@ export default {
   component: ApiKey,
 };
 
-function Template(args) {
-  return <ApiKey {...args} />;
-}
+const Template = (args) => <ApiKey {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

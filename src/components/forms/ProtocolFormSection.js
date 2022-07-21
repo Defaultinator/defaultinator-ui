@@ -2,21 +2,15 @@ import React from 'react';
 
 import {
   FormControl,
-  Grid, InputLabel, MenuItem, Select,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
 } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
 
 import { Controller } from 'react-hook-form';
 
-const useStyles = makeStyles((theme) => ({
-  select: {
-    minWidth: 150,
-  },
-}));
-
-function ProtocolFormSection({ control }) {
-  const classes = useStyles();
-
+const ProtocolFormSection = ({ control }) => {
   const protocols = [
     {
       name: <em>Unknown</em>,
@@ -48,7 +42,7 @@ function ProtocolFormSection({ control }) {
           control={control}
           defaultValue=""
           render={({ field }) => (
-            <FormControl variant="outlined" className={classes.select}>
+            <FormControl variant="outlined" sx={{ minWidth: 150 }}>
               <InputLabel
                 id="add-protocol-label"
               >
@@ -73,6 +67,6 @@ function ProtocolFormSection({ control }) {
       </Grid>
     </Grid>
   );
-}
+};
 
 export default ProtocolFormSection;

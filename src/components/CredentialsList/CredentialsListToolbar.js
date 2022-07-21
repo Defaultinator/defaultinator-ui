@@ -2,30 +2,20 @@ import { useState } from 'react';
 
 import { alpha } from '@mui/material/styles';
 
-import makeStyles from '@mui/styles/makeStyles';
-
 import {
   Dialog,
   IconButton,
   Toolbar,
   Tooltip,
   Typography,
+  useTheme,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
 import AdvancedSearchModal from '../AdvancedSearchModal/AdvancedSearchModal';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
-  },
-  title: {
-    flex: '1 1 100%',
-  },
-}));
-
-export function CredentialsListToolbar() {
-  const classes = useStyles();
+export const CredentialsListToolbar = () => {
+  const theme = useTheme();
   const [searchOpen, setSearchOpen] = useState(false);
 
   return (
@@ -37,10 +27,16 @@ export function CredentialsListToolbar() {
         <AdvancedSearchModal onSearch={() => setSearchOpen(false)} />
       </Dialog>
       <Toolbar
-        className={classes.root}
+        sx={{
+          backgroundColor:
+            alpha(
+              theme.palette.primary.main,
+              theme.palette.action.activatedOpacity,
+            ),
+        }}
       >
         <Typography
-          className={classes.title}
+          sx={{ flex: '1 1 100%' }}
           variant="h6"
         >
           Credentials
@@ -53,6 +49,6 @@ export function CredentialsListToolbar() {
       </Toolbar>
     </>
   );
-}
+};
 
 export default CredentialsListToolbar;

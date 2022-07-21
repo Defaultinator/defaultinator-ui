@@ -7,7 +7,7 @@ import {
 import { useState } from 'react';
 import { REQUEST_ACCOUNT_EMAIL } from '../config/constants';
 
-function FeedbackPage() {
+const FeedbackPage = () => {
   const [text, setText] = useState('');
 
   return (
@@ -36,6 +36,6 @@ function FeedbackPage() {
       </div>
     </Container>
   );
-}
+};
 
 export default FeedbackPage;

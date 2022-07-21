@@ -9,8 +9,7 @@ import {
 } from '@mui/material';
 import AutoCompleteCPEFormSection from '../forms/AutoCompleteCPEFormSection';
 
-function AdvancedSearchByCPE({ onSubmit }) {
-
+const AdvancedSearchByCPE = ({ onSubmit }) => {
   const [fields, setFields] = useState({});
 
   return (
@@ -33,7 +32,7 @@ function AdvancedSearchByCPE({ onSubmit }) {
         <Grid item>
           <Button
             color="secondary"
-            sx={{marginLeft: 2}}
+            sx={{ marginLeft: 2 }}
             onClick={() => setFields({})}
           >
             Clear
@@ -42,7 +41,7 @@ function AdvancedSearchByCPE({ onSubmit }) {
       </Grid>
     </Container>
   );
-}
+};
 
 AdvancedSearchByCPE.propTypes = {
 };

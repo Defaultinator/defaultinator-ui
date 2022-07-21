@@ -7,9 +7,7 @@ export default {
   component: AddCredentialsPage,
 };
 
-function Template(args) {
-  return <AddCredentialsPage {...args} />;
-}
+const Template = (args) => <AddCredentialsPage {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

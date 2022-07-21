@@ -7,9 +7,7 @@ export default {
   component: PartIcon,
 };
 
-function Template(args) {
-  return <PartIcon {...args} />;
-}
+const Template = (args) => <PartIcon {...args} />;
 
 export const APart = Template.bind({});
 APart.args = {

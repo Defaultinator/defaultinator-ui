@@ -18,9 +18,7 @@ export default {
   ],
 };
 
-function Template(args) {
-  return <AddAPIKeyPage {...args} />;
-}
+const Template = (args) => <AddAPIKeyPage {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

@@ -11,9 +11,7 @@ export default {
   },
 };
 
-function Template(args) {
-  return <APIKeyListToolbar {...args} />;
-}
+const Template = (args) => <APIKeyListToolbar {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

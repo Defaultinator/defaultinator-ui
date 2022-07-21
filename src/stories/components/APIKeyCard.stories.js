@@ -11,9 +11,7 @@ export default {
   component: APIKeyCard,
 };
 
-function Template(args) {
-  return <APIKeyCard {...args} />;
-}
+const Template = (args) => <APIKeyCard {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

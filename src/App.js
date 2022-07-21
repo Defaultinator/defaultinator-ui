@@ -17,8 +17,9 @@ import AboutPage from './routes/AboutPage';
 import AuthButton from './components/AuthButton';
 import TermsPage from './routes/TermsPage';
 import FeedbackPage from './routes/FeedbackPage';
+import { Box } from '@mui/material';
 
-function App() {
+const App = () => {
   const [isAdmin] = useApiKey((s) => [s.isAdmin]);
 
   const pages = [
@@ -61,12 +62,12 @@ function App() {
   ];
 
   return (
-    <div sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 }}>
       <Router>
         <MainNavigation pages={pages} title="Defaultinator" AppBarAction={<AuthButton />} />
       </Router>
-    </div>
+    </Box>
   );
-}
+};
 
 export default App;

@@ -10,7 +10,7 @@ import {
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
-export function ApiKey({ apiKey }) {
+export const ApiKey = ({ apiKey }) => {
   const [showKey, setShowKey] = useState(false);
 
   return (
@@ -43,7 +43,7 @@ export function ApiKey({ apiKey }) {
 
     </Box>
   );
-}
+};
 
 ApiKey.propTypes = {
   apiKey: PropTypes.string.isRequired,

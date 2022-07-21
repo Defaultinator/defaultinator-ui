@@ -7,9 +7,7 @@ export default {
   component: AdvancedSearchByCPE,
 };
 
-function Template(args) {
-  return <AdvancedSearchByCPE {...args} />;
-}
+const Template = (args) => <AdvancedSearchByCPE {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

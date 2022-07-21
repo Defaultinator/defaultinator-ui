@@ -7,6 +7,8 @@ function getStorageValue(key, defaultValue) {
     const initial = saved !== null ? JSON.parse(saved) : defaultValue;
     return initial;
   }
+
+  return undefined;
 }
 
 export const useLocalStorage = (key, defaultValue) => {
@@ -19,3 +21,5 @@ export const useLocalStorage = (key, defaultValue) => {
 
   return [value, setValue];
 };
+
+export default useLocalStorage;

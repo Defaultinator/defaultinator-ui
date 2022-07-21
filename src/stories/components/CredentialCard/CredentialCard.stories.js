@@ -14,9 +14,7 @@ export default {
   },
 };
 
-function Template(args) {
-  return <CredentialCard {...args} />;
-}
+const Template = (args) => <CredentialCard {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

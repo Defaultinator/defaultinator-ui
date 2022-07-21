@@ -6,7 +6,7 @@ import {
 
 import FormField from '../FormField';
 
-function CredsFormSection({ control }) {
+const CredsFormSection = ({ control }) => {
   const inputs = [
     {
       name: 'username',
@@ -27,6 +27,6 @@ function CredsFormSection({ control }) {
       ))}
     </Grid>
   );
-}
+};
 
 export default CredsFormSection;
