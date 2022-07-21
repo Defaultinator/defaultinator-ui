@@ -1,20 +1,19 @@
 export const flattenObject = (ob) => {
   const toReturn = {};
 
-  for (const i in ob) {
-    if (!ob.hasOwnProperty(i)) continue;
-
+  Object.keys(ob).forEach((i) => {
     if ((typeof ob[i]) === 'object') {
       const flatObject = flattenObject(ob[i]);
-      for (const x in flatObject) {
-        if (!flatObject.hasOwnProperty(x)) continue;
-
+      Object.keys(flatObject).forEach((x) => {
+        if (!Object.prototype.hasOwnProperty.call(flatObject, x)) return null;
         toReturn[`${i}.${x}`] = flatObject[x];
-      }
+        return 1;
+      });
     } else {
       toReturn[i] = ob[i];
     }
-  }
+  });
+
   return toReturn;
 };
 
