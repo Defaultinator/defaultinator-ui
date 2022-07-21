@@ -11,13 +11,13 @@ import {
   Typography,
   Divider,
   IconButton,
+  Skeleton,
 } from '@mui/material';
 
 import { CredentialType } from '../../config/types';
 
 import CredentialCardMenuOptions from './CredentialCardMenuOptions';
 import VerifiedIcon from '../Icons/VerifiedIcon';
-import { Skeleton } from '@mui/material';
 import loadingWrapper from '../../util/loadingWrapper';
 
 export const CredentialCard = (
@@ -28,7 +28,7 @@ export const CredentialCard = (
     isAdmin = false,
     onVerify = () => { },
     loading = false,
-  }
+  },
 ) => {
   const {
     username = '',
@@ -44,33 +44,38 @@ export const CredentialCard = (
   let lastEdited;
   if (edits?.length > 1) {
     lastEdited = Math.max(...edits.map(({ timestamp }) => timestamp)) / 1000;
-  };
+  }
 
   // Needed to display the date properly
   const dateOptions = {
-    year: "numeric",
-    month: "numeric",
-    day: "2-digit"
+    year: 'numeric',
+    month: 'numeric',
+    day: '2-digit',
   };
 
   return (
-    <Card sx={{ maxWidth: 550, minWidth: 250, textAlign: 'center', margin: 'auto' }}>
+    <Card sx={{
+      maxWidth: 550, minWidth: 250, textAlign: 'center', margin: 'auto',
+    }}
+    >
       <CardHeader
         avatar={
           loadingWrapper(
             loading,
             <IconButton
               disabled={!isAdmin}
-              aria-label={isVerified ? "unverify" : "verify"}
+              aria-label={isVerified ? 'unverify' : 'verify'}
               onClick={() => onVerify(credential)}
-              size="large">
+              size="large"
+            >
               <VerifiedIcon isVerified={isVerified} />
             </IconButton>,
-            'circle')
+            'circle',
+          )
         }
-        title={loading ? <Skeleton width={100} variant={'text'} /> : vendor}
+        title={loading ? <Skeleton width={100} variant="text" /> : vendor}
         titleTypographyProps={{ style: { textTransform: 'capitalize' }, variant: 'h5' }}
-        subheader={loading ? <Skeleton width={200} variant={'text'} /> : product}
+        subheader={loading ? <Skeleton width={200} variant="text" /> : product}
         subheaderTypographyProps={{ variant: 'body2' }}
         action={loadingWrapper(loading, <CredentialCardMenuOptions {...credential} />, 'circle')}
       />
@@ -84,7 +89,7 @@ export const CredentialCard = (
         >
           <Grid item>
             <Typography
-              variant={'h6'}
+              variant="h6"
             >
               Username
             </Typography>
@@ -94,10 +99,10 @@ export const CredentialCard = (
               {loading ? <Skeleton /> : (username || <i>blank</i>)}
             </Typography>
           </Grid>
-          <Divider orientation={'vertical'} flexItem />
+          <Divider orientation="vertical" flexItem />
           <Grid item>
             <Typography
-              variant={'h6'}
+              variant="h6"
             >
               Password
             </Typography>
@@ -110,44 +115,53 @@ export const CredentialCard = (
         </Grid>
       </CardContent>
       <Divider />
-      <CardActions sx={{ display: "flex", justifyContent: "flex-end" }}>
+      <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <span sx={{ width: '100%' }}>
-          {!!createdOn && createdOn !== Infinity &&
-            <Box sx={{textAlign: 'left'}}>
-              <Typography variant={'caption'}>
-                {loading ?
-                  <Skeleton width={150} /> :
-                  <>
-                    Created on: {new Date(createdOn * 1000).toLocaleString("en-US", dateOptions)}
-                  </>
-                }
+          {!!createdOn && createdOn !== Infinity
+            && (
+            <Box sx={{ textAlign: 'left' }}>
+              <Typography variant="caption">
+                {loading
+                  ? <Skeleton width={150} />
+                  : (
+                    <>
+                      Created on:
+                      {' '}
+                      {new Date(createdOn * 1000).toLocaleString('en-US', dateOptions)}
+                    </>
+                  )}
               </Typography>
             </Box>
-          }
-          {lastEdited &&
-            <Box sx={{textAlign: 'left'}}>
-              <Typography variant={'caption'}>
-                {loading ?
-                  <Skeleton width={150} /> :
-                  <>
-                    Last edited: {new Date(lastEdited * 1000).toLocaleString("en-US", dateOptions)}
-                  </>
-                }
+            )}
+          {lastEdited
+            && (
+            <Box sx={{ textAlign: 'left' }}>
+              <Typography variant="caption">
+                {loading
+                  ? <Skeleton width={150} />
+                  : (
+                    <>
+                      Last edited:
+                      {' '}
+                      {new Date(lastEdited * 1000).toLocaleString('en-US', dateOptions)}
+                    </>
+                  )}
               </Typography>
             </Box>
-          }
+            )}
         </span>
         <Button
           disabled={loading || isVerified}
           size="small"
           color="primary"
-          variant={'outlined'}
+          variant="outlined"
           aria-label="edit"
           {...primaryButtonProps}
         >
           Edit
         </Button>
-        {isAdmin &&
+        {isAdmin
+          && (
           <Button
             disabled={loading}
             size="small"
@@ -157,7 +171,7 @@ export const CredentialCard = (
           >
             Delete
           </Button>
-        }
+          )}
       </CardActions>
     </Card>
   );

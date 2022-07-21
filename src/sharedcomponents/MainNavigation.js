@@ -114,7 +114,6 @@ const MainNavigation = ({
         </Toolbar>
       </AppBar>
       <Box sx={{ width: DRAWER_WIDTH }}>
-        
         <Drawer
           variant={`${temporaryDrawer ? 'temporary' : 'persistent'}`}
           open={mobileOpen}
@@ -142,7 +141,7 @@ const MainNavigation = ({
           ...((mobileOpen && !temporaryDrawer)
             && ({
               width: `calc(100% - ${DRAWER_WIDTH}px)`,
-              marginLeft: 0, //`${-DRAWER_WIDTH}px`,
+              marginLeft: 0, // `${-DRAWER_WIDTH}px`,
               transition: theme.transitions.create(['margin', 'width'], {
                 easing: theme.transitions.easing.easeOut,
                 duration: theme.transitions.duration.enteringScreen,

@@ -5,7 +5,7 @@ import React, {
 import {
   useHistory,
 } from 'react-router-dom';
-import useAxios from "axios-hooks";
+import useAxios from 'axios-hooks';
 import {
   useSnackbar,
 } from 'notistack';
@@ -19,7 +19,7 @@ import { APIKEY_TABLE_CONFIG } from '../../config/tables';
 const ListAPIKeysPage = () => {
   const history = useHistory();
   const [paginationParams, setPaginationParams] = useState();
-  const [apikey] = useApiKey(s => [s.apikey]);
+  const [apikey] = useApiKey((s) => [s.apikey]);
   const { enqueueSnackbar } = useSnackbar();
 
   const [{ data, loading, error }] = useAxios({
@@ -44,14 +44,12 @@ const ListAPIKeysPage = () => {
     });
   };
 
-  const formatData = (data) => {
-    return data?.map((item) => (
-      {
-        ...item,
-        rowProps: { onClick: () => history.push(`/apikeys/${item._id}`), style: {cursor: 'pointer'} }
-      }
-    ));
-  };
+  const formatData = (data) => data?.map((item) => (
+    {
+      ...item,
+      rowProps: { onClick: () => history.push(`/apikeys/${item._id}`), style: { cursor: 'pointer' } },
+    }
+  ));
 
   return (
     <APIKeyList

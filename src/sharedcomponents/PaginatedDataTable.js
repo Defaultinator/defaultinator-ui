@@ -27,7 +27,7 @@ export const PaginatedDataTable = (
     error = false,
     updateConfig,
     dense = false,
-  }
+  },
 ) => {
   const { fields, pagination } = dataConfig;
 
@@ -39,7 +39,7 @@ export const PaginatedDataTable = (
             {dataConfig.fields.map((field, idx) => (
               <TableCell
                 key={idx}
-                align={field.align || "left"}
+                align={field.align || 'left'}
                 style={{ borderBottom: 'none' }}
               >
                 {field.label}
@@ -48,50 +48,52 @@ export const PaginatedDataTable = (
           </TableRow>
         </TableHead>
         <TableBody>
-          {error ?
-            <TableRow>
-              <TableCell
-                colSpan={fields.length}
-                sx={{
-                  padding: 0,
-                  height: `350px`,
-                }}>
-                <ErrorOutlineIcon
-                  fontSize={'large'}
-                  colSpan={3}
-                  sx={{
-                    margin: 'auto',
-                    display: 'block',
-                    color: 'error.main',
-                  }}
-                />
-              </TableCell>
-            </TableRow>
-            :
-            <>
+          {error
+            ? (
               <TableRow>
                 <TableCell
                   colSpan={fields.length}
-                  sx={{ padding: 0 }}
+                  sx={{
+                    padding: 0,
+                    height: '350px',
+                  }}
                 >
-                  {loading ?
-                    <LinearProgress colSpan="3" /> :
-                    <div style={{ height: 4 }} colSpan={3} />
-                  }
+                  <ErrorOutlineIcon
+                    fontSize="large"
+                    colSpan={3}
+                    sx={{
+                      margin: 'auto',
+                      display: 'block',
+                      color: 'error.main',
+                    }}
+                  />
                 </TableCell>
               </TableRow>
-              {loading && (!data || data.length === 0) &&
-                Array(rowsPerPage || pagination.defaultRowsPerPage).fill(Array(dataConfig.fields.length).fill('')).map((columns, idx) =>
+            )
+            : (
+              <>
+                <TableRow>
+                  <TableCell
+                    colSpan={fields.length}
+                    sx={{ padding: 0 }}
+                  >
+                    {loading
+                      ? <LinearProgress colSpan="3" />
+                      : <div style={{ height: 4 }} colSpan={3} />}
+                  </TableCell>
+                </TableRow>
+                {loading && (!data || data.length === 0)
+                && Array(rowsPerPage || pagination.defaultRowsPerPage).fill(Array(dataConfig.fields.length).fill('')).map((columns, idx) => (
                   <TableRow key={idx}>
-                    {columns.map((col, idx) =>
+                    {columns.map((col, idx) => (
                       <TableCell key={idx}>
                         <Skeleton />
                       </TableCell>
-                    )}
+                    ))}
                   </TableRow>
-                )
-              }
-              {data &&
+                ))}
+                {data
+                && (
                 <>
                   {data.map((row, idx) => (
                     <TableRow
@@ -102,7 +104,7 @@ export const PaginatedDataTable = (
                       {fields.map((field, idx) => (
                         <TableCell
                           key={idx}
-                          align={field.align || "left"}
+                          align={field.align || 'left'}
                         >
                           {row[field.fieldName]}
                         </TableCell>
@@ -120,9 +122,9 @@ export const PaginatedDataTable = (
                     />
                   </TableRow>
                 </>
-              }
-            </>
-          }
+                )}
+              </>
+            )}
         </TableBody>
       </Table>
     </TableContainer>

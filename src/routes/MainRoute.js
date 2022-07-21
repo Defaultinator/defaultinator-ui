@@ -5,9 +5,9 @@ import {
   Switch,
 } from 'react-router-dom';
 
+import { Box } from '@mui/material';
 import CredentialsPage from './CredentialsPage';
 import APIKeyPage from './APIKeyPage';
-import { Box } from '@mui/material';
 
 export const MainRoute = () => {
   const pages = [

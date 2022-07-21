@@ -5,11 +5,11 @@ import React, {
 import {
   useHistory,
 } from 'react-router-dom';
-import useAxios from "axios-hooks";
+import useAxios from 'axios-hooks';
 import {
   useSnackbar,
 } from 'notistack';
-import { API_URI } from "../../config/constants";
+import { API_URI } from '../../config/constants';
 import { useApiKey } from '../../util/useApiKey';
 import CredentialsList from '../../components/CredentialsList/CredentialsList';
 import { CREDENTIALS_TABLE_CONFIG } from '../../config/tables';
@@ -17,7 +17,7 @@ import { CREDENTIALS_TABLE_CONFIG } from '../../config/tables';
 const CredentialsListPage = () => {
   const history = useHistory();
   const [paginationParams, setPaginationParams] = useState();
-  const [apikey] = useApiKey(s => [s.apikey]);
+  const [apikey] = useApiKey((s) => [s.apikey]);
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -27,8 +27,8 @@ const CredentialsListPage = () => {
       'X-API-KEY': apikey,
     },
     params: {
-      ...paginationParams
-    }
+      ...paginationParams,
+    },
   });
 
   useEffect(() => {
@@ -46,17 +46,15 @@ const CredentialsListPage = () => {
     });
   };
 
-  const formatData = (data) => {
-    return data?.map((item) => (
-      {
-        ...item,
-        vendor: item.cpe?.vendor || 'ANY',
-        product: item.cpe?.product || 'ANY',
-        part: item.cpe?.part || 'unknown',
-        rowProps: { onClick: () => history.push(`/credentials/${item._id}`), style: {cursor: 'pointer'} }
-      }
-    ));
-  };
+  const formatData = (data) => data?.map((item) => (
+    {
+      ...item,
+      vendor: item.cpe?.vendor || 'ANY',
+      product: item.cpe?.product || 'ANY',
+      part: item.cpe?.part || 'unknown',
+      rowProps: { onClick: () => history.push(`/credentials/${item._id}`), style: { cursor: 'pointer' } },
+    }
+  ));
 
   return (
     <CredentialsList

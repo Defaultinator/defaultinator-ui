@@ -5,50 +5,50 @@ import React, {
 import {
   useHistory,
 } from 'react-router-dom';
-import useAxios from "axios-hooks";
+import useAxios from 'axios-hooks';
 import {
   useSnackbar,
 } from 'notistack';
 import { useApiKey } from '../../util/useApiKey';
-import { API_URI } from "../../config/constants";
+import { API_URI } from '../../config/constants';
 import CredentialsList from '../../components/CredentialsList/CredentialsList';
 
 const TABLE_CONFIG = {
   fields: [
     {
-      label: "CPE",
-      fieldName: "cpe",
-      align: "left"
+      label: 'CPE',
+      fieldName: 'cpe',
+      align: 'left',
     },
     {
-      label: "Username",
+      label: 'Username',
       fieldName: 'username',
     },
     {
-      label: "Password",
+      label: 'Password',
       fieldName: 'password',
     },
   ],
   pagination: {
     rowsPerPageOptions: [10, 25, 50, 100],
     defaultRowsPerPage: 10,
-  }
+  },
 };
 
 const SearchCredentialsPage = () => {
   const history = useHistory();
   const { enqueueSnackbar } = useSnackbar();
   const [paginationParams, setPaginationParams] = useState();
-  const [apikey] = useApiKey(s => [s.apikey]);
+  const [apikey] = useApiKey((s) => [s.apikey]);
 
   const query = new URLSearchParams(document.location.search);
   const searchParams = {
-    ...(query.get('part') && {part: query.get('part')}),
-    ...(query.get('vendor') && {vendor: query.get('vendor')}),
-    ...(query.get('product') && {product: query.get('product')}),
-    ...(query.get('version') && {version: query.get('version')}),
-    ...(query.get('username') && {username: query.get('username')}),
-    ...(query.get('password') && {password: query.get('password')}),
+    ...(query.get('part') && { part: query.get('part') }),
+    ...(query.get('vendor') && { vendor: query.get('vendor') }),
+    ...(query.get('product') && { product: query.get('product') }),
+    ...(query.get('version') && { version: query.get('version') }),
+    ...(query.get('username') && { username: query.get('username') }),
+    ...(query.get('password') && { password: query.get('password') }),
   };
 
   const [{ data, loading, error }] = useAxios({
@@ -78,15 +78,13 @@ const SearchCredentialsPage = () => {
     });
   };
 
-  const formatData = (data) => {
-    return data.map((item) => (
-      {
-        ...item,
-        cpe: `cpe:/${item.cpe.part}:${item.cpe.vendor}:${item.cpe.product}`,
-        rowProps: { onClick: () => history.push(`/credentials/${item._id}`), style: {cursor: 'pointer'} }
-      }
-    ));
-  };
+  const formatData = (data) => data.map((item) => (
+    {
+      ...item,
+      cpe: `cpe:/${item.cpe.part}:${item.cpe.vendor}:${item.cpe.product}`,
+      rowProps: { onClick: () => history.push(`/credentials/${item._id}`), style: { cursor: 'pointer' } },
+    }
+  ));
 
   return (
     <CredentialsList

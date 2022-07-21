@@ -10,11 +10,13 @@ import PaginatedDataTable from '../../sharedcomponents/PaginatedDataTable';
 import IsAdminIcon from '../Icons/IsAdminIcon';
 import ApiKey from '../ApiKey';
 
-export const APIKeyList = ({ data = [], dataConfig, loading, rowsPerPage, page, totalRows, updateConfig, dense, error }) => {
+export const APIKeyList = ({
+  data = [], dataConfig, loading, rowsPerPage, page, totalRows, updateConfig, dense, error,
+}) => {
   data = data?.map((row) => ({
     ...row,
     isAdmin: <IsAdminIcon isAdmin={row.isAdmin} />,
-    apiKey: <ApiKey apiKey={row.apiKey} />
+    apiKey: <ApiKey apiKey={row.apiKey} />,
   }));
 
   return (

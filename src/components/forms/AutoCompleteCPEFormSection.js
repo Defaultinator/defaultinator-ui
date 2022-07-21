@@ -4,10 +4,8 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 
-import useAxios from "axios-hooks";
-import { useSnackbar } from "notistack";
-
-import { API_URI } from '../../config/constants';
+import useAxios from 'axios-hooks';
+import { useSnackbar } from 'notistack';
 
 import {
   Grid,
@@ -15,12 +13,15 @@ import {
   CircularProgress,
 } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
+import { API_URI } from '../../config/constants';
 import useApiKey from '../../util/useApiKey';
 
-const CPEFormAutocompleteItem = ({ field, setField, fieldName, queryParams }) => {
+const CPEFormAutocompleteItem = ({
+  field, setField, fieldName, queryParams,
+}) => {
   const [open, setOpen] = useState(false);
   const [fieldText, setFieldText] = useState(field);
-  const [apikey] = useApiKey(s => [s.apikey]);
+  const [apikey] = useApiKey((s) => [s.apikey]);
   const { enqueueSnackbar } = useSnackbar();
 
   const [{ data = [], loading, error }, executeRequest] = useAxios(
@@ -31,8 +32,9 @@ const CPEFormAutocompleteItem = ({ field, setField, fieldName, queryParams }) =>
       },
     },
     {
-      manual: true
-    });
+      manual: true,
+    },
+  );
 
   useEffect(() => {
     if (error) {
@@ -51,7 +53,7 @@ const CPEFormAutocompleteItem = ({ field, setField, fieldName, queryParams }) =>
             field: fieldName,
             prefix: fieldText,
             ...myParams,
-          }
+          },
         }).catch(() => { });
       }, 300);
 
@@ -79,13 +81,13 @@ const CPEFormAutocompleteItem = ({ field, setField, fieldName, queryParams }) =>
       onInputChange={(event, newInputValue) => {
         setFieldText(newInputValue);
       }}
-      getOptionLabel={(option) => option._id || ""}
+      getOptionLabel={(option) => option._id || ''}
       filterOptions={(x) => x}
       renderInput={(params) => (
         <TextField
           {...params}
           label={`${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)}`}
-          variant={"outlined"}
+          variant="outlined"
           InputProps={{
             ...params.InputProps,
             endAdornment: (
@@ -110,7 +112,7 @@ export const AutoCompleteCPEFormSection = ({ fields, setFields }) => {
   useEffect(() => {
     if (vendor?.hasOwnProperty('_id')) {
       setFields((q) => {
-        let newParams = { ...q };
+        const newParams = { ...q };
         delete newParams.vendor;
         return ({
           ...newParams,
@@ -123,7 +125,7 @@ export const AutoCompleteCPEFormSection = ({ fields, setFields }) => {
   useEffect(() => {
     if (product?.hasOwnProperty('_id')) {
       setFields((q) => {
-        let newParams = { ...q };
+        const newParams = { ...q };
         delete newParams.product;
         return ({
           ...newParams,
@@ -136,7 +138,7 @@ export const AutoCompleteCPEFormSection = ({ fields, setFields }) => {
   useEffect(() => {
     if (version?.hasOwnProperty('_id')) {
       setFields((q) => {
-        let newParams = { ...q };
+        const newParams = { ...q };
         delete newParams.version;
         return ({
           ...newParams,
@@ -150,33 +152,32 @@ export const AutoCompleteCPEFormSection = ({ fields, setFields }) => {
     <Grid container spacing={3}>
       <Grid item sm={4}>
         <Autocomplete
-          id={"part-select"}
+          id="part-select"
           options={['a', 'o', 'h']}
           defaultValue={part}
           value={part}
           onChange={(e, newPart) => {
             setPart(newPart);
             setFields((q) => {
-              let newParams = { ...q };
+              const newParams = { ...q };
               delete newParams.part;
               return ({
                 ...newParams,
                 ...(newPart && { part: newPart }),
               });
-            })
-          }
-          }
-          renderInput={(params) => <TextField {...params} label={"Part"} variant={"outlined"} />}
+            });
+          }}
+          renderInput={(params) => <TextField {...params} label="Part" variant="outlined" />}
         />
       </Grid>
       <Grid item xs={12} sm={8}>
-        <CPEFormAutocompleteItem field={vendor} setField={setVendor} fieldName={'vendor'} queryParams={fields} />
+        <CPEFormAutocompleteItem field={vendor} setField={setVendor} fieldName="vendor" queryParams={fields} />
       </Grid>
       <Grid item xs={12} sm={6}>
-        <CPEFormAutocompleteItem field={product} setField={setProduct} fieldName={'product'} queryParams={fields} />
+        <CPEFormAutocompleteItem field={product} setField={setProduct} fieldName="product" queryParams={fields} />
       </Grid>
       <Grid item xs={12} sm={6}>
-        <CPEFormAutocompleteItem field={version} setField={setVersion} fieldName={'version'} queryParams={fields} />
+        <CPEFormAutocompleteItem field={version} setField={setVersion} fieldName="version" queryParams={fields} />
       </Grid>
     </Grid>
   );
@@ -186,7 +187,7 @@ AutoCompleteCPEFormSection.propTypes = {
   fields: PropTypes.shape({
     vendor: PropTypes.string,
     product: PropTypes.string,
-    version: PropTypes.string
+    version: PropTypes.string,
   }).isRequired,
   setFields: PropTypes.func.isRequired,
 };

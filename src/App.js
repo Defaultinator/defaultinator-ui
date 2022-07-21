@@ -8,6 +8,7 @@ import GavelIcon from '@mui/icons-material/Gavel';
 import FeedbackIcon from '@mui/icons-material/Feedback';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 
+import { Box } from '@mui/material';
 import MainNavigation from './sharedcomponents/MainNavigation';
 import { useApiKey } from './util/useApiKey';
 
@@ -17,7 +18,6 @@ import AboutPage from './routes/AboutPage';
 import AuthButton from './components/AuthButton';
 import TermsPage from './routes/TermsPage';
 import FeedbackPage from './routes/FeedbackPage';
-import { Box } from '@mui/material';
 
 const App = () => {
   const [isAdmin] = useApiKey((s) => [s.isAdmin]);

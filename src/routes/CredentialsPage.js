@@ -56,7 +56,7 @@ const CredentialsPage = () => {
       </Switch>
       <Link to={`${url}/add`}>
         <Fab
-          sx={{position: 'fixed', bottom: theme.spacing(2), right: theme.spacing(2)}}
+          sx={{ position: 'fixed', bottom: theme.spacing(2), right: theme.spacing(2) }}
           color="primary"
         >
           <AddIcon />
