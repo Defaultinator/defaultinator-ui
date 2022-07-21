@@ -6,8 +6,8 @@ module.exports = {
   "addons": [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
-    "@storybook/addon-interactions",
-    "@storybook/preset-create-react-app"
+    "@storybook/addon-interactions"
+    // TODO: Enable thisd after linting "@storybook/preset-create-react-app"
   ],
   "framework": "@storybook/react",
   "core": {
