@@ -8,30 +8,26 @@
     "@mui/icons-material": "^5.8.4",
     "@mui/lab": "^5.0.0-alpha.90",
     "@mui/material": "^5.9.0",
-    "@mui/styles": "^5.9.0",
-    "axios": "^0.21.1",
-    "axios-hooks": "^2.6.1",
-    "clsx": "^1.1.1",
+    "axios": "^0.27.2",
+    "axios-hooks": "^3.1.4",
     "cpe": "git+https://github.com/cbarnard-r7/cpe-js.git",
     "dotenv": "^8.2.0",
     "material-ui-confirm": "^3.0.4",
     "material-ui-popup-state": "^4.0.1",
     "notistack": "^2.0.5",
     "prop-types": "^15.7.2",
-    "query-string": "^7.0.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-highlight-words": "^0.17.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
     "react-hook-form": "^7.9.0",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^5.0.1",
+    "react-scripts": "^5.0.0",
     "web-vitals": "^2.1.4",
     "zustand": "^3.6.5"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^6.5.9",
-    "@storybook/addon-essentials": "^6.4.22",
+    "@storybook/addon-essentials": "^6.5.9",
     "@storybook/addon-interactions": "^6.5.9",
     "@storybook/addon-links": "^6.5.9",
     "@storybook/addon-queryparams": "^6.2.9",
@@ -39,15 +35,16 @@
     "@storybook/manager-webpack5": "^6.5.9",
     "@storybook/node-logger": "^6.5.9",
     "@storybook/preset-create-react-app": "^4.1.2",
-    "@storybook/react": "^6.1.21",
-    "@storybook/testing-react": "^0.0.22",
+    "@storybook/react": "^6.5.9",
+    "@storybook/testing-library": "^0.0.13",
     "@testing-library/dom": "^8.16.0",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^12.0.0",
     "axios-mock-adapter": "^1.20.0",
+    "babel-plugin-named-exports-order": "^0.0.2",
     "chromatic": "^6.4.0",
-    "eslint": "^8.20.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-storybook": "^0.6.1",
-    "storybook": "^6.5.9",
     "webpack": "^5.73.0"
   },
   "scripts": {
@@ -66,6 +63,30 @@
       "react-app/jest"
     ],
     "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      },
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      },
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      },
       {
         "files": [
           "**/*.stories.*"
@@ -93,5 +114,13 @@
       "reportWebVitals.js",
       "src/tests"
     ]
+  },
+  "resolutions": {
+    "@storybook/react/webpack": "^5"
+  },
+  "overrides": {
+    "@pmmmwh/react-refresh-webpack-plugin@0.5.7": {
+      "react-refresh": "^0.11.0"
+    }
   }
 }
