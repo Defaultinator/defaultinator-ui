@@ -85,8 +85,8 @@ export const PaginatedDataTable = (
                 {loading && (!data || data.length === 0)
                 && Array(rowsPerPage || pagination.defaultRowsPerPage).fill(Array(dataConfig.fields.length).fill('')).map((columns, idx) => (
                   <TableRow key={idx}>
-                    {columns.map((col, idx) => (
-                      <TableCell key={idx}>
+                    {columns.map((col, idx2) => (
+                      <TableCell key={idx2}>
                         <Skeleton />
                       </TableCell>
                     ))}
@@ -101,9 +101,9 @@ export const PaginatedDataTable = (
                       hover
                       {...row.rowProps}
                     >
-                      {fields.map((field, idx) => (
+                      {fields.map((field, idx2) => (
                         <TableCell
-                          key={idx}
+                          key={idx2}
                           align={field.align || 'left'}
                         >
                           {row[field.fieldName]}

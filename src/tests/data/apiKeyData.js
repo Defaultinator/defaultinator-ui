@@ -11,3 +11,5 @@ export const sampleApiKeys = [
     isAdmin: true,
   },
 ];
+
+export default sampleApiKeys;

@@ -75,12 +75,10 @@ const ViewAPIKeyPage = () => {
               history.push('/apikeys');
             } else {
               enqueueSnackbar('There has been an error deleting this record.');
-              console.log(res);
             }
           })
-          .catch((err) => {
+          .catch(() => {
             enqueueSnackbar('There has been an error deleting this record.');
-            console.log(err);
           });
       })
       .catch(() => {

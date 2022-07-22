@@ -38,7 +38,7 @@ const ReportIssueMenuItem = () => {
   );
 };
 
-const ReferencesMenuItem = ({ references }) => {
+const ReferencesMenuItem = ({ references = [] }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   return (

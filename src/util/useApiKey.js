@@ -10,20 +10,22 @@ function getStorageValue(key, defaultValue) {
     const initial = saved !== null ? JSON.parse(saved) : defaultValue;
     return initial;
   }
+
+  return undefined;
 }
 
 export const useApiKey = create((set) => ({
   apikey: getStorageValue(KEY_NAME, EMPTY_VALUE),
   isAdmin: getStorageValue('isAdmin', false),
-  setApikey: (key) => set((state) => {
+  setApikey: (key) => set(() => {
     localStorage.setItem(KEY_NAME, JSON.stringify(key));
     return ({ apikey: key });
   }),
-  deleteApikey: () => set((state) => {
+  deleteApikey: () => set(() => {
     localStorage.removeItem(KEY_NAME);
     return ({ apikey: EMPTY_VALUE });
   }),
-  setIsAdmin: (isAdmin) => set((state) => {
+  setIsAdmin: (isAdmin) => set(() => {
     localStorage.setItem('isAdmin', JSON.stringify(isAdmin));
     return ({ isAdmin });
   }),

@@ -41,7 +41,6 @@ const AddCredentialsPage = () => {
             history.push(`/credentials/${res.data._id}`);
           } else {
             enqueueSnackbar('There has been an error submitting your credentials.');
-            console.log(res);
           }
         });
       });

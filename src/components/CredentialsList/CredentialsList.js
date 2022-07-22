@@ -12,14 +12,20 @@ import CredentialsListToolbar from './CredentialsListToolbar';
 export const CredentialsList = ({
   data = [], dataConfig, loading, rowsPerPage, page, totalRows, updateConfig, dense, error,
 }) => {
-  data = data?.map((row) => ({ ...row, isVerified: <VerifiedIcon isVerified={row.isVerified} /> }));
-  data = data?.map((row) => ({ ...row, part: <PartIcon part={row.part} /> }));
+  let myData = data?.map((row) => ({
+    ...row,
+    isVerified: <VerifiedIcon isVerified={row.isVerified} />,
+  }));
+  myData = myData?.map((row) => ({
+    ...row,
+    part: <PartIcon part={row.part} />,
+  }));
 
   return (
     <Paper>
       <CredentialsListToolbar />
       <PaginatedDataTable
-        data={data || []}
+        data={myData || []}
         dataConfig={dataConfig}
         loading={loading}
         rowsPerPage={rowsPerPage}

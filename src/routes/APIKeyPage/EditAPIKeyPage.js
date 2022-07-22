@@ -62,7 +62,6 @@ const AddAPIKeyPage = () => {
         history.push(`/apikeys/${res.data._id}`);
       } else {
         enqueueSnackbar('There has been an error updating the specified API Key.');
-        console.log(res);
       }
     });
   };

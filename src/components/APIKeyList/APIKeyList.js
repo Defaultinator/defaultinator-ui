@@ -13,7 +13,7 @@ import ApiKey from '../ApiKey';
 export const APIKeyList = ({
   data = [], dataConfig, loading, rowsPerPage, page, totalRows, updateConfig, dense, error,
 }) => {
-  data = data?.map((row) => ({
+  const myData = data?.map((row) => ({
     ...row,
     isAdmin: <IsAdminIcon isAdmin={row.isAdmin} />,
     apiKey: <ApiKey apiKey={row.apiKey} />,
@@ -23,7 +23,7 @@ export const APIKeyList = ({
     <Paper sx={{ maxWidth: 600, margin: 'auto' }}>
       <APIKeyListToolbar />
       <PaginatedDataTable
-        data={data || []}
+        data={myData || []}
         dataConfig={dataConfig}
         loading={loading}
         rowsPerPage={rowsPerPage}

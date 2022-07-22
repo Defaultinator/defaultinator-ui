@@ -22,7 +22,11 @@ const SuggestionItem = ({ suggestion }) => {
 const AutoCompleteSuggestions = ({ suggestions }) => (
   <Paper>
     <List>
-      {suggestions.map((suggestion) => <SuggestionItem key={suggestion._id} suggestion={suggestion} />)}
+      {
+        suggestions.map((suggestion) => (
+          <SuggestionItem key={suggestion._id} suggestion={suggestion} />
+        ))
+      }
     </List>
   </Paper>
 );

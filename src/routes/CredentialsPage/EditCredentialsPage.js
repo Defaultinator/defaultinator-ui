@@ -57,10 +57,10 @@ const EditCredentialsPage = () => {
     }
   }, [error, enqueueSnackbar]);
 
-  const myAction = (data) => {
+  const myAction = (myData) => {
     confirm({ description: 'Are you sure you want to commit your edit?' })
       .then(() => {
-        executePut({ data })
+        executePut({ myData })
           .then((res) => {
             if (res.status === 200) {
               enqueueSnackbar('Credential edited!');
@@ -68,23 +68,17 @@ const EditCredentialsPage = () => {
             }
           });
       })
-      .catch((err) => {
+      .catch(() => {
         // Confirm dialogue was cancelled. Just back out gracefully.
       });
   };
 
+  if (loading) return null;
+
   return (
-    <>
-      {loading
-        ? <></>
-        : (
-          <>
-            {error
-              ? <Typography variant="h1">Something went wrong.</Typography>
-              : <CredentialsForm formAction={myAction} defaultValues={flattenCpe(data)} title="Edit Credentials" />}
-          </>
-        )}
-    </>
+    error
+      ? <Typography variant="h1">Something went wrong.</Typography>
+      : <CredentialsForm formAction={myAction} defaultValues={flattenCpe(data)} title="Edit Credentials" />
   );
 };
 

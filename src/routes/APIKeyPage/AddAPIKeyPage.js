@@ -43,7 +43,6 @@ const AddAPIKeyPage = () => {
         history.push(`/apikeys/${res.data._id}`);
       } else {
         enqueueSnackbar('There has been an error submitting your credentials.');
-        console.log(res);
       }
     });
   };

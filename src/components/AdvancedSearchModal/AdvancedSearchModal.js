@@ -12,7 +12,7 @@ import AdvancedSearchByCPE from './AdvancedSearchByCPE';
 import AdvancedSearchByCredentials from './AdvancedSearchByCredentials';
 import TabLayout from '../../sharedcomponents/TabLayout';
 
-export const AdvancedSearchModal = ({ onSearch = () => { }, onClear }) => {
+export const AdvancedSearchModal = ({ onSearch = () => { } }) => {
   const history = useHistory();
 
   const handleSearch = (fields) => {

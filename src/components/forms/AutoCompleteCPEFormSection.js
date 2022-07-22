@@ -38,7 +38,6 @@ const CPEFormAutocompleteItem = ({
 
   useEffect(() => {
     if (error) {
-      console.log(error);
       enqueueSnackbar('There was an error loading the requested data.');
     }
   }, [error, enqueueSnackbar]);
@@ -59,6 +58,8 @@ const CPEFormAutocompleteItem = ({
 
       return () => clearTimeout(delayRequest);
     }
+
+    return undefined;
   }, [fieldText, fieldName, executeRequest, open, queryParams]);
 
   return (
@@ -110,7 +111,7 @@ export const AutoCompleteCPEFormSection = ({ fields, setFields }) => {
   const [version, setVersion] = useState({ _id: fields?.version });
 
   useEffect(() => {
-    if (vendor?.hasOwnProperty('_id')) {
+    if (vendor && Object.prototype.hasOwnProperty.call(vendor, '_id')) {
       setFields((q) => {
         const newParams = { ...q };
         delete newParams.vendor;
@@ -123,7 +124,7 @@ export const AutoCompleteCPEFormSection = ({ fields, setFields }) => {
   }, [vendor, setFields]);
 
   useEffect(() => {
-    if (product?.hasOwnProperty('_id')) {
+    if (product && Object.prototype.hasOwnProperty.call(product, '_id')) {
       setFields((q) => {
         const newParams = { ...q };
         delete newParams.product;
@@ -136,7 +137,7 @@ export const AutoCompleteCPEFormSection = ({ fields, setFields }) => {
   }, [product, setFields]);
 
   useEffect(() => {
-    if (version?.hasOwnProperty('_id')) {
+    if (version && Object.prototype.hasOwnProperty.call(version, '_id')) {
       setFields((q) => {
         const newParams = { ...q };
         delete newParams.version;

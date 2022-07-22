@@ -92,7 +92,6 @@ const CredentialsSection = ({ control }) => {
         sx={{
           backgroundColor: theme.palette.background.paper, position: 'relative', top: -28, padding: '0px 8px', color: theme.palette.primary.light,
         }}
-        Ï
         variant="caption"
       >
         Credentials
@@ -124,14 +123,20 @@ const ReferenceList = ({ references, setReferences }) => {
   };
 
   return (
-    <>
-      {references.length !== 0
-        && (
-          <List>
-            {references.map((reference, idx) => <ReferenceListItem reference={reference} key={idx} deleteSelf={removeSelf(idx)} />)}
-          </List>
-        )}
-    </>
+    references.length !== 0
+    && (
+      <List>
+        {
+          references.map((reference, idx) => (
+            <ReferenceListItem
+              reference={reference}
+              key={idx}
+              deleteSelf={removeSelf(idx)}
+            />
+          ))
+        }
+      </List>
+    )
   );
 };
 
@@ -146,7 +151,6 @@ const ReferencesSection = ({ references, setReferences }) => {
         sx={{
           backgroundColor: theme.palette.background.paper, position: 'relative', top: -28, padding: '0px 8px', color: theme.palette.primary.light,
         }}
-        Ï
         variant="caption"
       >
         References
@@ -233,7 +237,6 @@ const CredentialsForm = ({
               sx={{
                 backgroundColor: theme.palette.background.paper, position: 'relative', top: -28, padding: '0px 8px', color: theme.palette.primary.light,
               }}
-              Ï
               variant="caption"
             >
               Credentials

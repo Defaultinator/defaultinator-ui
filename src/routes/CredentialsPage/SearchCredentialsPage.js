@@ -74,11 +74,11 @@ const SearchCredentialsPage = () => {
     setPaginationParams({
       ...paginationParams,
       ...(rowsPerPage && { limit: rowsPerPage }),
-      ...((page || page === 0) && { page: parseInt(page) + 1 }),
+      ...((page || page === 0) && { page: parseInt(page, 10) + 1 }),
     });
   };
 
-  const formatData = (data) => data.map((item) => (
+  const formatData = (myData) => myData.map((item) => (
     {
       ...item,
       cpe: `cpe:/${item.cpe.part}:${item.cpe.vendor}:${item.cpe.product}`,

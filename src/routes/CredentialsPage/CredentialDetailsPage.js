@@ -40,7 +40,6 @@ const CredentialDetailsPage = () => {
   // Error handling for initial credential loading
   useEffect(() => {
     if (credError) {
-      console.log(credError);
       enqueueSnackbar('There was an error loading the requested data.');
     }
   }, [credError, enqueueSnackbar]);
@@ -61,7 +60,6 @@ const CredentialDetailsPage = () => {
   // Error handling for credential deletion
   useEffect(() => {
     if (deleteError) {
-      console.log(deleteError);
       enqueueSnackbar('There was an error loading the requested data.');
     }
   }, [deleteError, enqueueSnackbar]);
@@ -76,12 +74,10 @@ const CredentialDetailsPage = () => {
               history.push('/credentials');
             } else {
               enqueueSnackbar('There has been an error deleting this record.');
-              console.log(res);
             }
           })
-          .catch((err) => {
+          .catch(() => {
             enqueueSnackbar('There has been an error deleting this record.');
-            console.log(err);
           });
       })
       .catch(() => {
@@ -104,27 +100,24 @@ const CredentialDetailsPage = () => {
   // Error handling for credential verification
   useEffect(() => {
     if (verifyError) {
-      console.log(verifyError);
       enqueueSnackbar('There was an error verifying the credential.');
     }
   }, [verifyError, enqueueSnackbar]);
 
-  const toggleVerify = (credential) => {
+  const toggleVerify = (myCredential) => {
     confirm({ description: 'Are you sure you want to verify this entry?' })
       .then(() => {
-        executeVerify({ data: { isVerified: !credential.isVerified } })
+        executeVerify({ data: { isVerified: !myCredential.isVerified } })
           .then((res) => {
             if (res.status === 200) {
               enqueueSnackbar('Verification status changed!');
               executeGet();
             } else {
               enqueueSnackbar('There has been an error verifying this record.');
-              console.log(res);
             }
           })
-          .catch((err) => {
+          .catch(() => {
             enqueueSnackbar('There has been an error verifying this record.');
-            console.log(err);
           });
       })
       .catch(() => {
@@ -132,21 +125,16 @@ const CredentialDetailsPage = () => {
   };
 
   return (
-    <>
-      {!loading
-        && (
-        <CredentialCard
-          loading={loading}
-          credential={credential}
-          primaryButtonText="Edit"
-          primaryButtonProps={{ component: Link, to: `/credentials/${credentialId}/edit` }}
-          secondaryButtonText="Delete"
-          secondaryButtonProps={{ onClick: handleDelete }}
-          onVerify={toggleVerify}
-          isAdmin={isAdmin}
-        />
-        )}
-    </>
+    <CredentialCard
+      loading={loading}
+      credential={credential}
+      primaryButtonText="Edit"
+      primaryButtonProps={{ component: Link, to: `/credentials/${credentialId}/edit` }}
+      secondaryButtonText="Delete"
+      secondaryButtonProps={{ onClick: handleDelete }}
+      onVerify={toggleVerify}
+      isAdmin={isAdmin}
+    />
   );
 };
 

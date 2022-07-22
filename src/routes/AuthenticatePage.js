@@ -35,14 +35,14 @@ const AuthenticatePage = () => {
 
   }, [error]);
 
-  const onSubmit = ({ apikey }) => {
+  const onSubmit = ({ myApikey }) => {
     executeRequest({
       headers: {
-        'X-API-KEY': apikey,
+        'X-API-KEY': myApikey,
       },
     }).then(() => {
-      setApikey(apikey);
-    }).catch((err) => {
+      setApikey(myApikey);
+    }).catch(() => {
       enqueueSnackbar('You entered an invalid key.');
     });
   };

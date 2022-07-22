@@ -40,11 +40,11 @@ const ListAPIKeysPage = () => {
     setPaginationParams({
       ...paginationParams,
       ...(rowsPerPage && { limit: rowsPerPage }),
-      ...((page || page === 0) && { page: parseInt(page) + 1 }),
+      ...((page || page === 0) && { page: parseInt(page, 10) + 1 }),
     });
   };
 
-  const formatData = (data) => data?.map((item) => (
+  const formatData = (myData) => myData?.map((item) => (
     {
       ...item,
       rowProps: { onClick: () => history.push(`/apikeys/${item._id}`), style: { cursor: 'pointer' } },
