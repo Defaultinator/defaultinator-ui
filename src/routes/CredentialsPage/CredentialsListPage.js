@@ -62,7 +62,7 @@ const CredentialsListPage = () => {
       dataConfig={CREDENTIALS_TABLE_CONFIG}
       rowsPerPage={data?.limit}
       page={data ? data.page - 1 : null}
-      totalRows={data?.total}
+      totalRows={data?.totalDocs}
       updateConfig={handlePaginationChange}
     />
   );

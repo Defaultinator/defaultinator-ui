@@ -24,7 +24,7 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
-const DRAWER_WIDTH = 240;
+const DRAWER_WIDTH = 250;
 
 const AppDrawerContent = ({ pages, linkClicked, DrawerHeader }) => {
   const { pathname: activePath } = useLocation();
