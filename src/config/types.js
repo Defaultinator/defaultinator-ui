@@ -8,7 +8,7 @@ export const CpeType = PropTypes.shape({
   update: PropTypes.string,
   edition: PropTypes.string,
   language: PropTypes.string,
-})
+});
 
 export const CredentialType = PropTypes.shape({
   username: PropTypes.string,

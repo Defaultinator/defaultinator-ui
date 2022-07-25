@@ -4,21 +4,21 @@ import React, {
 import {
   useHistory,
   useParams,
-} from "react-router-dom";
+} from 'react-router-dom';
 import {
   useSnackbar,
 } from 'notistack';
-import useAxios from "axios-hooks";
+import useAxios from 'axios-hooks';
 import { useApiKey } from '../../util/useApiKey';
 
-import { API_URI } from "../../config/constants";
-import APIKeyForm from "../../components/forms/APIKeyForm/APIKeyForm";
+import { API_URI } from '../../config/constants';
+import APIKeyForm from '../../components/forms/APIKeyForm/APIKeyForm';
 
 const AddAPIKeyPage = () => {
   const history = useHistory();
   const { apiKeyId } = useParams();
   const { enqueueSnackbar } = useSnackbar();
-  const [apikey] = useApiKey(s => [s.apikey]);
+  const [apikey] = useApiKey((s) => [s.apikey]);
 
   const [{ data: apiKey, loading, error }] = useAxios(
     {
@@ -33,7 +33,7 @@ const AddAPIKeyPage = () => {
   useEffect(() => {
     if (error) {
       const message = error.response?.data?.message || 'There was an error updating the API Key.';
-      enqueueSnackbar(message);
+      enqueueSnackbar(message, { variant: 'error' });
     }
   }, [error, enqueueSnackbar]);
 
@@ -45,28 +45,27 @@ const AddAPIKeyPage = () => {
         'X-API-KEY': apikey,
       },
     },
-    { manual: true }
+    { manual: true },
   );
 
   useEffect(() => {
     if (putError) {
       const message = putError.response?.data?.message || 'There was an error updating the API Key.';
-      enqueueSnackbar(message);
+      enqueueSnackbar(message, { variant: 'error' });
     }
   }, [putError, enqueueSnackbar]);
 
   const myAction = (data) => {
-    executePut({ data: data }).then((res) => {
+    executePut({ data }).then((res) => {
       if (res.status === 200) {
-        enqueueSnackbar('API Key updated!');
+        enqueueSnackbar('API Key updated!', { variant: 'success' });
         history.push(`/apikeys/${res.data._id}`);
       } else {
-        enqueueSnackbar('There has been an error updating the specified API Key.');
-        console.log(res);
+        enqueueSnackbar('There has been an error updating the specified API Key.', { variant: 'error' });
       }
     });
   };
-  
+
   return (
     <APIKeyForm
       formAction={myAction}

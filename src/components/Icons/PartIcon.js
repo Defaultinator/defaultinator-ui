@@ -1,11 +1,11 @@
-import AppsIcon from '@material-ui/icons/Apps';
-import RouterIcon from '@material-ui/icons/Router';
-import DeveloperBoardIcon from '@material-ui/icons/DeveloperBoard';
-import DeviceUnknownIcon from '@material-ui/icons/DeviceUnknown';
+import AppsIcon from '@mui/icons-material/Apps';
+import RouterIcon from '@mui/icons-material/Router';
+import DeveloperBoardIcon from '@mui/icons-material/DeveloperBoard';
+import DeviceUnknownIcon from '@mui/icons-material/DeviceUnknown';
 
-import { Tooltip } from '@material-ui/core';
+import { Tooltip } from '@mui/material';
 
-export const PartIcon = ({part}) => {
+export const PartIcon = ({ part }) => {
   let icon = <DeviceUnknownIcon />;
   let text = 'Unknown';
 
@@ -15,18 +15,18 @@ export const PartIcon = ({part}) => {
       text = 'Software';
       break;
     case 'o':
-      icon = <DeveloperBoardIcon />
+      icon = <DeveloperBoardIcon />;
       text = 'Operating System';
       break;
     case 'h':
-      icon = <RouterIcon />
+      icon = <RouterIcon />;
       text = 'Hardware';
       break;
     default:
       break;
-  };
+  }
 
-  return(
+  return (
     <Tooltip title={text}>
       {icon}
     </Tooltip>

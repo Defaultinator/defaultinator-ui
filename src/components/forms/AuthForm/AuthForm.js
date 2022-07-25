@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   useForm,
-} from "react-hook-form";
+} from 'react-hook-form';
 import PropTypes from 'prop-types';
 
 import {
@@ -9,40 +9,24 @@ import {
   Button,
   Paper,
   Container,
-} from "@material-ui/core";
+} from '@mui/material';
 
-import {
-  makeStyles,
-} from "@material-ui/core/styles";
 import FormField from '../../FormField';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'inline-block',
-    margin: 'auto',
-  },
-  container: {
-    padding: theme.spacing(2),
-  },
-}));
-
-const AuthForm = ({onSubmit, apikey, onClear}) => {
-  const classes = useStyles();
-  const { handleSubmit, control, reset, formState: { errors } } = useForm();
-
-  // const onSubmit = (data) => {
-  //   setApikey(data.apikey);
-  // };
+const AuthForm = ({ onSubmit, apikey, onClear }) => {
+  const {
+    handleSubmit, control, reset, formState: { errors },
+  } = useForm();
 
   return (
-    <Paper className={classes.root}>
+    <Paper sx={{ display: 'inline-block', margin: 'auto' }}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Container className={classes.container}>
+        <Container sx={{ padding: 2 }}>
           <Grid container spacing={3} alignItems="center">
             <Grid item xs={12}>
               <FormField
-                name={"apikey"}
-                placeholder={"Enter Your API Key"}
+                name="apikey"
+                placeholder="Enter Your API Key"
                 control={control}
                 controllerProps={{ rules: { required: true } }}
                 defaultValue={apikey}
@@ -51,7 +35,7 @@ const AuthForm = ({onSubmit, apikey, onClear}) => {
             </Grid>
           </Grid>
         </Container>
-        <Container className={classes.container}>
+        <Container sx={{ padding: 2 }}>
           <Button
             color="secondary"
             onClick={() => {
@@ -61,7 +45,7 @@ const AuthForm = ({onSubmit, apikey, onClear}) => {
           >
             Clear
           </Button>
-          <Button type="submit" variant="contained" color="primary">Submit</Button>
+          <Button type="submit" variant="outlined" color="primary">Submit</Button>
         </Container>
       </form>
     </Paper>

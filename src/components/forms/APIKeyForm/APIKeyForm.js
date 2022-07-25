@@ -1,9 +1,9 @@
+import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import {
   Controller,
   useForm,
-} from "react-hook-form";
-import PropTypes from 'prop-types';
+} from 'react-hook-form';
 
 import {
   Grid,
@@ -13,42 +13,23 @@ import {
   FormGroup,
   FormControlLabel,
   Checkbox,
-} from "@material-ui/core";
+} from '@mui/material';
 
-import {
-  makeStyles,
-} from "@material-ui/core/styles";
 import FormField from '../../FormField';
 import { APIKeyType } from '../../../config/types';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    //maxWidth: 650,
-    display: 'inline-block',
-    margin: 'auto',
-  },
-  container: {
-    padding: theme.spacing(2),
-    width: 300,
-  },
-  input: {
-    width: '100%',
-  }
-}));
+const APIKeyForm = ({
+  formAction,
+  defaultValues = { email: '', notes: '', isAdmin: false },
+  loading = false,
+}) => {
+  const {
+    handleSubmit, control, reset, formState: { errors },
+  } = useForm({ defaultValues });
 
-const APIKeyForm = (
-  {
-    formAction,
-    defaultValues = {email: '', notes: '', isAdmin: false},
-    loading = false,
-  }
-) => {
-  const classes = useStyles();
-  const { handleSubmit, control, reset, formState: { errors } } = useForm({defaultValues: defaultValues});
-
-  useEffect(()=> {
+  useEffect(() => {
     reset(defaultValues);
-  }, [defaultValues, reset])
+  }, [defaultValues, reset]);
 
   const onSubmit = (data) => {
     formAction(data);
@@ -56,15 +37,15 @@ const APIKeyForm = (
 
   // TODO: Should validate clientside that the email is valid.Would need YUM or something.
   return (
-    <Paper className={classes.root}>
+    <Paper sx={{ display: 'inline-block', margin: 'auto' }}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Container className={classes.container}>
+        <Container sx={{ padding: 2, width: 300 }}>
           <Grid container spacing={3} alignItems="center">
             <Grid item xs={12}>
               <FormField
-                name={"email"}
-                className={classes.input}
-                placeholder={"E-mail Address"}
+                name="email"
+                sx={{ width: '100%' }}
+                placeholder="E-mail Address"
                 control={control}
                 controllerProps={{ rules: { required: true } }}
                 error={errors.email}
@@ -73,8 +54,8 @@ const APIKeyForm = (
             </Grid>
             <Grid item xs={12}>
               <FormField
-                name={"notes"}
-                placeholder={"Notes"}
+                name="notes"
+                placeholder="Notes"
                 multiline
                 control={control}
                 textFieldProps={{ disabled: loading }}
@@ -93,7 +74,7 @@ const APIKeyForm = (
             </Grid>
           </Grid>
         </Container>
-        <Container className={classes.container}>
+        <Container sx={{ padding: 2, width: 300 }}>
           <Button
             color="secondary"
             onClick={() => reset({ email: '', notes: '', isAdmin: false })}
@@ -103,7 +84,7 @@ const APIKeyForm = (
           </Button>
           <Button
             type="submit"
-            variant="contained"
+            variant="outlined"
             color="primary"
             disabled={loading}
           >
@@ -118,10 +99,12 @@ const APIKeyForm = (
 APIKeyForm.propTypes = {
   formAction: PropTypes.func.isRequired,
   defaultValues: PropTypes.shape(APIKeyType),
+  loading: PropTypes.bool,
 };
 
 APIKeyForm.defaultProps = {
-  defaultValues: {email: '', notes: '', isAdmin: false},
+  defaultValues: { email: '', notes: '', isAdmin: false },
+  loading: false,
 };
 
 export default APIKeyForm;
