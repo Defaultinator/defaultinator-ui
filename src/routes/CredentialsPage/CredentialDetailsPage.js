@@ -71,12 +71,12 @@ const CredentialDetailsPage = () => {
           .then((res) => {
             if (res.status === 200) {
               enqueueSnackbar('Credential deleted!', { variant: 'success' });
-              history.push(`/credentials`);
+              history.push('/credentials');
             } else {
               enqueueSnackbar('There has been an error deleting this record.', { variant: 'error' });
             }
           })
-          .catch((err) => {
+          .catch(() => {
             enqueueSnackbar('There has been an error deleting this record.', { variant: 'error' });
           });
       })
@@ -116,7 +116,7 @@ const CredentialDetailsPage = () => {
               enqueueSnackbar('There has been an error verifying this record.', { variant: 'error' });
             }
           })
-          .catch((err) => {
+          .catch(() => {
             enqueueSnackbar('There has been an error verifying this record.', { variant: 'error' });
           });
       })

@@ -1,9 +1,9 @@
+import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import {
   Controller,
   useForm,
 } from 'react-hook-form';
-import PropTypes from 'prop-types';
 
 import {
   Grid,
@@ -103,7 +103,7 @@ APIKeyForm.propTypes = {
 };
 
 APIKeyForm.defaultProps = {
-  defaultValues: {email: '', notes: '', isAdmin: false},
+  defaultValues: { email: '', notes: '', isAdmin: false },
   loading: false,
 };
 
