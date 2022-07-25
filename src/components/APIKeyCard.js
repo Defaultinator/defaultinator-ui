@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/core/styles';
 import {
   Button,
   Card,
@@ -8,22 +7,12 @@ import {
   CardContent,
   CardHeader,
   Typography,
-} from '@material-ui/core';
+  Skeleton,
+} from '@mui/material';
 import { APIKeyType } from '../config/types';
 import IsAdminIcon from './Icons/IsAdminIcon';
 import loadingWrapper from '../util/loadingWrapper';
-import { Skeleton } from '@material-ui/lab';
-
-const useStyles = makeStyles({
-  root: {
-    width: 400,
-    margin: 'auto',
-  },
-  cardActions: {
-    display: "flex",
-    justifyContent: "flex-end"
-  },
-});
+import ApiKey from './ApiKey';
 
 export const APIKeyCard = ({
   apiKey = {},
@@ -31,31 +20,23 @@ export const APIKeyCard = ({
   deleteButtonProps = {},
   editButtonProps = {},
 }) => {
-  const styles = useStyles();
-  const { apiKey: key, email, notes, isAdmin } = apiKey;
+  const {
+    apiKey: key, email, notes, isAdmin,
+  } = apiKey;
 
   return (
-    <Card className={styles.root}>
+    <Card sx={{ width: 400, margin: 'auto' }}>
       <CardHeader
         avatar={
           loadingWrapper(loading, <IsAdminIcon isAdmin={isAdmin} />, 'circle')
         }
-        title={loading ? <Skeleton width={100} variant={'text'} /> : email}
-        subheader={loading ? <Skeleton width={150} variant={'text'} /> : key}
+        title={loading ? <Skeleton width={100} variant="text" /> : email}
+        subheader={loading ? <Skeleton width={150} variant="text" /> : <ApiKey apiKey={key} />}
       />
       <CardContent>
-        <Typography variant="body1">{loading ? [1,2,3].map((val) => <Skeleton key={val} style={{ width: '100%' }} />) : notes}</Typography>
+        <Typography variant="body1">{loading ? [1, 2, 3].map((val) => <Skeleton key={val} style={{ width: '100%' }} />) : notes}</Typography>
       </CardContent>
-      <CardActions className={styles.cardActions}>
-        <Button
-          disabled={loading}
-          size="small"
-          color="primary"
-          variant={'contained'}
-          {...editButtonProps}
-        >
-          Edit
-        </Button>
+      <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Button
           disabled={loading}
           size="small"
@@ -63,6 +44,15 @@ export const APIKeyCard = ({
           {...deleteButtonProps}
         >
           Delete
+        </Button>
+        <Button
+          disabled={loading}
+          size="small"
+          color="primary"
+          variant="outlined"
+          {...editButtonProps}
+        >
+          Edit
         </Button>
       </CardActions>
     </Card>

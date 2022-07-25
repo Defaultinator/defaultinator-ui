@@ -1,9 +1,6 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import {
-  makeStyles,
-  alpha,
-} from '@material-ui/core/styles';
+import { alpha } from '@mui/material/styles';
 
 import {
   Dialog,
@@ -11,22 +8,14 @@ import {
   Toolbar,
   Tooltip,
   Typography,
-} from "@material-ui/core";
-import SearchIcon from '@material-ui/icons/Search';
+  useTheme,
+} from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 
 import AdvancedSearchModal from '../AdvancedSearchModal/AdvancedSearchModal';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
-  },
-  title: {
-    flex: '1 1 100%',
-  },
-}));
-
 export const CredentialsListToolbar = () => {
-  const classes = useStyles();
+  const theme = useTheme();
   const [searchOpen, setSearchOpen] = useState(false);
 
   return (
@@ -35,21 +24,25 @@ export const CredentialsListToolbar = () => {
         open={searchOpen}
         onClose={() => setSearchOpen(false)}
       >
-        <AdvancedSearchModal onSearch={() => setSearchOpen(false)}/>
+        <AdvancedSearchModal onSearch={() => setSearchOpen(false)} />
       </Dialog>
       <Toolbar
-        className={classes.root}
+        sx={{
+          backgroundColor:
+            alpha(
+              theme.palette.primary.main,
+              theme.palette.action.activatedOpacity,
+            ),
+        }}
       >
         <Typography
-          className={classes.title}
-          variant={'h6'}
+          sx={{ flex: '1 1 100%' }}
+          variant="h6"
         >
           Credentials
         </Typography>
-        <Tooltip title={`Filter Results`}>
-          <IconButton
-            onClick={() => setSearchOpen(true)}
-          >
+        <Tooltip title="Filter Results">
+          <IconButton onClick={() => setSearchOpen(true)} size="large">
             <SearchIcon />
           </IconButton>
         </Tooltip>
@@ -57,4 +50,5 @@ export const CredentialsListToolbar = () => {
     </>
   );
 };
+
 export default CredentialsListToolbar;

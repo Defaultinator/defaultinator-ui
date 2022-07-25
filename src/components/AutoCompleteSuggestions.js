@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -6,25 +6,27 @@ import {
   ListItem,
   ListItemText,
   Paper,
-} from "@material-ui/core";
+} from '@mui/material';
 
-const SuggestionItem = ({suggestion}) => {
-  const {_id: name, count} = suggestion;
+const SuggestionItem = ({ suggestion }) => {
+  const { _id: name, count } = suggestion;
 
   // TODO: These should be clickable
   return (
     <ListItem button>
-      <ListItemText primary={name} secondary={`Records: ${count}`}/>
+      <ListItemText primary={name} secondary={`Records: ${count}`} />
     </ListItem>
   );
 };
 
-const AutoCompleteSuggestions = ({suggestions}) => (
+const AutoCompleteSuggestions = ({ suggestions }) => (
   <Paper>
     <List>
-      {suggestions.map((suggestion) =>
-        <SuggestionItem key={suggestion._id} suggestion={suggestion}/>
-      )}
+      {
+        suggestions.map((suggestion) => (
+          <SuggestionItem key={suggestion._id} suggestion={suggestion} />
+        ))
+      }
     </List>
   </Paper>
 );

@@ -3,15 +3,12 @@ import {
   Switch,
   Route,
   useRouteMatch, Link,
-} from "react-router-dom";
+} from 'react-router-dom';
 
 import {
-  Fab,
-} from "@material-ui/core";
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
-import {
-  makeStyles,
-} from "@material-ui/core/styles";
+  Fab, useTheme,
+} from '@mui/material';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
 import withAuth from '../components/withAuth';
 
@@ -20,19 +17,9 @@ import ViewAPIKeyPage from './APIKeyPage/ViewAPIKeyPage';
 import AddAPIKeyPage from './APIKeyPage/AddAPIKeyPage';
 import EditAPIKeyPage from './APIKeyPage/EditAPIKeyPage';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-  },
-  fab: {
-    position: 'fixed',
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
-  },
-}));
-
 const APIKeyPage = () => {
-  let { path, url } = useRouteMatch();
-  let classes = useStyles();
+  const { path, url } = useRouteMatch();
+  const theme = useTheme();
 
   const pages = [
     {
@@ -50,22 +37,22 @@ const APIKeyPage = () => {
     {
       path: `${path}/`,
       content: <ListAPIKeysPage />,
-    }
+    },
   ];
 
   return (
     <div>
       <Switch>
-        {pages.map((page, idx) =>
+        {pages.map((page, idx) => (
           <Route path={page.path} key={idx}>
             {page.content}
           </Route>
-        )}
+        ))}
       </Switch>
       <Link to={`${url}/add`}>
         <Fab
-          className={classes.fab}
-          color={"primary"}
+          sx={{ position: 'fixed', bottom: theme.spacing(2), right: theme.spacing(2) }}
+          color="primary"
         >
           <PersonAddIcon />
         </Fab>

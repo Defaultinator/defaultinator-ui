@@ -10,38 +10,38 @@ import {
   Tooltip,
   Typography,
   ListItemIcon,
-} from '@material-ui/core';
+} from '@mui/material';
 
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import BugReportIcon from '@material-ui/icons/BugReport';
-import BookmarksIcon from '@material-ui/icons/Bookmarks';
-import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import BugReportIcon from '@mui/icons-material/BugReport';
+import BookmarksIcon from '@mui/icons-material/Bookmarks';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 import ReportIssueDialog from './ReportIssueDialog';
 
 const ReportIssueMenuItem = () => {
   const [open, setOpen] = useState(false);
 
-  return(
+  return (
     <>
-    <ReportIssueDialog open={open} setOpen={setOpen}/>
-    <MenuItem
-      onClick={() => setOpen(true)}
-    >
-      <ListItemIcon>
-        <BugReportIcon />
-      </ListItemIcon>
-      <Typography variant="inherit" noWrap>
-        Report an Issue
-      </Typography>
-    </MenuItem>
+      <ReportIssueDialog open={open} setOpen={setOpen} />
+      <MenuItem
+        onClick={() => setOpen(true)}
+      >
+        <ListItemIcon>
+          <BugReportIcon />
+        </ListItemIcon>
+        <Typography variant="inherit" noWrap>
+          Report an Issue
+        </Typography>
+      </MenuItem>
     </>
   );
 };
 
-const ReferencesMenuItem = ({ references }) => {
+const ReferencesMenuItem = ({ references = [] }) => {
   const [anchorEl, setAnchorEl] = useState(null);
-  
+
   return (
     <>
       <MenuItem
@@ -61,12 +61,12 @@ const ReferencesMenuItem = ({ references }) => {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={() => setAnchorEl(null)}
-        style={{position: 'absolute', top: 40}}
+        style={{ position: 'absolute', top: 40 }}
       >
         {references.map((ref, idx) => (
           <MenuItem
             key={idx}
-            component={'a'}
+            component="a"
             href={`${ref}`}
           >
             {ref}
@@ -82,13 +82,14 @@ const CredentialCardMenuOptions = ({ references }) => {
 
   return (
     <>
-      <Tooltip title={"More Options"}>
+      <Tooltip title="More Options">
         <span>
           <IconButton
             aria-label="options"
             aria-controls="simple-menu"
             aria-haspopup="true"
             onClick={(e) => setAnchorEl(e.currentTarget)}
+            size="large"
           >
             <MoreVertIcon />
           </IconButton>
@@ -107,4 +108,5 @@ const CredentialCardMenuOptions = ({ references }) => {
     </>
   );
 };
+
 export default CredentialCardMenuOptions;

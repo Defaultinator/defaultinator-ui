@@ -1,80 +1,72 @@
 import {
   BrowserRouter as Router,
-} from "react-router-dom";
+} from 'react-router-dom';
 
-import { makeStyles } from '@material-ui/core/styles';
+import LockIcon from '@mui/icons-material/Lock';
+import HomeIcon from '@mui/icons-material/Home';
+import GavelIcon from '@mui/icons-material/Gavel';
+import FeedbackIcon from '@mui/icons-material/Feedback';
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
 
-import LockIcon from '@material-ui/icons/Lock';
-import HomeIcon from '@material-ui/icons/Home';
-import GavelIcon from '@material-ui/icons/Gavel';
-import FeedbackIcon from '@material-ui/icons/Feedback';
-import VpnKeyIcon from '@material-ui/icons/VpnKey';
-
+import { Box } from '@mui/material';
 import MainNavigation from './sharedcomponents/MainNavigation';
-import useApiKey from "./util/useApiKey";
+import { useApiKey } from './util/useApiKey';
 
 import CredentialsPage from './routes/CredentialsPage';
 import APIKeyPage from './routes/APIKeyPage';
 import AboutPage from './routes/AboutPage';
 import AuthButton from './components/AuthButton';
-import TermsPage from "./routes/TermsPage";
-import FeedbackPage from "./routes/FeedbackPage";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-}));
+import TermsPage from './routes/TermsPage';
+import FeedbackPage from './routes/FeedbackPage';
 
 const App = () => {
-  const classes = useStyles();
-  const [isAdmin] = useApiKey(s => [s.isAdmin]);
+  const [isAdmin] = useApiKey((s) => [s.isAdmin]);
 
   const pages = [
     {
-      navText: "Home",
+      navText: 'Home',
       navIcon: <HomeIcon />,
       pageContent: <AboutPage />,
-      pageTitle: "About",
-      path: "/about",
+      pageTitle: 'About',
+      path: '/about',
     },
     {
-      navText: "Credentials",
+      navText: 'Credentials',
       navIcon: <LockIcon />,
       pageContent: <CredentialsPage />,
-      pageTitle: "Credentials",
-      path: "/credentials",
+      pageTitle: 'Credentials',
+      path: '/credentials',
     },
     {
-      navText: "Key Management",
+      navText: 'Key Management',
       navIcon: <VpnKeyIcon />,
       pageContent: <APIKeyPage />,
-      pageTitle: "API Keys",
-      path: "/apikeys",
+      pageTitle: 'API Keys',
+      path: '/apikeys',
       hidden: !isAdmin,
     },
     {
-      navText: "Terms and Conditions",
+      navText: 'Terms and Conditions',
       navIcon: <GavelIcon />,
       pageContent: <TermsPage />,
-      pageTitle: "Terms and Conditions",
-      path: "/terms",
+      pageTitle: 'Terms and Conditions',
+      path: '/terms',
     },
     {
-      navText: "Feedback",
+      navText: 'Feedback',
       navIcon: <FeedbackIcon />,
       pageContent: <FeedbackPage />,
-      pageTitle: "Feedback",
-      path: "/feedback",
+      pageTitle: 'Feedback',
+      path: '/feedback',
     },
   ];
 
   return (
-    <div className={classes.root}>
+    <Box sx={{ flexGrow: 1 }}>
       <Router>
-        <MainNavigation pages={pages} title={"Defaultinator"} AppBarAction={<AuthButton />}/>
+        <MainNavigation pages={pages} title="Defaultinator" AppBarAction={<AuthButton />} />
       </Router>
-    </div>
+    </Box>
   );
 };
 

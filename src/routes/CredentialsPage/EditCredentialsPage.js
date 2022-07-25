@@ -3,37 +3,36 @@ import React, {
 } from 'react';
 import {
   useHistory, useParams,
-} from "react-router-dom";
+} from 'react-router-dom';
 import {
   useSnackbar,
 } from 'notistack';
-import useAxios from "axios-hooks";
-import {useConfirm} from 'material-ui-confirm';
-import { useApiKey } from '../../util/useApiKey';
-
-import {API_URI} from "../../config/constants";
-import CredentialsForm from "../../components/forms/CredentialsForm";
-import {flattenCpe} from "../../util/flatten";
+import useAxios from 'axios-hooks';
+import { useConfirm } from 'material-ui-confirm';
 import {
   Typography,
-} from "@material-ui/core";
+} from '@mui/material';
+import { useApiKey } from '../../util/useApiKey';
+
+import { API_URI } from '../../config/constants';
+import CredentialsForm from '../../components/forms/CredentialsForm';
+import { flattenCpe } from '../../util/flatten';
 
 const EditCredentialsPage = () => {
   const history = useHistory();
-  const {credentialId} = useParams();
-  const {enqueueSnackbar} = useSnackbar();
+  const { credentialId } = useParams();
+  const { enqueueSnackbar } = useSnackbar();
   const confirm = useConfirm();
-  const [apikey] = useApiKey(s => [s.apikey]);
+  const [apikey] = useApiKey((s) => [s.apikey]);
 
-
-  const [{data, loading, error}] = useAxios({
+  const [{ data, loading, error }] = useAxios({
     url: `${API_URI}/credentials/${credentialId}`,
     headers: {
       'X-API-KEY': apikey,
     },
   });
 
-  const [{error: putError}, executePut] = useAxios(
+  const [{ error: putError }, executePut] = useAxios(
     {
       url: `${API_URI}/credentials/${credentialId}`,
       method: 'PUT',
@@ -41,7 +40,7 @@ const EditCredentialsPage = () => {
         'X-API-KEY': apikey,
       },
     },
-    {manual: true}
+    { manual: true },
   );
 
   useEffect(() => {
@@ -58,10 +57,10 @@ const EditCredentialsPage = () => {
     }
   }, [error, enqueueSnackbar]);
 
-  const myAction = (data) => {
-    confirm({description: "Are you sure you want to commit your edit?"})
+  const myAction = (myData) => {
+    confirm({ description: 'Are you sure you want to commit your edit?' })
       .then(() => {
-        executePut({data: data})
+        executePut({ myData })
           .then((res) => {
             if (res.status === 200) {
               enqueueSnackbar('Credential edited!', { variant: 'success' });
@@ -69,23 +68,17 @@ const EditCredentialsPage = () => {
             }
           });
       })
-      .catch((err) => {
+      .catch(() => {
         // Confirm dialogue was cancelled. Just back out gracefully.
       });
   };
 
+  if (loading) return null;
+
   return (
-    <>
-      {loading ?
-        <></> :
-        <>
-          {error ?
-            <Typography variant={'h1'}>Something went wrong.</Typography> :
-            <CredentialsForm formAction={myAction} defaultValues={flattenCpe(data)} title={'Edit Credentials'}/>
-          }
-        </>
-      }
-    </>
+    error
+      ? <Typography variant="h1">Something went wrong.</Typography>
+      : <CredentialsForm formAction={myAction} defaultValues={flattenCpe(data)} title="Edit Credentials" />
   );
 };
 

@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import {
   useForm,
-} from "react-hook-form";
+} from 'react-hook-form';
 import PropTypes from 'prop-types';
 
 import {
@@ -20,77 +20,59 @@ import {
   TextField,
   FormControl,
   IconButton,
-} from "@material-ui/core";
+  useTheme,
+} from '@mui/material';
 
-import {
-  makeStyles,
-} from "@material-ui/core/styles";
-
-import AddIcon from '@material-ui/icons/Add';
-import DeleteIcon from '@material-ui/icons/Delete';
-import CredsFormSection from "./CredsFormSection";
-import ProtocolFormSection from "./ProtocolFormSection";
+import AddIcon from '@mui/icons-material/Add';
+import DeleteIcon from '@mui/icons-material/Delete';
+import CredsFormSection from './CredsFormSection';
+import ProtocolFormSection from './ProtocolFormSection';
 import { CpeType } from '../../config/types';
 import AutoCompleteCPEFormSection from './AutoCompleteCPEFormSection';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    maxWidth: 650,
-    margin: 'auto',
-  },
-  container: {
-    padding: theme.spacing(2),
-  },
-  caption: {
-    backgroundColor: theme.palette.background.paper,
-    position: 'relative',
-    top: -28,
-    padding: '0px 8px',
-    color: theme.palette.primary.light,
-  }
-}));
-
-const ActionButtons = ({ reset }) => {
-  const classes = useStyles();
-
-  return (
-    <Container className={classes.container}>
-      <Grid
-        container
-        spacing={4}
-        justifyContent="flex-start"
-        alignItems="center"
-      >
-        <Grid item>
-          <Button
-            variant={'contained'}
-            type={'submit'}
-            color={'primary'}
-          >
-            Submit
-          </Button>
-        </Grid>
-        <Grid item>
-          <Button
-            color={'secondary'}
-            onClick={() => reset()}
-          >
-            Clear
-          </Button>
-        </Grid>
+const ActionButtons = ({ reset }) => (
+  <Container sx={{ padding: 2 }}>
+    <Grid
+      container
+      spacing={4}
+      justifyContent="flex-start"
+      alignItems="center"
+    >
+      <Grid item>
+        <Button
+          variant="outlined"
+          type="submit"
+          color="primary"
+        >
+          Submit
+        </Button>
       </Grid>
-    </Container>
-  );
-};
+      <Grid item>
+        <Button
+          color="secondary"
+          onClick={() => reset()}
+        >
+          Clear
+        </Button>
+      </Grid>
+    </Grid>
+  </Container>
+);
 
 const ProtocolSection = ({ control }) => {
-  const classes = useStyles();
+  const theme = useTheme();
 
   return (
-    <Container className={classes.container}>
+    <Container sx={{ padding: 2 }}>
       <Typography
         gutterBottom
-        className={classes.caption}
+        sx={{
+          backgroundColor: theme.palette.background.paper,
+          position: 'relative',
+          top: -28,
+          padding: '0px 8px',
+          color: theme.palette.primary.light,
+        }}
         variant="caption"
       >
         Protocol
@@ -101,13 +83,15 @@ const ProtocolSection = ({ control }) => {
 };
 
 const CredentialsSection = ({ control }) => {
-  const classes = useStyles();
+  const theme = useTheme();
 
   return (
-    <Container className={classes.container}>
+    <Container sx={{ padding: 2 }}>
       <Typography
         gutterBottom
-        className={classes.caption}
+        sx={{
+          backgroundColor: theme.palette.background.paper, position: 'relative', top: -28, padding: '0px 8px', color: theme.palette.primary.light,
+        }}
         variant="caption"
       >
         Credentials
@@ -117,57 +101,56 @@ const CredentialsSection = ({ control }) => {
   );
 };
 
-const ReferenceListItem = ({ reference, deleteSelf }) => {
-  return (
-    <ListItem
-    >
-      <ListItemText
-        primary={reference}
-      />
-      <ListItemSecondaryAction>
-        <IconButton
-          edge="end"
-          aria-label="delete"
-          onClick={deleteSelf}
-        >
-          <DeleteIcon
-            color={'secondary'}
-          />
-        </IconButton>
-      </ListItemSecondaryAction>
-    </ListItem>
-  );
-};
+const ReferenceListItem = ({ reference, deleteSelf }) => (
+  <ListItem>
+    <ListItemText
+      primary={reference}
+    />
+    <ListItemSecondaryAction>
+      <IconButton edge="end" aria-label="delete" onClick={deleteSelf} size="large">
+        <DeleteIcon
+          color="secondary"
+        />
+      </IconButton>
+    </ListItemSecondaryAction>
+  </ListItem>
+);
 
 const ReferenceList = ({ references, setReferences }) => {
-
   const removeSelf = (idx) => () => {
     references.splice(idx, 1);
     setReferences([...references]);
   };
 
   return (
-    <>
-      {references.length !== 0 &&
-        <List>
-          {references.map((reference, idx) =>
-            <ReferenceListItem reference={reference} key={idx} deleteSelf={removeSelf(idx)} />
-          )}
-        </List>
-      }
-    </>
+    references.length !== 0
+    && (
+      <List>
+        {
+          references.map((reference, idx) => (
+            <ReferenceListItem
+              reference={reference}
+              key={idx}
+              deleteSelf={removeSelf(idx)}
+            />
+          ))
+        }
+      </List>
+    )
   );
 };
 
 const ReferencesSection = ({ references, setReferences }) => {
-  const classes = useStyles();
+  const theme = useTheme();
   const [reference, setReference] = useState('');
 
   return (
-    <Container className={classes.container}>
+    <Container sx={{ padding: 2 }}>
       <Typography
         gutterBottom
-        className={classes.caption}
+        sx={{
+          backgroundColor: theme.palette.background.paper, position: 'relative', top: -28, padding: '0px 8px', color: theme.palette.primary.light,
+        }}
         variant="caption"
       >
         References
@@ -177,14 +160,13 @@ const ReferencesSection = ({ references, setReferences }) => {
         display: 'flex',
         alignItems: 'center',
         flexWrap: 'wrap',
-      }}>
-        <FormControl
-          className={classes.input}
-        >
+      }}
+      >
+        <FormControl>
           <TextField
-            variant={"outlined"}
-            label={'Reference'}
-            autoComplete='off'
+            variant="outlined"
+            label="Reference"
+            autoComplete="off"
             value={reference}
             onChange={(e) => setReference(e.target.value)}
           />
@@ -194,6 +176,7 @@ const ReferencesSection = ({ references, setReferences }) => {
             setReferences([...references, reference]);
             setReference('');
           }}
+          size="large"
         >
           <AddIcon />
         </IconButton>
@@ -202,15 +185,14 @@ const ReferencesSection = ({ references, setReferences }) => {
   );
 };
 
-const CredentialsForm = (
-  {
-    formAction,
-    defaultValues = { 'part': '' },
-    title = 'Add New Credentials',
-  }
-) => {
-  const classes = useStyles();
-  const { handleSubmit, control, reset } = useForm({ defaultValues: defaultValues });
+const CredentialsForm = ({
+  formAction,
+  defaultValues = { part: '' },
+  title = 'Add New Credentials',
+}) => {
+  const theme = useTheme();
+
+  const { handleSubmit, control, reset } = useForm({ defaultValues });
   const [references, setReferences] = useState([]);
   const [cpeFields, setCpeFields] = useState(defaultValues);
 
@@ -219,9 +201,9 @@ const CredentialsForm = (
   // Hit refresh. Changes are now reflected.
 
   const onSubmit = (data) => {
-    let newCred = {};
+    const newCred = {};
 
-    newCred['cpe'] = {
+    newCred.cpe = {
       part: cpeFields.part || 'ANY',
       vendor: cpeFields.vendor || 'ANY',
       product: cpeFields.product || 'ANY',
@@ -231,28 +213,30 @@ const CredentialsForm = (
       language: cpeFields.language || 'ANY',
     };
 
-    newCred['username'] = data.username;
-    newCred['password'] = data.password;
-    newCred['references'] = references;
-    newCred['protocol'] = data.protocol;
+    newCred.username = data.username;
+    newCred.password = data.password;
+    newCred.references = references;
+    newCred.protocol = data.protocol;
 
     formAction(newCred);
   };
 
   return (
-    <Paper className={classes.root}>
+    <Paper sx={{ maxWidth: 650, margin: 'auto' }}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Container className={classes.container}>
+        <Container sx={{ padding: 2 }}>
           <Typography gutterBottom variant="h4">
             {title}
           </Typography>
           <Divider />
           <CredentialsSection control={control} />
           <Divider />
-          <Container className={classes.container}>
+          <Container sx={{ padding: 2 }}>
             <Typography
               gutterBottom
-              className={classes.caption}
+              sx={{
+                backgroundColor: theme.palette.background.paper, position: 'relative', top: -28, padding: '0px 8px', color: theme.palette.primary.light,
+              }}
               variant="caption"
             >
               Credentials
@@ -277,7 +261,7 @@ CredentialsForm.propTypes = {
 };
 
 CredentialsForm.defaultProps = {
-  defaultValues: { 'part': '' },
+  defaultValues: { part: '' },
   title: 'Add New Credentials',
 };
 

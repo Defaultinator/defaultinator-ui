@@ -11,26 +11,10 @@ import {
   TablePagination,
   Paper,
   LinearProgress,
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+} from '@mui/material';
 
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import Skeleton from '@material-ui/lab/Skeleton';
-
-const useStyles = makeStyles((theme) => ({
-  loadingRow: {
-    padding: 0,
-  },
-  errorRow: {
-    padding: 0,
-    height: 350,
-  },
-  errorIcon: {
-    margin: 'auto',
-    display: 'block',
-    color: theme.palette.error.main,
-  }
-}));
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import Skeleton from '@mui/material/Skeleton';
 
 export const PaginatedDataTable = (
   {
@@ -43,9 +27,8 @@ export const PaginatedDataTable = (
     error = false,
     updateConfig,
     dense = false,
-  }
+  },
 ) => {
-  const styles = useStyles();
   const { fields, pagination } = dataConfig;
 
   return (
@@ -56,8 +39,8 @@ export const PaginatedDataTable = (
             {dataConfig.fields.map((field, idx) => (
               <TableCell
                 key={idx}
-                align={field.align || "right"}
-                style={{borderBottom: 'none'}}
+                align={field.align || 'left'}
+                style={{ borderBottom: 'none' }}
               >
                 {field.label}
               </TableCell>
@@ -65,34 +48,52 @@ export const PaginatedDataTable = (
           </TableRow>
         </TableHead>
         <TableBody>
-          {error ?
-            <TableRow>
-              <TableCell colSpan={fields.length} className={styles.errorRow}>
-                <ErrorOutlineIcon fontSize={'large'} colSpan={3} className={styles.errorIcon} />
-              </TableCell>
-            </TableRow>
-            :
-            <>
+          {error
+            ? (
               <TableRow>
-                <TableCell colSpan={fields.length} className={styles.loadingRow}>
-                  {loading ?
-                    <LinearProgress colSpan="3" /> :
-                    <div style={{ height: 4 }} colSpan={3} />
-                  }
+                <TableCell
+                  colSpan={fields.length}
+                  sx={{
+                    padding: 0,
+                    height: '350px',
+                  }}
+                >
+                  <ErrorOutlineIcon
+                    fontSize="large"
+                    colSpan={3}
+                    sx={{
+                      margin: 'auto',
+                      display: 'block',
+                      color: 'error.main',
+                    }}
+                  />
                 </TableCell>
               </TableRow>
-              {loading && (!data || data.length === 0) &&
-                Array(rowsPerPage || pagination.defaultRowsPerPage).fill(Array(dataConfig.fields.length).fill('')).map((columns, idx) =>
+            )
+            : (
+              <>
+                <TableRow>
+                  <TableCell
+                    colSpan={fields.length}
+                    sx={{ padding: 0 }}
+                  >
+                    {loading
+                      ? <LinearProgress colSpan="3" />
+                      : <div style={{ height: 4 }} colSpan={3} />}
+                  </TableCell>
+                </TableRow>
+                {loading && (!data || data.length === 0)
+                && Array(rowsPerPage || pagination.defaultRowsPerPage).fill(Array(dataConfig.fields.length).fill('')).map((columns, idx) => (
                   <TableRow key={idx}>
-                    {columns.map((col, idx) => 
-                      <TableCell key={idx}>
+                    {columns.map((col, idx2) => (
+                      <TableCell key={idx2}>
                         <Skeleton />
                       </TableCell>
-                    )}
+                    ))}
                   </TableRow>
-                )
-              }
-              {data &&
+                ))}
+                {data
+                && (
                 <>
                   {data.map((row, idx) => (
                     <TableRow
@@ -100,10 +101,10 @@ export const PaginatedDataTable = (
                       hover
                       {...row.rowProps}
                     >
-                      {fields.map((field, idx) => (
+                      {fields.map((field, idx2) => (
                         <TableCell
-                          key={idx}
-                          align={field.align || "right"}
+                          key={idx2}
+                          align={field.align || 'left'}
                         >
                           {row[field.fieldName]}
                         </TableCell>
@@ -121,9 +122,9 @@ export const PaginatedDataTable = (
                     />
                   </TableRow>
                 </>
-              }
-            </>
-          }
+                )}
+              </>
+            )}
         </TableBody>
       </Table>
     </TableContainer>

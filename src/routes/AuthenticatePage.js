@@ -1,28 +1,30 @@
-import { useEffect } from "react";
-import useAxios from "axios-hooks";
+import { useEffect } from 'react';
+import useAxios from 'axios-hooks';
 import {
   useSnackbar,
-} from "notistack";
+} from 'notistack';
 
 import {
-  Container,
-} from "@material-ui/core";
+  Container, Link, Typography,
+} from '@mui/material';
 
-import { useApiKey } from "../util/useApiKey";
-import AuthForm from "../components/forms/AuthForm/AuthForm";
+import { useApiKey } from '../util/useApiKey';
+import AuthForm from '../components/forms/AuthForm/AuthForm';
 import {
   API_URI,
   REQUEST_ACCOUNT_EMAIL,
-} from "../config/constants";
+} from '../config/constants';
 
 const AuthenticatePage = () => {
-  const [apikey, setApikey, setIsAdmin] = useApiKey(s => [s.apikey, s.setApikey, s.setIsAdmin]);
+  const [apikey, setApikey, setIsAdmin] = useApiKey((s) => [s.apikey, s.setApikey, s.setIsAdmin]);
   const { enqueueSnackbar } = useSnackbar();
 
-  const [{ data: keyinfo, error }, executeRequest] = useAxios({
-    url: `${API_URI}/apikeys/keyinfo`,
-  },
-    { manual: true });
+  const [{ data: keyinfo, error }, executeRequest] = useAxios(
+    {
+      url: `${API_URI}/apikeys/keyinfo`,
+    },
+    { manual: true },
+  );
 
   useEffect(() => {
     const { isAdmin } = keyinfo || { isAdmin: false };
@@ -33,13 +35,13 @@ const AuthenticatePage = () => {
 
   }, [error]);
 
-  const onSubmit = ({ apikey }) => {
+  const onSubmit = ({ apikey: myApiKey }) => {
     executeRequest({
       headers: {
-        'X-API-KEY': apikey,
+        'X-API-KEY': myApiKey,
       },
     }).then(() => {
-      setApikey(apikey);
+      setApikey(myApiKey);
     }).catch((err) => {
       enqueueSnackbar('You entered an invalid key.', { variant: 'error' });
     });
@@ -51,12 +53,15 @@ const AuthenticatePage = () => {
 
   return (
     <Container>
-      <div>
-        <AuthForm onSubmit={onSubmit} apikey={apikey} onClear={onClear} />
-        <br />
-        <br />
-        or <a href={`mailto:${REQUEST_ACCOUNT_EMAIL}`}>request</a> an account!
-      </div>
+      <AuthForm onSubmit={onSubmit} apikey={apikey} onClear={onClear} />
+      <br />
+      <br />
+      <Typography variant="body1">
+        or
+        <Link href={`mailto:${REQUEST_ACCOUNT_EMAIL}`}>request</Link>
+        {' '}
+        an account!
+      </Typography>
     </Container>
   );
 };

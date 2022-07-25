@@ -5,7 +5,7 @@ import React, {
 import {
   useHistory,
 } from 'react-router-dom';
-import useAxios from "axios-hooks";
+import useAxios from 'axios-hooks';
 import {
   useSnackbar,
 } from 'notistack';
@@ -19,7 +19,7 @@ import { APIKEY_TABLE_CONFIG } from '../../config/tables';
 const ListAPIKeysPage = () => {
   const history = useHistory();
   const [paginationParams, setPaginationParams] = useState();
-  const [apikey] = useApiKey(s => [s.apikey]);
+  const [apikey] = useApiKey((s) => [s.apikey]);
   const { enqueueSnackbar } = useSnackbar();
 
   const [{ data, loading, error }] = useAxios({
@@ -40,18 +40,16 @@ const ListAPIKeysPage = () => {
     setPaginationParams({
       ...paginationParams,
       ...(rowsPerPage && { limit: rowsPerPage }),
-      ...((page || page === 0) && { page: parseInt(page) + 1 }),
+      ...((page || page === 0) && { page: parseInt(page, 10) + 1 }),
     });
   };
 
-  const formatData = (data) => {
-    return data?.map((item) => (
-      {
-        ...item,
-        rowProps: { onClick: () => history.push(`/apikeys/${item._id}`), style: {cursor: 'pointer'} }
-      }
-    ));
-  };
+  const formatData = (myData) => myData?.map((item) => (
+    {
+      ...item,
+      rowProps: { onClick: () => history.push(`/apikeys/${item._id}`), style: { cursor: 'pointer' } },
+    }
+  ));
 
   return (
     <APIKeyList
@@ -60,7 +58,7 @@ const ListAPIKeysPage = () => {
       dataConfig={APIKEY_TABLE_CONFIG}
       rowsPerPage={data?.limit}
       page={data ? data.page - 1 : null}
-      totalRows={data?.total}
+      totalRows={data?.totalDocs}
       updateConfig={handlePaginationChange}
     />
   );

@@ -1,43 +1,35 @@
-import React from "react";
+import React from 'react';
 
 import {
   Route,
   Switch,
-} from "react-router-dom";
+} from 'react-router-dom';
 
-import { makeStyles } from '@material-ui/core/styles';
-import CredentialsPage from "./CredentialsPage";
-import APIKeyPage from "./APIKeyPage";
-
-const useStyles = makeStyles((theme) => ({
-  content: {
-    margin: 'auto',
-  },
-}));
+import { Box } from '@mui/material';
+import CredentialsPage from './CredentialsPage';
+import APIKeyPage from './APIKeyPage';
 
 export const MainRoute = () => {
-  const classes = useStyles();
-
   const pages = [
     {
-      "path": '/credentials',
-      "content": <CredentialsPage />
+      path: '/credentials',
+      content: <CredentialsPage />,
     },
     {
-      "path": '/apikeys',
-      "content": <APIKeyPage />
+      path: '/apikeys',
+      content: <APIKeyPage />,
     },
   ];
 
   return (
     <Switch>
-      {pages.map((page, idx) =>
+      {pages.map((page, idx) => (
         <Route path={page.path} key={idx}>
-          <div className={classes.content}>
+          <Box sx={{ margin: 'auto' }}>
             {page.content}
-          </div>
+          </Box>
         </Route>
-      )}
+      ))}
     </Switch>
   );
 };

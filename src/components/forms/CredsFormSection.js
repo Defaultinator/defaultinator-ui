@@ -1,30 +1,30 @@
-import React from "react";
+import React from 'react';
 
 import {
   Grid,
-} from "@material-ui/core";
+} from '@mui/material';
 
-import FormField from "../FormField";
+import FormField from '../FormField';
 
-const CredsFormSection = ({control}) => {
+const CredsFormSection = ({ control }) => {
   const inputs = [
     {
-      "name": "username",
-      "placeholder": "Username",
+      name: 'username',
+      placeholder: 'Username',
     },
     {
-      "name": "password",
-      "placeholder": "Password",
+      name: 'password',
+      placeholder: 'Password',
     },
   ];
 
   return (
     <Grid container spacing={4} justifyContent="space-evenly">
-      {inputs.map((input, idx) =>
+      {inputs.map((input, idx) => (
         <Grid item key={idx}>
-          <FormField {...input} control={control}/>
+          <FormField {...input} control={control} />
         </Grid>
-      )}
+      ))}
     </Grid>
   );
 };

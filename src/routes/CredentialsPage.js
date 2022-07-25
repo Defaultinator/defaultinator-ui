@@ -3,37 +3,24 @@ import {
   Switch,
   Route,
   useRouteMatch, Link,
-} from "react-router-dom";
+} from 'react-router-dom';
 
 import {
-  Fab,
-} from "@material-ui/core";
-import AddIcon from '@material-ui/icons/Add';
-import {
-  makeStyles,
-} from "@material-ui/core/styles";
+  Fab, useTheme,
+} from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 
 import withAuth from '../components/withAuth';
 
-import CredentialDetailsPage from "./CredentialsPage/CredentialDetailsPage";
-import CredentialsListPage from "./CredentialsPage/CredentialsListPage";
-import AddCredentialsPage from "./CredentialsPage/AddCredentialsPage";
-import EditCredentialsPage from "./CredentialsPage/EditCredentialsPage";
-import SearchCredentialsPage from "./CredentialsPage/SearchCredentialsPage";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-  },
-  fab: {
-    position: 'fixed',
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
-  },
-}));
+import CredentialDetailsPage from './CredentialsPage/CredentialDetailsPage';
+import CredentialsListPage from './CredentialsPage/CredentialsListPage';
+import AddCredentialsPage from './CredentialsPage/AddCredentialsPage';
+import EditCredentialsPage from './CredentialsPage/EditCredentialsPage';
+import SearchCredentialsPage from './CredentialsPage/SearchCredentialsPage';
 
 const CredentialsPage = () => {
-  let { path, url } = useRouteMatch();
-  let classes = useStyles();
+  const { path, url } = useRouteMatch();
+  const theme = useTheme();
 
   const pages = [
     {
@@ -55,22 +42,22 @@ const CredentialsPage = () => {
     {
       path: `${path}/`,
       content: <CredentialsListPage />,
-    }
+    },
   ];
 
   return (
     <div>
       <Switch>
-        {pages.map((page, idx) =>
+        {pages.map((page, idx) => (
           <Route path={page.path} key={idx}>
             {page.content}
           </Route>
-        )}
+        ))}
       </Switch>
       <Link to={`${url}/add`}>
         <Fab
-          className={classes.fab}
-          color={"primary"}
+          sx={{ position: 'fixed', bottom: theme.spacing(2), right: theme.spacing(2) }}
+          color="primary"
         >
           <AddIcon />
         </Fab>

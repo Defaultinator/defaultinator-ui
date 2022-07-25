@@ -1,64 +1,61 @@
-import React, {useEffect} from "react";
-import {Controller} from "react-hook-form";
+import React, { useEffect } from 'react';
+import { Controller } from 'react-hook-form';
 
-import PopupState, {bindFocus, bindPopper} from 'material-ui-popup-state';
+import PopupState, { bindFocus, bindPopper } from 'material-ui-popup-state';
 
 import {
+  Box,
   FormControl,
   Grid,
   Popper,
   MenuItem,
   InputLabel,
   Select,
-} from "@material-ui/core";
-import {makeStyles} from "@material-ui/core/styles";
+} from '@mui/material';
 
+import useAxios from 'axios-hooks';
 import useApiKey from '../../util/useApiKey';
-import FormField from "../FormField";
-import useAxios from "axios-hooks";
-import {API_URI} from '../../config/constants';
-import AutoCompleteSuggestions from "../AutoCompleteSuggestions";
+import FormField from '../FormField';
+import { API_URI } from '../../config/constants';
+import AutoCompleteSuggestions from '../AutoCompleteSuggestions';
 
-const useStyles = makeStyles((theme) => ({
-  select: {
-    minWidth: 150,
-  }
-}));
-
-const CPEFormElement = ({control, input, autoCompleteParams}) => {
-  const [apiKey] = useApiKey(s => [s.apikey]);
+const CPEFormElement = ({ control, input, autoCompleteParams }) => {
+  const [apiKey] = useApiKey((s) => [s.apikey]);
   const prefix = autoCompleteParams[input.name];
 
   const params = {
     field: input.name,
-    prefix: prefix,
+    prefix,
     ...autoCompleteParams,
   };
 
   delete params[input.name];
-  delete params['references'];
-  delete params['username'];
-  delete params['password'];
+  delete params.references;
+  delete params.username;
+  delete params.password;
 
   Object.keys(params).forEach((key) => {
-    if(!params[key]) delete params[key];
+    if (!params[key]) delete params[key];
   });
 
-  // TODO: This autocomplete makes things go super slow. It rerenders the whole form every keypress. It works, but yikes
-  const [{data}, executeRequest] = useAxios({
+  // TODO: This autocomplete makes things go super slow.
+  // It rerenders the whole form every keypress. It works, but yikes
+  const [{ data }, executeRequest] = useAxios(
+    {
       url: `${API_URI}/dictionary/typeahead`,
-      params: params,
+      params,
       headers: {
         'X-API-KEY': apiKey,
-      }
+      },
     },
     {
-      manual: true
-    });
+      manual: true,
+    },
+  );
 
   useEffect(() => {
     const delayRequest = setTimeout(() => {
-      executeRequest().catch(() => {});
+      executeRequest().catch(() => { });
     }, 500);
 
     return () => clearTimeout(delayRequest);
@@ -73,89 +70,90 @@ const CPEFormElement = ({control, input, autoCompleteParams}) => {
             control={control}
             autocompleteprops={bindFocus(popupState)}
           />
-          { data &&
-            <Popper {...bindPopper(popupState)}  style={{zIndex: 20}}>
-              <AutoCompleteSuggestions suggestions={data} />
-            </Popper>
-          }
+          {data
+            && (
+              <Popper {...bindPopper(popupState)} style={{ zIndex: 20 }}>
+                <AutoCompleteSuggestions suggestions={data} />
+              </Popper>
+            )}
         </>
       )}
     </PopupState>
   );
 };
 
-const CPEFormSection = ({control, autoCompleteParams}) => {
-  const classes = useStyles();
-
+const CPEFormSection = ({ control, autoCompleteParams }) => {
   const inputs = [
     {
-      "name": "vendor",
-      "placeholder": "Vendor",
+      name: 'vendor',
+      placeholder: 'Vendor',
     },
     {
-      "name": "product",
-      "placeholder": "Product",
+      name: 'product',
+      placeholder: 'Product',
     },
     {
-      "name": "version",
-      "placeholder": "Version",
+      name: 'version',
+      placeholder: 'Version',
     },
     {
-      "name": "update",
-      "placeholder": "Update",
+      name: 'update',
+      placeholder: 'Update',
     },
     {
-      "name": "edition",
-      "placeholder": "Edition",
+      name: 'edition',
+      placeholder: 'Edition',
     },
     {
-      "name": "language",
-      "placeholder": "Language",
+      name: 'language',
+      placeholder: 'Language',
     },
   ];
 
   return (
-    <Grid container spacing={4} justifyContent={'center'}>
+    <Grid container spacing={4} justifyContent="center">
       <Grid item>
         <Controller
-          name={'part'}
+          name="part"
           control={control}
-          defaultValue={""}
-          render={({field}) =>
-            <FormControl variant={"outlined"} className={classes.select}>
-              <InputLabel
-                id={"add-credentials-part-label"}
-              >
-                Part
-              </InputLabel>
-              <Select
-                id={"add-credentials-part-input"}
-                labelId={"add-credentials-part-label"}
-                label={"Part"}
-                {...field}
-              >
-                <MenuItem value={""}>
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={'a'}>
-                  a
-                </MenuItem>
-                <MenuItem value={'o'}>
-                  o
-                </MenuItem>
-                <MenuItem value={'h'}>
-                  h
-                </MenuItem>
-              </Select>
-            </FormControl>
-          }
+          defaultValue=""
+          render={({ field }) => (
+            <Box sx={{ minWidth: 150 }}>
+              <FormControl variant="outlined">
+                <InputLabel
+                  id="add-credentials-part-label"
+                >
+                  Part
+                </InputLabel>
+                <Select
+                  id="add-credentials-part-input"
+                  labelId="add-credentials-part-label"
+                  label="Part"
+                  {...field}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value="a">
+                    a
+                  </MenuItem>
+                  <MenuItem value="o">
+                    o
+                  </MenuItem>
+                  <MenuItem value="h">
+                    h
+                  </MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          )}
         />
       </Grid>
-      {inputs.map((input, idx) =>
+      {inputs.map((input, idx) => (
         <Grid item xs={6} md={3} sm={3} key={idx}>
-          <CPEFormElement control={control} input={input} autoCompleteParams={autoCompleteParams}/>
+          <CPEFormElement control={control} input={input} autoCompleteParams={autoCompleteParams} />
         </Grid>
-      )}
+      ))}
     </Grid>
   );
 };

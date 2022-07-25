@@ -1,12 +1,12 @@
-import { addDecorator } from '@storybook/react';
+//import { addDecorator } from '@storybook/react';
 
-import { ThemeProvider } from '@material-ui/styles';
+import { ThemeProvider } from '@mui/material';
 import darkTheme from '../src/themes/darkTheme';
 import { SnackbarProvider } from 'notistack';
 import { ConfirmProvider } from 'material-ui-confirm';
-import StoryRouter from 'storybook-react-router';
+//import StoryRouter from 'storybook-react-router';
  
-addDecorator(StoryRouter());
+//addDecorator(StoryRouter());
 
 export const decorators = [
   (Story) => (
