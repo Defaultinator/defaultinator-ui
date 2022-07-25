@@ -42,8 +42,8 @@ const AuthenticatePage = () => {
       },
     }).then(() => {
       setApikey(myApiKey);
-    }).catch(() => {
-      enqueueSnackbar('You entered an invalid key.');
+    }).catch((err) => {
+      enqueueSnackbar('You entered an invalid key.', { variant: 'error' });
     });
   };
 

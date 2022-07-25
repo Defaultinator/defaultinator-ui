@@ -37,10 +37,10 @@ const AddCredentialsPage = () => {
       .then(() => {
         executePost({ data }).then((res) => {
           if (res.status === 200) {
-            enqueueSnackbar('Credential added!');
+            enqueueSnackbar('Credential added!', { variant: 'success' });
             history.push(`/credentials/${res.data._id}`);
           } else {
-            enqueueSnackbar('There has been an error submitting your credentials.');
+            enqueueSnackbar('There has been an error submitting your credentials.', { variant: 'error' });
           }
         });
       });

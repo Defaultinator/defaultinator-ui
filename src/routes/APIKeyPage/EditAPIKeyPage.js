@@ -33,7 +33,7 @@ const AddAPIKeyPage = () => {
   useEffect(() => {
     if (error) {
       const message = error.response?.data?.message || 'There was an error updating the API Key.';
-      enqueueSnackbar(message);
+      enqueueSnackbar(message, { variant: 'error' });
     }
   }, [error, enqueueSnackbar]);
 
@@ -51,17 +51,17 @@ const AddAPIKeyPage = () => {
   useEffect(() => {
     if (putError) {
       const message = putError.response?.data?.message || 'There was an error updating the API Key.';
-      enqueueSnackbar(message);
+      enqueueSnackbar(message, { variant: 'error' });
     }
   }, [putError, enqueueSnackbar]);
 
   const myAction = (data) => {
     executePut({ data }).then((res) => {
       if (res.status === 200) {
-        enqueueSnackbar('API Key updated!');
+        enqueueSnackbar('API Key updated!', { variant: 'success' });
         history.push(`/apikeys/${res.data._id}`);
       } else {
-        enqueueSnackbar('There has been an error updating the specified API Key.');
+        enqueueSnackbar('There has been an error updating the specified API Key.', { variant: 'error' });
       }
     });
   };

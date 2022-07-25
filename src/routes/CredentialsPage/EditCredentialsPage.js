@@ -46,14 +46,14 @@ const EditCredentialsPage = () => {
   useEffect(() => {
     if (putError) {
       const message = putError.response?.data?.message || 'There was an error loading the requested data.';
-      enqueueSnackbar(message);
+      enqueueSnackbar(message, { variant: 'error' });
     }
   }, [putError, enqueueSnackbar]);
 
   useEffect(() => {
     if (error) {
       const message = error.response?.data?.message || 'There was an error loading the requested data.';
-      enqueueSnackbar(message);
+      enqueueSnackbar(message, { variant: 'error' });
     }
   }, [error, enqueueSnackbar]);
 
@@ -63,7 +63,7 @@ const EditCredentialsPage = () => {
         executePut({ myData })
           .then((res) => {
             if (res.status === 200) {
-              enqueueSnackbar('Credential edited!');
+              enqueueSnackbar('Credential edited!', { variant: 'success' });
               history.push(`/credentials/${credentialId}`);
             }
           });

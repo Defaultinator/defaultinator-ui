@@ -32,17 +32,17 @@ const AddAPIKeyPage = () => {
   useEffect(() => {
     if (error) {
       const message = error.response?.data?.message || 'There was an error loading the requested data.';
-      enqueueSnackbar(message);
+      enqueueSnackbar(message, { variant: 'error' });
     }
   }, [error, enqueueSnackbar]);
 
   const myAction = (data) => {
     executePost({ data }).then((res) => {
       if (res.status === 200) {
-        enqueueSnackbar('API Key added!');
+        enqueueSnackbar('API Key added!', { variant: 'success'});
         history.push(`/apikeys/${res.data._id}`);
       } else {
-        enqueueSnackbar('There has been an error submitting your credentials.');
+        enqueueSnackbar('There has been an error submitting your credentials.', { variant: 'error' });
       }
     });
   };

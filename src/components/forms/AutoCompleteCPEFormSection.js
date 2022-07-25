@@ -38,7 +38,7 @@ const CPEFormAutocompleteItem = ({
 
   useEffect(() => {
     if (error) {
-      enqueueSnackbar('There was an error loading the requested data.');
+      enqueueSnackbar('There was an error loading the requested data.', { variant: 'error' });
     }
   }, [error, enqueueSnackbar]);
 

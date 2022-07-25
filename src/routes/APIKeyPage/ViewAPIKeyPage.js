@@ -41,7 +41,7 @@ const ViewAPIKeyPage = () => {
   useEffect(() => {
     if (error) {
       const message = error.response?.data?.message || 'There was an error loading the requested data.';
-      enqueueSnackbar(message);
+      enqueueSnackbar(message, { variant: 'error' });
     }
   }, [error, enqueueSnackbar]);
 
@@ -61,7 +61,7 @@ const ViewAPIKeyPage = () => {
   useEffect(() => {
     if (deleteError) {
       const message = deleteError.response?.data?.message || 'There was an error deleting the requested data.';
-      enqueueSnackbar(message);
+      enqueueSnackbar(message, { variant: 'error' });
     }
   }, [deleteError, enqueueSnackbar]);
 
@@ -71,14 +71,14 @@ const ViewAPIKeyPage = () => {
         executeDelete()
           .then((res) => {
             if (res.status === 200) {
-              enqueueSnackbar('API key deleted!');
-              history.push('/apikeys');
+              enqueueSnackbar('API key deleted!', { variant: 'success' });
+              history.push(`/apikeys`);
             } else {
-              enqueueSnackbar('There has been an error deleting this record.');
+              enqueueSnackbar('There has been an error deleting this record.', { variant: 'error' });
             }
           })
-          .catch(() => {
-            enqueueSnackbar('There has been an error deleting this record.');
+          .catch((err) => {
+            enqueueSnackbar('There has been an error deleting this record.', { variant: 'error' });
           });
       })
       .catch(() => {

@@ -40,7 +40,7 @@ const CredentialDetailsPage = () => {
   // Error handling for initial credential loading
   useEffect(() => {
     if (credError) {
-      enqueueSnackbar('There was an error loading the requested data.');
+      enqueueSnackbar('There was an error loading the requested data.', { variant: 'error' });
     }
   }, [credError, enqueueSnackbar]);
 
@@ -60,7 +60,7 @@ const CredentialDetailsPage = () => {
   // Error handling for credential deletion
   useEffect(() => {
     if (deleteError) {
-      enqueueSnackbar('There was an error loading the requested data.');
+      enqueueSnackbar('There was an error loading the requested data.', { variant: 'error' });
     }
   }, [deleteError, enqueueSnackbar]);
 
@@ -70,14 +70,14 @@ const CredentialDetailsPage = () => {
         executeDelete()
           .then((res) => {
             if (res.status === 200) {
-              enqueueSnackbar('Credential deleted!');
-              history.push('/credentials');
+              enqueueSnackbar('Credential deleted!', { variant: 'success' });
+              history.push(`/credentials`);
             } else {
-              enqueueSnackbar('There has been an error deleting this record.');
+              enqueueSnackbar('There has been an error deleting this record.', { variant: 'error' });
             }
           })
-          .catch(() => {
-            enqueueSnackbar('There has been an error deleting this record.');
+          .catch((err) => {
+            enqueueSnackbar('There has been an error deleting this record.', { variant: 'error' });
           });
       })
       .catch(() => {
@@ -100,7 +100,7 @@ const CredentialDetailsPage = () => {
   // Error handling for credential verification
   useEffect(() => {
     if (verifyError) {
-      enqueueSnackbar('There was an error verifying the credential.');
+      enqueueSnackbar('There was an error verifying the credential.', { variant: 'error' });
     }
   }, [verifyError, enqueueSnackbar]);
 
@@ -110,14 +110,14 @@ const CredentialDetailsPage = () => {
         executeVerify({ data: { isVerified: !myCredential.isVerified } })
           .then((res) => {
             if (res.status === 200) {
-              enqueueSnackbar('Verification status changed!');
+              enqueueSnackbar('Verification status changed!', { variant: 'success' });
               executeGet();
             } else {
-              enqueueSnackbar('There has been an error verifying this record.');
+              enqueueSnackbar('There has been an error verifying this record.', { variant: 'error' });
             }
           })
-          .catch(() => {
-            enqueueSnackbar('There has been an error verifying this record.');
+          .catch((err) => {
+            enqueueSnackbar('There has been an error verifying this record.', { variant: 'error' });
           });
       })
       .catch(() => {

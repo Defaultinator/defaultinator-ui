@@ -99,10 +99,12 @@ const APIKeyForm = ({
 APIKeyForm.propTypes = {
   formAction: PropTypes.func.isRequired,
   defaultValues: PropTypes.shape(APIKeyType),
+  loading: PropTypes.bool,
 };
 
 APIKeyForm.defaultProps = {
-  defaultValues: { email: '', notes: '', isAdmin: false },
+  defaultValues: {email: '', notes: '', isAdmin: false},
+  loading: false,
 };
 
 export default APIKeyForm;
