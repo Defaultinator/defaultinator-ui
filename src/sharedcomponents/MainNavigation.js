@@ -38,6 +38,7 @@ const AppDrawerContent = ({ pages, linkClicked, DrawerHeader }) => {
           && (
             <ListItem
               key={index}
+              sx={{ display: page.hidden && 'none' }}
               button
               component={Link}
               to={page.navLink || page.path}

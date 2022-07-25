@@ -20,7 +20,7 @@ export const APIKeyList = ({
   }));
 
   return (
-    <Paper sx={{ maxWidth: 600, margin: 'auto' }}>
+    <Paper sx={{ margin: 'auto' }}>
       <APIKeyListToolbar />
       <PaginatedDataTable
         data={myData || []}
