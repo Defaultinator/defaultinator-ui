@@ -32,7 +32,7 @@ jobs:
       - run: npm ci
         name: Build
 
-      - run: npm run coverage
+      - run: npm run coverage:ci
         name: Test with coverage
 
       - name: Upload coverage to Codecov
