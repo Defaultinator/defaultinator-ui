@@ -60,7 +60,6 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
-    "chromatic": "npx chromatic --project-token=0b89cbeb111e --allow-console-errors",
     "lint": "./node_modules/.bin/eslint"
   },
   "eslintConfig": {
