@@ -39,7 +39,7 @@ jobs:
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          directory: ./coverage/reports/
+          directory: ./coverage/
           fail_ci_if_error: true
           files: ./clover.xml
           flags: unittests
