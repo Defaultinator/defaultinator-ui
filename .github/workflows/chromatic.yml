@@ -6,8 +6,8 @@ name: 'Chromatic'
 # Event for the workflow
 on:
   workflow_run:
-    workflows: ["Build"]
-    branches: [main]
+    workflows: ["Node 16 build / test / lint"]
+    branches: [main, dev]
     types: 
       - completed
 
