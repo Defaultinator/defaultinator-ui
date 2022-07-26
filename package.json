@@ -56,7 +56,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --silent --setupFiles ./setupFile.js",
-    "coverage": "CI=true react-scripts test --silent --coverage --watchAll=false --setupFiles ./setupFile.js",
+    "coverage:ci": "CI=true react-scripts test --silent --coverage --watchAll=false --setupFiles ./setupFile.js",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
