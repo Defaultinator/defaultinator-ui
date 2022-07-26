@@ -170,6 +170,7 @@ const MainNavigation = ({
               <Route
                 key={index}
                 path={page.path}
+                exact={page.exact}
                 render={() => (
                   page.pageContent
                 )}

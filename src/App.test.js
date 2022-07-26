@@ -7,7 +7,7 @@ const { Primary: App } = composeStories(stories);
 describe('<App />', () => {
   it('renders the app with Defaultinator in the title', () => {
     render(<App />);
-    const linkElement = screen.getByText(/Defaultinator/i);
+    const linkElement = screen.getByRole('heading', { name: /Defaultinator/i });
     expect(linkElement).toBeInTheDocument();
   });
 

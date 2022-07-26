@@ -28,7 +28,8 @@ const App = () => {
       navIcon: <HomeIcon />,
       pageContent: <AboutPage />,
       pageTitle: 'About',
-      path: '/about',
+      path: '/',
+      exact: true,
     },
     {
       navText: 'Credentials',

@@ -1,23 +1,20 @@
-# .github/workflows/chromatic.yml
+name: "Build and Test"
 
-# Workflow name
-name: 'Chromatic'
+on: push
 
-# Event for the workflow
-on:
-  push:
-    branches: [main, dev]
-
-# List of jobs
 jobs:
-  chromatic-deployment:
-    # Operating System
+  build:
     runs-on: ubuntu-latest
-    # Job steps
+    name: Node ${{ matrix.node }} build / test / lint
+    strategy:
+      matrix:
+        node: [ 14, 16, 18 ]
     steps:
       - uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
         with:
-          fetch-depth: 0
+          node-version: ${{ matrix.node }}
       - name: Cache node modules
         id: cache-npm
         uses: actions/cache@v3
@@ -31,7 +28,6 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-
       - if: ${{ steps.cache-npm.outputs.cache-hit == 'false' }}
         name: List the state of node modules
         continue-on-error: true
@@ -39,11 +35,7 @@ jobs:
         
       - run: npm ci
         name: Build
-
-      - name: Publish to Chromatic
-        uses: chromaui/action@v1
-        # Chromatic GitHub Action options
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          # 👇 Chromatic projectToken, refer to the manage page to obtain it.
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+      - run: npm run test
+        name: Test
+      - run: npm run lint
+        name: Lint
